@@ -14,7 +14,9 @@ set(SOURCE_FILES
         src/Stream.cpp
         src/Stream.h
         src/User.cpp
-        src/User.h)
+        src/User.h
+        src/Exceptions.h
+        src/Exceptions.cpp)
 add_executable(${CMAKE_PROJECT_NAME}_run ${SOURCE_FILES})
 
 include_directories(src)
