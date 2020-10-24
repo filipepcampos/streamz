@@ -17,10 +17,12 @@ set(SOURCE_FILES
         src/User.h
         src/Exceptions.h
         src/Exceptions.cpp)
-add_executable(${CMAKE_PROJECT_NAME}_run ${SOURCE_FILES})
 
 include_directories(src)
 add_subdirectory(tests)
+
+add_library(${CMAKE_PROJECT_NAME}_lib ${SOURCE_FILES})
+add_executable(${CMAKE_PROJECT_NAME}_run ${SOURCE_FILES})
 
 # Doxygen Build
 find_package(Doxygen)
