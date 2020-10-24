@@ -1,36 +1,37 @@
 #ifndef STREAMZ_EXCEPTIONS_H
 #define STREAMZ_EXCEPTIONS_H
+#include <string>
 
 
 class UserDoesNotExist {
-    string nickname;
+    std::string nickname;
 public:
     /**
      * Class constructor
      * @param nickname Nickname of the user
      */
-    UserDoesNotExist(string nickname);
+    UserDoesNotExist(const std::string &nickname);
     /**
      * Returns the nickname of the user
      * @return nickname of the user
      */
-    string getNickname() const;
+    std::string getNickname() const;
 };
 
 
 class UserAlreadyExists {
-    string nickname;
+    std::string nickname;
 public:
     /**
      * Class constructor
      * @param nickname Nickname of the user
      */
-    UserAlreadyExists(string nickname);
+    UserAlreadyExists(const std::string &nickname);
     /**
      * Returns the nickname of the user
      * @return nickname of the user
      */
-    string getNickname() const;
+    std::string getNickname() const;
 };
 
 #endif //STREAMZ_EXCEPTIONS_H
