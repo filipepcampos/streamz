@@ -13,3 +13,17 @@ UserAlreadyExists::UserAlreadyExists(const std::string &nickname) : nickname(nic
 std::string UserAlreadyExists::getNickname() const {
     return nickname;
 }
+
+InvalidAge::InvalidAge(unsigned int age) : age(age) {
+}
+
+unsigned int InvalidAge::getAge() const {
+    return age;
+}
+
+InsufficientAge::InsufficientAge(unsigned int age) : age(age) {
+}
+
+unsigned int InsufficientAge::getAge() const {
+    return age;
+}

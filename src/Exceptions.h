@@ -4,6 +4,9 @@
 
 
 class UserDoesNotExist {
+    /**
+     * Nickname of the user
+     */
     std::string nickname;
 public:
     /**
@@ -12,7 +15,7 @@ public:
      */
     UserDoesNotExist(const std::string &nickname);
     /**
-     * Returns the nickname of the user
+     * Gets the nickname of the user
      * @return nickname of the user
      */
     std::string getNickname() const;
@@ -20,6 +23,9 @@ public:
 
 
 class UserAlreadyExists {
+    /**
+     * Nickname of the user
+     */
     std::string nickname;
 public:
     /**
@@ -28,10 +34,48 @@ public:
      */
     UserAlreadyExists(const std::string &nickname);
     /**
-     * Returns the nickname of the user
+     * Gets the nickname of the user
      * @return nickname of the user
      */
     std::string getNickname() const;
+};
+
+
+class InvalidAge {
+    /**
+     * Age of the user
+     */
+    unsigned int age;
+public:
+    /**
+     * Class constructor
+     * @param age Age of the user
+     */
+    InvalidAge(unsigned int age);
+    /**
+     * Gets the age of the user
+     * @return age of the user
+     */
+    unsigned int getAge() const;
+};
+
+
+class InsufficientAge {
+    /**
+     * Age of the user
+     */
+    unsigned int age;
+public:
+    /**
+     * Class constructor
+     * @param age Age of the user
+     */
+    InsufficientAge(unsigned int age);
+    /**
+     * Gets the age of the user
+     * @return age of the user
+     */
+    unsigned int getAge() const;
 };
 
 #endif //STREAMZ_EXCEPTIONS_H
