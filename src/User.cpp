@@ -16,7 +16,11 @@ Date User::getBirthDate() const {
     return birth_date;
 }
 
-void User::show() {
+void User::show() const {
     /* IMPLEMENTAR MAIS TARDE */
     std::cout << "IMPLEMENTAR MAIS TARDE" << std::endl;
+}
+
+bool User::operator==(const User &other) const {
+    return this->nickname == other.getNickname();
 }

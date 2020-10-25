@@ -14,14 +14,14 @@ std::string UserAlreadyExists::getNickname() const {
     return nickname;
 }
 
-InvalidAge::InvalidAge(unsigned int age) : age(age) {
+InvalidAge::InvalidAge(const unsigned int age) : age(age) {
 }
 
 unsigned int InvalidAge::getAge() const {
     return age;
 }
 
-InsufficientAge::InsufficientAge(unsigned int age) : age(age) {
+InsufficientAge::InsufficientAge(const unsigned int age) : age(age) {
 }
 
 unsigned int InsufficientAge::getAge() const {

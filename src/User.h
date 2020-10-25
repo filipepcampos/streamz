@@ -43,7 +43,13 @@ public:
     /**
      * Displays on the screen the info about the user
      */
-    virtual void show() = 0;
+    virtual void show() const;
+    /**
+     * Compares users
+     * @param other User to be compared with
+     * @return boolean indicating if the users are the same
+     */
+    bool operator==(const User &other) const;
 };
 
 #endif //STREAMZ_USER_H

@@ -32,7 +32,17 @@ public:
      * Adds the id of a stream to the streams history
      * @param id Id of the stream
      */
-    void addStream(unsigned int id);
+    void addStream(const unsigned int id);
+    /**
+     * Displays on the screen the info about the user
+     */
+    void show() const;
+    /**
+     * Compares streamers
+     * @param other Streamer to be compared with
+     * @return boolean indicating if the streamers are the same
+     */
+    bool operator==(const Streamer &other) const;
 };
 
 #endif //STREAMZ_STREAMER_H

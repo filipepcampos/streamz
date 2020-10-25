@@ -51,7 +51,7 @@ public:
      * Class constructor
      * @param age Age of the user
      */
-    InvalidAge(unsigned int age);
+    InvalidAge(const unsigned int age);
     /**
      * Gets the age of the user
      * @return age of the user
@@ -70,7 +70,7 @@ public:
      * Class constructor
      * @param age Age of the user
      */
-    InsufficientAge(unsigned int age);
+    InsufficientAge(const unsigned int age);
     /**
      * Gets the age of the user
      * @return age of the user
