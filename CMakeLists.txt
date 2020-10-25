@@ -15,6 +15,8 @@ set(SOURCE_FILES
         src/Stream.h
         src/User.cpp
         src/User.h
+        src/Streamer.cpp
+        src/Streamer.h
         src/Exceptions.h
         src/Exceptions.cpp)
 
