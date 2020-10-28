@@ -17,8 +17,10 @@ set(SOURCE_FILES
         src/User.h
         src/Streamer.cpp
         src/Streamer.h
-        src/Exceptions.h
-        src/Exceptions.cpp)
+        src/Viewer.cpp
+        src/Viewer.h
+        src/Exceptions.cpp
+        src/Exceptions.h)
 
 include_directories(src)
 add_subdirectory(tests)

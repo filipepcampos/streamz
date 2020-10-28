@@ -16,6 +16,11 @@ Date User::getBirthDate() const {
     return birth_date;
 }
 
+unsigned User::getAge() const {
+    /* IMPLEMENTAR MAIS TARDE */
+    return 0;
+}
+
 void User::show() const {
     /* IMPLEMENTAR MAIS TARDE */
     std::cout << "IMPLEMENTAR MAIS TARDE" << std::endl;

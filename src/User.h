@@ -41,6 +41,11 @@ public:
      */
     Date getBirthDate() const;
     /**
+     * Gets the age of the user
+     * @return age of the user
+     */
+    unsigned getAge() const;
+    /**
      * Displays on the screen the info about the user
      */
     virtual void show() const;
