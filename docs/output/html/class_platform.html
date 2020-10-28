@@ -63,16 +63,136 @@ $(function() {
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="class_platform-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Platform Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a90516896a026fce4f6ffa0758492502f"><td class="memItemLeft" align="right" valign="top"><a id="a90516896a026fce4f6ffa0758492502f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>registerUser</b> (const std::string &amp;nickname)</td></tr>
+<tr class="separator:a90516896a026fce4f6ffa0758492502f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06a556936b7e745af42c26d25e1138cb"><td class="memItemLeft" align="right" valign="top"><a id="a06a556936b7e745af42c26d25e1138cb"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getUserCount</b> ()</td></tr>
+<tr class="separator:a06a556936b7e745af42c26d25e1138cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94cf1329b1480f0e0d39c5a5352454e8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_user.html">User</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#a94cf1329b1480f0e0d39c5a5352454e8">getUsers</a> ()</td></tr>
+<tr class="separator:a94cf1329b1480f0e0d39c5a5352454e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad66cdf0db327ce1fcd78d8cefd4bc8fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_user.html">User</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#ad66cdf0db327ce1fcd78d8cefd4bc8fc">getUser</a> (const std::string &amp;nickname)</td></tr>
+<tr class="separator:ad66cdf0db327ce1fcd78d8cefd4bc8fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affea5568f45d49ff2118398a7449d85e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#affea5568f45d49ff2118398a7449d85e">showStreams</a> ()</td></tr>
+<tr class="separator:affea5568f45d49ff2118398a7449d85e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5aac12c112633633a4b03148c41869e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#af5aac12c112633633a4b03148c41869e">showUsers</a> ()</td></tr>
+<tr class="separator:af5aac12c112633633a4b03148c41869e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a3da257edd33881d020ebe9eb2ae9d3b8"><td class="memItemLeft" align="right" valign="top"><a id="a3da257edd33881d020ebe9eb2ae9d3b8"></a>
+std::vector&lt; <a class="el" href="class_user.html">User</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>users</b></td></tr>
+<tr class="separator:a3da257edd33881d020ebe9eb2ae9d3b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a008746c57320b025b777bef893befb5e"><td class="memItemLeft" align="right" valign="top"><a id="a008746c57320b025b777bef893befb5e"></a>
+std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_stream.html">Stream</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>active_streams</b></td></tr>
+<tr class="separator:a008746c57320b025b777bef893befb5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c3762f4c6f0c119cfbf19d31aea1f20"><td class="memItemLeft" align="right" valign="top"><a id="a7c3762f4c6f0c119cfbf19d31aea1f20"></a>
+std::vector&lt; <a class="el" href="class_stream_data.html">StreamData</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>archived_streams</b></td></tr>
+<tr class="separator:a7c3762f4c6f0c119cfbf19d31aea1f20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb2439753d9c1b7c68819d4cfaf501ce"><td class="memItemLeft" align="right" valign="top"><a id="acb2439753d9c1b7c68819d4cfaf501ce"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>stream_id_count</b> = 0</td></tr>
+<tr class="separator:acb2439753d9c1b7c68819d4cfaf501ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad66cdf0db327ce1fcd78d8cefd4bc8fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad66cdf0db327ce1fcd78d8cefd4bc8fc">&#9670;&nbsp;</a></span>getUser()</h2>
 
-<p><code>#include &lt;<a class="el" href="_platform_8h_source.html">Platform.h</a>&gt;</code></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Example documentation </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_user.html">User</a> * Platform::getUser </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>nickname</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get user by nickname </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nickname</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="class_user_does_not_exist.html">UserDoesNotExist</a></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>corresponding <a class="el" href="class_user.html">User</a> * </dd></dl>
+
+</div>
+</div>
+<a id="a94cf1329b1480f0e0d39c5a5352454e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94cf1329b1480f0e0d39c5a5352454e8">&#9670;&nbsp;</a></span>getUsers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="class_user.html">User</a> * &gt; Platform::getUsers </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get every user </p><dl class="section return"><dt>Returns</dt><dd>all <a class="el" href="class_user.html">User</a> * in the platform </dd></dl>
+
+</div>
+</div>
+<a id="affea5568f45d49ff2118398a7449d85e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affea5568f45d49ff2118398a7449d85e">&#9670;&nbsp;</a></span>showStreams()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Platform::showStreams </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Show all streams active in the platform </p>
+
+</div>
+</div>
+<a id="af5aac12c112633633a4b03148c41869e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5aac12c112633633a4b03148c41869e">&#9670;&nbsp;</a></span>showUsers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Platform::showUsers </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Show all users in the platform </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/filipe/dev/projects-feup/streamz/src/<a class="el" href="_platform_8h_source.html">Platform.h</a></li>
+<li>/home/filipe/dev/projects-feup/streamz/src/Platform.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

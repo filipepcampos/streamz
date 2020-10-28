@@ -78,4 +78,34 @@ public:
     unsigned int getAge() const;
 };
 
+class StreamNoLongerActive {
+    unsigned int id;
+public:
+    /**
+     * Class constructor
+     * @param id stream id
+     */
+    StreamNoLongerActive(const unsigned int id);
+    /**
+     * Gets stream id
+     * @return id
+     */
+    unsigned int getId() const;
+};
+
+class StreamDoesNotExist {
+    unsigned int id;
+    public:
+    /**
+     * Class constructor
+     * @param id stream id
+     */
+    StreamDoesNotExist(const unsigned int id);
+    /**
+     * Gets stream id
+     * @return id
+     */
+    unsigned int getId() const;
+};
+
 #endif //STREAMZ_EXCEPTIONS_H

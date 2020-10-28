@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['stream_3',['Stream',['../class_stream.html',1,'']]]
+  ['platform_5',['Platform',['../class_platform.html',1,'']]]
 ];

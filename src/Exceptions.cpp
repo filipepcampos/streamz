@@ -27,3 +27,13 @@ InsufficientAge::InsufficientAge(const unsigned int age) : age(age) {
 unsigned int InsufficientAge::getAge() const {
     return age;
 }
+
+StreamNoLongerActive::StreamNoLongerActive(const unsigned int id) : id(id){}
+unsigned int StreamNoLongerActive::getId() const {
+    return id;
+}
+
+StreamDoesNotExist::StreamDoesNotExist(const unsigned int id) : id(id){}
+unsigned int StreamDoesNotExist::getId() const{
+    return id;
+}
