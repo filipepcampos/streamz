@@ -61,6 +61,7 @@ User *Platform::getUser(const std::string &nickname) {
 }
 
 std::weak_ptr<Stream> Platform::joinStream(int p, Viewer &viewer) {
+    p--;
     if(p < 0 || p >= active_streams.size()){
         throw std::out_of_range("Invalid index for active_streams");
     }
