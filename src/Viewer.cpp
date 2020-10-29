@@ -8,6 +8,10 @@ void Viewer::joinStream(const std::shared_ptr<Stream> &stream) {
     current_stream = stream;
 }
 
+std::weak_ptr<Stream> Viewer::getCurrentStream() const {
+    return current_stream;
+}
+
 void Viewer::leaveStream() {
     current_stream.reset();
 }

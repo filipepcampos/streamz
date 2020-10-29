@@ -1,5 +1,6 @@
 #ifndef STREAMZ_PLATFORM_H
 #define STREAMZ_PLATFORM_H
+#include "Admin.h"
 #include "User.h"
 #include "Stream.h"
 #include "Streamer.h"
@@ -23,6 +24,7 @@ private:
     std::vector<StreamData> top10_views;
 
     unsigned int stream_id_count = 0;
+    friend class Admin;
 
     /**
      * Get the 10 highest streams in active_streams using F function as a comparator

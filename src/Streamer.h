@@ -7,6 +7,9 @@
 
 
 class Streamer : public User {
+    /**
+     * Vector containing the id's of the streams created by the user (always sorted by id)
+     */
     std::vector<unsigned int> streams_history;
 public:
     /**
@@ -33,6 +36,11 @@ public:
      * @param id Id of the stream
      */
     void addStream(const unsigned int id);
+    /**
+     * Removes a stream from the streams history
+     * @param id Id of the stream
+     */
+    void removeStream(const unsigned int id);
     /**
      * Displays on the screen the info about the user
      */

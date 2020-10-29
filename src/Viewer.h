@@ -21,6 +21,11 @@ public:
      */
     Viewer(const std::string &nickname, const std::string &name, const Date &birth_date);
     /**
+     * Gets the weak pointer to the stream the viewer is currently watching
+     * @return weak pointer to the stream the viewer is currently watching
+     */
+    std::weak_ptr<Stream> getCurrentStream() const;
+    /**
      * Joins the stream given as an argument
      * @param stream Shared pointer to the stream the viewer will join
      */
@@ -35,7 +40,7 @@ public:
     void show() const;
     /**
      * Compares viewers
-     * @param other Viewers to be compared with
+     * @param other Viewer to be compared with
      * @return boolean indicating if the viewers are the same
      */
     bool operator==(const Viewer &other) const;
