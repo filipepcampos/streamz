@@ -75,48 +75,84 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define STREAMZ_PLATFORM_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;User.h&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Stream.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;Exceptions.h&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_stream_data.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_stream_data.html">StreamData</a>{};</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;Streamer.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Viewer.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Exceptions.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_platform.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_platform.html">Platform</a> {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    std::vector&lt;User *&gt; users;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    std::vector&lt;std::shared_ptr&lt;Stream&gt;&gt; active_streams;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    std::vector&lt;StreamData *&gt; archived_streams;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> stream_id_count = 0;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">bool</span> registerUser(<span class="keyword">const</span> std::string &amp;nickname);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getUserCount();</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_stream_data.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_stream_data.html">StreamData</a>{};</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_platform.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_platform.html">Platform</a> {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    std::vector&lt;User *&gt; users;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_platform.html#a008746c57320b025b777bef893befb5e">   18</a></span>&#160;    std::vector&lt;std::shared_ptr&lt;Stream&gt;&gt; <a class="code" href="class_platform.html#a008746c57320b025b777bef893befb5e">active_streams</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_platform.html#a2dfd3c26ee803069ecfa7ac97817d424">   20</a></span>&#160;    std::vector&lt;StreamData&gt; <a class="code" href="class_platform.html#a2dfd3c26ee803069ecfa7ac97817d424">archived_streams</a>;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    std::vector&lt;User *&gt; <a class="code" href="class_platform.html#a94cf1329b1480f0e0d39c5a5352454e8">getUsers</a>();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="class_user.html">User</a> * <a class="code" href="class_platform.html#ad66cdf0db327ce1fcd78d8cefd4bc8fc">getUser</a>(<span class="keyword">const</span> std::string &amp;nickname);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">/*+</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     * Get top 10 active streams by viewer_count and by likes</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * @return std::vector&lt;Stream *&gt; of all the streams</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">//std::vector&lt;Stream *&gt; topStreams();</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_platform.html#affea5568f45d49ff2118398a7449d85e">showStreams</a>();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_platform.html#af5aac12c112633633a4b03148c41869e">showUsers</a>();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    std::vector&lt;StreamData&gt; top10_likes;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    std::vector&lt;StreamData&gt; top10_views;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> stream_id_count = 0;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> F&gt;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::vector&lt;std::weak_ptr&lt;Stream&gt;&gt; <a class="code" href="class_platform.html#a71ecddc287c75e51cae5039a5204356b">getTop</a>(F <span class="keyword">function</span>);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_platform.html#a6a62d3f6b8c720daff44d25eb8a2de88">userExists</a>(<span class="keyword">const</span> std::string &amp;nickname);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_platform.html#ac6383c31a56c7d8a4c4156db1535c5e5">registerViewer</a>(<span class="keyword">const</span> std::string &amp;nickname, <span class="keyword">const</span> std::string &amp;name, <span class="keyword">const</span> <a class="code" href="class_date.html">Date</a> &amp;birth_date);</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif //STREAMZ_PLATFORM_H</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_platform.html#a06db58293ec6859885da5de5b7a0792e">registerStreamer</a>(<span class="keyword">const</span> std::string &amp;nickname, <span class="keyword">const</span> std::string &amp;name, <span class="keyword">const</span> <a class="code" href="class_date.html">Date</a> &amp;birth_date);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_platform.html#a0c5c3700e4694030a6400854d96b308c">getUserCount</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_platform.html#ad41e175069528998103588cfa9d1b8cb">getActiveStreamCount</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_platform.html#ac4ca128578a1aaaa00f28768ad952627">getTotalStreamCount</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="class_user.html">User</a> * <a class="code" href="class_platform.html#ad66cdf0db327ce1fcd78d8cefd4bc8fc">getUser</a>(<span class="keyword">const</span> std::string &amp;nickname);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    std::weak_ptr&lt;Stream&gt; <a class="code" href="class_platform.html#abfd6b6e1bd7e906d4982007bfa3ed9ea">joinStream</a>(<span class="keywordtype">int</span> p, <a class="code" href="class_viewer.html">Viewer</a> &amp;viewer);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    std::weak_ptr&lt;Stream&gt; startStream(<a class="code" href="class_streamer.html">Streamer</a> &amp;streamer);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">void</span> endStream(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="comment">/*+</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">     * Get top 10 active streams by viewer_count and by likes</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">void</span> topActiveStreams();</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_platform.html#affea5568f45d49ff2118398a7449d85e">showStreams</a>();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_platform.html#af5aac12c112633633a4b03148c41869e">showUsers</a>();</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_platform.html#ae90957361e72d4e1dbd5003836c23512">reset</a>();</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;};</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">#endif //STREAMZ_PLATFORM_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_platform_html_af5aac12c112633633a4b03148c41869e"><div class="ttname"><a href="class_platform.html#af5aac12c112633633a4b03148c41869e">Platform::showUsers</a></div><div class="ttdeci">void showUsers()</div><div class="ttdef"><b>Definition:</b> Platform.cpp:25</div></div>
-<div class="ttc" id="aclass_platform_html_ad66cdf0db327ce1fcd78d8cefd4bc8fc"><div class="ttname"><a href="class_platform.html#ad66cdf0db327ce1fcd78d8cefd4bc8fc">Platform::getUser</a></div><div class="ttdeci">User * getUser(const std::string &amp;nickname)</div><div class="ttdef"><b>Definition:</b> Platform.cpp:31</div></div>
-<div class="ttc" id="aclass_stream_data_html"><div class="ttname"><a href="class_stream_data.html">StreamData</a></div><div class="ttdef"><b>Definition:</b> Platform.h:10</div></div>
-<div class="ttc" id="aclass_platform_html_a94cf1329b1480f0e0d39c5a5352454e8"><div class="ttname"><a href="class_platform.html#a94cf1329b1480f0e0d39c5a5352454e8">Platform::getUsers</a></div><div class="ttdeci">std::vector&lt; User * &gt; getUsers()</div><div class="ttdef"><b>Definition:</b> Platform.cpp:9</div></div>
-<div class="ttc" id="aclass_user_html"><div class="ttname"><a href="class_user.html">User</a></div><div class="ttdef"><b>Definition:</b> User.h:5</div></div>
-<div class="ttc" id="aclass_platform_html_affea5568f45d49ff2118398a7449d85e"><div class="ttname"><a href="class_platform.html#affea5568f45d49ff2118398a7449d85e">Platform::showStreams</a></div><div class="ttdeci">void showStreams()</div><div class="ttdef"><b>Definition:</b> Platform.cpp:18</div></div>
-<div class="ttc" id="aclass_platform_html"><div class="ttname"><a href="class_platform.html">Platform</a></div><div class="ttdef"><b>Definition:</b> Platform.h:12</div></div>
+<div class="ttc" id="aclass_platform_html_ac4ca128578a1aaaa00f28768ad952627"><div class="ttname"><a href="class_platform.html#ac4ca128578a1aaaa00f28768ad952627">Platform::getTotalStreamCount</a></div><div class="ttdeci">unsigned int getTotalStreamCount() const</div><div class="ttdef"><b>Definition:</b> Platform.cpp:35</div></div>
+<div class="ttc" id="aclass_platform_html_af5aac12c112633633a4b03148c41869e"><div class="ttname"><a href="class_platform.html#af5aac12c112633633a4b03148c41869e">Platform::showUsers</a></div><div class="ttdeci">void showUsers()</div><div class="ttdef"><b>Definition:</b> Platform.cpp:47</div></div>
+<div class="ttc" id="aclass_platform_html_ad66cdf0db327ce1fcd78d8cefd4bc8fc"><div class="ttname"><a href="class_platform.html#ad66cdf0db327ce1fcd78d8cefd4bc8fc">Platform::getUser</a></div><div class="ttdeci">User * getUser(const std::string &amp;nickname)</div><div class="ttdef"><b>Definition:</b> Platform.cpp:54</div></div>
+<div class="ttc" id="aclass_platform_html_a6a62d3f6b8c720daff44d25eb8a2de88"><div class="ttname"><a href="class_platform.html#a6a62d3f6b8c720daff44d25eb8a2de88">Platform::userExists</a></div><div class="ttdeci">bool userExists(const std::string &amp;nickname)</div><div class="ttdef"><b>Definition:</b> Platform.cpp:6</div></div>
+<div class="ttc" id="aclass_platform_html_a2dfd3c26ee803069ecfa7ac97817d424"><div class="ttname"><a href="class_platform.html#a2dfd3c26ee803069ecfa7ac97817d424">Platform::archived_streams</a></div><div class="ttdeci">std::vector&lt; StreamData &gt; archived_streams</div><div class="ttdef"><b>Definition:</b> Platform.h:20</div></div>
+<div class="ttc" id="aclass_platform_html_a0c5c3700e4694030a6400854d96b308c"><div class="ttname"><a href="class_platform.html#a0c5c3700e4694030a6400854d96b308c">Platform::getUserCount</a></div><div class="ttdeci">unsigned int getUserCount() const</div><div class="ttdef"><b>Definition:</b> Platform.cpp:29</div></div>
+<div class="ttc" id="aclass_platform_html_a71ecddc287c75e51cae5039a5204356b"><div class="ttname"><a href="class_platform.html#a71ecddc287c75e51cae5039a5204356b">Platform::getTop</a></div><div class="ttdeci">std::vector&lt; std::weak_ptr&lt; Stream &gt; &gt; getTop(F function)</div><div class="ttdef"><b>Definition:</b> Platform.cpp:103</div></div>
+<div class="ttc" id="aclass_platform_html_ad41e175069528998103588cfa9d1b8cb"><div class="ttname"><a href="class_platform.html#ad41e175069528998103588cfa9d1b8cb">Platform::getActiveStreamCount</a></div><div class="ttdeci">unsigned int getActiveStreamCount() const</div><div class="ttdef"><b>Definition:</b> Platform.cpp:32</div></div>
+<div class="ttc" id="aclass_stream_data_html"><div class="ttname"><a href="class_stream_data.html">StreamData</a></div><div class="ttdef"><b>Definition:</b> Platform.h:12</div></div>
+<div class="ttc" id="aclass_platform_html_a06db58293ec6859885da5de5b7a0792e"><div class="ttname"><a href="class_platform.html#a06db58293ec6859885da5de5b7a0792e">Platform::registerStreamer</a></div><div class="ttdeci">bool registerStreamer(const std::string &amp;nickname, const std::string &amp;name, const Date &amp;birth_date)</div><div class="ttdef"><b>Definition:</b> Platform.cpp:13</div></div>
+<div class="ttc" id="aclass_platform_html_ac6383c31a56c7d8a4c4156db1535c5e5"><div class="ttname"><a href="class_platform.html#ac6383c31a56c7d8a4c4156db1535c5e5">Platform::registerViewer</a></div><div class="ttdeci">bool registerViewer(const std::string &amp;nickname, const std::string &amp;name, const Date &amp;birth_date)</div><div class="ttdef"><b>Definition:</b> Platform.cpp:21</div></div>
+<div class="ttc" id="aclass_platform_html_a008746c57320b025b777bef893befb5e"><div class="ttname"><a href="class_platform.html#a008746c57320b025b777bef893befb5e">Platform::active_streams</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; Stream &gt; &gt; active_streams</div><div class="ttdef"><b>Definition:</b> Platform.h:18</div></div>
+<div class="ttc" id="aclass_user_html"><div class="ttname"><a href="class_user.html">User</a></div><div class="ttdef"><b>Definition:</b> User.h:7</div></div>
+<div class="ttc" id="aclass_platform_html_ae90957361e72d4e1dbd5003836c23512"><div class="ttname"><a href="class_platform.html#ae90957361e72d4e1dbd5003836c23512">Platform::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdef"><b>Definition:</b> Platform.cpp:145</div></div>
+<div class="ttc" id="aclass_platform_html_abfd6b6e1bd7e906d4982007bfa3ed9ea"><div class="ttname"><a href="class_platform.html#abfd6b6e1bd7e906d4982007bfa3ed9ea">Platform::joinStream</a></div><div class="ttdeci">std::weak_ptr&lt; Stream &gt; joinStream(int p, Viewer &amp;viewer)</div><div class="ttdef"><b>Definition:</b> Platform.cpp:64</div></div>
+<div class="ttc" id="aclass_platform_html_affea5568f45d49ff2118398a7449d85e"><div class="ttname"><a href="class_platform.html#affea5568f45d49ff2118398a7449d85e">Platform::showStreams</a></div><div class="ttdeci">void showStreams()</div><div class="ttdef"><b>Definition:</b> Platform.cpp:40</div></div>
+<div class="ttc" id="aclass_platform_html"><div class="ttname"><a href="class_platform.html">Platform</a></div><div class="ttdef"><b>Definition:</b> Platform.h:14</div></div>
+<div class="ttc" id="aclass_streamer_html"><div class="ttname"><a href="class_streamer.html">Streamer</a></div><div class="ttdef"><b>Definition:</b> Streamer.h:9</div></div>
+<div class="ttc" id="aclass_date_html"><div class="ttname"><a href="class_date.html">Date</a></div><div class="ttdef"><b>Definition:</b> Date.h:5</div></div>
+<div class="ttc" id="aclass_viewer_html"><div class="ttname"><a href="class_viewer.html">Viewer</a></div><div class="ttdef"><b>Definition:</b> Viewer.h:10</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

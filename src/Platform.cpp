@@ -1,6 +1,7 @@
 #include "Platform.h"
 #include <iostream>
 #include <algorithm>
+#include <stack>
 
 bool Platform::userExists(const std::string &nickname) {
     auto it = std::find_if(users.begin(), users.end(), [nickname](User *user){
@@ -32,7 +33,7 @@ unsigned int Platform::getActiveStreamCount() const{
     return active_streams.size();
 }
 unsigned int Platform::getTotalStreamCount() const{
-    return archived_streams.size();
+    return active_streams.size() + archived_streams.size();
 }
 
 
@@ -94,7 +95,55 @@ void Platform::endStream(unsigned int id){
         throw id <= stream_id_count ? StreamNoLongerActive(id) : StreamDoesNotExist(id);
     }
     StreamData data = *(*it);
+     // TODO: update top10
     */
+}
+
+template <typename F>
+std::vector<std::weak_ptr<Stream>> Platform::getTop(F function){
+    // TODO: Test this function;
+    std::vector<std::weak_ptr<Stream>> top10;
+    if(getActiveStreamCount() > 10){
+        top10.reserve(10);
+        std::stack<std::pair<decltype(active_streams.begin()), decltype(active_streams.begin())>> s;
+        // Custom insertion sort, where 10 greatest elements are inserted into the first 10 index
+        for(auto it = active_streams.begin(); it != active_streams.begin() + 10; ++it){
+            auto max_it = std::max_element(it, active_streams.end(), function);
+            s.emplace(it, max_it);
+            std::iter_swap(it, max_it);
+        }
+        for(int i = 0; i < 10; ++i){
+            top10.emplace_back(active_streams[i]);
+        }
+        // Unwind the changes made, restoring original vector state
+        while(!s.empty()){
+            std::iter_swap(s.top().first, s.top().second);
+            s.pop();
+        }
+    }
+    else{
+        top10.reserve(active_streams.size());
+        for(auto &ptr : active_streams){
+            top10.emplace_back(ptr);
+        }
+    }
+    return top10;
+}
+
+void Platform::topActiveStreams() {
+    std::cout << "NOT IMPLEMENTED" << std::endl;
+    /*
+    std::vector<std::weak_ptr<Stream>> likes = getTop([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
+        return ptr1->getLikes() < ptr2->getLikes();
+    });
+    std::vector<std::weak_ptr<Stream>> views = getTop([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
+        return ptr1->getLikes() < ptr2->getLikes();
+    });
+     */
+}
+
+void Platform::topArchivedStreams() {
+    std::cout << "NOT IMPLEMENTED" << std::endl;
 }
 
 void Platform::reset() {

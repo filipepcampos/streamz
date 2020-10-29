@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['platform_5',['Platform',['../class_platform.html',1,'']]]
+  ['date_7',['Date',['../class_date.html',1,'']]]
 ];

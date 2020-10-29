@@ -65,6 +65,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_platform-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -74,37 +75,141 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a90516896a026fce4f6ffa0758492502f"><td class="memItemLeft" align="right" valign="top"><a id="a90516896a026fce4f6ffa0758492502f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>registerUser</b> (const std::string &amp;nickname)</td></tr>
-<tr class="separator:a90516896a026fce4f6ffa0758492502f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06a556936b7e745af42c26d25e1138cb"><td class="memItemLeft" align="right" valign="top"><a id="a06a556936b7e745af42c26d25e1138cb"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getUserCount</b> ()</td></tr>
-<tr class="separator:a06a556936b7e745af42c26d25e1138cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94cf1329b1480f0e0d39c5a5352454e8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_user.html">User</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#a94cf1329b1480f0e0d39c5a5352454e8">getUsers</a> ()</td></tr>
-<tr class="separator:a94cf1329b1480f0e0d39c5a5352454e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6383c31a56c7d8a4c4156db1535c5e5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#ac6383c31a56c7d8a4c4156db1535c5e5">registerViewer</a> (const std::string &amp;nickname, const std::string &amp;name, const <a class="el" href="class_date.html">Date</a> &amp;birth_date)</td></tr>
+<tr class="separator:ac6383c31a56c7d8a4c4156db1535c5e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06db58293ec6859885da5de5b7a0792e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#a06db58293ec6859885da5de5b7a0792e">registerStreamer</a> (const std::string &amp;nickname, const std::string &amp;name, const <a class="el" href="class_date.html">Date</a> &amp;birth_date)</td></tr>
+<tr class="separator:a06db58293ec6859885da5de5b7a0792e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c5c3700e4694030a6400854d96b308c"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#a0c5c3700e4694030a6400854d96b308c">getUserCount</a> () const</td></tr>
+<tr class="separator:a0c5c3700e4694030a6400854d96b308c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad41e175069528998103588cfa9d1b8cb"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#ad41e175069528998103588cfa9d1b8cb">getActiveStreamCount</a> () const</td></tr>
+<tr class="separator:ad41e175069528998103588cfa9d1b8cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4ca128578a1aaaa00f28768ad952627"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#ac4ca128578a1aaaa00f28768ad952627">getTotalStreamCount</a> () const</td></tr>
+<tr class="separator:ac4ca128578a1aaaa00f28768ad952627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad66cdf0db327ce1fcd78d8cefd4bc8fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_user.html">User</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#ad66cdf0db327ce1fcd78d8cefd4bc8fc">getUser</a> (const std::string &amp;nickname)</td></tr>
 <tr class="separator:ad66cdf0db327ce1fcd78d8cefd4bc8fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfd6b6e1bd7e906d4982007bfa3ed9ea"><td class="memItemLeft" align="right" valign="top">std::weak_ptr&lt; <a class="el" href="class_stream.html">Stream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#abfd6b6e1bd7e906d4982007bfa3ed9ea">joinStream</a> (int p, <a class="el" href="class_viewer.html">Viewer</a> &amp;viewer)</td></tr>
+<tr class="separator:abfd6b6e1bd7e906d4982007bfa3ed9ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7723ac13fa16e99da223c31b55bb9c5a"><td class="memItemLeft" align="right" valign="top"><a id="a7723ac13fa16e99da223c31b55bb9c5a"></a>
+std::weak_ptr&lt; <a class="el" href="class_stream.html">Stream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>startStream</b> (<a class="el" href="class_streamer.html">Streamer</a> &amp;streamer)</td></tr>
+<tr class="separator:a7723ac13fa16e99da223c31b55bb9c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a313d1507ecade92610946b57dc03c009"><td class="memItemLeft" align="right" valign="top"><a id="a313d1507ecade92610946b57dc03c009"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>endStream</b> (unsigned int id)</td></tr>
+<tr class="separator:a313d1507ecade92610946b57dc03c009"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a176f6b46546301bcbd5768b7a626809f"><td class="memItemLeft" align="right" valign="top"><a id="a176f6b46546301bcbd5768b7a626809f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>topActiveStreams</b> ()</td></tr>
+<tr class="separator:a176f6b46546301bcbd5768b7a626809f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affea5568f45d49ff2118398a7449d85e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#affea5568f45d49ff2118398a7449d85e">showStreams</a> ()</td></tr>
 <tr class="separator:affea5568f45d49ff2118398a7449d85e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5aac12c112633633a4b03148c41869e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#af5aac12c112633633a4b03148c41869e">showUsers</a> ()</td></tr>
 <tr class="separator:af5aac12c112633633a4b03148c41869e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae90957361e72d4e1dbd5003836c23512"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#ae90957361e72d4e1dbd5003836c23512">reset</a> ()</td></tr>
+<tr class="separator:ae90957361e72d4e1dbd5003836c23512"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a71ecddc287c75e51cae5039a5204356b"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a71ecddc287c75e51cae5039a5204356b"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; std::weak_ptr&lt; <a class="el" href="class_stream.html">Stream</a> &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_platform.html#a71ecddc287c75e51cae5039a5204356b">getTop</a> (F function)</td></tr>
+<tr class="separator:a71ecddc287c75e51cae5039a5204356b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a62d3f6b8c720daff44d25eb8a2de88"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#a6a62d3f6b8c720daff44d25eb8a2de88">userExists</a> (const std::string &amp;nickname)</td></tr>
+<tr class="separator:a6a62d3f6b8c720daff44d25eb8a2de88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a3da257edd33881d020ebe9eb2ae9d3b8"><td class="memItemLeft" align="right" valign="top"><a id="a3da257edd33881d020ebe9eb2ae9d3b8"></a>
 std::vector&lt; <a class="el" href="class_user.html">User</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>users</b></td></tr>
 <tr class="separator:a3da257edd33881d020ebe9eb2ae9d3b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a008746c57320b025b777bef893befb5e"><td class="memItemLeft" align="right" valign="top"><a id="a008746c57320b025b777bef893befb5e"></a>
-std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_stream.html">Stream</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>active_streams</b></td></tr>
+<tr class="memitem:a008746c57320b025b777bef893befb5e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_stream.html">Stream</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#a008746c57320b025b777bef893befb5e">active_streams</a></td></tr>
 <tr class="separator:a008746c57320b025b777bef893befb5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c3762f4c6f0c119cfbf19d31aea1f20"><td class="memItemLeft" align="right" valign="top"><a id="a7c3762f4c6f0c119cfbf19d31aea1f20"></a>
-std::vector&lt; <a class="el" href="class_stream_data.html">StreamData</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>archived_streams</b></td></tr>
-<tr class="separator:a7c3762f4c6f0c119cfbf19d31aea1f20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dfd3c26ee803069ecfa7ac97817d424"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_stream_data.html">StreamData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#a2dfd3c26ee803069ecfa7ac97817d424">archived_streams</a></td></tr>
+<tr class="separator:a2dfd3c26ee803069ecfa7ac97817d424"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88a07a0277bbe52057a3933621c2406c"><td class="memItemLeft" align="right" valign="top"><a id="a88a07a0277bbe52057a3933621c2406c"></a>
+std::vector&lt; <a class="el" href="class_stream_data.html">StreamData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>top10_likes</b></td></tr>
+<tr class="separator:a88a07a0277bbe52057a3933621c2406c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ab8b1a17cbe90b4216316ad6844f285"><td class="memItemLeft" align="right" valign="top"><a id="a6ab8b1a17cbe90b4216316ad6844f285"></a>
+std::vector&lt; <a class="el" href="class_stream_data.html">StreamData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>top10_views</b></td></tr>
+<tr class="separator:a6ab8b1a17cbe90b4216316ad6844f285"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb2439753d9c1b7c68819d4cfaf501ce"><td class="memItemLeft" align="right" valign="top"><a id="acb2439753d9c1b7c68819d4cfaf501ce"></a>
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>stream_id_count</b> = 0</td></tr>
 <tr class="separator:acb2439753d9c1b7c68819d4cfaf501ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad41e175069528998103588cfa9d1b8cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad41e175069528998103588cfa9d1b8cb">&#9670;&nbsp;</a></span>getActiveStreamCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Platform::getActiveStreamCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get number of active streams in the platform </p><dl class="section return"><dt>Returns</dt><dd>unsigned int </dd></dl>
+
+</div>
+</div>
+<a id="a71ecddc287c75e51cae5039a5204356b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71ecddc287c75e51cae5039a5204356b">&#9670;&nbsp;</a></span>getTop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::weak_ptr&lt; <a class="el" href="class_stream.html">Stream</a> &gt; &gt; Platform::getTop </td>
+          <td>(</td>
+          <td class="paramtype">F&#160;</td>
+          <td class="paramname"><em>function</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get the 10 highest streams in active_streams using F function as a comparator The original vector active_streams is always restored to it's original state before returning </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">function</td><td>- std::shared_ptr&lt;Stream&gt; comparator function </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>vector&lt;weak_ptr&lt;Stream&gt;&gt; </dd></dl>
+
+</div>
+</div>
+<a id="ac4ca128578a1aaaa00f28768ad952627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4ca128578a1aaaa00f28768ad952627">&#9670;&nbsp;</a></span>getTotalStreamCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Platform::getTotalStreamCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get total number of streams (active + archived) in the platform </p><dl class="section return"><dt>Returns</dt><dd>unsigned int </dd></dl>
+
+</div>
+</div>
 <a id="ad66cdf0db327ce1fcd78d8cefd4bc8fc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad66cdf0db327ce1fcd78d8cefd4bc8fc">&#9670;&nbsp;</a></span>getUser()</h2>
 
@@ -136,21 +241,167 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>stream_id_cou
 
 </div>
 </div>
-<a id="a94cf1329b1480f0e0d39c5a5352454e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94cf1329b1480f0e0d39c5a5352454e8">&#9670;&nbsp;</a></span>getUsers()</h2>
+<a id="a0c5c3700e4694030a6400854d96b308c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c5c3700e4694030a6400854d96b308c">&#9670;&nbsp;</a></span>getUserCount()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="class_user.html">User</a> * &gt; Platform::getUsers </td>
+          <td class="memname">unsigned int Platform::getUserCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get number of users registered in the platform </p><dl class="section return"><dt>Returns</dt><dd>unsigned int </dd></dl>
+
+</div>
+</div>
+<a id="abfd6b6e1bd7e906d4982007bfa3ed9ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfd6b6e1bd7e906d4982007bfa3ed9ea">&#9670;&nbsp;</a></span>joinStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::weak_ptr&lt; <a class="el" href="class_stream.html">Stream</a> &gt; Platform::joinStream </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_viewer.html">Viewer</a> &amp;&#160;</td>
+          <td class="paramname"><em>viewer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Return weak_ptr to stream at position 'p' (which can be seen using showStreams) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td></td></tr>
+    <tr><td class="paramname">viewer</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::out_of_range,<a class="el" href="class_insufficient_age.html">InsufficientAge</a></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="a06db58293ec6859885da5de5b7a0792e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06db58293ec6859885da5de5b7a0792e">&#9670;&nbsp;</a></span>registerStreamer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Platform::registerStreamer </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>nickname</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_date.html">Date</a> &amp;&#160;</td>
+          <td class="paramname"><em>birth_date</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Register a new <a class="el" href="class_streamer.html">Streamer</a> to the <a class="el" href="class_platform.html">Platform</a> </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nickname</td><td></td></tr>
+    <tr><td class="paramname">name</td><td></td></tr>
+    <tr><td class="paramname">birth_date</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if registered with success </dd></dl>
+
+</div>
+</div>
+<a id="ac6383c31a56c7d8a4c4156db1535c5e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6383c31a56c7d8a4c4156db1535c5e5">&#9670;&nbsp;</a></span>registerViewer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Platform::registerViewer </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>nickname</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_date.html">Date</a> &amp;&#160;</td>
+          <td class="paramname"><em>birth_date</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Register a new <a class="el" href="class_viewer.html">Viewer</a> to the <a class="el" href="class_platform.html">Platform</a> </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nickname</td><td></td></tr>
+    <tr><td class="paramname">name</td><td></td></tr>
+    <tr><td class="paramname">birth_date</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if registered with success </dd></dl>
+
+</div>
+</div>
+<a id="ae90957361e72d4e1dbd5003836c23512"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae90957361e72d4e1dbd5003836c23512">&#9670;&nbsp;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Platform::reset </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get every user </p><dl class="section return"><dt>Returns</dt><dd>all <a class="el" href="class_user.html">User</a> * in the platform </dd></dl>
+<p>Clear all vectors in memory Does not remove anything from files </p>
 
 </div>
 </div>
@@ -187,6 +438,86 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>stream_id_cou
       </table>
 </div><div class="memdoc">
 <p>Show all users in the platform </p>
+
+</div>
+</div>
+<a id="a6a62d3f6b8c720daff44d25eb8a2de88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a62d3f6b8c720daff44d25eb8a2de88">&#9670;&nbsp;</a></span>userExists()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Platform::userExists </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>nickname</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Check if a user with a given nickname already exists </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nickname</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if user exists </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a008746c57320b025b777bef893befb5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a008746c57320b025b777bef893befb5e">&#9670;&nbsp;</a></span>active_streams</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="class_stream.html">Stream</a>&gt; &gt; Platform::active_streams</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Active streams (always sorted by id) </p>
+
+</div>
+</div>
+<a id="a2dfd3c26ee803069ecfa7ac97817d424"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dfd3c26ee803069ecfa7ac97817d424">&#9670;&nbsp;</a></span>archived_streams</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="class_stream_data.html">StreamData</a>&gt; Platform::archived_streams</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Archived streams (sorted by end date) </p>
 
 </div>
 </div>

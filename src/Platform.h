@@ -14,14 +14,50 @@ class StreamData{};
 class Platform {
 private:
     std::vector<User *> users;
-    std::vector<std::shared_ptr<Stream>> active_streams; /** Active streams (always sorted by id) */
+    /** Active streams (always sorted by id) */
+    std::vector<std::shared_ptr<Stream>> active_streams;
+    /** Archived streams (sorted by end date) */
     std::vector<StreamData> archived_streams;
+
+    std::vector<StreamData> top10_likes;
+    std::vector<StreamData> top10_views;
+
     unsigned int stream_id_count = 0;
 
+    /**
+     * Get the 10 highest streams in active_streams using F function as a comparator
+     * The original vector active_streams is always restored to it's original state before returning
+     * @tparam F
+     * @param function - std::shared_ptr<Stream> comparator function
+     * @return vector<weak_ptr<Stream>>
+     */
+    template <typename F>
+    std::vector<std::weak_ptr<Stream>> getTop(F function);
+
+    /**
+     * Check if a user with a given nickname already exists
+     * @param nickname
+     * @return true if user exists
+     */
     bool userExists(const std::string &nickname);
 
 public:
+    /**
+     * Register a new Viewer to the Platform
+     * @param nickname
+     * @param name
+     * @param birth_date
+     * @return true if registered with success
+     */
     bool registerViewer(const std::string &nickname, const std::string &name, const Date &birth_date);
+
+    /**
+     * Register a new Streamer to the Platform
+     * @param nickname
+     * @param name
+     * @param birth_date
+     * @return true if registered with success
+     */
     bool registerStreamer(const std::string &nickname, const std::string &name, const Date &birth_date);
 
     /**
@@ -64,9 +100,13 @@ public:
 
     /*+
      * Get top 10 active streams by viewer_count and by likes
-     * @return std::vector<Stream *> of all the streams
      */
-    //std::vector<Stream *> topStreams();
+    void topActiveStreams();
+
+    /*
+     * Get top 10 archived streams by viewer_count and by likes
+     */
+    void topArchivedStreams();
 
     /**
      * Show all streams active in the platform

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['platform_15',['Platform',['../class_platform.html',1,'']]]
+  ['insufficientage_45',['InsufficientAge',['../class_insufficient_age.html',1,'']]],
+  ['invalidage_46',['InvalidAge',['../class_invalid_age.html',1,'']]]
 ];

@@ -73,16 +73,38 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef STREAMZ_USER_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define STREAMZ_USER_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="class_user.html">    5</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_user.html">User</a> {</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;Date.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;};</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#endif //STREAMZ_USER_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="class_user.html">    7</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_user.html">User</a> {</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_user.html#aebdb6953485740c33307118f91156832">   11</a></span>&#160;    std::string <a class="code" href="class_user.html#aebdb6953485740c33307118f91156832">nickname</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_user.html#a085d8d69282b6298964eab8351584536">   15</a></span>&#160;    std::string <a class="code" href="class_user.html#a085d8d69282b6298964eab8351584536">name</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_user.html#afe3e5752a826a0efb499f51e284bfd2d">   19</a></span>&#160;    <a class="code" href="class_date.html">Date</a> <a class="code" href="class_user.html#afe3e5752a826a0efb499f51e284bfd2d">birth_date</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_user.html#a85a176aa8eb9cdb76aeefd5b08a2fd7e">User</a>(<span class="keyword">const</span> std::string &amp;<a class="code" href="class_user.html#aebdb6953485740c33307118f91156832">nickname</a>, <span class="keyword">const</span> std::string &amp;<a class="code" href="class_user.html#a085d8d69282b6298964eab8351584536">name</a>, <span class="keyword">const</span> <a class="code" href="class_date.html">Date</a> &amp;<a class="code" href="class_user.html#afe3e5752a826a0efb499f51e284bfd2d">birth_date</a>);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    std::string <a class="code" href="class_user.html#ab9640074c59c719e68b7154ba85d64cb">getNickname</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    std::string <a class="code" href="class_user.html#a446a64e63adafbc2e1428532275ad6a1">getName</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_date.html">Date</a> <a class="code" href="class_user.html#a577924fd73e7e431cd0d4db3d37ecdfb">getBirthDate</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">unsigned</span> <a class="code" href="class_user.html#a5e631c30e702e5cc08cc32684b7bf3c0">getAge</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_user.html#ae39ad06f6b431952b3e372676adaba6e">show</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_user.html#ae6b5bfa0555fde48560fd1f2a37dd4e0">operator==</a>(<span class="keyword">const</span> <a class="code" href="class_user.html">User</a> &amp;other) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif //STREAMZ_USER_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_user_html"><div class="ttname"><a href="class_user.html">User</a></div><div class="ttdef"><b>Definition:</b> User.h:5</div></div>
+<div class="ttc" id="aclass_user_html_ae39ad06f6b431952b3e372676adaba6e"><div class="ttname"><a href="class_user.html#ae39ad06f6b431952b3e372676adaba6e">User::show</a></div><div class="ttdeci">virtual void show() const</div><div class="ttdef"><b>Definition:</b> User.cpp:24</div></div>
+<div class="ttc" id="aclass_user_html_a85a176aa8eb9cdb76aeefd5b08a2fd7e"><div class="ttname"><a href="class_user.html#a85a176aa8eb9cdb76aeefd5b08a2fd7e">User::User</a></div><div class="ttdeci">User(const std::string &amp;nickname, const std::string &amp;name, const Date &amp;birth_date)</div><div class="ttdef"><b>Definition:</b> User.cpp:4</div></div>
+<div class="ttc" id="aclass_user_html_ab9640074c59c719e68b7154ba85d64cb"><div class="ttname"><a href="class_user.html#ab9640074c59c719e68b7154ba85d64cb">User::getNickname</a></div><div class="ttdeci">std::string getNickname() const</div><div class="ttdef"><b>Definition:</b> User.cpp:7</div></div>
+<div class="ttc" id="aclass_user_html_aebdb6953485740c33307118f91156832"><div class="ttname"><a href="class_user.html#aebdb6953485740c33307118f91156832">User::nickname</a></div><div class="ttdeci">std::string nickname</div><div class="ttdef"><b>Definition:</b> User.h:11</div></div>
+<div class="ttc" id="aclass_user_html_ae6b5bfa0555fde48560fd1f2a37dd4e0"><div class="ttname"><a href="class_user.html#ae6b5bfa0555fde48560fd1f2a37dd4e0">User::operator==</a></div><div class="ttdeci">bool operator==(const User &amp;other) const</div><div class="ttdef"><b>Definition:</b> User.cpp:29</div></div>
+<div class="ttc" id="aclass_user_html_a5e631c30e702e5cc08cc32684b7bf3c0"><div class="ttname"><a href="class_user.html#a5e631c30e702e5cc08cc32684b7bf3c0">User::getAge</a></div><div class="ttdeci">unsigned getAge() const</div><div class="ttdef"><b>Definition:</b> User.cpp:19</div></div>
+<div class="ttc" id="aclass_user_html"><div class="ttname"><a href="class_user.html">User</a></div><div class="ttdef"><b>Definition:</b> User.h:7</div></div>
+<div class="ttc" id="aclass_user_html_a577924fd73e7e431cd0d4db3d37ecdfb"><div class="ttname"><a href="class_user.html#a577924fd73e7e431cd0d4db3d37ecdfb">User::getBirthDate</a></div><div class="ttdeci">Date getBirthDate() const</div><div class="ttdef"><b>Definition:</b> User.cpp:15</div></div>
+<div class="ttc" id="aclass_user_html_a446a64e63adafbc2e1428532275ad6a1"><div class="ttname"><a href="class_user.html#a446a64e63adafbc2e1428532275ad6a1">User::getName</a></div><div class="ttdeci">std::string getName() const</div><div class="ttdef"><b>Definition:</b> User.cpp:11</div></div>
+<div class="ttc" id="aclass_user_html_afe3e5752a826a0efb499f51e284bfd2d"><div class="ttname"><a href="class_user.html#afe3e5752a826a0efb499f51e284bfd2d">User::birth_date</a></div><div class="ttdeci">Date birth_date</div><div class="ttdef"><b>Definition:</b> User.h:19</div></div>
+<div class="ttc" id="aclass_date_html"><div class="ttname"><a href="class_date.html">Date</a></div><div class="ttdef"><b>Definition:</b> Date.h:5</div></div>
+<div class="ttc" id="aclass_user_html_a085d8d69282b6298964eab8351584536"><div class="ttname"><a href="class_user.html#a085d8d69282b6298964eab8351584536">User::name</a></div><div class="ttdeci">std::string name</div><div class="ttdef"><b>Definition:</b> User.h:15</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
