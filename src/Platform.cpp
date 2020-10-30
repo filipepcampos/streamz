@@ -2,6 +2,47 @@
 #include <iostream>
 #include <algorithm>
 #include <stack>
+#include <fstream>
+#include <sstream>
+
+Platform::Platform() {
+    std::string line;
+    std::ifstream users_file(files.user_file);
+    if(users_file.is_open()){
+        std::getline(users_file, line);
+        while(std::getline(users_file, line)){
+            std::string nickname, name;
+            std::istringstream ss{line};
+            ss >> nickname;
+            std::getline(ss, name);
+            // TODO: Change to correct class
+            users.push_back(new Viewer(nickname, name, Date()));
+        }
+        users_file.close();
+    }
+    // TODO: Read streams
+}
+
+Platform::~Platform() {
+    if(!test){
+        save();
+    }
+    for(auto ptr : users){
+        delete ptr;
+    }
+}
+
+void Platform::save(){
+    std::cout << "saving" << std::endl;
+    std::ofstream users_file(files.user_file, std::ofstream::trunc);
+    if(users_file.is_open()){
+        users_file << "=====================" << std::endl;
+        for(auto user : users){
+            users_file << user->getNickname() << " " << user->getName() << std::endl;
+        }
+        users_file.close();
+    }
+}
 
 bool Platform::userExists(const std::string &nickname) {
     auto it = std::find_if(users.begin(), users.end(), [nickname](User *user){
@@ -88,15 +129,32 @@ std::weak_ptr<Stream> Platform::startStream(Streamer &streamer){
 void Platform::endStream(unsigned int id){
     std::cout << "NOT IMPLEMENTED" << std::endl;
     /*
-    auto it = std::find_if(active_streams.begin(), active_streams.end(), [id](std::shared_ptr<Stream> ptr){
+    auto stream_it = std::find_if(active_streams.begin(), active_streams.end(), [id](std::shared_ptr<Stream> ptr){
         return ptr->getId() == id;
     });
-    if(it == active_streams.end()){
+    if(stream_it == active_streams.end()){
         throw id <= stream_id_count ? StreamNoLongerActive(id) : StreamDoesNotExist(id);
     }
-    StreamData data = *(*it);
-     // TODO: update top10
-    */
+    StreamData data = (*stream_it).get();
+    updateArchivedTop(data);*/
+}
+
+void Platform::updateArchivedTop(StreamData &data) {
+    /*
+    auto views_it = std::lower_bound(archived_top10_views.begin(), archived_top10_views.end(), [data](StreamData &d){
+        return d.getViews() < data;
+    });
+    if(views_it != archived_top10_views.begin()){
+        archived_top10_views.insert(views_it, data);
+        archived_top10_views.pop_back();
+    }
+    auto likes_it = std::lower_bound(archived_top10_likes.begin(), archived_top10_likes.end(), [data](StreamData &d){
+        return d.getLikes() < data;
+    });
+    if(likes_it != archived_top10_likes.begin()){
+        archived_top10_likes.insert(likes_it, data);
+        archived_top10_likes.pop_back();
+    }*/
 }
 
 template <typename F>
@@ -105,19 +163,20 @@ std::vector<std::weak_ptr<Stream>> Platform::getTop(F function){
     std::vector<std::weak_ptr<Stream>> top10;
     if(getActiveStreamCount() > 10){
         top10.reserve(10);
-        std::stack<std::pair<decltype(active_streams.begin()), decltype(active_streams.begin())>> s;
+        std::stack<decltype(active_streams.begin())> s;
         // Custom insertion sort, where 10 greatest elements are inserted into the first 10 index
         for(auto it = active_streams.begin(); it != active_streams.begin() + 10; ++it){
             auto max_it = std::max_element(it, active_streams.end(), function);
-            s.emplace(it, max_it);
+            s.emplace(max_it);
             std::iter_swap(it, max_it);
         }
         for(int i = 0; i < 10; ++i){
             top10.emplace_back(active_streams[i]);
         }
         // Unwind the changes made, restoring original vector state
-        while(!s.empty()){
-            std::iter_swap(s.top().first, s.top().second);
+        auto it = active_streams.begin() + 10;
+        for(int i = 0; i < 10; ++i, --it){
+            std::iter_swap(s.top(), it);
             s.pop();
         }
     }
@@ -137,7 +196,7 @@ void Platform::topActiveStreams() {
         return ptr1->getLikes() < ptr2->getLikes();
     });
     std::vector<std::weak_ptr<Stream>> views = getTop([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
-        return ptr1->getLikes() < ptr2->getLikes();
+        return ptr1->getViews() < ptr2->getViews();
     });
      */
 }
@@ -146,8 +205,22 @@ void Platform::topArchivedStreams() {
     std::cout << "NOT IMPLEMENTED" << std::endl;
 }
 
-void Platform::reset() {
+bool Platform::deleteUser(const std::string &nickname) {
+    auto it = std::find_if(users.begin(), users.end(), [nickname](User *ptr){
+        return ptr->getNickname() == nickname;
+    });
+    if(it == users.end()){
+        return false;
+    }
+    users.erase(it);
+    return true;
+}
+
+void Platform::test_mode() {
+    test = true;
     users.clear();
     active_streams.clear();
     archived_streams.clear();
+    archived_top10_likes.clear();
+    archived_top10_views.clear();
 }

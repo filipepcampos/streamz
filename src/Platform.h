@@ -9,8 +9,15 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <list>
 
 class StreamData{};
+
+struct IOFiles{
+    const std::string user_file = "user.txt";
+    const std::string active_stream_file = "active_streams.txt";
+    const std::string archived_stream_file = "archive.txt";
+};
 
 class Platform {
 private:
@@ -20,11 +27,15 @@ private:
     /** Archived streams (sorted by end date) */
     std::vector<StreamData> archived_streams;
 
-    std::vector<StreamData> top10_likes;
-    std::vector<StreamData> top10_views;
+    std::list<StreamData> archived_top10_likes;
+    std::list<StreamData> archived_top10_views;
 
     unsigned int stream_id_count = 0;
+
+    IOFiles files;
     friend class Admin;
+
+    bool test = false;
 
     /**
      * Get the 10 highest streams in active_streams using F function as a comparator
@@ -36,6 +47,8 @@ private:
     template <typename F>
     std::vector<std::weak_ptr<Stream>> getTop(F function);
 
+    void updateArchivedTop(StreamData &data);
+
     /**
      * Check if a user with a given nickname already exists
      * @param nickname
@@ -43,7 +56,13 @@ private:
      */
     bool userExists(const std::string &nickname);
 
+    void save();
+
 public:
+    Platform();
+
+    ~Platform();
+
     /**
      * Register a new Viewer to the Platform
      * @param nickname
@@ -89,6 +108,13 @@ public:
     User * getUser(const std::string &nickname);
 
     /**
+     * Delete a user from the Platform
+     * @param nickname
+     * @return true if user was deleted with success
+     */
+    bool deleteUser(const std::string &nickname);
+
+    /**
      * Return weak_ptr to stream at position 'p' (which can be seen using showStreams)
      * @param p
      * @param viewer
@@ -124,7 +150,7 @@ public:
      * Clear all vectors in memory
      * Does not remove anything from files
      */
-    void reset();
+    void test_mode();
 };
 
 
