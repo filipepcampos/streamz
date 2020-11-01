@@ -4,8 +4,6 @@
 #include "Stream.h"
 #include <memory>
 
-class Stream;
-
 #define MINIMUM_AGE_VIEWER 12
 
 class Viewer : public User {
@@ -20,7 +18,7 @@ public:
      * @param name Name of the user
      * @param birth_date Birth date of the user
      */
-    Viewer(const std::string &nickname, const std::string &name, const Date &birth_date);
+    Viewer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform *platform);
     /**
      * Gets the weak pointer to the stream the viewer is currently watching
      * @return weak pointer to the stream the viewer is currently watching

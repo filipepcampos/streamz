@@ -1,17 +1,16 @@
 #ifndef STREAMZ_PLATFORM_H
 #define STREAMZ_PLATFORM_H
-#include "Admin.h"
-#include "Archive.h"
-#include "User.h"
-#include "Stream.h"
-#include "Streamer.h"
-#include "Viewer.h"
 #include "Exceptions.h"
+#include "Archive.h"
 #include <vector>
 #include <string>
 #include <memory>
 #include <list>
 
+class User;
+class Viewer;
+class Streamer;
+class Stream;
 
 class Platform {
 private:

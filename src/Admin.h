@@ -1,12 +1,10 @@
 #ifndef STREAMZ_ADMIN_H
 #define STREAMZ_ADMIN_H
 #include "Platform.h"
-#include "Streamer.h"
 #include "Date.h"
 #include <string>
 
-class Platform; // Forward Declaration
-//class Streamer; // Forward Declaration
+class Platform;
 
 class Admin {
     /**

@@ -1,4 +1,7 @@
 #include "Platform.h"
+#include "Streamer.h"
+#include "Viewer.h"
+#include "Stream.h"
 #include "PrivateStream.h"
 #include <iostream>
 #include <algorithm>
@@ -17,7 +20,7 @@ Platform::Platform() : archive(files.archived_stream_file) {
             ss >> nickname;
             std::getline(ss, name);
             // TODO: Change to correct class
-            users.push_back(new Viewer(nickname, name, Date()));
+            users.push_back(new Viewer(nickname, name, Date(), this));
         }
         users_file.close();
     }
@@ -56,7 +59,7 @@ bool Platform::registerStreamer(const std::string &nickname, const std::string &
     if(userExists(nickname)){
         throw UserAlreadyExists(nickname);
     }
-    users.push_back(new Streamer(nickname, name, birth_date));
+    users.push_back(new Streamer(nickname, name, birth_date, this));
     return true;
 }
 
@@ -64,7 +67,7 @@ bool Platform::registerViewer(const std::string &nickname, const std::string &na
     if(userExists(nickname)){
         throw UserAlreadyExists(nickname);
     }
-    users.push_back(new Viewer(nickname, name, birth_date));
+    users.push_back(new Viewer(nickname, name, birth_date, this));
     return true;
 }
 

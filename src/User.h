@@ -5,7 +5,6 @@
 #include <iostream>
 #include <string>
 
-class Platform; // Forward Declaration
 
 class User {
     /**

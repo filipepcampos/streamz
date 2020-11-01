@@ -1,4 +1,6 @@
 #include "Admin.h"
+#include "Stream.h"
+#include "Streamer.h"
 
 Admin::Admin(const Platform * platform) : platform(platform) {
 }

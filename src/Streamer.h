@@ -7,7 +7,6 @@
 
 #define MINIMUM_AGE_STREAMER 15
 
-
 class Streamer : public User {
     /**
      * Weak pointer to the stream the streamer is currently streaming

@@ -2,6 +2,7 @@
 #include <gmock/gmock.h>
 #include <string>
 #include "Platform.h"
+#include "Streamer.h"
 using testing::Eq;
 
 TEST(platform, test_mode){
@@ -110,7 +111,7 @@ TEST(platform, top10){
     std::cout << "===== All Active Streams =====" << std::endl;
     platform.showStreams();
 
-    Viewer viewer("abc","name",Date());
+    Viewer viewer("abc","name",Date(), &platform);
     for(int i = 0; i < 1500; ++i){
         platform.joinStreamByPos(rand() % platform.getActiveStreamCount()+1, viewer);
     }

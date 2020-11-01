@@ -1,7 +1,7 @@
 #include "Viewer.h"
 #include <iostream>
 
-Viewer::Viewer(const std::string &nickname, const std::string &name, const Date &birth_date) : User(nickname, name, birth_date) {
+Viewer::Viewer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform *platform) : User(nickname, name, birth_date, platform) {
 }
 
 void Viewer::joinStream(const std::shared_ptr<Stream> &stream) {

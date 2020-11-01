@@ -2,7 +2,6 @@
 #define STREAMZ_STREAM_H
 #include "StreamData.h"
 #include "Viewer.h"
-#include "Date.h"
 
 class Viewer;
 

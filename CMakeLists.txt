@@ -5,24 +5,25 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCE_FILES
         main.cpp
-        src/Admin.cpp
         src/Admin.h
-        src/Date.cpp
         src/Date.h
-        src/Platform.cpp
-        src/Platform.h
-        src/Stream.cpp
         src/Stream.h
-        src/User.cpp
         src/User.h
-        src/Streamer.cpp
         src/Streamer.h
-        src/Viewer.cpp
         src/Viewer.h
-        src/Exceptions.cpp
+        src/Archive.h
         src/Exceptions.h
+        src/Platform.h
+        src/Admin.cpp
+        src/Date.cpp
+        src/Stream.cpp
+        src/User.cpp
+        src/Streamer.cpp
+        src/Viewer.cpp
+        src/Exceptions.cpp
         src/Archive.cpp
-        src/Archive.h)
+        src/Platform.cpp
+        )
 
 include_directories(src)
 add_subdirectory(tests)
