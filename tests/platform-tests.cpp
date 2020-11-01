@@ -6,7 +6,7 @@ using testing::Eq;
 
 TEST(platform, test_mode){
     Platform platform;
-    platform.test_mode();
+    platform.testMode();
     EXPECT_EQ(platform.getUserCount(), 0);
     EXPECT_EQ(platform.getActiveStreamCount(), 0);
     EXPECT_EQ(platform.getTotalStreamCount(), 0);
@@ -14,7 +14,7 @@ TEST(platform, test_mode){
 
 TEST(platform, registerUniqueUsers) {
     Platform platform;
-    platform.test_mode();
+    platform.testMode();
     EXPECT_EQ(platform.getUserCount(), 0);
     for(int i = 0; i < 30; i+=2) {
         EXPECT_EQ(platform.registerViewer("user" + std::to_string(i), "abc", Date()), true);
@@ -25,7 +25,7 @@ TEST(platform, registerUniqueUsers) {
 
 TEST(platform, registerNonUniqueUsers){
     Platform platform;
-    platform.test_mode();
+    platform.testMode();
     std::string name = "name"; Date date;
 
     EXPECT_EQ(platform.registerViewer("user1", name, date), true);
@@ -48,7 +48,7 @@ TEST(platform, registerNonUniqueUsers){
 
 TEST(platform, getUsers){
     Platform platform;
-    platform.test_mode();
+    platform.testMode();
     std::string name = "name"; Date date;
     for(int i = 0; i < 30; i+=2) {
         EXPECT_EQ(platform.registerViewer("user" + std::to_string(i), name, date), true);
@@ -64,7 +64,7 @@ TEST(platform, getUsers){
 
 TEST(platform, deleteUsers){
     Platform platform;
-    platform.test_mode();
+    platform.testMode();
     std::string name = "Name"; Date date;
 
     EXPECT_EQ(platform.registerStreamer("streamer1", name, date), true);
@@ -77,7 +77,7 @@ TEST(platform, deleteUsers){
 
 TEST(platform, showUsers){
     Platform platform;
-    platform.test_mode();
+    platform.testMode();
     std::string name = "Name"; Date date;
 
     std::cout << " --- Please verify the following information --- " << std::endl;
@@ -90,9 +90,39 @@ TEST(platform, showUsers){
     platform.showUsers();
 }
 
+TEST(platform, startStream){
+    
+}
+
+TEST(platform, top10){
+    srand(time(nullptr));
+    Platform platform;
+    std::cout << "Should be empty:" << std::endl;
+    platform.topActiveStreams();
+    platform.testMode();
+    platform.registerStreamer("streamer", "StreamerName", Date());
+    Streamer * streamer = dynamic_cast<Streamer *>(platform.getUser("streamer"));
+
+    for(int i = 0; i < 30; ++i){
+        platform.startPublicStream("title" + std::to_string(i), streamer->getName(), "pt", 10);
+    }
+
+    std::cout << "===== All Active Streams =====" << std::endl;
+    platform.showStreams();
+
+    Viewer viewer("abc","name",Date());
+    for(int i = 0; i < 1500; ++i){
+        platform.joinStreamByPos(rand() % platform.getActiveStreamCount()+1, viewer);
+    }
+    platform.topActiveStreams();
+
+    std::cout << "===== Make sure order hasn't changed =====" << std::endl;
+    platform.showStreams();
+}
+
 TEST(platform, showStreams){
     Platform platform;
-    platform.test_mode();
+    platform.testMode();
     GTEST_SKIP();
     std::cout << " --- Please verify the following information --- " << std::endl;
     for(int i = 0; i < 10; ++i){
