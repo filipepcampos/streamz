@@ -1,12 +1,18 @@
 #ifndef STREAMZ_STREAMER_H
 #define STREAMZ_STREAMER_H
 #include "User.h"
+#include "Stream.h"
 #include <vector>
+#include <memory>
 
 #define MINIMUM_AGE_STREAMER 15
 
 
 class Streamer : public User {
+    /**
+     * Weak pointer to the stream the streamer is currently streaming
+     */
+    std::weak_ptr<Stream> current_stream;
     /**
      * Vector containing the id's of the streams created by the user (always sorted by id)
      */
@@ -18,14 +24,14 @@ public:
      * @param name Name of the user
      * @param birth_date Birth date of the user
      */
-    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date);
+    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform);
     /**
      * Class constructor used when loading an existing streamer from a file
      * @param nickname Nickname of the user
      * @param name Name of the user
      * @param birth_date Birth date of the user
      */
-    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, const std::vector<unsigned int> &streams_history);
+    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform, const std::vector<unsigned int> &streams_history);
     /**
      * Gets the streamer's previous streams
      * @return vector containing the id of the streamer's previous streams
@@ -45,6 +51,12 @@ public:
      * Displays on the screen the info about the user
      */
     void show() const;
+    /**
+     * Writes in the indicated ostream the information about the user
+     * @param os output stream where the information will be writen
+     * @return stream where the information will be writen
+     */
+    std::ostream& print(std::ostream & os) const;
     /**
      * Compares streamers
      * @param other Streamer to be compared with

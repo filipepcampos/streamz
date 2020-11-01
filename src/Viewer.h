@@ -40,6 +40,12 @@ public:
      */
     void show() const;
     /**
+     * Writes in the indicated ostream the information about the user
+     * @param os output stream where the information will be writen
+     * @return stream where the information will be writen
+     */
+    std::ostream& print(std::ostream & os) const;
+    /**
      * Compares viewers
      * @param other Viewer to be compared with
      * @return boolean indicating if the viewers are the same

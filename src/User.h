@@ -1,10 +1,17 @@
 #ifndef STREAMZ_USER_H
 #define STREAMZ_USER_H
 #include "Date.h"
+#include "Platform.h"
+#include <iostream>
 #include <string>
 
+class Platform; // Forward Declaration
 
 class User {
+    /**
+     * Pointer to the associated platform
+     */
+    Platform * platform;
     /**
      * Nickname of the user
      */
@@ -24,7 +31,7 @@ public:
      * @param name Name of the user
      * @param birth_date Birth date of the user
      */
-    User(const std::string &nickname, const std::string &name, const Date &birth_date);
+    User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform);
     /**
      * Gets the nickname of the user
      * @return nickname of the user
@@ -50,11 +57,24 @@ public:
      */
     virtual void show() const;
     /**
+     * Writes in the indicated ostream the information about the user
+     * @param os output stream where the information will be writen
+     * @return stream where the information will be writen
+     */
+    virtual std::ostream& print(std::ostream & os) const;
+    /**
      * Compares users
      * @param other User to be compared with
      * @return boolean indicating if the users are the same
      */
     bool operator==(const User &other) const;
+    /**
+     * Writes in the indicated ostream the information about the user
+     * @param os output stream where the information will be writen
+     * @param user user containing the data
+     * @return stream where the information will be writen
+     */
+    friend std::ostream& operator<<(std::ostream& os, const User& user);
 };
 
 #endif //STREAMZ_USER_H

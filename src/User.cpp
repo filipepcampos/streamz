@@ -1,7 +1,7 @@
 #include "User.h"
 #include <iostream>
 
-User::User(const std::string &nickname, const std::string &name, const Date &birth_date) : nickname(nickname), name(name), birth_date(birth_date) {
+User::User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform) : nickname(nickname), name(name), birth_date(birth_date), platform(platform) {
 }
 
 std::string User::getNickname() const {
@@ -26,6 +26,13 @@ void User::show() const {
     std::cout << "IMPLEMENTAR MAIS TARDE" << std::endl;
 }
 
+std::ostream& User::print(std::ostream & os) const {
+}
+
 bool User::operator==(const User &other) const {
     return this->nickname == other.getNickname();
+}
+
+std::ostream& operator<<(std::ostream& os, const User& user) {
+    user.print(os);
 }

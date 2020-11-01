@@ -1,9 +1,52 @@
 #ifndef STREAMZ_ADMIN_H
 #define STREAMZ_ADMIN_H
+#include "Platform.h"
+#include "Streamer.h"
+#include "Date.h"
+#include <string>
 
+class Platform; // Forward Declaration
+//class Streamer; // Forward Declaration
 
 class Admin {
-
+    /**
+     * Pointer to the associated platform
+     */
+    const Platform * platform;
+public:
+    /**
+     * Class constructor
+     * @param platform Pointer to the platform that will be monitored
+     */
+    Admin(const Platform * platform);
+    /**
+     * Calculates the average views per stream
+     * @return average views per stream
+     */
+    float averageViews() const;
+    /**
+     * Counts the number of streams (active + archived) that meet the requirements given as parameters
+     * @param isPublic boolean indicating if the function is searching for public streams
+     * @param lower lower time interval limit
+     * @param upper upper time interval limit
+     * @return number of streams that meet the requirements given as parameters
+     */
+    unsigned int streamsCounter(const bool isPublic, const Date &lower, const Date &upper) const;
+    /**
+     * Searches the most created language
+     * @return the most created language
+     */
+    std::string topLanguage() const;
+    /**
+     * Searches the most created type of stream (public or private)
+     * @return the most created type of stream ("public", "private" or "draw")
+     */
+    std::string topTypeStream() const;
+    /**
+     * Searches the streamer with the most total views
+     * @return Pointer to the streamer with the most total views
+     */
+    Streamer * topStreamer() const;
 };
 
 
