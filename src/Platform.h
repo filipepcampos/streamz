@@ -1,6 +1,7 @@
 #ifndef STREAMZ_PLATFORM_H
 #define STREAMZ_PLATFORM_H
 #include "Admin.h"
+#include "Archive.h"
 #include "User.h"
 #include "Stream.h"
 #include "Streamer.h"
@@ -9,22 +10,28 @@
 #include <vector>
 #include <string>
 #include <memory>
-
+#include <list>
 
 
 class Platform {
 private:
-    std::vector<User *> users;
-    /** Active streams (always sorted by id) */
-    std::vector<std::shared_ptr<Stream>> active_streams;
-    /** Archived streams (sorted by end date) */
-    std::vector<StreamData> archived_streams;
+    friend class Admin;
+    bool test = false;
 
-    std::vector<StreamData> top10_likes;
-    std::vector<StreamData> top10_views;
+    std::vector<User *> users;
+    /** Active streams (sorted by id) */
+    std::vector<std::shared_ptr<Stream>> active_streams;
 
     unsigned int stream_id_count = 0;
-    friend class Admin;
+
+    struct IOFiles{
+        const std::string user_file = "user.txt";
+        const std::string active_stream_file = "active_streams.txt";
+        const std::string archived_stream_file = "archive.txt";
+    };
+    IOFiles files;
+
+    Archive archive;
 
     /**
      * Get the 10 highest streams in active_streams using F function as a comparator
@@ -34,7 +41,7 @@ private:
      * @return vector<weak_ptr<Stream>>
      */
     template <typename F>
-    std::vector<std::weak_ptr<Stream>> getTop(F function);
+    std::vector<std::weak_ptr<Stream>> getTopActiveStreams(F function);
 
     /**
      * Check if a user with a given nickname already exists
@@ -43,7 +50,13 @@ private:
      */
     bool userExists(const std::string &nickname);
 
+    void save();
+
 public:
+    Platform();
+
+    ~Platform();
+
     /**
      * Register a new Viewer to the Platform
      * @param nickname
@@ -89,15 +102,60 @@ public:
     User * getUser(const std::string &nickname);
 
     /**
+     * Delete a user from the Platform
+     * @param nickname
+     * @return true if user was deleted with success
+     */
+    bool deleteUser(const std::string &nickname);
+
+    //TODO change to const viewer
+    /**
      * Return weak_ptr to stream at position 'p' (which can be seen using showStreams)
      * @param p
      * @param viewer
-     * @throws std::out_of_range, InsufficientAge
+     * @throws std::out_of_range
      * @return
      */
-    std::weak_ptr<Stream> joinStream(int p, Viewer &viewer);
+    std::weak_ptr<Stream> joinStreamByPos(int p, Viewer &viewer);
 
-    std::weak_ptr<Stream> startStream(Streamer &streamer);
+    //TODO change to const viewer
+    /**
+     * Return weak_ptr to stream with id
+     * @param id - unique stream id
+     * @param viewer
+     * @return
+     */
+    std::weak_ptr<Stream> joinStreamById(unsigned int id, Viewer &viewer);
+
+    /**
+     * Start a Public Stream and return a weak_ptr to it
+     * @param title - Stream title
+     * @param streamer - Streamer nickname
+     * @param language
+     * @param minimum_age
+     * @return
+     */
+    std::weak_ptr<Stream> startPublicStream(const string &title, const string &streamer, const string &language,
+                                            const unsigned minimum_age);
+
+    /**
+     * Start a Private Stream and return a weak_ptr to it
+     * @param title - Stream Title
+     * @param streamer - Streamer nickname
+     * @param language
+     * @param minimum_age
+     * @param max_capacity
+     * @param allowed_viewers - Vector with allowed viewers nicknames
+     * @return
+     */
+    std::weak_ptr<Stream> startPrivateStream(const string &title, const string &streamer, const string &language,
+                                             const unsigned minimum_age, const unsigned max_capacity,
+                                             const vector<string> &allowed_viewers);
+
+    /**
+     * End stream with a given id
+     * @param id
+     */
     void endStream(unsigned int id);
 
     /*+
@@ -113,7 +171,7 @@ public:
     /**
      * Show all streams active in the platform
      */
-    void showStreams();
+    void showStreams(const std::string &language_filter = "", unsigned minimum_age = 99999);
 
     /**
      * Show all users in the platform
@@ -124,7 +182,7 @@ public:
      * Clear all vectors in memory
      * Does not remove anything from files
      */
-    void reset();
+    void testMode();
 };
 
 

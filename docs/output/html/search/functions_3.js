@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['joinstream_71',['joinStream',['../class_platform.html#abfd6b6e1bd7e906d4982007bfa3ed9ea',1,'Platform::joinStream()'],['../class_viewer.html#ab7b42f841cc47f8519aaee8acc784658',1,'Viewer::joinStream()']]]
+  ['insufficientage_77',['InsufficientAge',['../class_insufficient_age.html#a61008e6256cd126a37c9e70fcef47b01',1,'InsufficientAge']]],
+  ['invalidage_78',['InvalidAge',['../class_invalid_age.html#a2663076b2f75b615da201f3ec3bfddec',1,'InvalidAge']]]
 ];

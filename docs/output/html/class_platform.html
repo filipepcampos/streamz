@@ -67,6 +67,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="class_platform-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Platform Class Reference</div>  </div>
@@ -87,6 +88,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac4ca128578a1aaaa00f28768ad952627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad66cdf0db327ce1fcd78d8cefd4bc8fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_user.html">User</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#ad66cdf0db327ce1fcd78d8cefd4bc8fc">getUser</a> (const std::string &amp;nickname)</td></tr>
 <tr class="separator:ad66cdf0db327ce1fcd78d8cefd4bc8fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedaf507d2e8bde5158fbf5fc3002eb02"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#aedaf507d2e8bde5158fbf5fc3002eb02">deleteUser</a> (const std::string &amp;nickname)</td></tr>
+<tr class="separator:aedaf507d2e8bde5158fbf5fc3002eb02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfd6b6e1bd7e906d4982007bfa3ed9ea"><td class="memItemLeft" align="right" valign="top">std::weak_ptr&lt; <a class="el" href="class_stream.html">Stream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#abfd6b6e1bd7e906d4982007bfa3ed9ea">joinStream</a> (int p, <a class="el" href="class_viewer.html">Viewer</a> &amp;viewer)</td></tr>
 <tr class="separator:abfd6b6e1bd7e906d4982007bfa3ed9ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7723ac13fa16e99da223c31b55bb9c5a"><td class="memItemLeft" align="right" valign="top"><a id="a7723ac13fa16e99da223c31b55bb9c5a"></a>
@@ -98,12 +101,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>endStream</b> (unsign
 <tr class="memitem:a176f6b46546301bcbd5768b7a626809f"><td class="memItemLeft" align="right" valign="top"><a id="a176f6b46546301bcbd5768b7a626809f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>topActiveStreams</b> ()</td></tr>
 <tr class="separator:a176f6b46546301bcbd5768b7a626809f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c27adad8e3e5cdb1e886c9caf37924f"><td class="memItemLeft" align="right" valign="top"><a id="a7c27adad8e3e5cdb1e886c9caf37924f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>topArchivedStreams</b> ()</td></tr>
+<tr class="separator:a7c27adad8e3e5cdb1e886c9caf37924f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affea5568f45d49ff2118398a7449d85e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#affea5568f45d49ff2118398a7449d85e">showStreams</a> ()</td></tr>
 <tr class="separator:affea5568f45d49ff2118398a7449d85e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5aac12c112633633a4b03148c41869e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#af5aac12c112633633a4b03148c41869e">showUsers</a> ()</td></tr>
 <tr class="separator:af5aac12c112633633a4b03148c41869e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae90957361e72d4e1dbd5003836c23512"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#ae90957361e72d4e1dbd5003836c23512">reset</a> ()</td></tr>
-<tr class="separator:ae90957361e72d4e1dbd5003836c23512"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a841ab6fac4a1f69e7a7d74be54f94406"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#a841ab6fac4a1f69e7a7d74be54f94406">test_mode</a> ()</td></tr>
+<tr class="separator:a841ab6fac4a1f69e7a7d74be54f94406"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -112,6 +118,9 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a71ecddc287c75e51cae5039a5204356b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a62d3f6b8c720daff44d25eb8a2de88"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#a6a62d3f6b8c720daff44d25eb8a2de88">userExists</a> (const std::string &amp;nickname)</td></tr>
 <tr class="separator:a6a62d3f6b8c720daff44d25eb8a2de88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96a4b3e2d40b6b905c745e8da073c13f"><td class="memItemLeft" align="right" valign="top"><a id="a96a4b3e2d40b6b905c745e8da073c13f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> ()</td></tr>
+<tr class="separator:a96a4b3e2d40b6b905c745e8da073c13f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -122,17 +131,54 @@ std::vector&lt; <a class="el" href="class_user.html">User</a> * &gt;&#160;</td><
 <tr class="separator:a008746c57320b025b777bef893befb5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2dfd3c26ee803069ecfa7ac97817d424"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_stream_data.html">StreamData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_platform.html#a2dfd3c26ee803069ecfa7ac97817d424">archived_streams</a></td></tr>
 <tr class="separator:a2dfd3c26ee803069ecfa7ac97817d424"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88a07a0277bbe52057a3933621c2406c"><td class="memItemLeft" align="right" valign="top"><a id="a88a07a0277bbe52057a3933621c2406c"></a>
-std::vector&lt; <a class="el" href="class_stream_data.html">StreamData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>top10_likes</b></td></tr>
-<tr class="separator:a88a07a0277bbe52057a3933621c2406c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ab8b1a17cbe90b4216316ad6844f285"><td class="memItemLeft" align="right" valign="top"><a id="a6ab8b1a17cbe90b4216316ad6844f285"></a>
-std::vector&lt; <a class="el" href="class_stream_data.html">StreamData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>top10_views</b></td></tr>
-<tr class="separator:a6ab8b1a17cbe90b4216316ad6844f285"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a07f210d3214cb463933635d012aa23"><td class="memItemLeft" align="right" valign="top"><a id="a3a07f210d3214cb463933635d012aa23"></a>
+std::vector&lt; <a class="el" href="class_stream_data.html">StreamData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>archived_top10_likes</b></td></tr>
+<tr class="separator:a3a07f210d3214cb463933635d012aa23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c403f9b05e99a99362b7ee287239dbc"><td class="memItemLeft" align="right" valign="top"><a id="a6c403f9b05e99a99362b7ee287239dbc"></a>
+std::vector&lt; <a class="el" href="class_stream_data.html">StreamData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>archived_top10_views</b></td></tr>
+<tr class="separator:a6c403f9b05e99a99362b7ee287239dbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb2439753d9c1b7c68819d4cfaf501ce"><td class="memItemLeft" align="right" valign="top"><a id="acb2439753d9c1b7c68819d4cfaf501ce"></a>
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>stream_id_count</b> = 0</td></tr>
 <tr class="separator:acb2439753d9c1b7c68819d4cfaf501ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbaf15d0feb580ad8eb224d005f96584"><td class="memItemLeft" align="right" valign="top"><a id="abbaf15d0feb580ad8eb224d005f96584"></a>
+<a class="el" href="struct_i_o_files.html">IOFiles</a>&#160;</td><td class="memItemRight" valign="bottom"><b>files</b></td></tr>
+<tr class="separator:abbaf15d0feb580ad8eb224d005f96584"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc75781b87922b9ea0edb907d8cdc57d"><td class="memItemLeft" align="right" valign="top"><a id="abc75781b87922b9ea0edb907d8cdc57d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>test</b> = false</td></tr>
+<tr class="separator:abc75781b87922b9ea0edb907d8cdc57d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:aee7d27bfaa03d719cc85524be52a2bbe"><td class="memItemLeft" align="right" valign="top"><a id="aee7d27bfaa03d719cc85524be52a2bbe"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>Admin</b></td></tr>
+<tr class="separator:aee7d27bfaa03d719cc85524be52a2bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aedaf507d2e8bde5158fbf5fc3002eb02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedaf507d2e8bde5158fbf5fc3002eb02">&#9670;&nbsp;</a></span>deleteUser()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Platform::deleteUser </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>nickname</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Delete a user from the <a class="el" href="class_platform.html">Platform</a> </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nickname</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if user was deleted with success </dd></dl>
+
+</div>
+</div>
 <a id="ad41e175069528998103588cfa9d1b8cb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad41e175069528998103588cfa9d1b8cb">&#9670;&nbsp;</a></span>getActiveStreamCount()</h2>
 
@@ -387,24 +433,6 @@ template&lt;typename F &gt; </div>
 
 </div>
 </div>
-<a id="ae90957361e72d4e1dbd5003836c23512"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae90957361e72d4e1dbd5003836c23512">&#9670;&nbsp;</a></span>reset()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Platform::reset </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Clear all vectors in memory Does not remove anything from files </p>
-
-</div>
-</div>
 <a id="affea5568f45d49ff2118398a7449d85e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#affea5568f45d49ff2118398a7449d85e">&#9670;&nbsp;</a></span>showStreams()</h2>
 
@@ -438,6 +466,24 @@ template&lt;typename F &gt; </div>
       </table>
 </div><div class="memdoc">
 <p>Show all users in the platform </p>
+
+</div>
+</div>
+<a id="a841ab6fac4a1f69e7a7d74be54f94406"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a841ab6fac4a1f69e7a7d74be54f94406">&#9670;&nbsp;</a></span>test_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Platform::test_mode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Clear all vectors in memory Does not remove anything from files </p>
 
 </div>
 </div>

@@ -20,7 +20,9 @@ set(SOURCE_FILES
         src/Viewer.cpp
         src/Viewer.h
         src/Exceptions.cpp
-        src/Exceptions.h)
+        src/Exceptions.h
+        src/Archive.cpp
+        src/Archive.h)
 
 include_directories(src)
 add_subdirectory(tests)

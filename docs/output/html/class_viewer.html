@@ -85,6 +85,8 @@ Inheritance diagram for Viewer:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1378c153880a042a5cff9dccceb04432"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_viewer.html#a1378c153880a042a5cff9dccceb04432">Viewer</a> (const std::string &amp;<a class="el" href="class_user.html#aebdb6953485740c33307118f91156832">nickname</a>, const std::string &amp;<a class="el" href="class_user.html#a085d8d69282b6298964eab8351584536">name</a>, const <a class="el" href="class_date.html">Date</a> &amp;<a class="el" href="class_user.html#afe3e5752a826a0efb499f51e284bfd2d">birth_date</a>)</td></tr>
 <tr class="separator:a1378c153880a042a5cff9dccceb04432"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c85a77a86c514aacb5d560e2b766ebf"><td class="memItemLeft" align="right" valign="top">std::weak_ptr&lt; <a class="el" href="class_stream.html">Stream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_viewer.html#a7c85a77a86c514aacb5d560e2b766ebf">getCurrentStream</a> () const</td></tr>
+<tr class="separator:a7c85a77a86c514aacb5d560e2b766ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7b42f841cc47f8519aaee8acc784658"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_viewer.html#ab7b42f841cc47f8519aaee8acc784658">joinStream</a> (const std::shared_ptr&lt; <a class="el" href="class_stream.html">Stream</a> &gt; &amp;stream)</td></tr>
 <tr class="separator:ab7b42f841cc47f8519aaee8acc784658"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bcb6d912b95fe17dca5d6c0b811ffe7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_viewer.html#a1bcb6d912b95fe17dca5d6c0b811ffe7">leaveStream</a> ()</td></tr>
@@ -156,6 +158,24 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7c85a77a86c514aacb5d560e2b766ebf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c85a77a86c514aacb5d560e2b766ebf">&#9670;&nbsp;</a></span>getCurrentStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::weak_ptr&lt; <a class="el" href="class_stream.html">Stream</a> &gt; Viewer::getCurrentStream </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the weak pointer to the stream the viewer is currently watching </p><dl class="section return"><dt>Returns</dt><dd>weak pointer to the stream the viewer is currently watching </dd></dl>
+
+</div>
+</div>
 <a id="ab7b42f841cc47f8519aaee8acc784658"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab7b42f841cc47f8519aaee8acc784658">&#9670;&nbsp;</a></span>joinStream()</h2>
 
@@ -215,7 +235,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Compares viewers </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">other</td><td>Viewers to be compared with </td></tr>
+    <tr><td class="paramname">other</td><td><a class="el" href="class_viewer.html">Viewer</a> to be compared with </td></tr>
   </table>
   </dd>
 </dl>

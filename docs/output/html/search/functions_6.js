@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['registerstreamer_74',['registerStreamer',['../class_platform.html#a06db58293ec6859885da5de5b7a0792e',1,'Platform']]],
-  ['registerviewer_75',['registerViewer',['../class_platform.html#ac6383c31a56c7d8a4c4156db1535c5e5',1,'Platform']]],
-  ['reset_76',['reset',['../class_platform.html#ae90957361e72d4e1dbd5003836c23512',1,'Platform']]]
+  ['operator_3d_3d_81',['operator==',['../class_streamer.html#aea6d286028191df087b928a2e658ff9d',1,'Streamer::operator==()'],['../class_user.html#ae6b5bfa0555fde48560fd1f2a37dd4e0',1,'User::operator==()'],['../class_viewer.html#a695eaa8a2feabad465d117d936852cec',1,'Viewer::operator==()']]]
 ];

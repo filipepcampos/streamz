@@ -1,9 +1,10 @@
 #ifndef STREAMZ_EXCEPTIONS_H
 #define STREAMZ_EXCEPTIONS_H
 #include <string>
+#include <exception>
 
 
-class UserDoesNotExist {
+class UserDoesNotExist : public std::exception{
     /**
      * Nickname of the user
      */
@@ -22,7 +23,7 @@ public:
 };
 
 
-class UserAlreadyExists {
+class UserAlreadyExists : public std::exception{
     /**
      * Nickname of the user
      */
@@ -41,7 +42,7 @@ public:
 };
 
 
-class InvalidAge {
+class InvalidAge : public std::exception{
     /**
      * Age of the user
      */
@@ -60,7 +61,7 @@ public:
 };
 
 
-class InsufficientAge {
+class InsufficientAge : public std::exception{
     /**
      * Age of the user
      */
@@ -78,7 +79,7 @@ public:
     unsigned int getAge() const;
 };
 
-class StreamNoLongerActive {
+class StreamNoLongerActive : public std::exception {
     unsigned int id;
 public:
     /**
@@ -93,7 +94,7 @@ public:
     unsigned int getId() const;
 };
 
-class StreamDoesNotExist {
+class StreamDoesNotExist : public std::exception {
     unsigned int id;
     public:
     /**
