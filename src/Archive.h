@@ -7,6 +7,7 @@
 
 class Archive {
 private:
+    friend class Admin;
     bool test = false;
     std::string filename;
     std::vector<StreamData> streams;
