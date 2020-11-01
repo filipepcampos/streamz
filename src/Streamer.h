@@ -30,7 +30,7 @@ public:
      * Gets the streamer's previous streams
      * @return vector containing the id of the streamer's previous streams
      */
-    const std::vector<unsigned int> & getStreamsHistory() const;
+    std::vector<unsigned int> getStreamsHistory() const;
     /**
      * Adds the id of a stream to the streams history
      * @param id Id of the stream
