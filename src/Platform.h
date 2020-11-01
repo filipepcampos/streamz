@@ -11,7 +11,7 @@
 #include <memory>
 #include <list>
 
-class StreamData{};
+
 
 struct IOFiles{
     const std::string user_file = "user.txt";

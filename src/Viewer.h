@@ -4,6 +4,7 @@
 #include "Stream.h"
 #include <memory>
 
+class Stream;
 
 #define MINIMUM_AGE_VIEWER 12
 

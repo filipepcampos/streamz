@@ -25,7 +25,7 @@ set(SOURCE_FILES
 include_directories(src)
 add_subdirectory(tests)
 
-add_library(${CMAKE_PROJECT_NAME}_lib ${SOURCE_FILES})
+add_library(${CMAKE_PROJECT_NAME}_lib ${SOURCE_FILES} src/StreamData.cpp src/StreamData.h src/PrivateStream.cpp src/PrivateStream.h)
 add_executable(${CMAKE_PROJECT_NAME}_run ${SOURCE_FILES})
 
 # Doxygen Build
