@@ -10,7 +10,7 @@ Streamer::Streamer(const std::string &nickname, const std::string &name, const D
     this->streams_history = streams_history;
 }
 
-const std::vector<unsigned int> & Streamer::getStreamsHistory() const {
+std::vector<unsigned int> Streamer::getStreamsHistory() const {
     return streams_history;
 }
 
