@@ -174,8 +174,12 @@ std::weak_ptr<Stream> Platform::joinStreamById(unsigned int id, Viewer &viewer) 
             throw StreamNoLongerActive(id);
         }
     }
-    std::weak_ptr<Stream> ptr = (*it);
-    return ptr;
+    if((*it)->canJoin(viewer)){
+        (*it)->joinStream();
+        std::weak_ptr<Stream> ptr = (*it);
+        return ptr;
+    }
+    return std::weak_ptr<Stream>();
 }
 
 std::weak_ptr<Stream> Platform::startPublicStream(const string &title, const string &streamer, const string &language,
