@@ -1,6 +1,7 @@
 #include "Platform.h"
 #include "Streamer.h"
 #include "Viewer.h"
+#include "StreamData.h"
 #include "Stream.h"
 #include "PrivateStream.h"
 #include <iostream>
@@ -13,6 +14,7 @@ Platform::Platform() : archive(files.archived_stream_file) {
     std::string line;
     std::ifstream users_file(files.user_file);
     if(users_file.is_open()){
+        /*
         std::getline(users_file, line);
         while(std::getline(users_file, line)){
             std::string nickname, name;
@@ -21,7 +23,7 @@ Platform::Platform() : archive(files.archived_stream_file) {
             std::getline(ss, name);
             // TODO: Change to correct class
             users.push_back(new Viewer(nickname, name, Date(), this));
-        }
+        }*/
         users_file.close();
     }
     // TODO: Read streams
@@ -40,11 +42,38 @@ void Platform::save(){
     std::cout << "saving" << std::endl;
     std::ofstream users_file(files.user_file, std::ofstream::trunc);
     if(users_file.is_open()){
-        users_file << "=====================" << std::endl;
         for(auto user : users){
-            users_file << user->getNickname() << " " << user->getName() << std::endl;
+            users_file << *user;
+            users_file << std::endl;
         }
         users_file.close();
+    }
+}
+
+template <typename F>
+void Platform::sortActiveStreams(F pred) {
+    std::sort(active_streams.begin(), active_streams.end(), pred);
+}
+
+void Platform::sort(sortingMode mode, sortingOrder order) {
+    switch(mode){
+        case views:
+            sortActiveStreams([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
+                return ptr1->getViewers() < ptr2->getViewers();
+            }); break;
+        case likes:/* TODO: Uncomment
+            sortActiveStreams([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
+                return ptr1->getLikes() < ptr2->getLikes();
+            });*/ break;
+        case id:
+            sortActiveStreams([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
+                return ptr1->getId() < ptr2->getId();
+            }); break;
+        default:
+            return;
+    }
+    if(order == descending){
+        std::reverse(active_streams.begin(), active_streams.end());
     }
 }
 
@@ -77,8 +106,12 @@ unsigned int Platform::getUserCount() const{
 unsigned int Platform::getActiveStreamCount() const{
     return active_streams.size();
 }
+unsigned int Platform::getArchivedStreamCount() const {
+    return archive.getStreamCount();
+}
+
 unsigned int Platform::getTotalStreamCount() const{
-    return getActiveStreamCount() + archive.getStreamCount();
+    return getActiveStreamCount() + getArchivedStreamCount();
 }
 
 
@@ -167,18 +200,18 @@ void Platform::endStream(unsigned int id){
         return ptr->getId() == id;
     });
     if(stream_it == active_streams.end()){
-        if(id <= stream_id_count)
+        if(id < stream_id_count)
             throw StreamNoLongerActive(id);
         else
             throw StreamDoesNotExist(id);
     }
     StreamData data = *(*stream_it);
     archive.archiveStream(data);
+    active_streams.erase(stream_it);
 }
 
 template <typename F>
-std::vector<std::weak_ptr<Stream>> Platform::getTopActiveStreams(F function){
-    // TODO: Test this function;
+std::vector<std::weak_ptr<Stream>> Platform::getTopActiveStreams(F pred){
     std::vector<std::weak_ptr<Stream>> top10;
     int n_elements = active_streams.size() > 10 ? 10 : active_streams.size();
     top10.reserve(n_elements);
@@ -186,7 +219,7 @@ std::vector<std::weak_ptr<Stream>> Platform::getTopActiveStreams(F function){
 
     // Custom insertion sort, where 10 greatest elements are inserted into the first 10 index
     for(auto it = active_streams.begin(); it != active_streams.begin() + n_elements; ++it){
-        auto max_it = std::max_element(it, active_streams.end(), function);
+        auto max_it = std::max_element(it, active_streams.end(), pred);
         s.emplace(max_it);
         std::iter_swap(it, max_it);
     }
@@ -235,12 +268,14 @@ bool Platform::deleteUser(const std::string &nickname) {
     if(it == users.end()){
         return false;
     }
+    delete (*it);
     users.erase(it);
     return true;
 }
 
 void Platform::testMode() {
     test = true;
+    stream_id_count = 0;
     for(auto u : users){
         delete u;
     }

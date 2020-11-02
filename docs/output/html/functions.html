@@ -72,12 +72,18 @@ $(function() {
 <li>addStream()
 : <a class="el" href="class_streamer.html#af0878cc5b3acde1a0922d9bc5027353d">Streamer</a>
 </li>
+<li>Admin()
+: <a class="el" href="class_admin.html#aafef03737b2c923aebc0506181d9d74a">Admin</a>
+</li>
 <li>age
 : <a class="el" href="class_insufficient_age.html#a2216ec1a8917155b70ab082a1592e2ae">InsufficientAge</a>
 , <a class="el" href="class_invalid_age.html#a2b8f37c68f087c34346573bb9a0a3f27">InvalidAge</a>
 </li>
-<li>archived_streams
-: <a class="el" href="class_platform.html#a2dfd3c26ee803069ecfa7ac97817d424">Platform</a>
+<li>allowed_viewers
+: <a class="el" href="class_private_stream.html#aaf4a89d8afaeb3f45dc37fd7f63019dc">PrivateStream</a>
+</li>
+<li>averageViews()
+: <a class="el" href="class_admin.html#a500cc90cdbb5771629a30b891a746688">Admin</a>
 </li>
 </ul>
 
@@ -90,8 +96,13 @@ $(function() {
 
 
 <h3><a id="index_c"></a>- c -</h3><ul>
+<li>canJoin()
+: <a class="el" href="class_private_stream.html#a4111af1dd52e3bf87035ee3534eea54a">PrivateStream</a>
+, <a class="el" href="class_stream.html#a9f070b8fd898a56fe7538462afbda817">Stream</a>
+</li>
 <li>current_stream
-: <a class="el" href="class_viewer.html#aa7c83c7f330db66957ae9492b43eb239">Viewer</a>
+: <a class="el" href="class_streamer.html#ae349c50ff6b4191702fce8c562e5096f">Streamer</a>
+, <a class="el" href="class_viewer.html#aa7c83c7f330db66957ae9492b43eb239">Viewer</a>
 </li>
 </ul>
 
@@ -99,6 +110,17 @@ $(function() {
 <h3><a id="index_d"></a>- d -</h3><ul>
 <li>deleteUser()
 : <a class="el" href="class_platform.html#aedaf507d2e8bde5158fbf5fc3002eb02">Platform</a>
+</li>
+</ul>
+
+
+<h3><a id="index_e"></a>- e -</h3><ul>
+<li>end_date
+: <a class="el" href="class_stream_data.html#ab3de2ecb675182c53dd6b17e91c4d516">StreamData</a>
+</li>
+<li>endStream()
+: <a class="el" href="class_platform.html#a313d1507ecade92610946b57dc03c009">Platform</a>
+, <a class="el" href="class_stream.html#a460b2e7dafeecfd98d45a864f66be136">Stream</a>
 </li>
 </ul>
 
@@ -118,9 +140,19 @@ $(function() {
 <li>getCurrentStream()
 : <a class="el" href="class_viewer.html#a7c85a77a86c514aacb5d560e2b766ebf">Viewer</a>
 </li>
+<li>getEndDate()
+: <a class="el" href="class_stream_data.html#ad29c4295acb8e617b67063910230ab1e">StreamData</a>
+</li>
 <li>getId()
-: <a class="el" href="class_stream_does_not_exist.html#aadad0252b9dd3b27f257414cea03c143">StreamDoesNotExist</a>
+: <a class="el" href="class_stream_data.html#ad2bf553635657e5e1fd0b1cde0d6628b">StreamData</a>
+, <a class="el" href="class_stream_does_not_exist.html#aadad0252b9dd3b27f257414cea03c143">StreamDoesNotExist</a>
 , <a class="el" href="class_stream_no_longer_active.html#aee8f29e1da54c24e785c559e459a0cc1">StreamNoLongerActive</a>
+</li>
+<li>getIsPublic()
+: <a class="el" href="class_stream_data.html#acf8e217d7f9f0bec91f8811a7cd07925">StreamData</a>
+</li>
+<li>getLanguage()
+: <a class="el" href="class_stream_data.html#adec08414ad0994900dfd2c7d3381e0cd">StreamData</a>
 </li>
 <li>getName()
 : <a class="el" href="class_user.html#a446a64e63adafbc2e1428532275ad6a1">User</a>
@@ -130,11 +162,20 @@ $(function() {
 , <a class="el" href="class_user_already_exists.html#a46a6965bb790d6ec8cfc2ac25a9c312a">UserAlreadyExists</a>
 , <a class="el" href="class_user_does_not_exist.html#ad490b12e4e5a2d7d7b7c1f7e1f36d599">UserDoesNotExist</a>
 </li>
-<li>getStreamsHistory()
-: <a class="el" href="class_streamer.html#a4f3a7da7d438deb4dadfe74212d47fa4">Streamer</a>
+<li>getStartDate()
+: <a class="el" href="class_stream_data.html#a527c150a00c347adf4a37328dc8758d8">StreamData</a>
 </li>
-<li>getTop()
-: <a class="el" href="class_platform.html#a71ecddc287c75e51cae5039a5204356b">Platform</a>
+<li>getStreamer()
+: <a class="el" href="class_stream_data.html#a99c78eb9cf909a7f431838218dbe7eec">StreamData</a>
+</li>
+<li>getStreamsHistory()
+: <a class="el" href="class_streamer.html#aca3ff02461567ddb6fb6c2f48239aa87">Streamer</a>
+</li>
+<li>getTitle()
+: <a class="el" href="class_stream_data.html#ae090bff36f8256d64c2d991c2ce15dfc">StreamData</a>
+</li>
+<li>getTopActiveStreams()
+: <a class="el" href="class_platform.html#aee4fb30a15088843083b070ac438325e">Platform</a>
 </li>
 <li>getTotalStreamCount()
 : <a class="el" href="class_platform.html#ac4ca128578a1aaaa00f28768ad952627">Platform</a>
@@ -145,30 +186,59 @@ $(function() {
 <li>getUserCount()
 : <a class="el" href="class_platform.html#a0c5c3700e4694030a6400854d96b308c">Platform</a>
 </li>
+<li>getViewers()
+: <a class="el" href="class_stream_data.html#a22d52e5b22b3a187f69cbb91bd41bd77">StreamData</a>
+</li>
 </ul>
 
 
 <h3><a id="index_i"></a>- i -</h3><ul>
+<li>id
+: <a class="el" href="class_stream_data.html#a34667b131ae79030d7dd1511ea9c6109">StreamData</a>
+</li>
 <li>InsufficientAge()
 : <a class="el" href="class_insufficient_age.html#a61008e6256cd126a37c9e70fcef47b01">InsufficientAge</a>
 </li>
 <li>InvalidAge()
 : <a class="el" href="class_invalid_age.html#a2663076b2f75b615da201f3ec3bfddec">InvalidAge</a>
 </li>
+<li>isPublic
+: <a class="el" href="class_stream_data.html#a5b6a895fcf37195dae3f29c79ce4adc8">StreamData</a>
+</li>
 </ul>
 
 
 <h3><a id="index_j"></a>- j -</h3><ul>
 <li>joinStream()
-: <a class="el" href="class_platform.html#abfd6b6e1bd7e906d4982007bfa3ed9ea">Platform</a>
+: <a class="el" href="class_stream.html#ade0783a11771dffbb83f905fe768e346">Stream</a>
 , <a class="el" href="class_viewer.html#ab7b42f841cc47f8519aaee8acc784658">Viewer</a>
+</li>
+<li>joinStreamById()
+: <a class="el" href="class_platform.html#a1a44637d94334afb34d2e644511c84c5">Platform</a>
+</li>
+<li>joinStreamByPos()
+: <a class="el" href="class_platform.html#a7e9ebce13394e448b3b44865ab36bac5">Platform</a>
 </li>
 </ul>
 
 
 <h3><a id="index_l"></a>- l -</h3><ul>
+<li>language
+: <a class="el" href="class_stream_data.html#ad5649e4d70c8277749fd07876ecd4316">StreamData</a>
+</li>
 <li>leaveStream()
-: <a class="el" href="class_viewer.html#a1bcb6d912b95fe17dca5d6c0b811ffe7">Viewer</a>
+: <a class="el" href="class_stream.html#a679920da7b7c1ad1fd9e7228f6fcd907">Stream</a>
+, <a class="el" href="class_viewer.html#a1bcb6d912b95fe17dca5d6c0b811ffe7">Viewer</a>
+</li>
+</ul>
+
+
+<h3><a id="index_m"></a>- m -</h3><ul>
+<li>max_capacity
+: <a class="el" href="class_private_stream.html#a93fbebeb5882e41fdb65a09b918f0acb">PrivateStream</a>
+</li>
+<li>minimum_age
+: <a class="el" href="class_stream.html#aa11d597fd55f57b5eb8d3f8d57c6c1fc">Stream</a>
 </li>
 </ul>
 
@@ -186,10 +256,29 @@ $(function() {
 
 
 <h3><a id="index_o"></a>- o -</h3><ul>
+<li>operator&lt;&lt;
+: <a class="el" href="class_user.html#a8096d4eb432e19f22dd6566e10007454">User</a>
+</li>
 <li>operator==()
 : <a class="el" href="class_streamer.html#aea6d286028191df087b928a2e658ff9d">Streamer</a>
 , <a class="el" href="class_user.html#ae6b5bfa0555fde48560fd1f2a37dd4e0">User</a>
 , <a class="el" href="class_viewer.html#a695eaa8a2feabad465d117d936852cec">Viewer</a>
+</li>
+</ul>
+
+
+<h3><a id="index_p"></a>- p -</h3><ul>
+<li>platform
+: <a class="el" href="class_admin.html#a8c6bc473ba511930e5ec9d6bf6808912">Admin</a>
+, <a class="el" href="class_user.html#a8faed8eb28efc299d37643fd25dad4fe">User</a>
+</li>
+<li>print()
+: <a class="el" href="class_streamer.html#a0f93ce75a5aed16042eaa5932a61984e">Streamer</a>
+, <a class="el" href="class_user.html#a074f405d4a5c913a275de8242da8d7c6">User</a>
+, <a class="el" href="class_viewer.html#a4cba5751b59c64b415c8723fa5f840ca">Viewer</a>
+</li>
+<li>PrivateStream()
+: <a class="el" href="class_private_stream.html#a518bced3fc5b98f933876b1ae01a827b">PrivateStream</a>
 </li>
 </ul>
 
@@ -209,21 +298,41 @@ $(function() {
 
 <h3><a id="index_s"></a>- s -</h3><ul>
 <li>show()
-: <a class="el" href="class_streamer.html#ab3fb7d9a0b37e58417be6522996fbf6b">Streamer</a>
+: <a class="el" href="class_private_stream.html#a415799dc917e6b12a081f84c492a3ae6">PrivateStream</a>
+, <a class="el" href="class_stream.html#ac1502e758c6c3cd982dfbcbf2f5b0527">Stream</a>
+, <a class="el" href="class_streamer.html#ab3fb7d9a0b37e58417be6522996fbf6b">Streamer</a>
 , <a class="el" href="class_user.html#ae39ad06f6b431952b3e372676adaba6e">User</a>
 , <a class="el" href="class_viewer.html#a49e2ff0fd192d62edee4a37bc13736bd">Viewer</a>
 </li>
 <li>showStreams()
-: <a class="el" href="class_platform.html#affea5568f45d49ff2118398a7449d85e">Platform</a>
+: <a class="el" href="class_platform.html#a5acd57aaf881bfedcf690830e30729ae">Platform</a>
 </li>
 <li>showUsers()
 : <a class="el" href="class_platform.html#af5aac12c112633633a4b03148c41869e">Platform</a>
 </li>
+<li>start_date
+: <a class="el" href="class_stream_data.html#a65f2ba0b3d5d5793b8300587e5064ab2">StreamData</a>
+</li>
+<li>startPrivateStream()
+: <a class="el" href="class_platform.html#a911688bae143b23d29e8054602a53a46">Platform</a>
+</li>
+<li>startPublicStream()
+: <a class="el" href="class_platform.html#a3dd81ef0190e933138d4cb78b2d9198c">Platform</a>
+</li>
+<li>Stream()
+: <a class="el" href="class_stream.html#aed67007d66874cf077058bd438376c5c">Stream</a>
+</li>
+<li>StreamData()
+: <a class="el" href="class_stream_data.html#aac176d5fd5b55035acfb12e7200860d3">StreamData</a>
+</li>
 <li>StreamDoesNotExist()
 : <a class="el" href="class_stream_does_not_exist.html#a4fc8bbc1fd89b22000d62bbf69c638f4">StreamDoesNotExist</a>
 </li>
+<li>streamer
+: <a class="el" href="class_stream_data.html#a5130e20fe33aa3c314ef7b0fde302477">StreamData</a>
+</li>
 <li>Streamer()
-: <a class="el" href="class_streamer.html#a51e21508381e522e587639e0b7d87c9e">Streamer</a>
+: <a class="el" href="class_streamer.html#a116c7076a508b29d7d311c31f1fb6024">Streamer</a>
 </li>
 <li>StreamNoLongerActive()
 : <a class="el" href="class_stream_no_longer_active.html#a5c6e4f56f1141e1f8db15c27c743c16a">StreamNoLongerActive</a>
@@ -231,19 +340,34 @@ $(function() {
 <li>streams_history
 : <a class="el" href="class_streamer.html#aa98be95221b4602bf8e7671a103478c8">Streamer</a>
 </li>
+<li>streamsCounter()
+: <a class="el" href="class_admin.html#a0a18e7187918e379689a3966d83ed2cd">Admin</a>
+</li>
 </ul>
 
 
 <h3><a id="index_t"></a>- t -</h3><ul>
-<li>test_mode()
-: <a class="el" href="class_platform.html#a841ab6fac4a1f69e7a7d74be54f94406">Platform</a>
+<li>testMode()
+: <a class="el" href="class_platform.html#a69a793b5ab52f6ac4de0b1537917de2b">Platform</a>
+</li>
+<li>title
+: <a class="el" href="class_stream_data.html#ab0c6e0a50b8c149c56aa4f9d71c9745c">StreamData</a>
+</li>
+<li>topLanguage()
+: <a class="el" href="class_admin.html#abad5b844a83eed9ee230631e156aeca5">Admin</a>
+</li>
+<li>topStreamer()
+: <a class="el" href="class_admin.html#adacd840dfdcacd8bb7dd6513968522ec">Admin</a>
+</li>
+<li>topTypeStream()
+: <a class="el" href="class_admin.html#ac7fd0cdcd88fee80c184c9b237271bcd">Admin</a>
 </li>
 </ul>
 
 
 <h3><a id="index_u"></a>- u -</h3><ul>
 <li>User()
-: <a class="el" href="class_user.html#a85a176aa8eb9cdb76aeefd5b08a2fd7e">User</a>
+: <a class="el" href="class_user.html#a68dd935face17816332405f201ec758b">User</a>
 </li>
 <li>UserAlreadyExists()
 : <a class="el" href="class_user_already_exists.html#a9a9d47eb9a2c49a4208e214fb7d6dff9">UserAlreadyExists</a>
@@ -259,7 +383,10 @@ $(function() {
 
 <h3><a id="index_v"></a>- v -</h3><ul>
 <li>Viewer()
-: <a class="el" href="class_viewer.html#a1378c153880a042a5cff9dccceb04432">Viewer</a>
+: <a class="el" href="class_viewer.html#aaae01c3344328f24fe81c073b0ef81d4">Viewer</a>
+</li>
+<li>viewers
+: <a class="el" href="class_stream_data.html#ad9c1acf528564f72f6405a4656f499d7">StreamData</a>
 </li>
 </ul>
 </div><!-- contents -->

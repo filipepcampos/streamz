@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['name_26',['name',['../class_user.html#a085d8d69282b6298964eab8351584536',1,'User']]],
-  ['nickname_27',['nickname',['../class_user_does_not_exist.html#acd8ea7523f86c6063ac6552d81dfa92f',1,'UserDoesNotExist::nickname()'],['../class_user_already_exists.html#ad881e8ff728ae9d5a79393cd435128bd',1,'UserAlreadyExists::nickname()'],['../class_user.html#aebdb6953485740c33307118f91156832',1,'User::nickname()']]]
+  ['language_41',['language',['../class_stream_data.html#ad5649e4d70c8277749fd07876ecd4316',1,'StreamData']]],
+  ['leavestream_42',['leaveStream',['../class_stream.html#a679920da7b7c1ad1fd9e7228f6fcd907',1,'Stream::leaveStream()'],['../class_viewer.html#a1bcb6d912b95fe17dca5d6c0b811ffe7',1,'Viewer::leaveStream()']]]
 ];

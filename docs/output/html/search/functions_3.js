@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['insufficientage_77',['InsufficientAge',['../class_insufficient_age.html#a61008e6256cd126a37c9e70fcef47b01',1,'InsufficientAge']]],
-  ['invalidage_78',['InvalidAge',['../class_invalid_age.html#a2663076b2f75b615da201f3ec3bfddec',1,'InvalidAge']]]
+  ['endstream_101',['endStream',['../class_platform.html#a313d1507ecade92610946b57dc03c009',1,'Platform::endStream()'],['../class_stream.html#a460b2e7dafeecfd98d45a864f66be136',1,'Stream::endStream()']]]
 ];

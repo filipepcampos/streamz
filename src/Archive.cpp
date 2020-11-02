@@ -9,7 +9,7 @@ Archive::Archive(const string &filename) {
 Archive::~Archive(){
     // TODO: Store data
     if(!test){
-        ;
+        ;//
     }
 }
 
@@ -33,13 +33,50 @@ void Archive::showTop() {
     // TODO add likes
 }
 
+void Archive::showStream(unsigned int id) {
+    int pos = binarySearch(id);
+    if(pos != -1) {
+        // TODO: Uncomment
+        //streams[pos].show();
+    }
+}
+
+void Archive::showStreamsById(const std::vector<unsigned int> &ids) {
+    for(auto id : ids){
+        int pos = binarySearch(id);
+        if(pos != -1){
+            // TODO: Uncomment
+            //streams[pos].show();
+        }
+    }
+}
+
+int Archive::binarySearch(unsigned int id) {
+    int left = 0, right = streams.size()-1;
+    while (left <= right) {
+        int m = left + (right - left) / 2;
+        unsigned int current_id = streams[m].getId();
+        if (current_id == id)
+            return m;
+        if (current_id < id)
+            left = m + 1;
+        else
+            right = m - 1;
+    }
+    return -1;
+}
+
 void Archive::archiveStream(const StreamData &data) {
-    streams.push_back(data);
+    auto it = std::lower_bound(streams.begin(), streams.end(), data.getId(),
+                       [](const StreamData &d, unsigned int id){
+                           return d.getId() < id;
+                       });
+    streams.insert(it, data);
     updateTop(data);
 }
 
 void Archive::updateTop(const StreamData &data){
-    auto views_it = std::lower_bound(top_views.begin(), top_views.end(), data.getViewers(), [](const StreamData &d, unsigned int viewers){
+    auto views_it = std::lower_bound(top_views.begin(), top_views.end(), data.getViewers(),  [](const StreamData &d, unsigned int viewers){
         return d.getViewers() < viewers;
     });
     if(views_it != top_views.begin()){

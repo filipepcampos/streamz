@@ -7,7 +7,9 @@ set(SOURCE_FILES
         main.cpp
         src/Admin.h
         src/Date.h
+        src/StreamData.h
         src/Stream.h
+        src/PrivateStream.h
         src/User.h
         src/Streamer.h
         src/Viewer.h
@@ -16,7 +18,9 @@ set(SOURCE_FILES
         src/Platform.h
         src/Admin.cpp
         src/Date.cpp
+        src/StreamData.cpp
         src/Stream.cpp
+        src/PrivateStream.cpp
         src/User.cpp
         src/Streamer.cpp
         src/Viewer.cpp
@@ -28,7 +32,7 @@ set(SOURCE_FILES
 include_directories(src)
 add_subdirectory(tests)
 
-add_library(${CMAKE_PROJECT_NAME}_lib ${SOURCE_FILES} src/StreamData.cpp src/StreamData.h src/PrivateStream.cpp src/PrivateStream.h)
+add_library(${CMAKE_PROJECT_NAME}_lib ${SOURCE_FILES})
 add_executable(${CMAKE_PROJECT_NAME}_run ${SOURCE_FILES})
 
 # Doxygen Build

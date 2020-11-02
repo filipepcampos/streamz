@@ -73,16 +73,39 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef STREAMZ_STREAM_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define STREAMZ_STREAM_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="class_stream.html">    5</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_stream.html">Stream</a> {</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;};</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#endif //STREAMZ_STREAM_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;StreamData.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Viewer.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">class </span><a class="code" href="class_viewer.html">Viewer</a>;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="class_stream.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_stream.html">Stream</a> : <span class="keyword">public</span> <a class="code" href="class_stream_data.html">StreamData</a>{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_stream.html#aed67007d66874cf077058bd438376c5c">Stream</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="class_stream_data.html#ab0c6e0a50b8c149c56aa4f9d71c9745c">title</a>, <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="class_stream_data.html#a5130e20fe33aa3c314ef7b0fde302477">streamer</a>, <span class="keyword">const</span> <span class="keywordtype">string</span> &amp;<a class="code" href="class_stream_data.html#ad5649e4d70c8277749fd07876ecd4316">language</a>, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code" href="class_stream.html#aa11d597fd55f57b5eb8d3f8d57c6c1fc">minimum_age</a>);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">bool</span> <span class="keyword">virtual</span> <a class="code" href="class_stream.html#a9f070b8fd898a56fe7538462afbda817">canJoin</a>(<a class="code" href="class_viewer.html">Viewer</a> &amp;viewer);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_stream.html#ade0783a11771dffbb83f905fe768e346">joinStream</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_stream.html#a679920da7b7c1ad1fd9e7228f6fcd907">leaveStream</a>();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_stream.html#a460b2e7dafeecfd98d45a864f66be136">endStream</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_stream.html#ac1502e758c6c3cd982dfbcbf2f5b0527">show</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_stream.html#aa11d597fd55f57b5eb8d3f8d57c6c1fc">   45</a></span>&#160;    <span class="keywordtype">unsigned</span> <a class="code" href="class_stream.html#aa11d597fd55f57b5eb8d3f8d57c6c1fc">minimum_age</a>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#endif //STREAMZ_STREAM_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_stream_html"><div class="ttname"><a href="class_stream.html">Stream</a></div><div class="ttdef"><b>Definition:</b> Stream.h:5</div></div>
+<div class="ttc" id="aclass_stream_html_aa11d597fd55f57b5eb8d3f8d57c6c1fc"><div class="ttname"><a href="class_stream.html#aa11d597fd55f57b5eb8d3f8d57c6c1fc">Stream::minimum_age</a></div><div class="ttdeci">unsigned minimum_age</div><div class="ttdef"><b>Definition:</b> Stream.h:45</div></div>
+<div class="ttc" id="aclass_stream_data_html_a5130e20fe33aa3c314ef7b0fde302477"><div class="ttname"><a href="class_stream_data.html#a5130e20fe33aa3c314ef7b0fde302477">StreamData::streamer</a></div><div class="ttdeci">string streamer</div><div class="ttdef"><b>Definition:</b> StreamData.h:23</div></div>
+<div class="ttc" id="aclass_stream_html_a460b2e7dafeecfd98d45a864f66be136"><div class="ttname"><a href="class_stream.html#a460b2e7dafeecfd98d45a864f66be136">Stream::endStream</a></div><div class="ttdeci">void endStream()</div><div class="ttdef"><b>Definition:</b> Stream.cpp:28</div></div>
+<div class="ttc" id="aclass_stream_html_aed67007d66874cf077058bd438376c5c"><div class="ttname"><a href="class_stream.html#aed67007d66874cf077058bd438376c5c">Stream::Stream</a></div><div class="ttdeci">Stream(const string &amp;title, const string &amp;streamer, const string &amp;language, unsigned int id, const unsigned minimum_age)</div><div class="ttdef"><b>Definition:</b> Stream.cpp:7</div></div>
+<div class="ttc" id="aclass_stream_data_html"><div class="ttname"><a href="class_stream_data.html">StreamData</a></div><div class="ttdef"><b>Definition:</b> StreamData.h:10</div></div>
+<div class="ttc" id="aclass_stream_html"><div class="ttname"><a href="class_stream.html">Stream</a></div><div class="ttdef"><b>Definition:</b> Stream.h:8</div></div>
+<div class="ttc" id="aclass_stream_html_ac1502e758c6c3cd982dfbcbf2f5b0527"><div class="ttname"><a href="class_stream.html#ac1502e758c6c3cd982dfbcbf2f5b0527">Stream::show</a></div><div class="ttdeci">virtual void show() const</div><div class="ttdef"><b>Definition:</b> Stream.cpp:23</div></div>
+<div class="ttc" id="aclass_stream_html_a9f070b8fd898a56fe7538462afbda817"><div class="ttname"><a href="class_stream.html#a9f070b8fd898a56fe7538462afbda817">Stream::canJoin</a></div><div class="ttdeci">virtual bool canJoin(Viewer &amp;viewer)</div><div class="ttdef"><b>Definition:</b> Stream.cpp:11</div></div>
+<div class="ttc" id="aclass_stream_html_a679920da7b7c1ad1fd9e7228f6fcd907"><div class="ttname"><a href="class_stream.html#a679920da7b7c1ad1fd9e7228f6fcd907">Stream::leaveStream</a></div><div class="ttdeci">void leaveStream()</div><div class="ttdef"><b>Definition:</b> Stream.cpp:19</div></div>
+<div class="ttc" id="aclass_stream_data_html_ad5649e4d70c8277749fd07876ecd4316"><div class="ttname"><a href="class_stream_data.html#ad5649e4d70c8277749fd07876ecd4316">StreamData::language</a></div><div class="ttdeci">string language</div><div class="ttdef"><b>Definition:</b> StreamData.h:35</div></div>
+<div class="ttc" id="aclass_stream_data_html_ab0c6e0a50b8c149c56aa4f9d71c9745c"><div class="ttname"><a href="class_stream_data.html#ab0c6e0a50b8c149c56aa4f9d71c9745c">StreamData::title</a></div><div class="ttdeci">string title</div><div class="ttdef"><b>Definition:</b> StreamData.h:19</div></div>
+<div class="ttc" id="aclass_stream_html_ade0783a11771dffbb83f905fe768e346"><div class="ttname"><a href="class_stream.html#ade0783a11771dffbb83f905fe768e346">Stream::joinStream</a></div><div class="ttdeci">void joinStream()</div><div class="ttdef"><b>Definition:</b> Stream.cpp:15</div></div>
+<div class="ttc" id="aclass_viewer_html"><div class="ttname"><a href="class_viewer.html">Viewer</a></div><div class="ttdef"><b>Definition:</b> Viewer.h:9</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

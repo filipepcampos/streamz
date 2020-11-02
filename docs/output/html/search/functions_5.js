@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['leavestream_80',['leaveStream',['../class_viewer.html#a1bcb6d912b95fe17dca5d6c0b811ffe7',1,'Viewer']]]
+  ['insufficientage_121',['InsufficientAge',['../class_insufficient_age.html#a61008e6256cd126a37c9e70fcef47b01',1,'InsufficientAge']]],
+  ['invalidage_122',['InvalidAge',['../class_invalid_age.html#a2663076b2f75b615da201f3ec3bfddec',1,'InvalidAge']]]
 ];
