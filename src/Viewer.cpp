@@ -4,15 +4,17 @@
 Viewer::Viewer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform *platform) : User(nickname, name, birth_date, platform) {
 }
 
-void Viewer::joinStream(const std::shared_ptr<Stream> &stream) {
-    current_stream = stream;
-}
-
 std::weak_ptr<Stream> Viewer::getCurrentStream() const {
     return current_stream;
 }
 
+void Viewer::joinStream(const unsigned int id) {
+    current_stream = platform->joinStreamById(id, *this);
+    current_stream.lock()->joinStream();
+}
+
 void Viewer::leaveStream() {
+    current_stream.lock()->leaveStream();
     current_stream.reset();
 }
 

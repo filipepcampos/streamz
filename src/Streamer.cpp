@@ -24,6 +24,7 @@ void Streamer::startPrivateStream(const string &title, const string &language, c
 
 void Streamer::endStream() {
     unsigned int id = current_stream.lock()->getId();
+    current_stream.lock()->endStream();
     platform->endStream(id);
     streams_history.push_back(id);
     current_stream.reset();
@@ -55,6 +56,7 @@ std::ostream& Streamer::print(std::ostream & os) const {
     os << (current_stream.expired() ? 0 : current_stream.lock()->getId()) << " " << getName() << std::endl;
     for (unsigned int id : streams_history)
         os << id << " ";
+    return os;
 }
 
 bool Streamer::operator==(const Streamer &other) const {
