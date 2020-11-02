@@ -10,6 +10,7 @@
 class User;
 class Viewer;
 class Streamer;
+class StreamData;
 class Stream;
 
 class Platform {
@@ -135,7 +136,7 @@ public:
      * @return
      */
     std::weak_ptr<Stream> startPublicStream(const string &title, const string &streamer, const string &language,
-                                            const unsigned minimum_age);
+                                            unsigned minimum_age);
 
     /**
      * Start a Private Stream and return a weak_ptr to it
@@ -148,7 +149,7 @@ public:
      * @return
      */
     std::weak_ptr<Stream> startPrivateStream(const string &title, const string &streamer, const string &language,
-                                             const unsigned minimum_age, const unsigned max_capacity,
+                                             unsigned minimum_age, unsigned max_capacity,
                                              const vector<string> &allowed_viewers);
 
     /**

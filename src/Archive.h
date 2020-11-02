@@ -21,6 +21,7 @@ public:
     unsigned int getStreamCount() const;
     void show();
     void showTop();
+    void showStreamsById(const std::vector<unsigned int> &ids);
     void testMode();
 };
 

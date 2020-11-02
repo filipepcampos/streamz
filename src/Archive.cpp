@@ -33,6 +33,17 @@ void Archive::showTop() {
     // TODO add likes
 }
 
+void Archive::showStreamsById(const std::vector<unsigned int> &ids) {
+    for(auto id : ids){
+        for(StreamData &data : streams){
+            if(data.getId() == id){
+                // TODO: Uncomment
+                //data.show();
+            }
+        }
+    }
+}
+
 void Archive::archiveStream(const StreamData &data) {
     streams.push_back(data);
     updateTop(data);

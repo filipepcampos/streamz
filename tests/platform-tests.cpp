@@ -92,7 +92,11 @@ TEST(platform, showUsers){
 }
 
 TEST(platform, startStream){
-    
+    Platform platform;
+    platform.testMode();
+    EXPECT_EQ(platform.registerStreamer("streamer1", "Name", Date()), true);
+    Streamer * streamer = dynamic_cast<Streamer *>(platform.getUser("streamer1"));
+    //;
 }
 
 TEST(platform, top10){

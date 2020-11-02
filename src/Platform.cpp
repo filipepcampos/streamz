@@ -1,6 +1,7 @@
 #include "Platform.h"
 #include "Streamer.h"
 #include "Viewer.h"
+#include "StreamData.h"
 #include "Stream.h"
 #include "PrivateStream.h"
 #include <iostream>
@@ -13,6 +14,7 @@ Platform::Platform() : archive(files.archived_stream_file) {
     std::string line;
     std::ifstream users_file(files.user_file);
     if(users_file.is_open()){
+        /*
         std::getline(users_file, line);
         while(std::getline(users_file, line)){
             std::string nickname, name;
@@ -21,7 +23,7 @@ Platform::Platform() : archive(files.archived_stream_file) {
             std::getline(ss, name);
             // TODO: Change to correct class
             users.push_back(new Viewer(nickname, name, Date(), this));
-        }
+        }*/
         users_file.close();
     }
     // TODO: Read streams
@@ -40,9 +42,9 @@ void Platform::save(){
     std::cout << "saving" << std::endl;
     std::ofstream users_file(files.user_file, std::ofstream::trunc);
     if(users_file.is_open()){
-        users_file << "=====================" << std::endl;
         for(auto user : users){
-            users_file << user->getNickname() << " " << user->getName() << std::endl;
+            users_file << *user;
+            users_file << std::endl;
         }
         users_file.close();
     }
