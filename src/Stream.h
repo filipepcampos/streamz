@@ -3,6 +3,9 @@
 #include "StreamData.h"
 #include "Viewer.h"
 
+using namespace std;
+
+
 class Viewer;
 
 class Stream : public StreamData{
@@ -38,6 +41,12 @@ public:
      * Displays on the screen info about the stream
      */
     virtual void show() const;
+    /**
+     * Prints data about the stream
+     * @param os
+     * @return
+     */
+    ostream& operator<<(ostream & os) const;
 private:
     /**
      * Minimum age to watch the stream
