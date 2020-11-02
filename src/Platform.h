@@ -13,6 +13,16 @@ class Streamer;
 class StreamData;
 class Stream;
 
+enum sortingMode{
+    views,
+    id,
+    likes
+};
+enum sortingOrder{
+    ascending,
+    descending
+};
+
 class Platform {
 private:
     friend class Admin;
@@ -41,7 +51,10 @@ private:
      * @return vector<weak_ptr<Stream>>
      */
     template <typename F>
-    std::vector<std::weak_ptr<Stream>> getTopActiveStreams(F function);
+    std::vector<std::weak_ptr<Stream>> getTopActiveStreams(F pred);
+
+    template <typename F>
+    void sortActiveStreams(F pred);
 
     /**
      * Check if a user with a given nickname already exists
@@ -56,6 +69,8 @@ public:
     Platform();
 
     ~Platform();
+
+    void sort(sortingMode mode, sortingOrder order);
 
     /**
      * Register a new Viewer to the Platform
@@ -86,6 +101,12 @@ public:
      * @return unsigned int
      */
     unsigned int getActiveStreamCount() const;
+
+    /*
+     * Get number of archived streams
+     * @return unsigned int
+     */
+    unsigned int getArchivedStreamCount() const;
 
     /**
      * Get total number of streams (active + archived) in the platform
