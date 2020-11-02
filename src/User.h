@@ -8,10 +8,6 @@
 
 class User {
     /**
-     * Pointer to the associated platform
-     */
-    Platform * platform;
-    /**
      * Nickname of the user
      */
     std::string nickname;
@@ -23,6 +19,11 @@ class User {
      * Birth date of the user
      */
     Date birth_date;
+protected:
+    /**
+     * Pointer to the associated platform
+     */
+    Platform * platform;
 public:
     /**
      * Class constructor

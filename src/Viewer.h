@@ -28,7 +28,7 @@ public:
      * Joins the stream given as an argument
      * @param stream Shared pointer to the stream the viewer will join
      */
-    void joinStream(const std::shared_ptr<Stream> &stream);
+    void joinStream(const unsigned int id);
     /**
      * Leaves the stream that is currently being watched
      */

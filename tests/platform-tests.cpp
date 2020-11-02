@@ -7,6 +7,8 @@ using testing::Eq;
 
 TEST(platform, test_mode){
     Platform platform;
+    platform.registerViewer("viewer", "Name", Date());
+    platform.registerStreamer("streamer", "Name", Date());
     platform.testMode();
     EXPECT_EQ(platform.getUserCount(), 0);
     EXPECT_EQ(platform.getActiveStreamCount(), 0);
@@ -92,7 +94,36 @@ TEST(platform, showUsers){
 }
 
 TEST(platform, startStream){
-    
+    Platform platform;
+    platform.testMode();
+    EXPECT_EQ(platform.registerStreamer("streamer1", "Name", Date()), true);
+    Streamer * streamer = dynamic_cast<Streamer *>(platform.getUser("streamer1"));
+    //;
+}
+
+TEST(platform, joinStream){
+    Platform platform;
+    platform.testMode();
+    platform.registerViewer("viewer", "Name", Date());
+    Viewer * viewer = dynamic_cast<Viewer *>(platform.getUser("viewer"));
+    EXPECT_THROW(platform.joinStreamByPos(-9, *viewer), std::out_of_range);
+    EXPECT_THROW(platform.joinStreamByPos(0, *viewer), std::out_of_range);
+    EXPECT_THROW(platform.joinStreamByPos(2, *viewer), std::out_of_range);
+    platform.startPublicStream("title", "nickname", "PT", 5);
+    EXPECT_NO_THROW(platform.joinStreamByPos(1,*viewer));
+}
+
+TEST(platform, endStream){
+    Platform platform;
+    platform.testMode();
+    EXPECT_THROW(platform.endStream(0), StreamDoesNotExist);
+    platform.startPublicStream("title", "nickname", "PT", 5);
+    EXPECT_EQ(platform.getArchivedStreamCount(), 0);
+    EXPECT_EQ(platform.getActiveStreamCount(), 1);
+    platform.endStream(0);
+    EXPECT_EQ(platform.getActiveStreamCount(), 0);
+    EXPECT_EQ(platform.getArchivedStreamCount(), 1);
+    EXPECT_THROW(platform.endStream(0), StreamNoLongerActive);
 }
 
 TEST(platform, top10){

@@ -37,10 +37,27 @@ public:
      */
     std::vector<unsigned int> getStreamsHistory() const;
     /**
-     * Adds the id of a stream to the streams history
-     * @param id Id of the stream
+     * Starts a Public Stream and associate it with the streamer
+     * @param title Stream title
+     * @param language Stream language
+     * @param minimum_age Minimum age of the allowed viewers
+     * @return
      */
-    void addStream(const unsigned int id);
+    void startPublicStream(const string &title, const string &language, const unsigned minimum_age);
+    /**
+     * Starts a Private Stream and associate it with the streamer
+     * @param title Stream title
+     * @param language Stream language
+     * @param minimum_age Minimum age of the allowed viewers
+     * @param max_capacity Max capacity of viewers
+     * @param allowed_viewers Vector with allowed viewers nicknames
+     * @return
+     */
+    void startPrivateStream(const string &title, const string &language, const unsigned minimum_age, const unsigned max_capacity, const vector<string> &allowed_viewers);
+    /**
+     * Ends the stream the user is currently streaming
+     */
+    void endStream();
     /**
      * Removes a stream from the streams history
      * @param id Id of the stream

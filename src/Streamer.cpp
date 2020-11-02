@@ -14,8 +14,20 @@ std::vector<unsigned int> Streamer::getStreamsHistory() const {
     return streams_history;
 }
 
-void Streamer::addStream(const unsigned int id) {
+void Streamer::startPublicStream(const string &title, const string &language, const unsigned minimum_age) {
+    current_stream = platform->startPublicStream(title, getNickname(), language, minimum_age);
+}
+
+void Streamer::startPrivateStream(const string &title, const string &language, const unsigned minimum_age, const unsigned max_capacity, const vector<string> &allowed_viewers) {
+    current_stream = platform->startPrivateStream(title, getNickname(), language, minimum_age, max_capacity, allowed_viewers);
+}
+
+void Streamer::endStream() {
+    unsigned int id = current_stream.lock()->getId();
+    current_stream.lock()->endStream();
+    platform->endStream(id);
     streams_history.push_back(id);
+    current_stream.reset();
 }
 
 void Streamer::removeStream(const unsigned int id) {
@@ -44,6 +56,7 @@ std::ostream& Streamer::print(std::ostream & os) const {
     os << (current_stream.expired() ? 0 : current_stream.lock()->getId()) << " " << getName() << std::endl;
     for (unsigned int id : streams_history)
         os << id << " ";
+    return os;
 }
 
 bool Streamer::operator==(const Streamer &other) const {

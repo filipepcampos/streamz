@@ -27,6 +27,7 @@ void User::show() const {
 }
 
 std::ostream& User::print(std::ostream & os) const {
+    return os;
 }
 
 bool User::operator==(const User &other) const {
@@ -35,4 +36,5 @@ bool User::operator==(const User &other) const {
 
 std::ostream& operator<<(std::ostream& os, const User& user) {
     user.print(os);
+    return os;
 }

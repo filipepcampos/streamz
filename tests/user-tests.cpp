@@ -46,6 +46,7 @@ TEST(user, streamInteraction) {
     EXPECT_EQ(true, vw1.getCurrentStream().expired());
 }
 */
+/*
 TEST(user, streamsHistory) {
     Platform platform;
     Streamer st("Streamer", "Streamer Name", Date(), &platform);
@@ -59,3 +60,4 @@ TEST(user, streamsHistory) {
     v.erase(v.begin()+2);
     EXPECT_EQ(v, st.getStreamsHistory());
 }
+ */
