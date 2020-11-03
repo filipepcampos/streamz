@@ -10,7 +10,6 @@ std::weak_ptr<Stream> Viewer::getCurrentStream() const {
 
 void Viewer::joinStream(const unsigned int id) {
     current_stream = platform->joinStreamById(id, *this);
-    current_stream.lock()->joinStream();
 }
 
 void Viewer::leaveStream() {
@@ -24,8 +23,9 @@ void Viewer::show() const {
 }
 
 std::ostream& Viewer::print(std::ostream & os) const {
-    //os << "viewer " << getNickname() << " " << getAge() << " " << getBirthDate().toString() << " ";
+    os << "viewer " << getNickname() << " " << getBirthDate().toString() << " ";
     os << (current_stream.expired() ? 0 : current_stream.lock()->getId()) << " " << getName();
+    return os;
 }
 
 bool Viewer::operator==(const Viewer &other) const {
