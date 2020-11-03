@@ -86,6 +86,12 @@ public:
      * @return boolean indicating if the stream is public
      */
     bool getIsPublic() const;
+    /**
+     * Prints data about the stream
+     * @param os Output stream where the information will be writen
+     * @return Stream where the information will be writen
+     */
+    ostream& operator<<(ostream& os) const;
 };
 
 

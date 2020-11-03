@@ -17,6 +17,13 @@ bool PrivateStream::canJoin(Viewer &viewer){
     return false;
 }
 
+ostream& PrivateStream::print(ostream & os) const{
+    os << "stream: " << getIsPublic() << getId() << " " << getTitle() << " " << getStreamer() << " " << getStartDate().toString() << " " << getEndDate().toString() << " " << getLanguage() << " " << getViewers() << " "  << max_capacity << endl;
+    for (int i = 0; i < allowed_viewers.size(); i++)
+        os << allowed_viewers.at(i) << " ";
+    return os;
+}
+
 void PrivateStream::show() const {
     /* IMPLEMENTAR MAIS TARDE */
     cout << "IMPLEMENTAR MAIS TARDE" << endl;

@@ -25,7 +25,16 @@ void Stream::show() const {
     cout << "IMPLEMENTAR MAIS TARDE" << endl;
 }
 
+ostream& operator<<(ostream& os, Stream& stream){
+    stream.print(os);
+    return os;
+}
+
+ostream& Stream::print(ostream & os) const{
+    os << "stream: " << getIsPublic() << " " << getId() << " " << getTitle() << " " << getStreamer() << " " << getStartDate().toString() << " " << getEndDate().toString() << " " << getLanguage() << " " << getViewers() << " " << minimum_age << endl;
+    return os;
+}
+
 void Stream::endStream(){
-    Date date;
-    end_date = date;
+    end_date = Date();
 }

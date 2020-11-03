@@ -27,6 +27,12 @@ public:
      * @return Boolean indicating if he can join the stream
      */
     bool canJoin(Viewer &viewer);
+    /**
+     * Writes in the indicated ostream the information about the stream
+     * @param os Output stream where the information will be writen
+     * @return Stream where the information will be writen
+     */
+    ostream& print(ostream & os) const;
 private:
     /**
      * Maximum capacity of the stream
