@@ -39,6 +39,12 @@ public:
      * @return String in the format dd/mm/yyyy hh:mm
      */
     string toString();
+    /**
+     * Calculates the difference between two dates
+     * @param date Date to be subtracted
+     * @return Difference between two dates
+     */
+    Date operator-(const Date &date);
 };
 
 

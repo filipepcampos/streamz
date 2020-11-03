@@ -50,3 +50,22 @@ string Date::toString(){
     ss << setfill('0') << setw(2) << dia << "/" << setw(2) << mes << "/" << ano << " " << setw(2) << horas << ":" << setw(2) << minutos;
     return ss.str();
 }
+
+Date Date::operator-(const Date &date) {
+    int months[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+    if (date.day > day) {
+        day = day + months[date.month - 1];
+        month = month - 1;
+    }
+
+    if (date.month > month) {
+        year = year - 1;
+        month = month + 12;
+    }
+    Date result("00/00/0000 00:00");
+    result.day = day - date.day;
+    result.month = month - date.month;
+    result.year = year - date.year;
+    return result;
+}
