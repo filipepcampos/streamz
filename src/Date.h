@@ -17,6 +17,11 @@ public:
     Date();
     /**
      * Copy constructor
+     * @param date
+     */
+    Date(const Date &date);
+    /**
+     * Another constructor
      * @param date Date in the format dd/mm/yyyy hh:mm
      */
     Date(const string &date);

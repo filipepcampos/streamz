@@ -17,6 +17,14 @@ Date::Date(){
     minutes = ltm->tm_min;
 }
 
+Date::Date(const Date &date){
+    day = date.day;
+    month = date.month;
+    year = date.year;
+    hours = date.hours;
+    minutes = date.minutes;
+}
+
 Date::Date(const string &date){
     stringstream ss;
     unsigned dia, mes, ano, horas, minutos;
