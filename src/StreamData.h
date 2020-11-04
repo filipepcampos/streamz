@@ -89,9 +89,10 @@ public:
     /**
      * Prints data about the stream
      * @param os Output stream where the information will be writen
+     * @param d StreamData
      * @return Stream where the information will be writen
      */
-    ostream& operator<<(ostream& os) const;
+    friend ostream& operator<<(ostream& os, const StreamData &d);
     /**
      * Displays on the screen info about the stream
      */

@@ -1,15 +1,46 @@
 #include "Archive.h"
 #include <algorithm>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
-Archive::Archive(const string &filename) {
-    // TODO: Read data
+Archive::Archive(const string &filename) : filename(filename) {
+    std::ifstream file(filename);
+    if(file.is_open()){
+        std::string str;
+        while(std::getline(file, str)){
+            char discard;
+            unsigned id, view_count;
+            std::string title, streamer, stream_type, language, start_date, end_date;
+
+            std::stringstream ss1{str};
+            ss1 >> discard >> id >> discard;
+            std::getline(ss1 >> std::ws, title);
+
+            std::getline(file, str); std::stringstream ss2{str};
+            ss2 >> str >> streamer;
+
+            std::getline(file, str); std::stringstream ss3{str};
+            ss3 >> stream_type >> language >> view_count;
+
+            std::getline(file >> std::ws, str);
+            start_date = str.substr(0,16);  end_date = str.substr(19, 16);
+
+            streams.emplace_back(id, title, streamer, start_date, end_date, language, view_count, stream_type == "public");
+        }
+        file.close();
+    }
 }
 
 Archive::~Archive(){
-    // TODO: Store data
     if(!test){
-        ;//
+        std::ofstream file(filename, std::ofstream::trunc);
+        if(file.is_open()){
+            for(const auto &data : streams){
+                file << data;
+            }
+            file.close();
+        }
     }
 }
 

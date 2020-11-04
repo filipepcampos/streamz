@@ -39,7 +39,6 @@ Platform::~Platform() {
 }
 
 void Platform::save(){
-    std::cout << "saving" << std::endl;
     std::ofstream users_file(files.user_file, std::ofstream::trunc);
     if(users_file.is_open()){
         for(const auto &user : users){

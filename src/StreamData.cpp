@@ -37,8 +37,11 @@ bool StreamData::getIsPublic() const {
     return isPublic;
 }
 
-ostream& StreamData::operator<<(ostream& os) const{
-    os << "stream data: " << getIsPublic() << " " << getId() << " " << getTitle() << " " << getStreamer() << " " << getStartDate().toString() << " " << getEndDate().toString() << " " << getLanguage() << " " << getViewers() << endl;
+ostream& operator<<(ostream& os, const StreamData &d) {
+    os << "(" << d.getId() << ") " << d.getTitle() << endl
+        << "    by " << d.getStreamer() << endl
+        << "    " << (d.getIsPublic() ? "public" : "private") << " " << d.getLanguage() << " " << d.getViewers() << endl
+        << "    " << d.getStartDate().toString() << " - " << d.getEndDate().toString() << endl;
     return os;
 }
 
