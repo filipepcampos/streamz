@@ -32,7 +32,7 @@ private:
     /** Active streams (sorted by id) */
     std::vector<std::shared_ptr<Stream>> active_streams;
 
-    unsigned int stream_id_count = 0;
+    unsigned int stream_id_count = 1;
 
     struct IOFiles{
         const std::string user_file = "user.txt";

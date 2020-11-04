@@ -42,11 +42,20 @@ void Platform::save(){
     std::cout << "saving" << std::endl;
     std::ofstream users_file(files.user_file, std::ofstream::trunc);
     if(users_file.is_open()){
-        for(auto user : users){
+        for(const auto &user : users){
             users_file << *user;
             users_file << std::endl;
         }
         users_file.close();
+    }
+    std::ofstream streams_file(files.active_stream_file, std::ofstream::trunc);
+    if(streams_file.is_open()){
+        streams_file << stream_id_count << endl;
+        for(const auto &stream : active_streams){
+            streams_file << *stream;
+            streams_file << std::endl;
+        }
+        streams_file.close();
     }
 }
 
