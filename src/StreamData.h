@@ -92,6 +92,10 @@ public:
      * @return Stream where the information will be writen
      */
     ostream& operator<<(ostream& os) const;
+    /**
+     * Displays on the screen info about the stream
+     */
+    void show() const;
 };
 
 

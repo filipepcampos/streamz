@@ -27,13 +27,13 @@ public:
     Date(const string &date);
     /**
      *
-     * @param d1_inicial
-     * @param d1_final
-     * @param d2_inicial
-     * @param d2_final
-     * @return
+     * @param d1_inicial Initial date for range 1
+     * @param d1_final Final date for range 1
+     * @param d2_inicial Initial date for range 2
+     * @param d2_final Final date for range 2
+     * @return Boolean indicating if the given two date ranges overlap
      */
-    friend bool checkDateIntersection(Date d1_inicial, Date d1_final, Date d2_inicial, Date d2_final);
+    friend bool checkDateIntersection(const Date d1_inicial,const Date d1_final,const Date d2_inicial,const Date d2_final);
     /**
      * Turns date into a string
      * @return String in the format dd/mm/yyyy hh:mm
@@ -45,6 +45,13 @@ public:
      * @return Difference between two dates
      */
     Date operator-(const Date &date);
+    /**
+     * Checks if one date comes before the other
+     * @param d1 Date 1
+     * @param d2 Date 2
+     * @return Boolean indicating if Date d1 comes before Date d2
+     */
+    friend bool operator<(const Date &d1, const Date &d2);
 };
 
 
