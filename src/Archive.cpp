@@ -25,8 +25,9 @@ void Archive::show() {
 
 void Archive::showTop() {
     std::cout << "Top by Views:" << std::endl;
-    for(auto it = top_views.rbegin(); it!= top_views.rend(); ++it){
-        (*it).show();
+    int i = 1;
+    for(auto it = top_views.rbegin(); it != top_views.rend(); ++it){
+        std::cout << i++ << ": "; (*it).show();
     }
     // TODO add likes
 }
@@ -34,8 +35,7 @@ void Archive::showTop() {
 void Archive::showStream(unsigned int id) {
     int pos = binarySearch(id);
     if(pos != -1) {
-        // TODO: Uncomment
-        //streams[pos].show();
+        streams[pos].show();
     }
 }
 
@@ -78,9 +78,10 @@ void Archive::updateTop(const StreamData &data){
     auto views_it = std::lower_bound(top_views.begin(), top_views.end(), data.getViewers(),  [](const StreamData &d, unsigned int viewers){
         return d.getViewers() < viewers;
     });
-    if(views_it != top_views.begin()){
+    if(views_it != top_views.begin() || top_views.size() < 10){
         top_views.insert(views_it, data);
-        top_views.pop_back();
+        if(top_views.size() > 10)
+            top_views.pop_back();
     }
     // TODO Implement likes
     /*

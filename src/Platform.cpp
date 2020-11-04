@@ -82,8 +82,6 @@ void Platform::sort(sortingMode mode, sortingOrder order) {
             sortActiveStreams([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
                 return ptr1->getMinimumAge() < ptr2->getMinimumAge();
             }); break;
-        default:
-            return;
     }
     if(order == descending){
         std::reverse(active_streams.begin(), active_streams.end());
@@ -146,8 +144,7 @@ void Platform::showUsers() {
 void Platform::showStreamHistory(const std::vector<unsigned int> &ids) {
     std::vector<StreamData *> history = archive.getStreamsById(ids);
     for(const auto &data : history){
-        // TODO: Uncomment
-        //data->show();
+        data->show();
     }
 }
 

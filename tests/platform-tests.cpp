@@ -251,3 +251,27 @@ TEST(platform, showStreams){
     std::cout << " --- Filter: language = 'EN' and min_age <= 16 --- " << std::endl;
     platform.showStreams("EN", 20);
 }
+
+TEST(platform, archiveTop){
+    Platform platform;
+    platform.testMode();
+    std::vector<unsigned int> ids;
+    const unsigned int N_STREAMS = 50;
+    for(int i = 0; i < N_STREAMS; ++i){
+        if(rand() % 3 == 0){
+            ids.push_back(i);
+        }
+        platform.startPublicStream("title"+std::to_string(i), "streamer", "PT", 19);
+        platform.endStream(i+1);
+    }
+    std::cout << " --- Verify the following information ---\n";
+    std::cout << "Should include following ids:";
+    for(auto i : ids){
+        std::cout << i << ",";
+    }
+    std::cout << std::endl;
+    platform.showStreamHistory(ids);
+
+    std::cout << " --- Verify the following information ---\n";
+    platform.topArchivedStreams();
+}

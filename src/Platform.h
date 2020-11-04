@@ -7,6 +7,9 @@
 #include <memory>
 #include <list>
 
+#define MINIMUM_VIEWER_AGE 12
+#define MINIMUM_STREAMER_AGE 15
+
 class User;
 class Viewer;
 class Streamer;
