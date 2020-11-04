@@ -42,3 +42,8 @@ ostream& StreamData::operator<<(ostream& os) const{
     return os;
 }
 
+void StreamData::show() const {
+    /* IMPLEMENTAR MAIS TARDE */
+    cout << "IMPLEMENTAR MAIS TARDE" << endl;
+}
+

@@ -69,3 +69,19 @@ Date Date::operator-(const Date &date) {
     result.year = year - date.year;
     return result;
 }
+
+bool operator<(const Date &d1, const Date &d2){
+    if(d1.year == d2.year){
+        if(d1.month == d2.month){
+            int d1_total_minutes = d1.day * 1440 + d1.hours * 60 + d1.minutes;
+            int d2_total_minutes = d2.day * 1440 + d2.hours * 60 + d2.minutes;
+            return d1_total_minutes < d2_total_minutes;
+        }
+        return d1.month < d2.month;
+    }
+    return d1.year < d2.year;
+}
+
+bool checkDateIntersection(const Date d1_inicial,const Date d1_final,const Date d2_inicial,const Date d2_final){
+    return (!(d2_final < d1_inicial) && !(d1_final < d2_inicial));
+}
