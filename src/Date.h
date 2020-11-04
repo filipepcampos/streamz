@@ -35,6 +35,31 @@ public:
      */
     friend bool checkDateIntersection(const Date d1_inicial,const Date d1_final,const Date d2_inicial,const Date d2_final);
     /**
+     * Gets year
+     * @return Year of the date
+     */
+    unsigned getYear() const;
+    /**
+     * Gets month
+     * @return Month of the date
+     */
+    unsigned getMonth() const;
+    /**
+     * Gets day
+     * @return Day of the date
+     */
+    unsigned getDay() const;
+    /**
+     * Gets hours
+     * @return Hours of the date
+     */
+    unsigned getHours() const;
+    /**
+     * Gets minutes
+     * @return Minutes of the date
+     */
+    unsigned getMinutes() const;
+    /**
      * Turns date into a string
      * @return String in the format dd/mm/yyyy hh:mm
      */

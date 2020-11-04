@@ -18,11 +18,11 @@ Date::Date(){
 }
 
 Date::Date(const Date &date){
-    day = date.day;
-    month = date.month;
-    year = date.year;
-    hours = date.hours;
-    minutes = date.minutes;
+    day = date.getDay();
+    month = date.getMonth();
+    year = date.getYear();
+    hours = date.getHours();
+    minutes = date.getMinutes();
 }
 
 Date::Date(const string &date){
@@ -51,35 +51,55 @@ string Date::toString(){
     return ss.str();
 }
 
+unsigned Date::getYear() const {
+    return year;
+}
+
+unsigned Date::getMonth() const {
+    return month;
+}
+
+unsigned Date::getDay() const {
+    return day;
+}
+
+unsigned Date::getHours() const {
+    return hours;
+}
+
+unsigned Date::getMinutes() const {
+    return minutes;
+}
+
 Date Date::operator-(const Date &date) {
     int months[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-    if (date.day > day) {
-        day = day + months[date.month - 1];
+    if (date.getDay() > day) {
+        day = day + months[date.getMonth() - 1];
         month = month - 1;
     }
 
-    if (date.month > month) {
+    if (date.getMonth() > month) {
         year = year - 1;
         month = month + 12;
     }
     Date result("00/00/0000 00:00");
-    result.day = day - date.day;
-    result.month = month - date.month;
-    result.year = year - date.year;
+    result.day = day - date.getDay();
+    result.month = month - date.getMonth();
+    result.year = year - date.getYear();
     return result;
 }
 
 bool operator<(const Date &d1, const Date &d2){
-    if(d1.year == d2.year){
-        if(d1.month == d2.month){
-            int d1_total_minutes = d1.day * 1440 + d1.hours * 60 + d1.minutes;
-            int d2_total_minutes = d2.day * 1440 + d2.hours * 60 + d2.minutes;
+    if(d1.getYear() == d2.getYear()){
+        if(d1.getMonth() == d2.getMonth()){
+            int d1_total_minutes = d1.getDay() * 1440 + d1.getHours() * 60 + d1.getMinutes();
+            int d2_total_minutes = d2.getDay() * 1440 + d2.getHours() * 60 + d2.getMinutes();
             return d1_total_minutes < d2_total_minutes;
         }
-        return d1.month < d2.month;
+        return d1.getMonth() < d2.getMonth();
     }
-    return d1.year < d2.year;
+    return d1.getYear() < d2.getYear();
 }
 
 bool checkDateIntersection(const Date d1_inicial,const Date d1_final,const Date d2_inicial,const Date d2_final){
