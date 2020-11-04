@@ -16,6 +16,7 @@ class Stream;
 enum sortingMode{
     views,
     id,
+    minimum_age,
     likes
 };
 enum sortingOrder{
@@ -206,6 +207,8 @@ public:
      * Does not remove anything from files
      */
     void testMode();
+
+    std::vector<std::shared_ptr<Stream>> testGetStreams();
 };
 
 

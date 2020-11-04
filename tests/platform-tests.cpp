@@ -109,21 +109,31 @@ TEST(platform, joinStream){
     EXPECT_THROW(platform.joinStreamByPos(-9, *viewer), std::out_of_range);
     EXPECT_THROW(platform.joinStreamByPos(0, *viewer), std::out_of_range);
     EXPECT_THROW(platform.joinStreamByPos(2, *viewer), std::out_of_range);
+    EXPECT_THROW(platform.joinStreamById(9999, *viewer), StreamDoesNotExist);
+    EXPECT_THROW(platform.joinStreamById(0, *viewer), StreamDoesNotExist);
     platform.startPublicStream("title", "nickname", "PT", 5);
     EXPECT_NO_THROW(platform.joinStreamByPos(1,*viewer));
+    viewer->leaveStream();
+    EXPECT_NO_THROW(platform.joinStreamById(1, *viewer));
+    viewer->leaveStream();
+    platform.endStream(1);
+    EXPECT_THROW(platform.joinStreamById(1, *viewer), StreamNoLongerActive);
+    EXPECT_THROW(platform.joinStreamByPos(1, *viewer), std::out_of_range);
 }
 
 TEST(platform, endStream){
     Platform platform;
     platform.testMode();
     EXPECT_THROW(platform.endStream(0), StreamDoesNotExist);
+    EXPECT_THROW(platform.endStream(1), StreamDoesNotExist);
     platform.startPublicStream("title", "nickname", "PT", 5);
     EXPECT_EQ(platform.getArchivedStreamCount(), 0);
     EXPECT_EQ(platform.getActiveStreamCount(), 1);
-    platform.endStream(0);
+    platform.endStream(1);
     EXPECT_EQ(platform.getActiveStreamCount(), 0);
     EXPECT_EQ(platform.getArchivedStreamCount(), 1);
-    EXPECT_THROW(platform.endStream(0), StreamNoLongerActive);
+    EXPECT_THROW(platform.endStream(0), StreamDoesNotExist);
+    EXPECT_THROW(platform.endStream(1), StreamNoLongerActive);
 }
 
 TEST(platform, top10){
@@ -152,12 +162,92 @@ TEST(platform, top10){
     platform.showStreams();
 }
 
+TEST(platform, sorting){
+    srand(time(0));
+    Platform platform;
+    platform.testMode();
+    const int N_STREAMS = 500;
+    const int N_VIEWERS = 1500;
+    for(int i = 0; i < N_STREAMS; ++i){
+        platform.startPublicStream("title" + std::to_string(i), "streamer" + std::to_string(i), "PT", i);
+    }
+    for(int i = 0; i < N_VIEWERS; ++i){
+        platform.registerViewer("viewer" + std::to_string(i), "Name", Date());
+        Viewer * viewer = dynamic_cast<Viewer *>(platform.getUser("viewer" + std::to_string(i)));
+        viewer->joinStream(1 + rand() % (N_STREAMS-1));
+    }
+
+    // TODO: Test sorting by likes!
+    platform.sort(views, ascending);
+    std::vector<std::shared_ptr<Stream>> vec = platform.testGetStreams();
+    unsigned old_val = 0;
+    for(const auto &ptr : vec){
+        if(ptr->getViewers() < old_val){
+            GTEST_FAIL();
+        }
+        old_val = ptr->getViewers();
+    }
+    platform.sort(views, descending);
+    vec = platform.testGetStreams();
+    old_val = 999999999;
+    for(const auto &ptr : vec){
+        if(ptr->getViewers() > old_val){
+            GTEST_FAIL();
+        }
+        old_val = ptr->getViewers();
+    }
+    platform.sort(id, ascending);
+    vec = platform.testGetStreams();
+    old_val = 0;
+    for(const auto &ptr : vec){
+        if(ptr->getId() < old_val){
+            GTEST_FAIL();
+        }
+        old_val = ptr->getId();
+    }
+    platform.sort(id, descending);
+    vec = platform.testGetStreams();
+    old_val = 999999999;
+    for(const auto &ptr : vec){
+        if(ptr->getId() > old_val){
+            GTEST_FAIL();
+        }
+        old_val = ptr->getId();
+    }
+    platform.sort(minimum_age, ascending);
+    vec = platform.testGetStreams();
+    old_val = 0;
+    for(const auto &ptr : vec){
+        if(ptr->getMinimumAge() < old_val){
+            GTEST_FAIL();
+        }
+        old_val = ptr->getMinimumAge();
+    }
+    platform.sort(minimum_age, descending);
+    vec = platform.testGetStreams();
+    old_val = 999999999;
+    for(const auto &ptr : vec){
+        if(ptr->getMinimumAge() > old_val){
+            GTEST_FAIL();
+        }
+        old_val = ptr->getMinimumAge();
+    }
+}
+
 TEST(platform, showStreams){
     Platform platform;
     platform.testMode();
-    GTEST_SKIP();
-    std::cout << " --- Please verify the following information --- " << std::endl;
-    for(int i = 0; i < 10; ++i){
-
+    for(int i = 0; i < 100; ++i){
+        platform.startPublicStream("title" + std::to_string(i), "streamername" + std::to_string(i), "PT", i);
     }
+    platform.startPublicStream("title", "streamername", "EN", 95);
+    platform.startPublicStream("title", "streamer_name", "EN", 15);
+    std::cout << " --- Please verify the following information --- " << std::endl;
+    platform.showStreams();
+    std::cout << " --- Filter: min_age <= 16 ---" << std::endl;
+    platform.showStreams("", 16);
+    std::cout << " --- Filter: language = 'EN' ---" << std::endl;
+    platform.showStreams("EN");
+    std::cout << " --- Filter: language = 'EN' and min_age <= 16 --- " << std::endl;
+    platform.showStreams("EN", 20);
 }

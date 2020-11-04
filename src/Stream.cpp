@@ -39,3 +39,7 @@ void Stream::endStream(){
     end_date = Date();
 }
 
+unsigned Stream::getMinimumAge() {
+    return minimum_age;
+}
+

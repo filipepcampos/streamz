@@ -78,6 +78,10 @@ void Platform::sort(sortingMode mode, sortingOrder order) {
             sortActiveStreams([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
                 return ptr1->getId() < ptr2->getId();
             }); break;
+        case minimum_age:
+            sortActiveStreams([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
+                return ptr1->getMinimumAge() < ptr2->getMinimumAge();
+            }); break;
         default:
             return;
     }
@@ -127,7 +131,7 @@ unsigned int Platform::getTotalStreamCount() const{
 void Platform::showStreams(const std::string &language_filter, unsigned minimum_age) {
     for(int i = 0; i < active_streams.size(); ++i){
         //TODO Check minimum age
-        if(language_filter.empty() || active_streams[i]->getLanguage() == language_filter){
+        if((language_filter.empty() || active_streams[i]->getLanguage() == language_filter) && active_streams[i]->getMinimumAge() <= minimum_age){
             std::cout << i+1 << ": " << active_streams[i]->getTitle() << ' ' << active_streams[i]->getId() << ' '
                       << active_streams[i]->getViewers() << std::endl;
         }
@@ -184,7 +188,7 @@ std::weak_ptr<Stream> Platform::joinStreamById(unsigned int id, Viewer &viewer) 
         return ptr->getId() == id;
     });
     if(it == active_streams.end()){
-        if(id > stream_id_count){
+        if(id >= stream_id_count || id < 1){
             throw StreamDoesNotExist(id);
         }
         else{
@@ -221,10 +225,10 @@ void Platform::endStream(unsigned int id){
         return ptr->getId() == id;
     });
     if(stream_it == active_streams.end()){
-        if(id < stream_id_count)
-            throw StreamNoLongerActive(id);
-        else
+        if(id >= stream_id_count || id < 1)
             throw StreamDoesNotExist(id);
+        else
+            throw StreamNoLongerActive(id);
     }
     StreamData data = *(*stream_it);
     archive.archiveStream(data);
@@ -296,11 +300,15 @@ bool Platform::deleteUser(const std::string &nickname) {
 
 void Platform::testMode() {
     test = true;
-    stream_id_count = 0;
+    stream_id_count = 1;
     for(auto u : users){
         delete u;
     }
     users.clear();
     active_streams.clear();
     archive.testMode();
+}
+
+std::vector<std::shared_ptr<Stream>> Platform::testGetStreams() {
+    return active_streams;
 }

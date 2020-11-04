@@ -38,6 +38,10 @@ public:
      */
     void endStream();
     /**
+     * Get minimum viewer age
+     */
+    unsigned getMinimumAge();
+    /**
      * Displays on the screen info about the stream
      */
     virtual void show() const;
