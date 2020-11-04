@@ -65,7 +65,7 @@ private:
      * @param nickname
      * @return true if user exists
      */
-    bool userExists(const std::string &nickname);
+    bool userExists(const std::string &nickname) const;
 
     void save();
 
@@ -141,7 +141,7 @@ public:
      * @throws std::out_of_range
      * @return
      */
-    std::weak_ptr<Stream> joinStreamByPos(int p, Viewer &viewer);
+    std::weak_ptr<Stream> joinStreamByPos(int p, const Viewer &viewer);
 
     //TODO change to const viewer
     /**
@@ -150,7 +150,7 @@ public:
      * @param viewer
      * @return
      */
-    std::weak_ptr<Stream> joinStreamById(unsigned int id, Viewer &viewer);
+    std::weak_ptr<Stream> joinStreamById(unsigned int id, const Viewer &viewer);
 
     /**
      * Start a Public Stream and return a weak_ptr to it
@@ -191,19 +191,19 @@ public:
     /*
      * Get top 10 archived streams by viewer_count and by likes
      */
-    void topArchivedStreams();
+    void topArchivedStreams() const;
 
     /**
      * Show all streams active in the platform
      */
-    void showStreams(const std::string &language_filter = "", unsigned minimum_age = 99999);
+    void showStreams(const std::string &language_filter = "", unsigned minimum_age = 99999) const;
 
-    void showStreamHistory(const std::vector<unsigned> &ids);
+    void showStreamHistory(const std::vector<unsigned> &ids) const;
 
     /**
      * Show all users in the platform
      */
-    void showUsers();
+    void showUsers() const;
 
     /**
      * Clear all vectors in memory

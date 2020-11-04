@@ -88,7 +88,7 @@ void Platform::sort(sortingMode mode, sortingOrder order) {
     }
 }
 
-bool Platform::userExists(const std::string &nickname) {
+bool Platform::userExists(const std::string &nickname) const{
     auto it = std::find_if(users.begin(), users.end(), [nickname](User *user){
         return user->getNickname() == nickname;
     });
@@ -126,7 +126,7 @@ unsigned int Platform::getTotalStreamCount() const{
 }
 
 
-void Platform::showStreams(const std::string &language_filter, unsigned minimum_age) {
+void Platform::showStreams(const std::string &language_filter, unsigned minimum_age) const{
     for(int i = 0; i < active_streams.size(); ++i){
         if((language_filter.empty() || active_streams[i]->getLanguage() == language_filter) && active_streams[i]->getMinimumAge() <= minimum_age){
             std::cout << i+1 << ": "; active_streams[i]->show(); std::cout << std::endl;
@@ -134,15 +134,15 @@ void Platform::showStreams(const std::string &language_filter, unsigned minimum_
     }
 }
 
-void Platform::showUsers() {
+void Platform::showUsers() const{
     for(int i = 0; i < users.size(); ++i){
         std::cout << i+1 << ": ";
         users[i]->show();
     }
 }
 
-void Platform::showStreamHistory(const std::vector<unsigned int> &ids) {
-    std::vector<StreamData *> history = archive.getStreamsById(ids);
+void Platform::showStreamHistory(const std::vector<unsigned int> &ids) const {
+    std::vector<const StreamData *> history = archive.getStreamsById(ids);
     for(const auto &data : history){
         data->show();
     }
@@ -158,7 +158,7 @@ User *Platform::getUser(const std::string &nickname) {
     return (*it);
 }
 
-std::weak_ptr<Stream> Platform::joinStreamByPos(int p, Viewer &viewer) {
+std::weak_ptr<Stream> Platform::joinStreamByPos(int p, const Viewer &viewer) {
     p--;
     if(p < 0 || p >= active_streams.size()){
         throw std::out_of_range("Invalid index for active_streams");
@@ -172,7 +172,7 @@ std::weak_ptr<Stream> Platform::joinStreamByPos(int p, Viewer &viewer) {
     return std::weak_ptr<Stream>();
 }
 
-std::weak_ptr<Stream> Platform::joinStreamById(unsigned int id, Viewer &viewer) {
+std::weak_ptr<Stream> Platform::joinStreamById(unsigned int id, const Viewer &viewer) {
     auto it = std::find_if(active_streams.begin(), active_streams.end(), [id](std::shared_ptr<Stream> ptr){
         return ptr->getId() == id;
     });
@@ -225,7 +225,7 @@ void Platform::endStream(unsigned int id){
 }
 
 template <typename F>
-std::vector<std::weak_ptr<Stream>> Platform::getTopActiveStreams(F pred){
+std::vector<std::weak_ptr<Stream>> Platform::getTopActiveStreams(F pred) {
     std::vector<std::weak_ptr<Stream>> top10;
     int n_elements = active_streams.size() > 10 ? 10 : active_streams.size();
     top10.reserve(n_elements);
@@ -269,7 +269,7 @@ void Platform::topActiveStreams() {
     }
 }
 
-void Platform::topArchivedStreams() {
+void Platform::topArchivedStreams() const{
     archive.showTop();
 }
 

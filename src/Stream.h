@@ -24,7 +24,7 @@ public:
      * @param viewer Viewer who wants to join the stream
      * @return boolean Boolean indicating if he can join the stream
      */
-    bool virtual canJoin(Viewer &viewer);
+    bool virtual canJoin(const Viewer &viewer);
     /**
      * Adds viewer to the stream
      */

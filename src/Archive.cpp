@@ -17,13 +17,13 @@ unsigned int Archive::getStreamCount() const {
     return streams.size();
 }
 
-void Archive::show() {
+void Archive::show() const{
     for(const auto &data : streams){
         data.show();
     }
 }
 
-void Archive::showTop() {
+void Archive::showTop() const{
     std::cout << "Top by Views:" << std::endl;
     int i = 1;
     for(auto it = top_views.rbegin(); it != top_views.rend(); ++it){
@@ -32,15 +32,15 @@ void Archive::showTop() {
     // TODO add likes
 }
 
-void Archive::showStream(unsigned int id) {
+void Archive::showStream(unsigned int id) const{
     int pos = binarySearch(id);
     if(pos != -1) {
         streams[pos].show();
     }
 }
 
-std::vector<StreamData *> Archive::getStreamsById(const std::vector<unsigned int> &ids) {
-    std::vector<StreamData *> vec;
+std::vector<const StreamData *> Archive::getStreamsById(const std::vector<unsigned int> &ids) const{
+    std::vector<const StreamData *> vec;
     for(auto id : ids){
         int pos = binarySearch(id);
         if(pos != -1){
@@ -50,7 +50,7 @@ std::vector<StreamData *> Archive::getStreamsById(const std::vector<unsigned int
     return vec;
 }
 
-int Archive::binarySearch(unsigned int id) {
+int Archive::binarySearch(unsigned int id) const{
     int left = 0, right = streams.size()-1;
     while (left <= right) {
         int m = left + (right - left) / 2;

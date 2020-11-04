@@ -58,7 +58,7 @@ TEST(archive, streamsById){
         archive.archiveStream(StreamData(i,"title"+std::to_string(i), "streamer", Date(), Date(), "PT", viewers, is_public));
     }
 
-    std::vector<StreamData *> vec = archive.getStreamsById(ids);
+    std::vector<const StreamData *> vec = archive.getStreamsById(ids);
     EXPECT_EQ(ids.size(), vec.size());
     for(int i = 0; i < ids.size(); ++i){
         if(vec[i]->getId() != ids[i]){

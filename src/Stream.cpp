@@ -8,7 +8,7 @@ Stream::Stream(const string &title, const string &streamer, const string &langua
     this->minimum_age = minimum_age;
 }
 
-bool Stream::canJoin(Viewer &viewer){
+bool Stream::canJoin(const Viewer &viewer){
     return (viewer.getAge() >= minimum_age);
 }
 
