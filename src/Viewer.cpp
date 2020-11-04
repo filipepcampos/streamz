@@ -13,7 +13,8 @@ void Viewer::joinStream(const unsigned int id) {
 }
 
 void Viewer::leaveStream() {
-    current_stream.lock()->leaveStream();
+    if (!current_stream.expired())
+        current_stream.lock()->leaveStream();
     current_stream.reset();
 }
 

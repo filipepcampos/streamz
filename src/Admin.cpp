@@ -1,6 +1,7 @@
 #include "Admin.h"
 #include "Stream.h"
 #include "Streamer.h"
+#include <map>
 
 Admin::Admin(const Platform * platform) : platform(platform) {
 }
@@ -20,11 +21,31 @@ float Admin::averageViews() const {
 }
 
 unsigned int Admin::streamsCounter(const bool isPublic, const Date &lower, const Date &upper) const {
+    /* IMPLEMENTAR MAIS TARDE */
+    std::cout << "IMPLEMENTAR MAIS TARDE" << std::endl;
     return 0;
 }
 
 std::string Admin::topLanguage() const {
-    return "Portuguese";
+    map<string, unsigned int> languages;
+    for (std::shared_ptr<Stream> stream : platform->active_streams) {
+        languages[stream->getLanguage()]++;
+    }
+    for (StreamData stream : platform->archive.streams) {
+        languages[stream.getLanguage()]++;
+    }
+
+    unsigned maxCounter = 0;
+    string maxLanguage;
+    map<string, unsigned int>::iterator it = languages.begin();
+    while (it != languages.end()) {
+        if (it->second > maxCounter) {
+            maxLanguage = it->first;
+            maxCounter = it->second;
+        }
+        it++;
+    }
+    return maxLanguage;
 }
 
 std::string Admin::topTypeStream() const {
