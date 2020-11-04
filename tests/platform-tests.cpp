@@ -7,8 +7,8 @@ using testing::Eq;
 
 TEST(platform, test_mode){
     Platform platform;
-    platform.registerViewer("viewer", "Name", Date());
-    platform.registerStreamer("streamer", "Name", Date());
+    platform.registerViewer("viewer", "Name", Date("01/01/1984 00:00"));
+    platform.registerStreamer("streamer", "Name", Date("01/01/1984 00:00"));
     platform.testMode();
     EXPECT_EQ(platform.getUserCount(), 0);
     EXPECT_EQ(platform.getActiveStreamCount(), 0);
@@ -20,8 +20,8 @@ TEST(platform, registerUniqueUsers) {
     platform.testMode();
     EXPECT_EQ(platform.getUserCount(), 0);
     for(int i = 0; i < 30; i+=2) {
-        EXPECT_EQ(platform.registerViewer("user" + std::to_string(i), "abc", Date()), true);
-        EXPECT_EQ(platform.registerStreamer("user" + std::to_string(i+1), "abc", Date()), true);
+        EXPECT_EQ(platform.registerViewer("user" + std::to_string(i), "abc", Date("01/01/1984 00:00")), true);
+        EXPECT_EQ(platform.registerStreamer("user" + std::to_string(i+1), "abc", Date("01/01/1984 00:00")), true);
         EXPECT_EQ(platform.getUserCount(), i + 2);
     }
 }
@@ -29,7 +29,7 @@ TEST(platform, registerUniqueUsers) {
 TEST(platform, registerNonUniqueUsers){
     Platform platform;
     platform.testMode();
-    std::string name = "name"; Date date;
+    std::string name = "name"; Date date("01/01/1984 00:00");
 
     EXPECT_EQ(platform.registerViewer("user1", name, date), true);
     EXPECT_THROW(platform.registerViewer("user1", name, date), UserAlreadyExists);
@@ -52,7 +52,7 @@ TEST(platform, registerNonUniqueUsers){
 TEST(platform, getUsers){
     Platform platform;
     platform.testMode();
-    std::string name = "name"; Date date;
+    std::string name = "name"; Date date("01/01/1984 00:00");
     for(int i = 0; i < 30; i+=2) {
         EXPECT_EQ(platform.registerViewer("user" + std::to_string(i), name, date), true);
         EXPECT_EQ(platform.registerStreamer("user" + std::to_string(i+1), name, date), true);
@@ -68,7 +68,7 @@ TEST(platform, getUsers){
 TEST(platform, deleteUsers){
     Platform platform;
     platform.testMode();
-    std::string name = "Name"; Date date;
+    std::string name = "Name"; Date date("01/01/1984 00:00");
 
     EXPECT_EQ(platform.registerStreamer("streamer1", name, date), true);
     EXPECT_EQ((platform.getUser("streamer1")->getNickname()), "streamer1");
@@ -81,7 +81,7 @@ TEST(platform, deleteUsers){
 TEST(platform, showUsers){
     Platform platform;
     platform.testMode();
-    std::string name = "Name"; Date date;
+    std::string name = "Name"; Date date("01/01/1984 00:00");
 
     std::cout << " --- Please verify the following information --- " << std::endl;
     for(int i = 0; i < 10; ++i) {
@@ -96,15 +96,17 @@ TEST(platform, showUsers){
 TEST(platform, startStream){
     Platform platform;
     platform.testMode();
-    EXPECT_EQ(platform.registerStreamer("streamer1", "Name", Date()), true);
+    EXPECT_EQ(platform.registerStreamer("streamer1", "Name", Date("01/01/1984 00:00")), true);
     Streamer * streamer = dynamic_cast<Streamer *>(platform.getUser("streamer1"));
-    //;
+    platform.startPublicStream("title", streamer->getName(), "PT", 15);
+    std::vector<std::string> allowed;
+    platform.startPrivateStream("title", streamer->getName(), "PT", 15, 5, allowed);
 }
 
 TEST(platform, joinStream){
     Platform platform;
     platform.testMode();
-    platform.registerViewer("viewer", "Name", Date());
+    platform.registerViewer("viewer", "Name", Date("01/01/1984 00:00"));
     Viewer * viewer = dynamic_cast<Viewer *>(platform.getUser("viewer"));
     EXPECT_THROW(platform.joinStreamByPos(-9, *viewer), std::out_of_range);
     EXPECT_THROW(platform.joinStreamByPos(0, *viewer), std::out_of_range);
@@ -142,7 +144,7 @@ TEST(platform, top10){
     std::cout << "Should be empty:" << std::endl;
     platform.topActiveStreams();
     platform.testMode();
-    platform.registerStreamer("streamer", "StreamerName", Date());
+    platform.registerStreamer("streamer", "StreamerName", Date("01/01/1984 00:00"));
     Streamer * streamer = dynamic_cast<Streamer *>(platform.getUser("streamer"));
 
     for(int i = 0; i < 30; ++i){
@@ -152,7 +154,7 @@ TEST(platform, top10){
     std::cout << "===== All Active Streams =====" << std::endl;
     platform.showStreams();
 
-    Viewer viewer("abc","name",Date(), &platform);
+    Viewer viewer("abc","name",Date("01/01/1984 00:00"), &platform);
     for(int i = 0; i < 1500; ++i){
         platform.joinStreamByPos(rand() % platform.getActiveStreamCount()+1, viewer);
     }
@@ -172,7 +174,7 @@ TEST(platform, sorting){
         platform.startPublicStream("title" + std::to_string(i), "streamer" + std::to_string(i), "PT", i);
     }
     for(int i = 0; i < N_VIEWERS; ++i){
-        platform.registerViewer("viewer" + std::to_string(i), "Name", Date());
+        platform.registerViewer("viewer" + std::to_string(i), "Name", Date("01/01/1984 00:00"));
         Viewer * viewer = dynamic_cast<Viewer *>(platform.getUser("viewer" + std::to_string(i)));
         viewer->joinStream(1 + rand() % (N_STREAMS-1));
     }
