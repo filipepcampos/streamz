@@ -194,6 +194,8 @@ public:
      */
     void showStreams(const std::string &language_filter = "", unsigned minimum_age = 99999);
 
+    void showStreamHistory(const std::vector<unsigned> &ids);
+
     /**
      * Show all users in the platform
      */

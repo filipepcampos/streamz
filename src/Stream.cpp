@@ -25,7 +25,7 @@ void Stream::show() const {
     cout << "IMPLEMENTAR MAIS TARDE" << endl;
 }
 
-ostream& operator<<(ostream& os, Stream& stream){
+ostream& operator<<(ostream& os, const Stream& stream){
     stream.print(os);
     return os;
 }
@@ -38,3 +38,4 @@ ostream& Stream::print(ostream & os) const{
 void Stream::endStream(){
     end_date = Date();
 }
+

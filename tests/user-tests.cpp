@@ -9,6 +9,7 @@ using testing::Eq;
 TEST(user, getMethods) {
     Date date;
     Platform platform;
+    platform.testMode();
     Streamer st("streamer","st name", date, &platform);
     EXPECT_EQ("streamer", st.getNickname());
     EXPECT_EQ("st name", st.getName());
@@ -22,6 +23,7 @@ TEST(user, getMethods) {
 
 TEST(user, userEquality) {
     Platform platform;
+    platform.testMode();
     Streamer st1("MikeG", "Miguel", Date(), &platform);
     Streamer st2("Streamer1", "Streamer Name", Date(), &platform);
     Viewer vw1("Viewer1", "Viewer Name", Date(), &platform);
@@ -36,6 +38,7 @@ TEST(user, userEquality) {
 
 TEST(user, streamInteraction) {
     Platform platform;
+    platform.testMode();
     platform.registerStreamer("Streamer1", "Streamer Name", Date());
     platform.registerViewer("Viewer1", "Viewer Name", Date("01/01/2000 00:00"));
     platform.registerViewer("Viewer2", "Viewer Name", Date("01/01/2000 00:00"));
@@ -55,6 +58,7 @@ TEST(user, streamInteraction) {
 
 TEST(user, streamsHistory) {
     Platform platform;
+    platform.testMode();
     platform.registerStreamer("Streamer1", "Streamer Name", Date("01/01/2000 00:00"));
     platform.registerViewer("Viewer1", "Viewer Name", Date("01/01/2000 00:00"));
     platform.registerViewer("Viewer2", "Viewer Name", Date("01/01/2000 00:00"));
@@ -69,6 +73,7 @@ TEST(user, streamsHistory) {
 
 TEST(user, showUser) {
     Platform platform;
+    platform.testMode();
     platform.registerStreamer("Streamer1", "Streamer Name", Date());
     platform.registerViewer("Viewer1", "Viewer Name", Date("22/06/2001 00:00"));
 

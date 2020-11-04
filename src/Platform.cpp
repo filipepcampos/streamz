@@ -147,6 +147,14 @@ void Platform::showUsers() {
     }
 }
 
+void Platform::showStreamHistory(const std::vector<unsigned int> &ids) {
+    std::vector<StreamData *> history = archive.getStreamsById(ids);
+    for(const auto &data : history){
+        // TODO: Uncomment
+        //data->show();
+    }
+}
+
 User *Platform::getUser(const std::string &nickname) {
     auto it = std::find_if(users.begin(), users.end(), [nickname](User * user){
         return user->getNickname() == nickname;
