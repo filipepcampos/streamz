@@ -52,7 +52,7 @@ void Streamer::show() const {
 }
 
 std::ostream& Streamer::print(std::ostream & os) const {
-    //os << "streamer " << getNickname() << " " << getAge() << " " << getBirthDate().toString() << " ";
+    os << "streamer " << getNickname() << " " << getBirthDate().toString() << " ";
     os << (current_stream.expired() ? 0 : current_stream.lock()->getId()) << " " << getName() << std::endl;
     for (unsigned int id : streams_history)
         os << id << " ";

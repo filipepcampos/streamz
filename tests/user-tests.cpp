@@ -33,31 +33,48 @@ TEST(user, userEquality) {
     EXPECT_EQ(false, *(users[0]) == *(users[1]));
     EXPECT_EQ(false, *(users[1]) == *(users[2]));
 }
-/*
+
 TEST(user, streamInteraction) {
-    std::shared_ptr<Stream> stream1(nullptr);
-    stream1 = std::make_shared<Stream>(arguments);
-    Viewer vw1("Viewer1", "Viewer Name", Date());
+    Platform platform;
+    platform.registerStreamer("Streamer1", "Streamer Name", Date());
+    platform.registerViewer("Viewer1", "Viewer Name", Date("01/01/2000 00:00"));
+    platform.registerViewer("Viewer2", "Viewer Name", Date("01/01/2000 00:00"));
 
-    vw1.joinStream(stream1);
-    EXPECT_EQ(id, vw1.getCurrentStream().lock().get().getId());
+    Streamer * st = dynamic_cast<Streamer*>(platform.getUser("Streamer1"));
+    st->startPublicStream("Test", "PT", 10);
+    Viewer * vw1 = dynamic_cast<Viewer*>(platform.getUser("Viewer1"));
+    vw1->joinStream(0);
+    Viewer * vw2 = dynamic_cast<Viewer*>(platform.getUser("Viewer2"));
+    vw2->joinStream(0);
 
-    vw1.leaveStream();
-    EXPECT_EQ(true, vw1.getCurrentStream().expired());
+    EXPECT_EQ(2, vw1->getCurrentStream().lock()->getViewers());
+
+    vw2->leaveStream();
+    EXPECT_EQ(1, vw1->getCurrentStream().lock()->getViewers());
 }
-*/
-/*
+
 TEST(user, streamsHistory) {
     Platform platform;
-    Streamer st("Streamer", "Streamer Name", Date(), &platform);
-    st.addStream(1);
-    st.addStream(3);
-    st.addStream(10);
-    std::vector<unsigned int> v{1,3,10};
-    EXPECT_EQ(v, st.getStreamsHistory());
+    platform.registerStreamer("Streamer1", "Streamer Name", Date("01/01/2000 00:00"));
+    platform.registerViewer("Viewer1", "Viewer Name", Date("01/01/2000 00:00"));
+    platform.registerViewer("Viewer2", "Viewer Name", Date("01/01/2000 00:00"));
 
-    st.removeStream(10);
-    v.erase(v.begin()+2);
-    EXPECT_EQ(v, st.getStreamsHistory());
+    Streamer * st = dynamic_cast<Streamer*>(platform.getUser("Streamer1"));
+    st->startPublicStream("Test", "PT", 10);
+    Viewer * vw1 = dynamic_cast<Viewer*>(platform.getUser("Viewer1"));
+    vw1->joinStream(0);
+    st->endStream();
+    EXPECT_EQ(1, st->getStreamsHistory().size());
 }
- */
+
+TEST(user, showUser) {
+    Platform platform;
+    platform.registerStreamer("Streamer1", "Streamer Name", Date());
+    platform.registerViewer("Viewer1", "Viewer Name", Date("22/06/2001 00:00"));
+
+    Streamer * st = dynamic_cast<Streamer*>(platform.getUser("Streamer1"));
+    cout << *st;
+    Viewer * vw1 = dynamic_cast<Viewer*>(platform.getUser("Viewer1"));
+    cout << *vw1;
+    cout << endl << vw1->getAge() << endl;
+}

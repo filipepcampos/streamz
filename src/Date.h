@@ -17,6 +17,11 @@ public:
     Date();
     /**
      * Copy constructor
+     * @param date
+     */
+    Date(const Date &date);
+    /**
+     * Another constructor
      * @param date Date in the format dd/mm/yyyy hh:mm
      */
     Date(const string &date);
@@ -34,6 +39,12 @@ public:
      * @return String in the format dd/mm/yyyy hh:mm
      */
     string toString();
+    /**
+     * Calculates the difference between two dates
+     * @param date Date to be subtracted
+     * @return Difference between two dates
+     */
+    Date operator-(const Date &date);
 };
 
 

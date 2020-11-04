@@ -17,8 +17,7 @@ Date User::getBirthDate() const {
 }
 
 unsigned User::getAge() const {
-    /* IMPLEMENTAR MAIS TARDE */
-    return 0;
+    return stoi((Date() - birth_date).toString().substr(6,4));
 }
 
 void User::show() const {
