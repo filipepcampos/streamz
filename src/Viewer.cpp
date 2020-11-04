@@ -2,6 +2,8 @@
 #include <iostream>
 
 Viewer::Viewer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform *platform) : User(nickname, name, birth_date, platform) {
+    if (getAge() <= MINIMUM_VIEWER_AGE)
+        throw InvalidAge(getAge());
 }
 
 std::weak_ptr<Stream> Viewer::getCurrentStream() const {
@@ -9,6 +11,8 @@ std::weak_ptr<Stream> Viewer::getCurrentStream() const {
 }
 
 void Viewer::joinStream(const unsigned int id) {
+    if (!current_stream.expired())
+        leaveStream();
     current_stream = platform->joinStreamById(id, *this);
 }
 

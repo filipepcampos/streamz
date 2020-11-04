@@ -65,12 +65,6 @@ public:
      */
     string toString();
     /**
-     * Calculates the difference between two dates
-     * @param date Date to be subtracted
-     * @return Difference between two dates
-     */
-    Date operator-(const Date &date);
-    /**
      * Checks if one date comes before the other
      * @param d1 Date 1
      * @param d2 Date 2

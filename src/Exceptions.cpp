@@ -1,29 +1,21 @@
 #include "Exceptions.h"
 
-UserDoesNotExist::UserDoesNotExist(const std::string &nickname) : nickname(nickname) {
-}
-
+UserDoesNotExist::UserDoesNotExist(const std::string &nickname) : nickname(nickname) {}
 std::string UserDoesNotExist::getNickname() const {
     return nickname;
 }
 
-UserAlreadyExists::UserAlreadyExists(const std::string &nickname) : nickname(nickname) {
-}
-
+UserAlreadyExists::UserAlreadyExists(const std::string &nickname) : nickname(nickname) {}
 std::string UserAlreadyExists::getNickname() const {
     return nickname;
 }
 
-InvalidAge::InvalidAge(const unsigned int age) : age(age) {
-}
-
+InvalidAge::InvalidAge(const unsigned int age) : age(age) {}
 unsigned int InvalidAge::getAge() const {
     return age;
 }
 
-InsufficientAge::InsufficientAge(const unsigned int age) : age(age) {
-}
-
+InsufficientAge::InsufficientAge(const unsigned int age) : age(age) {}
 unsigned int InsufficientAge::getAge() const {
     return age;
 }
@@ -36,4 +28,9 @@ unsigned int StreamNoLongerActive::getId() const {
 StreamDoesNotExist::StreamDoesNotExist(const unsigned int id) : id(id){}
 unsigned int StreamDoesNotExist::getId() const{
     return id;
+}
+
+InvalidAction::InvalidAction(const std::string &message) : message(message) {}
+std::string InvalidAction::getMessage() const {
+    return message;
 }

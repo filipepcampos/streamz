@@ -5,7 +5,6 @@
 #include <iostream>
 #include <string>
 
-
 class User {
     /**
      * Nickname of the user
@@ -34,22 +33,22 @@ public:
     User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform);
     /**
      * Gets the nickname of the user
-     * @return nickname of the user
+     * @return String containing the nickname of the user
      */
     std::string getNickname() const;
     /**
      * Gets the name of the user
-     * @return name of the user
+     * @return String containing the name of the user
      */
     std::string getName() const;
     /**
      * Gets the birth date of the user
-     * @return birth date of the user
+     * @return Birth date of the user
      */
     Date getBirthDate() const;
     /**
      * Gets the age of the user
-     * @return age of the user
+     * @return Age of the user
      */
     unsigned getAge() const;
     /**
@@ -58,21 +57,21 @@ public:
     virtual void show() const;
     /**
      * Writes in the indicated ostream the information about the user
-     * @param os output stream where the information will be writen
-     * @return stream where the information will be writen
+     * @param os Output stream where the information will be writen
+     * @return Stream where the information will be writen
      */
     virtual std::ostream& print(std::ostream & os) const;
     /**
-     * Compares users
+     * Checks if the users have the same nickname
      * @param other User to be compared with
-     * @return boolean indicating if the users are the same
+     * @return Boolean indicating if the users are the same
      */
     bool operator==(const User &other) const;
     /**
      * Writes in the indicated ostream the information about the user
-     * @param os output stream where the information will be writen
-     * @param user user containing the data
-     * @return stream where the information will be writen
+     * @param os Output stream where the information will be writen
+     * @param user User containing the data
+     * @return Stream where the information will be writen
      */
     friend std::ostream& operator<<(std::ostream& os, const User& user);
 };

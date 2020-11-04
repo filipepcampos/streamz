@@ -4,9 +4,13 @@
 #include <algorithm>
 
 Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform) : User(nickname, name, birth_date, platform) {
+    if (getAge() <= MINIMUM_STREAMER_AGE)
+        throw InvalidAge(getAge());
 }
 
 Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform, const std::vector<unsigned int> &streams_history) : User(nickname, name, birth_date, platform) {
+    if (getAge() <= MINIMUM_STREAMER_AGE)
+        throw InvalidAge(getAge());
     this->streams_history = streams_history;
 }
 
@@ -15,14 +19,20 @@ std::vector<unsigned int> Streamer::getStreamsHistory() const {
 }
 
 void Streamer::startPublicStream(const string &title, const string &language, const unsigned minimum_age) {
+    if (!current_stream.expired())
+        throw InvalidAction("Stream already occurring");
     current_stream = platform->startPublicStream(title, getNickname(), language, minimum_age);
 }
 
 void Streamer::startPrivateStream(const string &title, const string &language, const unsigned minimum_age, const unsigned max_capacity, const vector<string> &allowed_viewers) {
+    if (!current_stream.expired())
+        throw InvalidAction("Stream already occurring");
     current_stream = platform->startPrivateStream(title, getNickname(), language, minimum_age, max_capacity, allowed_viewers);
 }
 
 void Streamer::endStream() {
+    if (current_stream.expired())
+        throw InvalidAction("No stream is occurring");
     unsigned int id = current_stream.lock()->getId();
     current_stream.lock()->endStream();
     platform->endStream(id);

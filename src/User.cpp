@@ -17,7 +17,8 @@ Date User::getBirthDate() const {
 }
 
 unsigned User::getAge() const {
-    return stoi((Date() - birth_date).toString().substr(6,4));
+    Date today;
+    return ((today.getYear() - birth_date.getYear()) * 10000 + (today.getMonth() - birth_date.getMonth()) * 100 + (today.getDay() - birth_date.getDay())) / 10000;
 }
 
 void User::show() const {

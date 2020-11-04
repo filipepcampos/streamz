@@ -71,25 +71,6 @@ unsigned Date::getMinutes() const {
     return minutes;
 }
 
-Date Date::operator-(const Date &date) {
-    int months[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
-    if (date.getDay() > day) {
-        day = day + months[date.getMonth() - 1];
-        month = month - 1;
-    }
-
-    if (date.getMonth() > month) {
-        year = year - 1;
-        month = month + 12;
-    }
-    Date result("00/00/0000 00:00");
-    result.day = day - date.getDay();
-    result.month = month - date.getMonth();
-    result.year = year - date.getYear();
-    return result;
-}
-
 bool operator<(const Date &d1, const Date &d2){
     if(d1.getYear() == d2.getYear()){
         if(d1.getMonth() == d2.getMonth()){

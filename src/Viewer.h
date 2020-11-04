@@ -4,8 +4,6 @@
 #include "Stream.h"
 #include <memory>
 
-#define MINIMUM_AGE_VIEWER 12
-
 class Viewer : public User {
     /**
      * Weak pointer to the stream the viewer is currently watching
@@ -17,11 +15,12 @@ public:
      * @param nickname Nickname of the user
      * @param name Name of the user
      * @param birth_date Birth date of the user
+     * @throws InvalidAge
      */
     Viewer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform *platform);
     /**
      * Gets the weak pointer to the stream the viewer is currently watching
-     * @return weak pointer to the stream the viewer is currently watching
+     * @return Weak pointer to the stream the viewer is currently watching
      */
     std::weak_ptr<Stream> getCurrentStream() const;
     /**
@@ -39,14 +38,14 @@ public:
     void show() const;
     /**
      * Writes in the indicated ostream the information about the user
-     * @param os output stream where the information will be writen
-     * @return stream where the information will be writen
+     * @param os Stream where the information will be writen
+     * @return Stream where the information will be writen
      */
     std::ostream& print(std::ostream & os) const;
     /**
-     * Compares viewers
+     * Checks if the users have the same nickname
      * @param other Viewer to be compared with
-     * @return boolean indicating if the viewers are the same
+     * @return Boolean indicating if the viewers are the same
      */
     bool operator==(const Viewer &other) const;
 };

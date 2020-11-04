@@ -24,18 +24,18 @@ TEST(admin, adminTests) {
     Viewer * vw3 = dynamic_cast<Viewer *>(pl.getUser("vw3"));
 
     st1->startPrivateStream("str1", "PT", 0, 10, {"vw1","vw2"});
-    vw1->joinStream(0);vw2->joinStream(0);
+    vw1->joinStream(1);vw2->joinStream(1);
     st1->endStream();
     vw1->leaveStream();vw2->leaveStream();
 
     st1->startPublicStream("str2", "EN", 0);
-    vw1->joinStream(1);vw2->joinStream(1);vw3->joinStream(1);
+    vw1->joinStream(2);vw2->joinStream(2);vw3->joinStream(2);
 
     st1->endStream();
     vw1->leaveStream();vw2->leaveStream();vw3->leaveStream();
 
     st2->startPublicStream("str3", "PT", 0);
-    vw1->joinStream(2);
+    vw1->joinStream(3);
 
     EXPECT_EQ(2, ad.averageViews());
     EXPECT_EQ(2, ad.streamsCounter(true, d1, Date()));

@@ -109,4 +109,19 @@ class StreamDoesNotExist : public std::exception {
     unsigned int getId() const;
 };
 
+class InvalidAction : public std::exception {
+    std::string message;
+public:
+    /**
+     * Class constructor
+     * @param message Message to be displayed
+     */
+    InvalidAction(const std::string &message);
+    /**
+     * Gets exception message
+     * @return id
+     */
+    std::string getMessage() const;
+};
+
 #endif //STREAMZ_EXCEPTIONS_H
