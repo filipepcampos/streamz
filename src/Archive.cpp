@@ -39,7 +39,7 @@ void Archive::showStream(unsigned int id) {
     }
 }
 
-std::vector<StreamData *> Archive::getStreamsById(const std::vector<unsigned int> &ids) {
+std::vector<StreamData *> Archive::getStreamsById(const std::vector<unsigned int> &ids) const {
     std::vector<StreamData *> vec;
     for(auto id : ids){
         int pos = binarySearch(id);
@@ -50,7 +50,7 @@ std::vector<StreamData *> Archive::getStreamsById(const std::vector<unsigned int
     return vec;
 }
 
-int Archive::binarySearch(unsigned int id) {
+int Archive::binarySearch(unsigned int id) const {
     int left = 0, right = streams.size()-1;
     while (left <= right) {
         int m = left + (right - left) / 2;

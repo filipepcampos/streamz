@@ -14,7 +14,7 @@ private:
     std::list<StreamData> top_views;
     std::list<StreamData> top_likes;
 
-    int binarySearch(unsigned int id);
+    int binarySearch(unsigned int id) const;
 public:
     explicit Archive(const string &filename = "archive.txt");
     ~Archive();
@@ -24,7 +24,7 @@ public:
     void show();
     void showTop();
     void showStream(unsigned int id);
-    std::vector<StreamData *> getStreamsById(const std::vector<unsigned int> &ids);
+    std::vector<StreamData *> getStreamsById(const std::vector<unsigned int> &ids) const;
     void testMode();
 };
 
