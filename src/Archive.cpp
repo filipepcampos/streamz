@@ -19,16 +19,14 @@ unsigned int Archive::getStreamCount() const {
 
 void Archive::show() {
     for(const auto &data : streams){
-        // TODO: Change to .show()
-        std::cout << data.getId() << " " << data.getTitle() << " " << data.getViewers() << std::endl;
+        data.show();
     }
 }
 
 void Archive::showTop() {
     std::cout << "Top by Views:" << std::endl;
     for(auto it = top_views.rbegin(); it!= top_views.rend(); ++it){
-        // TODO: Change to .show()
-        std::cout << it->getId() << " " << it->getTitle() << " " << it->getViewers() << std::endl;
+        (*it).show();
     }
     // TODO add likes
 }

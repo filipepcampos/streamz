@@ -130,17 +130,9 @@ unsigned int Platform::getTotalStreamCount() const{
 
 void Platform::showStreams(const std::string &language_filter, unsigned minimum_age) {
     for(int i = 0; i < active_streams.size(); ++i){
-        //TODO Check minimum age
         if((language_filter.empty() || active_streams[i]->getLanguage() == language_filter) && active_streams[i]->getMinimumAge() <= minimum_age){
-            std::cout << i+1 << ": " << active_streams[i]->getTitle() << ' ' << active_streams[i]->getId() << ' '
-                      << active_streams[i]->getViewers() << std::endl;
+            std::cout << i+1 << ": "; active_streams[i]->show(); std::cout << std::endl;
         }
-        /*
-        if(active_streams[i]->getMinimumAge() < minimum_age && (!language_filter || active_streams[i]->getLanguage() == language_filter){
-            // TODO Change to .show()
-            std::cout << i+1 << ": " << active_streams[i]->getTitle() << ' ' << active_streams[i]->getId() << ' '
-                      << active_streams[i]->getViewers() << std::endl;
-        }*/
     }
 }
 
@@ -273,10 +265,8 @@ void Platform::topActiveStreams() {
     std::cout << "Top by Views" << std::endl;
     for(int i = 0; i < views.size(); ++i){
         if(auto ptr = views[i].lock()){
-            // TODO: Change to .show()
-            std::cout << i+1 << ": " << ptr->getTitle() << ' ' << ptr->getId() << ' '
-                      << ptr->getViewers();
-            //ptr->show();
+            std::cout << i+1 << ": ";
+            ptr->show();
             std::cout << std::endl;
         }
     }
