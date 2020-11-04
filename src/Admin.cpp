@@ -80,10 +80,10 @@ Streamer * Admin::topStreamer() const {
         catch (std::bad_cast& bc) {
             continue;
         }
-        vector<StreamData *> history = platform->archive.getStreamsById(streamer->getStreamsHistory());
+        vector<const StreamData *> history = platform->archive.getStreamsById(streamer->getStreamsHistory());
 
 
-        for (StreamData * stream : history)
+        for (const StreamData * stream : history)
             views += stream->getViewers();
 
         if (views > maxViews) {
