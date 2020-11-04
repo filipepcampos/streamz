@@ -1,6 +1,7 @@
 #include "Admin.h"
 #include "Stream.h"
 #include "Streamer.h"
+#include "Date.h"
 #include <map>
 
 Admin::Admin(const Platform * platform) : platform(platform) {
@@ -21,9 +22,14 @@ float Admin::averageViews() const {
 }
 
 unsigned int Admin::streamsCounter(const bool isPublic, const Date &lower, const Date &upper) const {
-    /* IMPLEMENTAR MAIS TARDE */
-    std::cout << "IMPLEMENTAR MAIS TARDE" << std::endl;
-    return 0;
+    unsigned int counter = 0;
+    for (std::shared_ptr<Stream> stream : platform->active_streams)
+        if (stream->getIsPublic() == isPublic && checkDateIntersection(stream->getStartDate(),Date(), lower, upper))
+            counter++;
+    for (StreamData stream : platform->archive.streams)
+        if (stream.getIsPublic() == isPublic && checkDateIntersection(stream.getStartDate(),stream.getEndDate(), lower, upper))
+            counter++;
+    return counter;
 }
 
 std::string Admin::topLanguage() const {
@@ -74,17 +80,12 @@ Streamer * Admin::topStreamer() const {
         catch (std::bad_cast& bc) {
             continue;
         }
-        vector<unsigned int> history = streamer->getStreamsHistory();
-        for (StreamData stream : platform->archive.streams) {
-            if (history.size() == 0) break;
-            for (int i = 0; i < history.size(); i++) {
-                if (history.at(i) == stream.getId()) {
-                    views += stream.getViewers();
-                    history.erase(history.begin() + i);
-                    break;
-                }
-            }
-        }
+        vector<StreamData *> history = platform->archive.getStreamsById(streamer->getStreamsHistory());
+
+
+        for (StreamData * stream : history)
+            views += stream->getViewers();
+
         if (views > maxViews) {
             maxViews = views;
             maxStreamer = streamer;

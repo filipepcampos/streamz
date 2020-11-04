@@ -32,12 +32,12 @@ public:
     unsigned int streamsCounter(const bool isPublic, const Date &lower, const Date &upper) const;
     /**
      * Searches the most created language
-     * @return the most created language
+     * @return string indicating the most created language
      */
     std::string topLanguage() const;
     /**
      * Searches the most created type of stream (public or private)
-     * @return the most created type of stream ("public", "private" or "draw")
+     * @return string indicating the most created type of stream ("public", "private" or "draw")
      */
     std::string topTypeStream() const;
     /**
