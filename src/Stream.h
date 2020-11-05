@@ -44,6 +44,14 @@ public:
      */
     void leaveStream();
     /**
+     * Gives a like to the stream
+     */
+    void giveLike();
+    /**
+     * Gives a dislike to the stream
+     */
+    void giveDislike();
+    /**
      * Ends the stream
      */
     void endStream();

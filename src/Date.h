@@ -33,7 +33,7 @@ public:
      * @param d2_final Final date for range 2
      * @return Boolean indicating if the given two date ranges overlap
      */
-    friend bool checkDateIntersection(const Date d1_inicial,const Date d1_final,const Date d2_inicial,const Date d2_final);
+    friend bool checkDateIntersection(const Date &d1_inicial,const Date &d1_final,const Date &d2_inicial,const Date &d2_final);
     /**
      * Gets year
      * @return Year of the date
@@ -63,7 +63,7 @@ public:
      * Turns date into a string
      * @return String in the format dd/mm/yyyy hh:mm
      */
-    string toString();
+    string toString() const;
     /**
      * Checks if one date comes before the other
      * @param d1 Date 1

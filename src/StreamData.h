@@ -41,11 +41,19 @@ protected:
      * Accessibility of the stream
      */
     bool isPublic;
+    /**
+     * Number of likes of the stream
+     */
+    unsigned likes;
+    /**
+     * Number of dislikes of the stream
+     */
+    unsigned dislikes;
 public:
     /**
      * Class constructor
      */
-    StreamData(const unsigned &id, const string &title, const string &streamer,const Date &start_date, const Date &end_date,  const string &language, const unsigned &viewers, const bool &isPublic);
+    StreamData(const unsigned &id, const string &title, const string &streamer,const Date &start_date, const Date &end_date,  const string &language, const unsigned &viewers, const bool &isPublic, const unsigned &likes, const unsigned &dislikes);
     /**
      * Gets the id of the stream
      * @return id of the stream
@@ -86,6 +94,16 @@ public:
      * @return boolean indicating if the stream is public
      */
     bool getIsPublic() const;
+    /**
+     * Gets number of likes of the stream
+     * @return Number of likes of the stream
+     */
+    unsigned getLikes() const;
+    /**
+     * Gets number of dislikes of the stream
+     * @return Number of dislikes of the stream
+     */
+    unsigned getDislikes() const;
     /**
      * Prints data about the stream
      * @param os Output stream where the information will be writen
