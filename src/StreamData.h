@@ -44,16 +44,16 @@ protected:
     /**
      * Number of likes of the stream
      */
-    unsigned likes;
+    unsigned likes = 0;
     /**
      * Number of dislikes of the stream
      */
-    unsigned dislikes;
+    unsigned dislikes = 0;
 public:
     /**
      * Class constructor
      */
-    StreamData(const unsigned &id, const string &title, const string &streamer,const Date &start_date, const Date &end_date,  const string &language, const unsigned &viewers, const bool &isPublic, const unsigned &likes, const unsigned &dislikes);
+    StreamData(unsigned id, const string &title, const string &streamer,const Date &start_date, const Date &end_date,  const string &language, unsigned viewers, bool isPublic, unsigned likes=0, unsigned dislikes=0);
     /**
      * Gets the id of the stream
      * @return id of the stream

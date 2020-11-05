@@ -3,7 +3,11 @@
 
 using namespace std;
 
-StreamData::StreamData(const unsigned &id, const string &title, const string &streamer,const Date &start_date, const Date &end_date,  const string &language, const unsigned &viewers, const bool &isPublic, const unsigned &likes, const unsigned &dislikes): id(id), title(title), streamer(streamer), start_date(start_date), end_date(end_date), language(language), viewers(viewers), isPublic(isPublic), likes(likes), dislikes(dislikes) {}
+StreamData::StreamData(unsigned id, const string &title, const string &streamer,const Date &start_date,
+                       const Date &end_date,  const string &language, unsigned viewers,
+                       bool isPublic, unsigned likes, unsigned dislikes) :
+                            id(id), title(title), streamer(streamer), start_date(start_date), end_date(end_date),
+                            language(language), viewers(viewers), isPublic(isPublic), likes(likes), dislikes(dislikes) {}
 
 unsigned StreamData::getId() const{
     return id;
@@ -40,7 +44,8 @@ bool StreamData::getIsPublic() const {
 std::ostream &StreamData::print(ostream &os) const {
     os << "(" << getId() << ") " << getTitle() << endl
        << "    by " << getStreamer() << endl
-       << "    " << (getIsPublic() ? "public" : "private") << " " << getLanguage() << " " << getViewers() << " " << getLikes() << " " << getDislikes()<< std::endl
+       << "    " << (getIsPublic() ? "public" : "private") << " " << getLanguage() << " " << getViewers() << " viewers "
+       << getLikes() << " likes " << " " << getDislikes() << " dislikes" << std::endl
        << "    " << getStartDate().toString();
     return os;
 }

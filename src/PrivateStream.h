@@ -35,7 +35,7 @@ public:
      * @param start_date String that represents start date of stream
      * @param comments Vector of stream comments
      */
-    PrivateStream(const string &title, const string &streamer, const string &language, const unsigned int id, const unsigned minimum_age, const unsigned max_capacity, const vector<string> &allowed_viewers, const std::string &start_date, const vector<Comment> &comments);
+    PrivateStream(const string &title, const string &streamer, const string &language, const unsigned int id, const unsigned minimum_age, const unsigned max_capacity, const vector<string> &allowed_viewers, unsigned int likes, unsigned int dislikes, const std::string &start_date, const vector<Comment> &comments);
     /**
      * Displays on the screen info about the stream
      */

@@ -69,7 +69,11 @@ private:
 
     void readUsersFromFile();
 
+    bool readUserFromFile(std::ifstream &file);
+
     void readStreamsFromFile();
+
+    bool readStreamFromFile(std::ifstream &file);
 
     void save();
 
@@ -137,7 +141,6 @@ public:
      */
     bool deleteUser(const std::string &nickname);
 
-    //TODO change to const viewer
     /**
      * Return weak_ptr to stream at position 'p' (which can be seen using showStreams)
      * @param p
@@ -147,7 +150,6 @@ public:
      */
     std::weak_ptr<Stream> joinStreamByPos(int p, const Viewer &viewer);
 
-    //TODO change to const viewer
     /**
      * Return weak_ptr to stream with id
      * @param id - unique stream id

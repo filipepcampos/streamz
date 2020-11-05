@@ -6,27 +6,34 @@
 
 Archive::Archive(const string &filename) : filename(filename) {
     std::ifstream file(filename);
-    if(file.is_open()){
+    if(file.is_open()) {
         std::string str;
-        while(std::getline(file, str)){
+        std::getline(file, str);
+        while (std::getline(file, str)) {
             char discard;
-            unsigned id, view_count;
+            unsigned id, minimum_age, max_capacity, likes, dislikes, views;
             std::string title, streamer, stream_type, language, start_date, end_date;
 
             std::stringstream ss1{str};
             ss1 >> discard >> id >> discard;
             std::getline(ss1 >> std::ws, title);
 
-            std::getline(file, str); std::stringstream ss2{str};
+            std::getline(file, str);
+            std::stringstream ss2{str};
             ss2 >> str >> streamer;
 
-            std::getline(file, str); std::stringstream ss3{str};
-            ss3 >> stream_type >> language >> view_count;
+            std::getline(file, str);
+            std::stringstream ss3{str};
+            ss3 >> stream_type >> language >> views >> str >> likes >> str >> dislikes;
 
             std::getline(file >> std::ws, str);
-            start_date = str.substr(0,16);  end_date = str.substr(19, 16);
+            start_date = str.substr(0, 16); end_date = str.substr(19, 16);
 
-            streams.emplace_back(id, title, streamer, start_date, end_date, language, view_count, stream_type == "public");
+            std::getline(file, str);
+            std::stringstream ss4{str};
+            ss4 >> str >> minimum_age;
+
+            streams.emplace_back(id, title, streamer, start_date, end_date, language, views, stream_type=="public");
         }
         file.close();
     }
@@ -60,7 +67,11 @@ void Archive::showTop() const{
     for(auto it = top_views.rbegin(); it != top_views.rend(); ++it){
         std::cout << i++ << ": "; (*it).show();
     }
-    // TODO add likes
+    std::cout << "\nTop by Likes:" << std::endl;
+    i = 1;
+    for(auto it = top_likes.rbegin(); it != top_likes.rend(); ++it){
+        std::cout << i++ << ": "; (*it).show();
+    }
 }
 
 void Archive::showStream(unsigned int id) const{
@@ -114,14 +125,14 @@ void Archive::updateTop(const StreamData &data){
         if(top_views.size() > 10)
             top_views.pop_back();
     }
-    // TODO Implement likes
-    /*
-    auto likes_it = std::lower_bound(top_archived.likes.begin(), top_archived.likes.end(), [data](StreamData &d){
-        return d.getLikes() < data;
+    auto likes_it = std::lower_bound(top_likes.begin(), top_likes.end(), data.getLikes(), [](const StreamData &d, unsigned int likes){
+        return d.getLikes() < likes;
     });
-    if(likes_it != top_archived.likes.begin()){
-        top_archived.likes.insert(likes_it, data);
-        top_archived.likes.pop_back();*/
+    if(likes_it != top_likes.begin() || top_likes.size() < 10) {
+        top_likes.insert(likes_it, data);
+        if(top_likes.size() > 10)
+            top_likes.pop_back();
+    }
 }
 
 void Archive::testMode(){

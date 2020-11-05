@@ -4,13 +4,17 @@
 using namespace std;
 
 
-Stream::Stream(const string &title, const string &streamer, const string &language, unsigned int id,const unsigned int minimum_age): StreamData(id,title,streamer,start_date,end_date,language,0,true,0,0){
-    this->minimum_age = minimum_age;
-}
+Stream::Stream(const string &title, const string &streamer, const string &language, unsigned int id,
+               const unsigned int minimum_age) :
+                        StreamData(id,title,streamer,Date(),end_date,language,0,true),
+                        minimum_age(minimum_age) {}
 
-Stream::Stream(const string &title, const string &streamer, const string &language, unsigned int id,const unsigned int minimum_age, const std::string &start_date): StreamData(id,title,streamer,Date(start_date),end_date,language,0,true,0,0){
-    this->minimum_age = minimum_age;
-}
+Stream::Stream(const string &title, const string &streamer, const string &language, unsigned int id,
+               const unsigned int minimum_age, unsigned int likes, unsigned int dislikes,
+               const std::string &start_date) :
+                        StreamData(id,title,streamer,Date(start_date),end_date,language,0,true,
+                                   likes, dislikes),
+                        minimum_age(minimum_age) {}
 
 bool Stream::canJoin(const Viewer &viewer){
     return (viewer.getAge() >= minimum_age);
@@ -42,7 +46,7 @@ ostream& operator<<(ostream& os, const Stream& stream){
 }
 
 ostream& Stream::print(ostream & os) const{
-    StreamData::print(os); os << std::endl;
+    StreamData::print(os); os << std::endl << "    minimum_age: " << getMinimumAge() << std::endl;
     return os;
 }
 

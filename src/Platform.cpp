@@ -21,40 +21,57 @@ void Platform::readStreamsFromFile() {
         file >> stream_id_count;
         std::string str;
         std::getline(file, str);
-        while(std::getline(file, str)){
-            char discard;
-            unsigned id, minimum_age, max_capacity;
-            std::string title, streamer, stream_type, language, start_date, end_date;
-
-            std::stringstream ss1{str};
-            ss1 >> discard >> id >> discard;
-            std::getline(ss1 >> std::ws, title);
-
-            std::getline(file, str); std::stringstream ss2{str};
-            ss2 >> str >> streamer;
-
-            std::getline(file, str); std::stringstream ss3{str};
-            ss3 >> stream_type >> language >> str >> minimum_age;
-
-            std::getline(file >> std::ws, str);
-            start_date = str.substr(0,16);
-
-            if(stream_type == "public"){
-                active_streams.emplace_back(new Stream(title, streamer, language, id, minimum_age, start_date));
-            }
-            else{
-                std::getline(file, str); std::stringstream ss4{str};
-                ss4 >> str >> max_capacity >> str;
-                std::vector<std::string> allowed_users;
-                while(ss4 >> str){
-                    allowed_users.push_back(str);
-                }
-                active_streams.emplace_back(new PrivateStream(title, streamer, language, id, minimum_age,
-                                                              max_capacity, allowed_users, start_date));
-            }
-        }
+        while(readStreamFromFile(file)){}
         file.close();
     }
+}
+
+bool Platform::readStreamFromFile(std::ifstream &file){
+    std::string str;
+    std::vector<std::istringstream> lines;
+    for(int i = 0; i < 5; ++i){
+        if(!std::getline(file >> std::ws, str)){
+            return false;
+        }
+        lines.emplace_back(str);
+    }
+    char discard;
+    unsigned id, minimum_age, max_capacity, likes, dislikes;
+    std::string title, streamer, stream_type, language, start_date, end_date;
+
+
+    lines[0] >> discard >> id >> discard;
+    std::getline(lines[0] >> std::ws, title);
+    lines[1] >> str >> streamer;
+    lines[2] >> stream_type >> language >> str >> str >> likes >> str >> dislikes;
+    start_date = lines[3].str().substr(0,16);
+    lines[4] >> str >>  minimum_age;
+
+
+    if(stream_type == "public"){
+        active_streams.emplace_back(new Stream(title, streamer, language, id, minimum_age,
+                                               likes, dislikes, start_date));
+    }
+    else{
+        std::getline(file, str); std::stringstream ss1{str};
+        ss1 >> str >> max_capacity >> str;
+        std::vector<std::string> allowed_users;
+        while(ss1 >> str){
+            allowed_users.push_back(str);
+        }
+
+        std::vector<Comment> comments;
+        while(!file.peek() && std::getline(file, str)){
+            std::stringstream ss{str};
+            std::string nick, date, time, comment;
+            ss >> nick >> date >> time >> discard >> comment;
+            Comment comm{nick, date+time, comment};
+        }
+        active_streams.emplace_back(new PrivateStream(title, streamer, language, id, minimum_age,
+                                                      max_capacity, allowed_users, likes, dislikes,
+                                                      start_date, comments));
+    }
+    return true;
 }
 
 void Platform::readUsersFromFile(){
@@ -138,10 +155,10 @@ void Platform::sort(sortingMode mode, sortingOrder order) {
             sortActiveStreams([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
                 return ptr1->getViewers() < ptr2->getViewers();
             }); break;
-        case likes:/* TODO: Uncomment
+        case likes:
             sortActiveStreams([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
                 return ptr1->getLikes() < ptr2->getLikes();
-            });*/ break;
+            }); break;
         case id:
             sortActiveStreams([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
                 return ptr1->getId() < ptr2->getId();
@@ -318,11 +335,9 @@ std::vector<std::weak_ptr<Stream>> Platform::getTopActiveStreams(F pred) {
 }
 
 void Platform::topActiveStreams() {
-    // TODO: Uncomment likes
-    /*
-    std::vector<std::weak_ptr<Stream>> likes = getTop([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
+    std::vector<std::weak_ptr<Stream>> likes = getTopActiveStreams([](const std::shared_ptr<Stream> &ptr1,const std::shared_ptr<Stream> &ptr2){
         return ptr1->getLikes() < ptr2->getLikes();
-    });*/
+    });
 
     std::vector<std::weak_ptr<Stream>> views = getTopActiveStreams([](const std::shared_ptr<Stream> &ptr1,const std::shared_ptr<Stream> &ptr2){
         return ptr1->getViewers() < ptr2->getViewers();
@@ -330,6 +345,15 @@ void Platform::topActiveStreams() {
     std::cout << "Top by Views" << std::endl;
     for(int i = 0; i < views.size(); ++i){
         if(auto ptr = views[i].lock()){
+            std::cout << i+1 << ": ";
+            ptr->show();
+            std::cout << std::endl;
+        }
+    }
+
+    std::cout << "\nTop by Likes" << std::endl;
+    for(int i = 0; i < likes.size(); ++i){
+        if(auto ptr = likes[i].lock()){
             std::cout << i+1 << ": ";
             ptr->show();
             std::cout << std::endl;

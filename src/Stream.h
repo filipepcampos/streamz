@@ -28,7 +28,7 @@ public:
      * @param minimum_age Minimum age to watch the stream
      * @param start_date String to start_date
      */
-    Stream(const string &title, const string &streamer, const string &language, unsigned int id, const unsigned minimum_age, const std::string &start_date);
+    Stream(const string &title, const string &streamer, const string &language, unsigned int id, const unsigned minimum_age, unsigned int likes, unsigned int dislikes, const std::string &start_date);
     /**
      * Check if viewer can join the stream
      * @param viewer Viewer who wants to join the stream

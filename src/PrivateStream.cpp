@@ -9,9 +9,10 @@ PrivateStream::PrivateStream(const string &title, const string &streamer, const 
 }
 
 PrivateStream::PrivateStream(const string &title, const string &streamer, const string &language, unsigned int id,
-                             const unsigned int minimum_age, const unsigned int max_capacity, const vector<string> allowed_viewers,
-                             const std::string &start_date, const std::vector<Comment> &comments) : 
-                                 Stream(title, streamer, language, id, minimum_age, start_date),
+                             const unsigned int minimum_age, const unsigned int max_capacity, const vector<string> &allowed_viewers,
+                             unsigned int likes, unsigned int dislikes,
+                             const std::string &start_date, const std::vector<Comment> &comments) :
+                                 Stream(title, streamer, language, id, minimum_age, likes, dislikes, start_date),
                                  max_capacity(max_capacity), allowed_viewers(allowed_viewers), comments(comments) {
     isPublic = false;
 }
@@ -32,8 +33,7 @@ ostream& PrivateStream::print(ostream & os) const{
         os << allowed_viewers.at(i) << " ";
     os << std::endl;
     for (int n = 0; n < comments.size(); n++)
-        os << comments.at(n).date.toString() << " " << comments.at(n).nickname << " " << comments.at(n).comment;
-    os << std::endl;
+        os << "      " << comments.at(n).date.toString() << " " << comments.at(n).nickname << " \"" << comments.at(n).comment << "\"" << std::endl;
     return os;
 }
 

@@ -141,9 +141,9 @@ TEST(platform, endStream){
 TEST(platform, top10){
     srand(time(nullptr));
     Platform platform;
+    platform.testMode();
     std::cout << "Should be empty:" << std::endl;
     platform.topActiveStreams();
-    platform.testMode();
     platform.registerStreamer("streamer", "StreamerName", Date("01/01/1984 00:00"));
     Streamer * streamer = dynamic_cast<Streamer *>(platform.getUser("streamer"));
 
