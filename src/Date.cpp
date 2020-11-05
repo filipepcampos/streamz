@@ -40,7 +40,7 @@ Date::Date(const string &date){
     minutes = minutos;
 }
 
-string Date::toString(){
+string Date::toString() const {
     stringstream ss;
     string dia = to_string(day);
     string mes = to_string(month);
@@ -71,7 +71,7 @@ unsigned Date::getMinutes() const {
     return minutes;
 }
 
-bool operator<(const Date &d1, const Date &d2){
+bool operator<(const Date &d1, const Date &d2) {
     if(d1.getYear() == d2.getYear()){
         if(d1.getMonth() == d2.getMonth()){
             int d1_total_minutes = d1.getDay() * 1440 + d1.getHours() * 60 + d1.getMinutes();
@@ -83,6 +83,6 @@ bool operator<(const Date &d1, const Date &d2){
     return d1.getYear() < d2.getYear();
 }
 
-bool checkDateIntersection(const Date d1_inicial,const Date d1_final,const Date d2_inicial,const Date d2_final){
+bool checkDateIntersection(const Date &d1_inicial,const Date &d1_final,const Date &d2_inicial,const Date &d2_final) {
     return (!(d2_final < d1_inicial) && !(d1_final < d2_inicial));
 }

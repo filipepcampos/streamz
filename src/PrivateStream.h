@@ -3,6 +3,11 @@
 #include "Stream.h"
 #include <vector>
 
+struct Comment{
+    Date date;
+    string nickname;
+    string comment;
+};
 
 class PrivateStream : public Stream {
 public:
@@ -16,7 +21,7 @@ public:
      * @param max_capacity Maximum capacity of the stream
      * @param allowed_viewers Viewers allowed to watch the stream
      */
-    PrivateStream(const string &title, const string &streamer, const string &language, unsigned int id, const unsigned minimum_age, const unsigned max_capacity, const vector<string> allowed_viewers);
+    PrivateStream(const string &title, const string &streamer, const string &language, const unsigned int id, const unsigned minimum_age, const unsigned max_capacity, const vector<string> &allowed_viewers, const vector<Comment> &comments);
     /**
      * Displays on the screen info about the stream
      */
@@ -33,6 +38,12 @@ public:
      * @return Stream where the information will be writen
      */
     ostream& print(ostream & os) const;
+    /**
+     * Adds a comment to the stream
+     * @param viewer Viewer leaving the comment
+     * @param comment Comment the viewer is leaving
+     */
+    void addComment(Viewer &viewer, const string &comment);
 private:
     /**
      * Maximum capacity of the stream
@@ -42,6 +53,10 @@ private:
      * Vector with the viewers allowed to watch the stream
      */
     vector<string> allowed_viewers;
+    /**
+     * Vector with all the comments
+     */
+    vector<Comment> comments;
 
 };
 

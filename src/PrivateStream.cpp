@@ -4,7 +4,7 @@
 
 using namespace std;
 
-PrivateStream::PrivateStream(const string &title, const string &streamer, const string &language, unsigned int id, const unsigned int minimum_age, const unsigned int max_capacity, const vector<string> allowed_viewers) : Stream(title, streamer, language, id, minimum_age), max_capacity(max_capacity), allowed_viewers(allowed_viewers) {
+PrivateStream::PrivateStream(const string &title, const string &streamer, const string &language, const unsigned int id, const unsigned int minimum_age, const unsigned int max_capacity, const vector<string> &allowed_viewers, const vector<Comment> &comments) : Stream(title, streamer, language, id, minimum_age), max_capacity(max_capacity), allowed_viewers(allowed_viewers), comments(comments) {
     isPublic = false;
 }
 
@@ -18,10 +18,21 @@ bool PrivateStream::canJoin(Viewer &viewer){
 }
 
 ostream& PrivateStream::print(ostream & os) const{
-    os << "stream: " << getIsPublic() << getId() << " " << getTitle() << " " << getStreamer() << " " << getStartDate().toString() << " " << getEndDate().toString() << " " << getLanguage() << " " << getViewers() << " "  << max_capacity << endl;
+    os << "stream: " << getIsPublic() << getId() << " " << getTitle() << " " << getStreamer() << " " << getStartDate().toString() << " " << getEndDate().toString() << " " << getLanguage() << " " << getViewers() << " " << getLikes() << " " << getDislikes() << " " << max_capacity << endl;
     for (int i = 0; i < allowed_viewers.size(); i++)
         os << allowed_viewers.at(i) << " ";
+    os << endl;
+    for (int n = 0; n < comments.size(); n++)
+        os << comments.at(n).date.toString() << " " << comments.at(n).nickname << " " << comments.at(n).comment;
     return os;
+}
+
+void PrivateStream::addComment(Viewer &viewer, const string &comment){
+    Comment comentario;
+    comentario.date = Date();
+    comentario.nickname = viewer.getNickname();
+    comentario.comment = comment;
+    comments.push_back(comentario);
 }
 
 void PrivateStream::show() const {
