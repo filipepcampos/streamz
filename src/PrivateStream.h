@@ -17,6 +17,20 @@ public:
      * @param allowed_viewers Viewers allowed to watch the stream
      */
     PrivateStream(const string &title, const string &streamer, const string &language, unsigned int id, const unsigned minimum_age, const unsigned max_capacity, const vector<string> allowed_viewers);
+
+    /**
+     * Class constructor
+     * @param title Title of the stream
+     * @param streamer Streamer making the stream
+     * @param language Language of the stream
+     * @param id Identification of the stream
+     * @param minimum_age Minimum age to watch the stream
+     * @param max_capacity Maximum capacity of the stream
+     * @param allowed_viewers Viewers allowed to watch the stream
+     * @param start_date string
+     */
+    PrivateStream(const string &title, const string &streamer, const string &language, unsigned int id, const unsigned minimum_age, const unsigned max_capacity, const vector<string> allowed_viewers, const std::string &start_date);
+
     /**
      * Displays on the screen info about the stream
      */

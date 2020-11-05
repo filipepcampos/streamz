@@ -23,6 +23,11 @@ protected:
      * Pointer to the associated platform
      */
     Platform * platform;
+
+    /**
+     * Weak pointer to the stream the viewer is currently watching or streamer is currently hosting
+     */
+    std::weak_ptr<Stream> current_stream;
 public:
     /**
      * Class constructor

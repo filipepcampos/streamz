@@ -7,10 +7,6 @@
 
 class Streamer : public User {
     /**
-     * Weak pointer to the stream the streamer is currently streaming
-     */
-    std::weak_ptr<Stream> current_stream;
-    /**
      * Vector containing the id's of the streams created by the user (always sorted by id)
      */
     std::vector<unsigned int> streams_history;
@@ -31,6 +27,16 @@ public:
      * @throws InvalidAge
      */
     Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform, const std::vector<unsigned int> &streams_history);
+    /**
+     * Class constructor used when loading an existing streamer from a file
+     * @param nickname Nickname of the user
+     * @param name Name of the user
+     * @param birth_date Birth date of the user
+     * @param current_stream weak_ptr to streamer's current stream
+     * @throws InvalidAge
+     */
+    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform, const std::vector<unsigned int> &streams_history, const std::weak_ptr<Stream> &current_stream);
+
     /**
      * Gets the streamer's previous streams
      * @return Vector containing the id of the streamer's previous streams

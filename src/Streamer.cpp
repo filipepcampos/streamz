@@ -14,6 +14,13 @@ Streamer::Streamer(const std::string &nickname, const std::string &name, const D
     this->streams_history = streams_history;
 }
 
+Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform, const std::vector<unsigned int> &streams_history, const std::weak_ptr<Stream> &current_stream) : User(nickname, name, birth_date, platform) {
+    if (getAge() <= MINIMUM_STREAMER_AGE)
+        throw InvalidAge(getAge());
+    this->streams_history = streams_history;
+    this->current_stream = current_stream;
+}
+
 std::vector<unsigned int> Streamer::getStreamsHistory() const {
     return streams_history;
 }
@@ -62,10 +69,10 @@ void Streamer::show() const {
 }
 
 std::ostream& Streamer::print(std::ostream & os) const {
-    os << "streamer " << getNickname() << " " << getBirthDate().toString() << " ";
-    os << (current_stream.expired() ? 0 : current_stream.lock()->getId()) << " " << getName() << std::endl;
+    os << "(streamer) "; User::print(os);
     for (unsigned int id : streams_history)
         os << id << " ";
+    os << std::endl;
     return os;
 }
 

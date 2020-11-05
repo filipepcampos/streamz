@@ -1,4 +1,5 @@
 #include "User.h"
+#include "Stream.h"
 #include <iostream>
 
 User::User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform) : nickname(nickname), name(name), birth_date(birth_date), platform(platform) {
@@ -27,6 +28,8 @@ void User::show() const {
 }
 
 std::ostream& User::print(std::ostream & os) const {
+    os << getNickname() << " " << getName() << std::endl;
+    os << "    " << (current_stream.expired() ? 0 : current_stream.lock()->getId()) << " " << getBirthDate().toString() << std::endl;
     return os;
 }
 

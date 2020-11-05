@@ -5,10 +5,6 @@
 #include <memory>
 
 class Viewer : public User {
-    /**
-     * Weak pointer to the stream the viewer is currently watching
-     */
-    std::weak_ptr<Stream> current_stream;
 public:
     /**
      * Class constructor

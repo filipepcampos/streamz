@@ -8,6 +8,14 @@ PrivateStream::PrivateStream(const string &title, const string &streamer, const 
     isPublic = false;
 }
 
+PrivateStream::PrivateStream(const string &title, const string &streamer, const string &language, unsigned int id,
+                             const unsigned int minimum_age, const unsigned int max_capacity, const vector<string> allowed_viewers,
+                             const std::string &start_date) :
+                                 Stream(title, streamer, language, id, minimum_age, start_date),
+                                 max_capacity(max_capacity), allowed_viewers(allowed_viewers) {
+    isPublic = false;
+}
+
 bool PrivateStream::canJoin(Viewer &viewer){
     string nickname = viewer.getNickname();
     if (viewers < max_capacity)
@@ -18,9 +26,11 @@ bool PrivateStream::canJoin(Viewer &viewer){
 }
 
 ostream& PrivateStream::print(ostream & os) const{
-    os << "stream: " << getIsPublic() << getId() << " " << getTitle() << " " << getStreamer() << " " << getStartDate().toString() << " " << getEndDate().toString() << " " << getLanguage() << " " << getViewers() << " "  << max_capacity << endl;
+    Stream::print(os);
+    os << "    " << "maximum_capacity: " << max_capacity << " allowed_users: ";
     for (int i = 0; i < allowed_viewers.size(); i++)
         os << allowed_viewers.at(i) << " ";
+    os << std::endl;
     return os;
 }
 

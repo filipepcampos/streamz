@@ -67,6 +67,10 @@ private:
      */
     bool userExists(const std::string &nickname) const;
 
+    void readUsersFromFile();
+
+    void readStreamsFromFile();
+
     void save();
 
 public:

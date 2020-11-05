@@ -11,22 +11,93 @@
 #include <sstream>
 
 Platform::Platform() : archive(files.archived_stream_file) {
-    std::string line;
-    std::ifstream users_file(files.user_file);
-    if(users_file.is_open()){
-        /*
-        std::getline(users_file, line);
-        while(std::getline(users_file, line)){
-            std::string nickname, name;
-            std::istringstream ss{line};
-            ss >> nickname;
-            std::getline(ss, name);
-            // TODO: Change to correct class
-            users.push_back(new Viewer(nickname, name, Date(), this));
-        }*/
-        users_file.close();
+    readStreamsFromFile();
+    readUsersFromFile();
+}
+
+void Platform::readStreamsFromFile() {
+    std::ifstream file(files.active_stream_file);
+    if(file.is_open()){
+        file >> stream_id_count;
+        std::string str;
+        std::getline(file, str);
+        while(std::getline(file, str)){
+            char discard;
+            unsigned id, minimum_age, max_capacity;
+            std::string title, streamer, stream_type, language, start_date, end_date;
+
+            std::stringstream ss1{str};
+            ss1 >> discard >> id >> discard;
+            std::getline(ss1 >> std::ws, title);
+
+            std::getline(file, str); std::stringstream ss2{str};
+            ss2 >> str >> streamer;
+
+            std::getline(file, str); std::stringstream ss3{str};
+            ss3 >> stream_type >> language >> str >> minimum_age;
+
+            std::getline(file >> std::ws, str);
+            start_date = str.substr(0,16);
+
+            if(stream_type == "public"){
+                active_streams.emplace_back(new Stream(title, streamer, language, id, minimum_age, start_date));
+            }
+            else{
+                std::getline(file, str); std::stringstream ss4{str};
+                ss4 >> str >> max_capacity >> str;
+                std::vector<std::string> allowed_users;
+                while(ss4 >> str){
+                    allowed_users.push_back(str);
+                }
+                active_streams.emplace_back(new PrivateStream(title, streamer, language, id, minimum_age,
+                                                              max_capacity, allowed_users, start_date));
+            }
+        }
+        file.close();
     }
-    // TODO: Read streams
+}
+
+void Platform::readUsersFromFile(){
+    std::ifstream file(files.user_file);
+    std::string line;
+    if(file.is_open()){
+        while(std::getline(file, line)){
+            std::string nickname, name, user_type, birth_date;
+            unsigned current_stream_id;
+            std::istringstream ss{line};
+            ss >> user_type >> nickname;
+            std::getline(ss >> std::ws, name);
+
+            std::getline(file, line);
+            std::istringstream ss1{line};
+            ss1 >> current_stream_id;
+            std::getline(ss1, birth_date);
+
+            if(user_type == "(viewer)"){
+                Viewer * viewer = new Viewer(nickname, name, birth_date, this);
+                if(current_stream_id) {
+                    viewer->joinStream(current_stream_id);
+                }
+                users.push_back(viewer);
+            }
+            else{
+                std::getline(file, line); std::istringstream ss2{line};
+                unsigned int id; vector<unsigned int> history;
+                while(ss2 >> id){
+                    history.push_back(id);
+                }
+                auto it = std::find_if(active_streams.begin(), active_streams.end(), [current_stream_id](const std::shared_ptr<Stream> &ptr){
+                    return ptr->getId() == current_stream_id;
+                });
+                if(it != active_streams.end()) {
+                    users.emplace_back(new Streamer(nickname, name, birth_date, this, history, (*it)));
+                } else{
+                    users.emplace_back(new Streamer(nickname, name, birth_date, this, history));
+                }
+            }
+        }
+        file.close();
+    }
 }
 
 Platform::~Platform() {
@@ -43,7 +114,6 @@ void Platform::save(){
     if(users_file.is_open()){
         for(const auto &user : users){
             users_file << *user;
-            users_file << std::endl;
         }
         users_file.close();
     }
@@ -52,7 +122,6 @@ void Platform::save(){
         streams_file << stream_id_count << endl;
         for(const auto &stream : active_streams){
             streams_file << *stream;
-            streams_file << std::endl;
         }
         streams_file.close();
     }
@@ -172,7 +241,7 @@ std::weak_ptr<Stream> Platform::joinStreamByPos(int p, const Viewer &viewer) {
 }
 
 std::weak_ptr<Stream> Platform::joinStreamById(unsigned int id, const Viewer &viewer) {
-    auto it = std::find_if(active_streams.begin(), active_streams.end(), [id](std::shared_ptr<Stream> ptr){
+    auto it = std::find_if(active_streams.begin(), active_streams.end(), [id](const std::shared_ptr<Stream> &ptr){
         return ptr->getId() == id;
     });
     if(it == active_streams.end()){
@@ -209,7 +278,7 @@ std::weak_ptr<Stream> Platform::startPrivateStream(const string &title, const st
 }
 
 void Platform::endStream(unsigned int id){
-    auto stream_it = std::find_if(active_streams.begin(), active_streams.end(), [id](std::shared_ptr<Stream> ptr){
+    auto stream_it = std::find_if(active_streams.begin(), active_streams.end(), [id](const std::shared_ptr<Stream> &ptr){
         return ptr->getId() == id;
     });
     if(stream_it == active_streams.end()){

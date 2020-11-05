@@ -93,6 +93,8 @@ public:
      * @return Stream where the information will be writen
      */
     friend ostream& operator<<(ostream& os, const StreamData &d);
+
+    virtual std::ostream& print(std::ostream & os) const;
     /**
      * Displays on the screen info about the stream
      */
