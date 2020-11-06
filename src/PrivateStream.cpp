@@ -46,7 +46,6 @@ void PrivateStream::addComment(Viewer &viewer, const string &comment){
 }
 
 void PrivateStream::show() const {
-    /* IMPLEMENTAR MAIS TARDE */
-    cout << "IMPLEMENTAR MAIS TARDE" << endl;
+    Stream::show();
 }
 

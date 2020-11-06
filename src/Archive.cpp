@@ -7,34 +7,7 @@
 Archive::Archive(const string &filename) : filename(filename) {
     std::ifstream file(filename);
     if(file.is_open()) {
-        std::string str;
-        std::getline(file, str);
-        while (std::getline(file, str)) {
-            char discard;
-            unsigned id, minimum_age, max_capacity, likes, dislikes, views;
-            std::string title, streamer, stream_type, language, start_date, end_date;
-
-            std::stringstream ss1{str};
-            ss1 >> discard >> id >> discard;
-            std::getline(ss1 >> std::ws, title);
-
-            std::getline(file, str);
-            std::stringstream ss2{str};
-            ss2 >> str >> streamer;
-
-            std::getline(file, str);
-            std::stringstream ss3{str};
-            ss3 >> stream_type >> language >> views >> str >> likes >> str >> dislikes;
-
-            std::getline(file >> std::ws, str);
-            start_date = str.substr(0, 16); end_date = str.substr(19, 16);
-
-            std::getline(file, str);
-            std::stringstream ss4{str};
-            ss4 >> str >> minimum_age;
-
-            streams.emplace_back(id, title, streamer, start_date, end_date, language, views, stream_type=="public");
-        }
+        while(readStreamFromFile(file));
         file.close();
     }
 }
@@ -51,17 +24,42 @@ Archive::~Archive(){
     }
 }
 
+bool Archive::readStreamFromFile(ifstream &file) {
+    std::string str;
+    std::vector<std::istringstream> lines;
+    for(int i = 0; i < 4; ++i){
+        if(!getline(file >> std::ws, str)){
+            return false;
+        }
+        lines.emplace_back(str);
+    }
+    char discard;
+    unsigned id, likes, dislikes, views;
+    std::string title, streamer, stream_type, language, start_date, end_date;
+
+    lines[0] >> discard >> id >> discard;
+    std::getline(lines[0] >> std::ws, title);
+    lines[1] >> str >> streamer;
+    lines[2] >> stream_type >> language >> views >> str >> likes >> str >> dislikes;
+    start_date = lines[3].str().substr(0, 16); end_date = lines[3].str().substr(19, 16);
+
+    streams.emplace_back(id, title, streamer, start_date, end_date, language, views, stream_type=="public");
+    return true;
+}
+
 unsigned int Archive::getStreamCount() const {
     return streams.size();
 }
 
 void Archive::show() const{
+    std::cout << "All archived streams:" << std::endl;
     for(const auto &data : streams){
         data.show();
     }
 }
 
 void Archive::showTop() const{
+    std::cout << "Archive Top 10" << std::endl;
     std::cout << "Top by Views:" << std::endl;
     int i = 1;
     for(auto it = top_views.rbegin(); it != top_views.rend(); ++it){

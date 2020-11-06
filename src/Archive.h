@@ -15,6 +15,8 @@ private:
     std::list<StreamData> top_likes;
 
     int binarySearch(unsigned int id) const;
+
+    bool readStreamFromFile(std::ifstream &file);
 public:
     explicit Archive(const string &filename = "archive.txt");
     ~Archive();

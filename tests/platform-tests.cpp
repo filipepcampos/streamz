@@ -151,8 +151,7 @@ TEST(platform, top10){
         platform.startPublicStream("title" + std::to_string(i), streamer->getName(), "pt", 10);
     }
 
-    std::cout << "===== All Active Streams =====" << std::endl;
-    platform.showStreams();
+    std::vector<std::shared_ptr<Stream>> vec = platform.testGetStreams();
 
     Viewer viewer("abc","name",Date("01/01/1984 00:00"), &platform);
     for(int i = 0; i < 1500; ++i){
@@ -160,8 +159,15 @@ TEST(platform, top10){
     }
     platform.topActiveStreams();
 
-    std::cout << "===== Make sure order hasn't changed =====" << std::endl;
-    platform.showStreams();
+    std::vector<std::shared_ptr<Stream>> new_vec = platform.testGetStreams();
+    if(new_vec.size() != vec.size()){
+        GTEST_FAIL();
+    }
+    for(int i = 0; i < vec.size(); ++i){
+        if(new_vec[i]->getId() != vec[i]->getId()){
+            GTEST_FAIL();
+        }
+    }
 }
 
 TEST(platform, sorting){
@@ -179,10 +185,28 @@ TEST(platform, sorting){
         viewer->joinStream(1 + rand() % (N_STREAMS-1));
     }
 
-    // TODO: Test sorting by likes!
-    platform.sort(views, ascending);
+    platform.sort(likes, ascending);
     std::vector<std::shared_ptr<Stream>> vec = platform.testGetStreams();
     unsigned old_val = 0;
+    for(const auto &ptr : vec){
+        if(ptr->getLikes() < old_val){
+            GTEST_FAIL();
+        }
+        old_val = ptr->getLikes();
+    }
+    platform.sort(likes, descending);
+    vec = platform.testGetStreams();
+    old_val = 999999999;
+    for(const auto &ptr : vec) {
+        if (ptr->getLikes() > old_val) {
+            GTEST_FAIL();
+        }
+        old_val = ptr->getLikes();
+    }
+
+    platform.sort(views, ascending);
+    vec = platform.testGetStreams();
+    old_val = 0;
     for(const auto &ptr : vec){
         if(ptr->getViewers() < old_val){
             GTEST_FAIL();
