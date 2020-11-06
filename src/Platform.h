@@ -16,12 +16,18 @@ class Streamer;
 class StreamData;
 class Stream;
 
+/*
+ * Sorting parameter
+ */
 enum sortingMode{
     views,
     id,
     minimum_age,
     likes
 };
+/*
+ * Sorting order
+ */
 enum sortingOrder{
     ascending,
     descending
@@ -30,33 +36,36 @@ enum sortingOrder{
 class Platform {
 private:
     friend class Admin;
-    bool test = false;
+    bool test = false;/**< If test = true the Platform is in test mode that doesn't read nor write information to files */
 
-    std::vector<User *> users;
-    /** Active streams (sorted by id) */
-    std::vector<std::shared_ptr<Stream>> active_streams;
+    std::vector<User *> users; /*Users*/
+    std::vector<std::shared_ptr<Stream>> active_streams; /*< Active streams */
 
-    unsigned int stream_id_count = 1;
+    unsigned int stream_id_count = 1; /*Track stream ids to be assigned to new streams*/
 
     struct IOFiles{
         const std::string user_file = "user.txt";
         const std::string active_stream_file = "active_streams.txt";
         const std::string archived_stream_file = "archive.txt";
     };
-    IOFiles files;
+    IOFiles files; /*< Holds file information to save data across sessions */
 
-    Archive archive;
+    Archive archive; /*< Archive containing all terminated streams */
 
     /**
-     * Get the 10 highest streams in active_streams using F function as a comparator
-     * The original vector active_streams is always restored to it's original state before returning
-     * @tparam F
-     * @param function - std::shared_ptr<Stream> comparator function
-     * @return vector<weak_ptr<Stream>>
+     * Get the 10 highest streams in active_streams using F predicate as a comparator
+     * Non-const because it relies on partial sorting of active_streams but
+     * tte original vector active_streams will be restored to it's original state before returning
+     * @param F pred - Predicate that will be used by std::max_element
+     * @return vector<weak_ptr<Stream>> containing all the top streams in descending order
      */
     template <typename F>
     std::vector<std::weak_ptr<Stream>> getTopActiveStreams(F pred);
 
+    /**
+     * Sort all active streams according to pred
+     * @param pred - predicate that will be passed to std::sort()
+     */
     template <typename F>
     void sortActiveStreams(F pred);
 
@@ -67,21 +76,44 @@ private:
      */
     bool userExists(const std::string &nickname) const;
 
+    /**
+     * Read all users from a file and place them in users vector
+     */
     void readUsersFromFile();
 
+    /**
+     * Read a single user from a file and place him in the users vector
+     * @param file - fstream to file
+     * @return true if successful
+     */
     bool readUserFromFile(std::ifstream &file);
 
+    /**
+     * Read all streams from a file and place them in active_streams vector
+     */
     void readStreamsFromFile();
 
+    /**
+     * Read a single stream from a file and place it in active_streams vector
+     * @param file - fstream to file
+     * @return true if successful
+     */
     bool readStreamFromFile(std::ifstream &file);
 
+    /**
+     * Store all information in files
+     */
     void save();
-
 public:
     Platform();
 
     ~Platform();
 
+    /**
+     * Sort active_streams according to the specified mode and order
+     * @param mode
+     * @param order
+     */
     void sort(sortingMode mode, sortingOrder order);
 
     /**
@@ -204,6 +236,10 @@ public:
      */
     void showStreams(const std::string &language_filter = "", unsigned minimum_age = 99999) const;
 
+    /**
+     * Show all streams in a user history
+     * @param ids - vector of ids of all streams to be shown
+     */
     void showStreamHistory(const std::vector<unsigned> &ids) const;
 
     /**
@@ -217,6 +253,10 @@ public:
      */
     void testMode();
 
+    /**
+     * Get a vector with all active_streams (Used for testing purposes)
+     * @return active_streams
+     */
     std::vector<std::shared_ptr<Stream>> testGetStreams();
 };
 
