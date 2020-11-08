@@ -16,6 +16,7 @@ set(SOURCE_FILES
         src/Archive.h
         src/Exceptions.h
         src/Platform.h
+        src/Menu.h
         src/Admin.cpp
         src/Date.cpp
         src/StreamData.cpp
@@ -27,7 +28,7 @@ set(SOURCE_FILES
         src/Exceptions.cpp
         src/Archive.cpp
         src/Platform.cpp
-        )
+        src/Menu.cpp)
 
 include_directories(src)
 add_subdirectory(tests)
