@@ -9,7 +9,8 @@ class Menu {
     Admin admin;
 
     template<typename T>
-    T getVar(T &var, ostream &os) const;
+    T getVar(T &var, istream &is) const;
+
     void title() const;
 
 public:
@@ -26,19 +27,21 @@ public:
      *      * Streamer
      *          * Criar Stream
      *          * Encerrar Stream
+     *          * Remover stream do historico
      *          * Apagar conta
      *      * Viewer
      *          * Juntar Stream
      *              * Like/dislike
      *              * Comentar (se privada)
      *              * Abandonar
-     *
      *          * Apagar conta
-     *
      * Admin
-     *      * ...
-     *      * ...
-     *      (btw, o admin n deveria ter tambem acesso previligiado, i.e. apagar streams, users,... (por exemplo por causa de conteudo ofensivo))
+     *      * averageViews
+     *      * streamsCounter
+     *      * topLanguage
+     *      * topTypeStream
+     *      * topStreamer
+     *      (btw, o admin n deveria ter tambem acesso previligiado, i.e. apagar streams, users,...? (por exemplo por causa de conteudo ofensivo))
      * Manual save (?) (para alem de guardar sempre ao encerrar)
      * Sair
      */
