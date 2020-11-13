@@ -47,6 +47,11 @@ public:
      */
     bool canJoin(Viewer &viewer);
     /**
+     * Gets the comments of the stream
+     * @return Comments of the stream
+     */
+    vector<Comment> getComments();
+    /**
      * Writes in the indicated ostream the information about the stream
      * @param os Output stream where the information will be writen
      * @return Stream where the information will be writen

@@ -26,6 +26,11 @@ bool PrivateStream::canJoin(Viewer &viewer){
     return false;
 }
 
+vector<Comment> PrivateStream::getComments(){
+    return comments;
+}
+
+
 ostream& PrivateStream::print(ostream & os) const{
     Stream::print(os);
     os << "    " << "maximum_capacity: " << max_capacity << " allowed_users: ";
