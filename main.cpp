@@ -1,8 +1,4 @@
-#include <iostream>
 #include "Platform.h"
-#include "PrivateStream.h"
-#include "Viewer.h"
-#include "Stream.h"
 #include "Menu.h"
 #include <stack>
 
@@ -24,6 +20,5 @@ int main(int argc, char* argv[]) {
             menus.pop();
         }
     }
-    platform.save();
     return 0;
 }

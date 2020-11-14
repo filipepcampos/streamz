@@ -132,10 +132,10 @@ bool Platform::readUserFromFile(std::ifstream &file) {
 }
 
 Platform::~Platform() {
+    save();
     for(auto ptr : users){
         delete ptr;
     }
-    save();
 }
 
 void Platform::save(){

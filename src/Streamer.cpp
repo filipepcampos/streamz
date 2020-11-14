@@ -74,6 +74,7 @@ std::ostream& Streamer::print(std::ostream & os) const {
     os << "    history: ";
     for (unsigned int id : streams_history)
         os << id << " ";
+    os << std::endl;
     return os;
 }
 
