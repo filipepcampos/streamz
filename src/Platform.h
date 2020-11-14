@@ -100,14 +100,15 @@ private:
      */
     bool readStreamFromFile(std::ifstream &file);
 
-    /**
-     * Store all information in files
-     */
-    void save();
 public:
     Platform();
 
     ~Platform();
+
+    /**
+     * Store all information in files
+     */
+    void save();
 
     /**
      * Sort active_streams according to the specified mode and order

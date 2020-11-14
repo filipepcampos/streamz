@@ -38,6 +38,9 @@ bool User::operator==(const User &other) const {
 }
 
 std::ostream& operator<<(std::ostream& os, const User& user) {
-    user.print(os);
-    return os;
+    return user.print(os);
+}
+
+bool User::inStream() const {
+    return !current_stream.expired();
 }

@@ -56,6 +56,13 @@ public:
      * @return Age of the user
      */
     unsigned getAge() const;
+
+    /**
+     * Check if user is in a stream
+     * @return true if in stream
+     */
+    bool inStream() const;
+
     /**
      * Displays on the screen the info about the user
      */

@@ -26,11 +26,17 @@ Date::Date(const Date &date){
 }
 
 Date::Date(const string &date){
-    stringstream ss;
+    istringstream ss{date};
     unsigned dia, mes, ano, horas, minutos;
     char separator;
-    ss << date;
-    ss >> dia >> separator >> mes >> separator >> ano >> horas >> separator >> minutos;
+    if(date.length() > 10){
+        ss >> dia >> separator >> mes >> separator >> ano >> horas >> separator >> minutos;
+    }
+    else{
+        ss >> dia >> separator >> mes >> separator >> ano;
+        horas = 0;
+        minutos = 0;
+    }
     ss.ignore(100, '\n');
     ss.clear();
     day = dia;

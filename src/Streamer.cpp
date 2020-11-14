@@ -69,10 +69,11 @@ void Streamer::show() const {
 }
 
 std::ostream& Streamer::print(std::ostream & os) const {
-    os << "(streamer) "; User::print(os);
+    os << "(streamer) ";
+    User::print(os);
+    os << "    history: ";
     for (unsigned int id : streams_history)
         os << id << " ";
-    os << std::endl;
     return os;
 }
 

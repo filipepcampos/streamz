@@ -2,50 +2,72 @@
 #define STREAMZ_MENU_H
 #include "Platform.h"
 #include "Admin.h"
+#include "Streamer.h"
+#include "Viewer.h"
 #include <iostream>
+#include <map>
+#include <functional>
 
-class Menu {
-    Platform platform;
-    Admin admin;
+#define CLR_SCREEN "\033[2J\033[1;1H"
 
-    template<typename T>
-    T getVar(T &var, istream &is) const;
+class Menu{
+protected:
+    Platform &platform;
 
-    void title() const;
+    template <typename T>
+    T getInput() const;
 
+    void waitEnter() const;
 public:
-    void mainMenu();
-    /*
-     * Ver informacoes
-     *      * topActiveStreams
-     *      * topArchivedStreams
-     *      * showStreams (juntamente com a contagem)
-     *      * showStreamsHistory (juntamente com a contagem)
-     *      * showUsers (juntamente com a contagem)
-     * Registar user
-     * Log in
-     *      * Streamer
-     *          * Criar Stream
-     *          * Encerrar Stream
-     *          * Remover stream do historico
-     *          * Apagar conta
-     *      * Viewer
-     *          * Juntar Stream
-     *              * Like/dislike
-     *              * Comentar (se privada)
-     *              * Abandonar
-     *          * Apagar conta
-     * Admin
-     *      * averageViews
-     *      * streamsCounter
-     *      * topLanguage
-     *      * topTypeStream
-     *      * topStreamer
-     *      (btw, o admin n deveria ter tambem acesso previligiado, i.e. apagar streams, users,...? (por exemplo por causa de conteudo ofensivo))
-     * Manual save (?) (para alem de guardar sempre ao encerrar)
-     * Sair
-     */
+    explicit Menu(Platform &platform);
+    virtual ~Menu() = default;
+    virtual void show() = 0;
+    virtual Menu * getNextMenu() = 0;
+};
 
+class MainMenu : public Menu {
+public:
+    explicit MainMenu(Platform &platform);
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class RegisterUserMenu : public Menu{
+public:
+    explicit RegisterUserMenu(Platform &platform);
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class LoginUserMenu : public Menu{
+    bool logged_in = false;
+public:
+    explicit LoginUserMenu(Platform &platform);
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class ViewerMenu : public Menu{
+    Viewer * viewer;
+public:
+    ViewerMenu(Platform &platform, Viewer * viewer);
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class StreamerMenu : public Menu{
+    Streamer * streamer;
+public:
+    StreamerMenu(Platform &platform, Streamer * streamer);
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class InformationMenu : public Menu{
+public:
+    InformationMenu(Platform &platform);
+    void show() override;
+    Menu * getNextMenu() override;
 };
 
 #endif //STREAMZ_MENU_H

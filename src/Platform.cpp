@@ -115,6 +115,7 @@ bool Platform::readUserFromFile(std::ifstream &file) {
         }
         lines.emplace_back(str);
         unsigned int id; vector<unsigned int> history;
+        lines[2] >> str; // Remove 'history: '
         while(lines[2] >> id){
             history.push_back(id);
         }
@@ -131,15 +132,16 @@ bool Platform::readUserFromFile(std::ifstream &file) {
 }
 
 Platform::~Platform() {
-    if(!test){
-        save();
-    }
     for(auto ptr : users){
         delete ptr;
     }
+    save();
 }
 
 void Platform::save(){
+    if(test){
+        return;
+    }
     std::ofstream users_file(files.user_file, std::ofstream::trunc);
     if(users_file.is_open()){
         for(const auto &user : users){
