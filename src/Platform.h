@@ -175,6 +175,13 @@ public:
     bool deleteUser(const std::string &nickname);
 
     /**
+     * Delete a stream from the Platform
+     * @param id
+     * @return true if deleted with success
+     */
+    bool deleteStream(unsigned int id);
+
+    /**
      * Return weak_ptr to stream at position 'p' (which can be seen using showStreams)
      * @param p
      * @param viewer

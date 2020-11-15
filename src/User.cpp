@@ -44,3 +44,7 @@ std::ostream& operator<<(std::ostream& os, const User& user) {
 bool User::inStream() const {
     return !current_stream.expired();
 }
+
+bool User::inPrivateStream() const {
+    return inStream() && !current_stream.lock()->getIsPublic();
+}

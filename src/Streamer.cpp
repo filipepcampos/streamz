@@ -1,5 +1,6 @@
 #include "Streamer.h"
 #include "Exceptions.h"
+#include "PrivateStream.h"
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
@@ -67,6 +68,24 @@ void Streamer::removeStream(const unsigned int id) {
 void Streamer::show() const {
     std::cout << std::left << std::setw(10) << "Streamer";
     User::show();
+}
+
+void Streamer::showStreamInfo() const {
+    if(auto ptr = current_stream.lock()){
+        std::cout << (ptr->getIsPublic() ? "Public" : "Private") << " stream" << std::endl;
+        std::cout << "Title: \"" << ptr->getTitle() << "\"" << std::endl;
+        std::cout << "Id: " << ptr->getId() << std::endl;
+        std::cout << "Views: " << ptr->getViewers() << std::endl;
+        std::cout << "Likes: " << ptr->getLikes() << std::endl;
+        std::cout << "Dislikes: " << ptr->getDislikes() << std::endl;
+        std::shared_ptr<PrivateStream> private_stream = std::dynamic_pointer_cast<std::shared_ptr<PrivateStream>::element_type>(ptr);
+        if(private_stream){
+            for(const auto &comment : private_stream->getComments()){
+                std::cout << "  (" << comment.date.toString() << ")  "
+                        << comment.nickname << " \"" << comment.comment << "\"" << std::endl;
+            }
+        }
+    }
 }
 
 std::ostream& Streamer::print(std::ostream & os) const {

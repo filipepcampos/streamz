@@ -13,7 +13,7 @@ float Admin::averageViews() const {
         totalStreams++;
         totalViews += stream->getViewers();
     }
-    for (StreamData stream : platform.archive.streams) {
+    for (const StreamData& stream : platform.archive.streams) {
         totalStreams++;
         totalViews += stream.getViewers();
     }
@@ -23,10 +23,10 @@ float Admin::averageViews() const {
 
 unsigned int Admin::streamsCounter(const bool isPublic, const Date &lower, const Date &upper) const {
     unsigned int counter = 0;
-    for (std::shared_ptr<Stream> stream : platform.active_streams)
+    for (const std::shared_ptr<Stream>& stream : platform.active_streams)
         if (stream->getIsPublic() == isPublic && checkDateIntersection(stream->getStartDate(),Date(), lower, upper))
             counter++;
-    for (StreamData stream : platform.archive.streams)
+    for (const StreamData& stream : platform.archive.streams)
         if (stream.getIsPublic() == isPublic && checkDateIntersection(stream.getStartDate(),stream.getEndDate(), lower, upper))
             counter++;
     return counter;
@@ -34,16 +34,16 @@ unsigned int Admin::streamsCounter(const bool isPublic, const Date &lower, const
 
 std::string Admin::topLanguage() const {
     map<string, unsigned int> languages;
-    for (std::shared_ptr<Stream> stream : platform.active_streams) {
+    for (const std::shared_ptr<Stream>& stream : platform.active_streams) {
         languages[stream->getLanguage()]++;
     }
-    for (StreamData stream : platform.archive.streams) {
+    for (const StreamData& stream : platform.archive.streams) {
         languages[stream.getLanguage()]++;
     }
 
     unsigned maxCounter = 0;
     string maxLanguage = "There are no streams"; // In case no stream is processed
-    map<string, unsigned int>::iterator it = languages.begin();
+    auto it = languages.begin();
     while (it != languages.end()) {
         if (it->second > maxCounter) {
             maxLanguage = it->first;
@@ -56,10 +56,10 @@ std::string Admin::topLanguage() const {
 
 std::string Admin::topTypeStream() const {
     unsigned int totalPublic = 0, totalPrivate = 0;
-    for (std::shared_ptr<Stream> stream : platform.active_streams) {
+    for (const std::shared_ptr<Stream>& stream : platform.active_streams) {
         stream->getIsPublic() ? totalPublic++ : totalPrivate++;
     }
-    for (StreamData stream : platform.archive.streams) {
+    for (const StreamData& stream : platform.archive.streams) {
         stream.getIsPublic() ? totalPublic++ : totalPrivate++;
     }
     if (totalPublic == totalPrivate) return "draw";

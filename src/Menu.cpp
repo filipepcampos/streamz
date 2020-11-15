@@ -19,7 +19,7 @@ bool Menu::getInput(T &var) const {
     }
     return true;
 }
-std::string Menu::getRawInput() const{
+std::string Menu::getRawInput() {
     std::string str;
     std::cout << "> ";
     std::getline(std::cin, str);
@@ -27,7 +27,7 @@ std::string Menu::getRawInput() const{
     return str;
 }
 
-void Menu::waitEnter() const {
+void Menu::waitEnter() {
     std::cout << std::endl << "Press enter to continue..." << std::endl;
     std::string str;
     std::getline(std::cin, str);
@@ -175,6 +175,9 @@ void ViewerMenu::show() {
         std::cout << "[" << option++ << "] Leave Stream" << std::endl;
         std::cout << "[" << option++ << "] Like" << std::endl;
         std::cout << "[" << option++ << "] Dislike" << std::endl;
+        if(viewer->inPrivateStream()){
+            std::cout << "[" << option++ << "] Comment" << std::endl;
+        }
     }
     else{
         std::cout << "[" << option++ << "] Join Stream" << std::endl;
@@ -192,7 +195,17 @@ Menu * ViewerMenu::getNextMenu() {
             case 1: viewer->leaveStream(); return this;
             case 2: std::cout << "Under development...\n"; return this;
             case 3: std::cout << "Under development...\n"; return this;
-            case 4: platform.deleteUser(viewer->getNickname()); return nullptr;
+        }
+        if(viewer->inPrivateStream()){
+            switch(option){
+                case 4: return new SubmitCommentMenu(platform, viewer);
+                case 5: platform.deleteUser(viewer->getNickname()); return nullptr;
+            }
+        }
+        else{
+            switch(option){
+                case 5: platform.deleteUser(viewer->getNickname()); return nullptr;
+            }
         }
     }
     else{
@@ -213,6 +226,7 @@ void StreamerMenu::show() {
     std::cout << "[" << option++ << "] Information" << std::endl;
     if(streamer->inStream()){
         std::cout << "[" << option++ << "] End Stream" << std::endl;
+        std::cout << "[" << option++ << "] View stream info" << std::endl;
     }
     else{
         std::cout << "[" << option++ << "] Start stream" << std::endl;
@@ -223,18 +237,21 @@ void StreamerMenu::show() {
 
 Menu * StreamerMenu::getNextMenu() {
     unsigned int option; getInput(option);
-    switch (option) {
-        case 1: return new InformationMenu(platform);
-        case 3: platform.deleteUser(streamer->getNickname()); return nullptr;
+    switch(option){
         case 0: return nullptr;
+        case 1: return new InformationMenu(platform);
     }
-    if(option == 2){
-        if(streamer->inStream()){
-            streamer->endStream();
-            return this;
+    if(streamer->inStream()){
+        switch(option){
+            case 2: streamer->endStream(); return this;
+            case 3: std::cout << CLR_SCREEN; streamer->showStreamInfo(); waitEnter(); return this;
+            case 4: platform.deleteUser(streamer->getNickname()); return nullptr;
         }
-        else{
-            return new CreateStreamMenu(platform, streamer);
+    }
+    else{
+        switch(option){
+            case 2: return new CreateStreamMenu(platform, streamer);
+            case 3: platform.deleteUser(streamer->getNickname()); return nullptr;
         }
     }
     return invalidOption();
@@ -404,7 +421,7 @@ Menu * CreateStreamMenu::getNextMenu() {
 
             vector<string> allowed;
             std::string user;
-            std::cout << "Allowed users (Write all users you wish to allow into the stream, press enter with no username to complete" << std::endl;
+            std::cout << "Allowed users (Write all users you wish to allow into the stream, submit blank username to complete)" << std::endl;
 
             while(true){
                 if(!getInput(user)){
@@ -442,4 +459,21 @@ Menu * JoinStreamMenu::getNextMenu() {
         waitEnter();
         return nullptr;
     }
+}
+
+// ----------- Submit Comment Menu ------------
+
+SubmitCommentMenu::SubmitCommentMenu(Platform &platform, Viewer *viewer) : Menu(platform), viewer(viewer){}
+void SubmitCommentMenu::show() {
+    std::cout << CLR_SCREEN << "Comment: ";
+}
+Menu * SubmitCommentMenu::getNextMenu() {
+    std::string comment = getRawInput();
+    if(comment.empty()){
+        return nullptr;
+    }
+    viewer->comment(comment);
+    std::cout << "Comment submitted" << std::endl;
+    waitEnter();
+    return nullptr;
 }

@@ -75,6 +75,12 @@ public:
      * Displays on the screen the info about the user
      */
     void show() const;
+
+    /**
+     * Show current stream stats, if in stream
+     */
+    void showStreamInfo() const;
+
     /**
      * Writes in the indicated ostream the information about the user
      * @param os Stream where the information will be writen

@@ -64,6 +64,12 @@ public:
     bool inStream() const;
 
     /**
+     * Check if user is in a public stream
+     * @return true if in public stream
+     */
+    bool inPrivateStream() const;
+
+    /**
      * Displays on the screen the info about the user
      */
     virtual void show() const;

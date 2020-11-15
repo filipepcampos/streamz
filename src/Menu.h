@@ -17,9 +17,9 @@ protected:
     template <typename T>
     bool getInput(T &var) const;
 
-    std::string getRawInput() const;
+    static std::string getRawInput() ;
 
-    void waitEnter() const;
+    static void waitEnter() ;
 
     Menu * invalidOption();
 public:
@@ -110,6 +110,14 @@ class JoinStreamMenu : public Menu{
     Viewer * viewer;
 public:
     JoinStreamMenu(Platform &platform, Viewer * viewer);
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class SubmitCommentMenu : public Menu{
+    Viewer * viewer;
+public:
+    SubmitCommentMenu(Platform &platform, Viewer * viewer);
     void show() override;
     Menu * getNextMenu() override;
 };

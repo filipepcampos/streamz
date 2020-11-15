@@ -388,9 +388,24 @@ bool Platform::deleteUser(const std::string &nickname) {
     if(it == users.end()){
         return false;
     }
+    Streamer * streamer = dynamic_cast<Streamer*> ((*it));
+    if(streamer && streamer->inStream()){
+        streamer->endStream();
+    }
     delete (*it);
     users.erase(it);
     return true;
+}
+
+bool Platform::deleteStream(unsigned int id) {
+    auto it = std::find_if(active_streams.begin(), active_streams.end(), [id](const std::shared_ptr<Stream> &ptr){
+        return ptr->getId() == id;
+    });
+    if(it != active_streams.end()){
+        active_streams.erase(it);
+        return true;
+    }
+    return false;
 }
 
 void Platform::testMode() {

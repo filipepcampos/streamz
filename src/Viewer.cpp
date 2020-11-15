@@ -1,4 +1,5 @@
 #include "Viewer.h"
+#include "PrivateStream.h"
 #include <iostream>
 #include <iomanip>
 
@@ -35,4 +36,13 @@ std::ostream& Viewer::print(std::ostream & os) const {
 
 bool Viewer::operator==(const Viewer &other) const {
     return this->getNickname() == other.getNickname();
+}
+
+void Viewer::comment(const string &str) {
+    if(auto ptr = current_stream.lock()){
+        std::shared_ptr<PrivateStream> private_stream = std::dynamic_pointer_cast<std::shared_ptr<PrivateStream>::element_type>(ptr);
+        if(private_stream){
+            private_stream->addComment(*this, str);
+        }
+    }
 }

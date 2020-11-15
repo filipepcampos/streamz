@@ -26,7 +26,7 @@ bool PrivateStream::canJoin(Viewer &viewer){
     return false;
 }
 
-vector<Comment> PrivateStream::getComments(){
+vector<Comment> & PrivateStream::getComments(){
     return comments;
 }
 

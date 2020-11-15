@@ -29,6 +29,11 @@ public:
      */
     void leaveStream();
     /**
+     * Leave a comment in the current stream (if viewer is not in private stream nothing will happen)
+     * @param str - Comment content
+     */
+    void comment(const std::string &str);
+    /**
      * Displays on the screen the info about the user
      */
     void show() const;
