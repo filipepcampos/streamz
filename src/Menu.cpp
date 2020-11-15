@@ -109,6 +109,9 @@ Menu * RegisterUserMenu::getNextMenu() {
         catch(const UserAlreadyExists &e){
             std::cout << "Username already exists" << std::endl;
         }
+        catch(const InvalidAge &e){
+            std::cout << "Viewer minimum age must be " << MINIMUM_VIEWER_AGE << std::endl;
+        }
     }
     else if(type == "streamer"){
         try{
@@ -117,6 +120,9 @@ Menu * RegisterUserMenu::getNextMenu() {
         }
         catch(const UserAlreadyExists &e){
             std::cout << "Username already exists" << std::endl;
+        }
+        catch(const InvalidAge &e){
+            std::cout << "Streamer minimum age must be " << MINIMUM_STREAMER_AGE << std::endl;
         }
     }
     waitEnter();

@@ -1,6 +1,7 @@
 #include "Streamer.h"
 #include "Exceptions.h"
 #include <iostream>
+#include <iomanip>
 #include <algorithm>
 
 Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform) : User(nickname, name, birth_date, platform) {
@@ -64,8 +65,8 @@ void Streamer::removeStream(const unsigned int id) {
 }
 
 void Streamer::show() const {
-    /* IMPLEMENTAR MAIS TARDE */
-    std::cout << "IMPLEMENTAR MAIS TARDE" << std::endl;
+    std::cout << std::left << std::setw(10) << "Streamer";
+    User::show();
 }
 
 std::ostream& Streamer::print(std::ostream & os) const {

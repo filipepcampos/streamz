@@ -1,6 +1,7 @@
 #include "User.h"
 #include "Stream.h"
 #include <iostream>
+#include <iomanip>
 
 User::User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform) : nickname(nickname), name(name), birth_date(birth_date), platform(platform) {
 }
@@ -23,8 +24,7 @@ unsigned User::getAge() const {
 }
 
 void User::show() const {
-    /* IMPLEMENTAR MAIS TARDE */
-    std::cout << "IMPLEMENTAR MAIS TARDE" << std::endl;
+    std::cout << std::setw(10) << nickname << std::setw(20) << name << std::endl;
 }
 
 std::ostream& User::print(std::ostream & os) const {
