@@ -15,9 +15,13 @@ protected:
     Platform &platform;
 
     template <typename T>
-    T getInput() const;
+    bool getInput(T &var) const;
+
+    std::string getRawInput() const;
 
     void waitEnter() const;
+
+    Menu * invalidOption();
 public:
     explicit Menu(Platform &platform);
     virtual ~Menu() = default;
@@ -66,6 +70,30 @@ public:
 class InformationMenu : public Menu{
 public:
     InformationMenu(Platform &platform);
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class SortMenu : public Menu {
+bool stage2 = false;
+public:
+    SortMenu(Platform &platform);
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class CreateStreamMenu : public Menu{
+    Streamer * streamer;
+public:
+    CreateStreamMenu(Platform &platform, Streamer * streamer);
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class JoinStreamMenu : public Menu{
+    Viewer * viewer;
+public:
+    JoinStreamMenu(Platform &platform, Viewer * viewer);
     void show() override;
     Menu * getNextMenu() override;
 };
