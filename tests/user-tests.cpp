@@ -9,11 +9,11 @@ using testing::Eq;
 TEST(user, getMethods) {
     Platform platform;
     platform.testMode();
-    Streamer st("streamer","st name", Date("22/06/2001 00:00"), &platform);
+    Streamer st("streamer","st name", Date("22/06/2001 00:00"), platform);
     EXPECT_EQ("streamer", st.getNickname());
     EXPECT_EQ("st name", st.getName());
 
-    Viewer vw("viewer","vw name", Date("22/06/2001 00:00"), &platform);
+    Viewer vw("viewer","vw name", Date("22/06/2001 00:00"), platform);
     EXPECT_EQ("viewer", vw.getNickname());
     EXPECT_EQ("vw name", vw.getName());
 }
@@ -21,9 +21,9 @@ TEST(user, getMethods) {
 TEST(user, userEquality) {
     Platform platform;
     platform.testMode();
-    Streamer st1("MikeG", "Miguel", Date("22/06/2001 00:00"), &platform);
-    Streamer st2("Streamer1", "Streamer Name", Date("22/06/2001 00:00"), &platform);
-    Viewer vw1("Viewer1", "Viewer Name", Date("22/06/2001 00:00"), &platform);
+    Streamer st1("MikeG", "Miguel", Date("22/06/2001 00:00"), platform);
+    Streamer st2("Streamer1", "Streamer Name", Date("22/06/2001 00:00"), platform);
+    Viewer vw1("Viewer1", "Viewer Name", Date("22/06/2001 00:00"), platform);
     std::vector<User *> users;
     users.push_back(&st1);
     users.push_back(&st2);

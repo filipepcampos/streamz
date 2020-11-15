@@ -153,7 +153,7 @@ TEST(platform, top10){
 
     std::vector<std::shared_ptr<Stream>> vec = platform.testGetStreams();
 
-    Viewer viewer("abc","name",Date("01/01/1984 00:00"), &platform);
+    Viewer viewer("abc","name",Date("01/01/1984 00:00"), platform);
     for(int i = 0; i < 1500; ++i){
         platform.joinStreamByPos(rand() % platform.getActiveStreamCount()+1, viewer);
     }

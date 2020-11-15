@@ -8,7 +8,7 @@ using testing::Eq;
 TEST(admin, adminTests) {
     Platform pl;
     pl.testMode();
-    Admin ad(&pl);
+    Admin ad(pl);
     Date d1;
     pl.registerStreamer("st1", "st1", Date("22/06/2001 00:00"));
     pl.registerStreamer("st2", "st2", Date("22/06/2001 00:00"));
