@@ -63,6 +63,22 @@ public:
     Menu * getNextMenu() override;
 };
 
+class AdministratorMenu : public Menu{
+    Admin * admin;
+public:
+    AdministratorMenu(Platform &platform, Admin * admin);
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class FilterStreamsMenu : public Menu{
+    Admin * admin;
+public:
+    FilterStreamsMenu(Platform &platform, Admin * admin);
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
 class InformationMenu : public Menu{
 public:
     InformationMenu(Platform &platform);

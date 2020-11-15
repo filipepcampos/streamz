@@ -42,7 +42,7 @@ std::string Admin::topLanguage() const {
     }
 
     unsigned maxCounter = 0;
-    string maxLanguage;
+    string maxLanguage = "There are no streams"; // In case no stream is processed
     map<string, unsigned int>::iterator it = languages.begin();
     while (it != languages.end()) {
         if (it->second > maxCounter) {
