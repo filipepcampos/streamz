@@ -18,7 +18,7 @@ public:
      * @param birth_date Birth date of the user
      * @throws InvalidAge
      */
-    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform);
+    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform);
     /**
      * Class constructor used when loading an existing streamer from a file
      * @param nickname Nickname of the user
@@ -26,7 +26,7 @@ public:
      * @param birth_date Birth date of the user
      * @throws InvalidAge
      */
-    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform, const std::vector<unsigned int> &streams_history);
+    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<unsigned int> &streams_history);
     /**
      * Class constructor used when loading an existing streamer from a file
      * @param nickname Nickname of the user
@@ -35,7 +35,7 @@ public:
      * @param current_stream weak_ptr to streamer's current stream
      * @throws InvalidAge
      */
-    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform, const std::vector<unsigned int> &streams_history, const std::weak_ptr<Stream> &current_stream);
+    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<unsigned int> &streams_history, const std::weak_ptr<Stream> &current_stream);
 
     /**
      * Gets the streamer's previous streams

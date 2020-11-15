@@ -68,17 +68,17 @@ public:
 };
 
 class AdministratorMenu : public Menu{
-    Admin * admin;
+    Admin admin;
 public:
-    AdministratorMenu(Platform &platform, Admin * admin);
+    AdministratorMenu(Platform &platform);
     void show() override;
     Menu * getNextMenu() override;
 };
 
 class FilterStreamsMenu : public Menu{
-    Admin * admin;
+    Admin & admin;
 public:
-    FilterStreamsMenu(Platform &platform, Admin * admin);
+    FilterStreamsMenu(Platform &platform, Admin & admin);
     void show() override;
     Menu * getNextMenu() override;
 };
@@ -91,7 +91,7 @@ public:
 };
 
 class SortMenu : public Menu {
-bool stage2 = false;
+    bool stage2 = false;
 public:
     SortMenu(Platform &platform);
     void show() override;

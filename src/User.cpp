@@ -2,7 +2,7 @@
 #include "Stream.h"
 #include <iostream>
 
-User::User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform) : nickname(nickname), name(name), birth_date(birth_date), platform(platform) {
+User::User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform) : nickname(nickname), name(name), birth_date(birth_date), platform(platform) {
 }
 
 std::string User::getNickname() const {

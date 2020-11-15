@@ -70,11 +70,11 @@ Menu * MainMenu::getNextMenu() {
         case 0: return nullptr;
         case 1: return new LoginUserMenu(platform);
         case 2: return new RegisterUserMenu(platform);
-        case 3: {Admin admin(&platform); return new AdministratorMenu(platform, &admin);}
+        case 3: return new AdministratorMenu(platform);
         case 4: return new InformationMenu(platform);
         case 5: platform.save(); return this;
     }
-    return nullptr;
+    return invalidOption();
 }
 
 // --------------- Register User Menu ---------------
@@ -236,7 +236,7 @@ Menu * StreamerMenu::getNextMenu() {
 
 // --------------- Administrator Menu ---------------
 
-AdministratorMenu::AdministratorMenu(Platform &platform, Admin * admin) : Menu(platform), admin(admin) {}
+AdministratorMenu::AdministratorMenu(Platform &platform) : Menu(platform), admin(platform) {}
 void AdministratorMenu::show() {
     unsigned int option = 1;
     std::cout << CLR_SCREEN;
@@ -249,17 +249,26 @@ void AdministratorMenu::show() {
 Menu * AdministratorMenu::getNextMenu() {
     int option; getInput<int>(option);
     switch(option){
-        case 1: std::cout << "Average views per stream: " << admin->averageViews() << std::endl; waitEnter(); return this;
+        case 1: std::cout << "Average views per stream: " << admin.averageViews() << std::endl; waitEnter(); return this;
         case 2: return new FilterStreamsMenu(platform, admin);
-        case 3: std::cout << "Most used language in streams: " << admin->topLanguage() << std::endl; waitEnter(); return this;
-        case 4: std::cout << "Most used stream type in streams: " << admin->topTypeStream() << std::endl; waitEnter(); return this;
-        case 5: std::cout << "Streamer with most views: "; admin->topStreamer()->show(); std::cout << std::endl; waitEnter(); return this;
+        case 3: std::cout << "Most used language in streams: " << admin.topLanguage() << std::endl; waitEnter(); return this;
+        case 4: std::cout << "Most used stream type in streams: " << admin.topTypeStream() << std::endl; waitEnter(); return this;
+        case 5:
+            std::cout << "Streamer with most views: ";
+            Streamer * strm = admin.topStreamer();
+            if(strm){
+                strm->show();
+            }
+            else{
+                std::cout << "No streamer registered";
+            }
+            std::cout << std::endl; waitEnter(); return this;
     }
     return nullptr;
 }
 
 // --------------- Filter Streams Menu ---------------
-FilterStreamsMenu::FilterStreamsMenu(Platform &platform, Admin * admin) : Menu(platform), admin(admin) {}
+FilterStreamsMenu::FilterStreamsMenu(Platform &platform, Admin & admin) : Menu(platform), admin(admin) {}
 void FilterStreamsMenu::show() {
     std::cout << "Information required: streams type (public or private) and lower and upper time interval limit\n";
 }
@@ -276,7 +285,7 @@ Menu * FilterStreamsMenu::getNextMenu() {
     std::cout << "Upper date\n "; getInput<std::string>(upper_date);
     /* MAIS TARDE VERIFICAR DATAS INVALIDAS */
     std::cout << "Number of " << type << " streams between " << lower_date << " and " << upper_date << ": ";
-    std::cout << admin->streamsCounter(type == "public", Date(lower_date), Date(upper_date)) << std::endl;
+    std::cout << admin.streamsCounter(type == "public", Date(lower_date), Date(upper_date)) << std::endl;
     waitEnter();
     return nullptr;
 }

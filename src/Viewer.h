@@ -13,7 +13,7 @@ public:
      * @param birth_date Birth date of the user
      * @throws InvalidAge
      */
-    Viewer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform *platform);
+    Viewer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform &platform);
     /**
      * Gets the weak pointer to the stream the viewer is currently watching
      * @return Weak pointer to the stream the viewer is currently watching

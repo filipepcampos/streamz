@@ -103,7 +103,7 @@ bool Platform::readUserFromFile(std::ifstream &file) {
     std::getline(lines[1], birth_date);
 
     if(user_type == "(viewer)"){
-        Viewer * viewer = new Viewer(nickname, name, birth_date, this);
+        Viewer * viewer = new Viewer(nickname, name, birth_date, *this);
         if(current_stream_id) {
             viewer->joinStream(current_stream_id);
         }
@@ -123,9 +123,9 @@ bool Platform::readUserFromFile(std::ifstream &file) {
             return ptr->getId() == current_stream_id;
         });
         if(it != active_streams.end()) {
-            users.emplace_back(new Streamer(nickname, name, birth_date, this, history, (*it)));
+            users.emplace_back(new Streamer(nickname, name, birth_date, *this, history, (*it)));
         } else{
-            users.emplace_back(new Streamer(nickname, name, birth_date, this, history));
+            users.emplace_back(new Streamer(nickname, name, birth_date, *this, history));
         }
     }
     return true;
@@ -199,7 +199,7 @@ bool Platform::registerStreamer(const std::string &nickname, const std::string &
     if(userExists(nickname)){
         throw UserAlreadyExists(nickname);
     }
-    users.push_back(new Streamer(nickname, name, birth_date, this));
+    users.push_back(new Streamer(nickname, name, birth_date, *this));
     return true;
 }
 
@@ -207,7 +207,7 @@ bool Platform::registerViewer(const std::string &nickname, const std::string &na
     if(userExists(nickname)){
         throw UserAlreadyExists(nickname);
     }
-    users.push_back(new Viewer(nickname, name, birth_date, this));
+    users.push_back(new Viewer(nickname, name, birth_date, *this));
     return true;
 }
 

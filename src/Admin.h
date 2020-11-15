@@ -10,13 +10,13 @@ class Admin {
     /**
      * Pointer to the associated platform
      */
-    const Platform * platform;
+    const Platform & platform;
 public:
     /**
      * Class constructor
      * @param platform Pointer to the platform that will be monitored
      */
-    Admin(const Platform * platform);
+    Admin(const Platform & platform);
     /**
      * Calculates the average views per stream
      * @return average views per stream

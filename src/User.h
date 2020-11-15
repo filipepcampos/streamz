@@ -22,7 +22,7 @@ protected:
     /**
      * Pointer to the associated platform
      */
-    Platform * platform;
+    Platform & platform;
 
     /**
      * Weak pointer to the stream the viewer is currently watching or streamer is currently hosting
@@ -35,7 +35,7 @@ public:
      * @param name Name of the user
      * @param birth_date Birth date of the user
      */
-    User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform * platform);
+    User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform);
     /**
      * Gets the nickname of the user
      * @return String containing the nickname of the user
