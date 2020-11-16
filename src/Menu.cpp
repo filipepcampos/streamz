@@ -167,7 +167,9 @@ void ViewerMenu::show() {
     std::cout << "[0] Exit" << std::endl;
 }
 Menu * ViewerMenu::getNextMenu() {
-    int option; input::get(option);
+    int option;
+    if(!input::get(option))
+        return invalidOption();
     if(option == 0){
         return nullptr;
     }
@@ -217,7 +219,9 @@ void StreamerMenu::show() {
 }
 
 Menu * StreamerMenu::getNextMenu() {
-    unsigned int option; input::get(option);
+    unsigned int option;
+    if(!input::get(option))
+        return invalidOption();
     switch(option){
         case 0: return nullptr;
         case 1: return new InformationMenu(platform);
@@ -251,8 +255,11 @@ void AdministratorMenu::show() {
 }
 
 Menu * AdministratorMenu::getNextMenu() {
-    int option; input::get(option);
+    int option;
+    if(!input::get(option))
+        return invalidOption();
     switch(option){
+        case 0: return nullptr;
         case 1: std::cout << "Average views per stream: " << admin.averageViews() << std::endl; waitEnter(); return this;
         case 2: return new FilterStreamsMenu(platform, admin);
         case 3: std::cout << "Most used language in streams: " << admin.topLanguage() << std::endl; waitEnter(); return this;
@@ -268,7 +275,7 @@ Menu * AdministratorMenu::getNextMenu() {
             }
             std::cout << std::endl; waitEnter(); return this;
     }
-    return nullptr;
+    return invalidOption();
 }
 
 // --------------- Filter Streams Menu ---------------
@@ -279,14 +286,13 @@ void FilterStreamsMenu::show() {
 Menu * FilterStreamsMenu::getNextMenu() {
     std::string type, lower_date, upper_date;
 
-    std::cout << "Stream type\n "; input::get(type);
-    while (type != "public" && type != "private") {
-        std::cout << "Invalid type\n";
-        input::get(type);
-    }
+    std::cout << "Stream type\n "; type = input::getRaw();
+    if (type != "public" && type != "private")
+        return invalidOption();
     /* MAIS TARDE VERIFICAR DATAS INVALIDAS */
-    std::cout << "Lower date\n "; input::get(lower_date);
-    std::cout << "Upper date\n "; input::get(upper_date);
+    input::getRaw();
+    std::cout << "Lower date\n ";lower_date = input::getRaw();
+    std::cout << "Upper date\n ";upper_date = input::getRaw();
     /* MAIS TARDE VERIFICAR DATAS INVALIDAS */
     std::cout << "Number of " << type << " streams between " << lower_date << " and " << upper_date << ": ";
     std::cout << admin.streamsCounter(type == "public", Date(lower_date), Date(upper_date)) << std::endl;
@@ -308,21 +314,24 @@ void InformationMenu::show() {
     std::cout << std::endl << "[0] Exit" << std::endl;
 }
 Menu * InformationMenu::getNextMenu() {
-    unsigned int option; input::get(option);
-    std::string language;
-    unsigned int minimum_age = 9999;
+    unsigned int option;
+    if(!input::get(option))
+        return invalidOption();
+    
     switch(option){
         case 0: return nullptr;
         case 1: platform.topActiveStreams(); waitEnter(); return this;
         case 2: platform.topArchivedStreams(); waitEnter(); return this;
         case 3: platform.showStreams(); waitEnter(); return this;
         case 4: std::cout << "language: ";
+            std::string language;
             if(!input::get(language)){
                 return invalidOption();
             }
             std::transform(language.begin(), language.end(), language.begin(), ::toupper);
             platform.showStreams(language); waitEnter(); return this;
         case 5: std::cout << "minimum_age: ";
+            unsigned int minimum_age;
             if(!input::get(minimum_age)){
                 return invalidOption();
             }
@@ -357,7 +366,9 @@ void SortMenu::show() {
 }
 Menu * SortMenu::getNextMenu() {
     static sortingMode mode;
-    int option; input::get(option);
+    int option;
+    if(!input::get(option))
+        return invalidOption();
     if(!stage2){
         switch(option){
             case 0: return nullptr;
