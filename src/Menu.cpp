@@ -1,6 +1,7 @@
 #include "Menu.h"
 #include "Input.h"
 #include <sstream>
+#include <algorithm>
 
 Menu::Menu(Platform &platform) : platform(platform) {}
 
@@ -299,21 +300,36 @@ InformationMenu::InformationMenu(Platform &platform) : Menu(platform) {}
 void InformationMenu::show() {
     unsigned int option = 1;
     std::cout << CLR_SCREEN;
-    for(const auto &str : {"Show top active streams", "Show Top archived streams", "Show all active streams", "Show all archived streams", "Show users", "Sort active streams"}){
+    for(const auto &str : {"Show top active streams", "Show Top archived streams", "Show all active streams",
+                           "Search active streams by language", "Search active streams by minimum age",
+                           "Show all archived streams", "Show users", "Sort active streams"}){
         std::cout << "[" << option++ << "] " << str << std::endl;
     }
     std::cout << std::endl << "[0] Exit" << std::endl;
 }
 Menu * InformationMenu::getNextMenu() {
     unsigned int option; input::get(option);
+    std::string language;
+    unsigned int minimum_age = 9999;
     switch(option){
         case 0: return nullptr;
         case 1: platform.topActiveStreams(); waitEnter(); return this;
         case 2: platform.topArchivedStreams(); waitEnter(); return this;
         case 3: platform.showStreams(); waitEnter(); return this;
-        case 4: platform.showArchive(); waitEnter(); return this;
-        case 5: platform.showUsers(); waitEnter(); return this;
-        case 6: return new SortMenu(platform);
+        case 4: std::cout << "language: ";
+            if(!input::get(language)){
+                return invalidOption();
+            }
+            std::transform(language.begin(), language.end(), language.begin(), ::toupper);
+            platform.showStreams(language); waitEnter(); return this;
+        case 5: std::cout << "minimum_age: ";
+            if(!input::get(minimum_age)){
+                return invalidOption();
+            }
+            platform.showStreams("", minimum_age); waitEnter(); return this;
+        case 6: platform.showArchive(); waitEnter(); return this;
+        case 7: platform.showUsers(); waitEnter(); return this;
+        case 8: return new SortMenu(platform);
     }
     return invalidOption();
 }
@@ -385,11 +401,7 @@ Menu * CreateStreamMenu::getNextMenu() {
         if(!input::get(language)){
             return invalidOption();
         }
-        for(auto &c : language){
-            if(std::isupper(c)){
-                c = std::tolower(c);
-            }
-        }
+        std::transform(language.begin(), language.end(), language.begin(), ::toupper);
         std::cout << "Minimum age" << std::endl;
         unsigned int minimum_age;
         if(!input::get(minimum_age) || minimum_age > 125){
