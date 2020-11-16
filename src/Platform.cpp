@@ -165,26 +165,24 @@ void Platform::sortActiveStreams(F pred) {
 }
 
 void Platform::sort(sortingMode mode, sortingOrder order) {
+    bool asc = (order == ascending);
     switch(mode){
         case views:
-            sortActiveStreams([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
-                return ptr1->getViewers() < ptr2->getViewers();
+            sortActiveStreams([asc](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
+                return asc ? ptr1->getViewers() < ptr2->getViewers() : ptr1->getViewers() > ptr2->getViewers();
             }); break;
         case likes:
-            sortActiveStreams([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
-                return ptr1->getLikes() < ptr2->getLikes();
+            sortActiveStreams([asc](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
+                return asc ? ptr1->getLikes() < ptr2->getLikes() : ptr1->getLikes() > ptr2->getLikes();
             }); break;
         case id:
-            sortActiveStreams([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
-                return ptr1->getId() < ptr2->getId();
+            sortActiveStreams([asc](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
+                return asc ? ptr1->getId() < ptr2->getId() : ptr1->getId() > ptr2->getId();
             }); break;
         case minimum_age:
-            sortActiveStreams([](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
-                return ptr1->getMinimumAge() < ptr2->getMinimumAge();
+            sortActiveStreams([asc](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
+                return asc ? ptr1->getMinimumAge() < ptr2->getMinimumAge() : ptr1->getMinimumAge() > ptr2->getMinimumAge();
             }); break;
-    }
-    if(order == descending){
-        std::reverse(active_streams.begin(), active_streams.end());
     }
 }
 
@@ -260,15 +258,16 @@ User *Platform::getUser(const std::string &nickname) {
     return (*it);
 }
 
-std::weak_ptr<Stream> Platform::joinStreamByPos(int p, const Viewer &viewer) {
-    p--;
-    if(p < 0 || p >= active_streams.size()){
-        throw std::out_of_range("Invalid index for active_streams");
+std::weak_ptr<Stream> Platform::joinStreamByStreamer(const std::string &streamer, const Viewer &viewer) {
+    auto it = find_if(active_streams.begin(), active_streams.end(), [streamer](const std::shared_ptr<Stream> &ptr){
+        return ptr->getStreamer() == streamer;
+    });
+    if(it == active_streams.end()){
+        throw StreamerNotStreaming(streamer);
     }
-
-    if(active_streams[p]->canJoin(viewer)){
-        active_streams[p]->joinStream();
-        std::weak_ptr<Stream> ptr = active_streams[p];
+    if((*it)->canJoin(viewer)){
+        (*it)->joinStream();
+        std::weak_ptr<Stream> ptr = (*it);
         return ptr;
     }
     return std::weak_ptr<Stream>();
@@ -421,4 +420,8 @@ void Platform::testMode() {
 
 std::vector<std::shared_ptr<Stream>> Platform::testGetStreams() {
     return active_streams;
+}
+
+void Platform::showArchive() {
+    archive.show();
 }

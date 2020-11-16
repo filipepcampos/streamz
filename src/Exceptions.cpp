@@ -34,3 +34,8 @@ InvalidAction::InvalidAction(const std::string &message) : message(message) {}
 std::string InvalidAction::getMessage() const {
     return message;
 }
+
+StreamerNotStreaming::StreamerNotStreaming(const std::string &nickname) : streamer(nickname){}
+std::string StreamerNotStreaming::getName() const {
+    return streamer;
+}

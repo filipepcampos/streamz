@@ -21,9 +21,14 @@ public:
     std::weak_ptr<Stream> getCurrentStream() const;
     /**
      * Joins the stream given as an argument
-     * @param stream Shared pointer to the stream the viewer will join
+     * @param id - id of stream
      */
-    void joinStream(const unsigned int id);
+    void joinStream(unsigned int id);
+    /**
+     * Join stream hosted by specified streamer
+     * @param streamer - nickname of the streamer
+     */
+     void joinStream(const std::string &streamer);
     /**
      * Leaves the stream that is currently being watched
      */

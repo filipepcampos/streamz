@@ -43,11 +43,11 @@ ostream& PrivateStream::print(ostream & os) const{
 }
 
 void PrivateStream::addComment(Viewer &viewer, const string &comment){
-    Comment comentario;
-    comentario.date = Date();
-    comentario.nickname = viewer.getNickname();
-    comentario.comment = comment;
-    comments.push_back(comentario);
+    Comment c;
+    c.date = Date();
+    c.nickname = viewer.getNickname();
+    c.comment = comment;
+    comments.push_back(c);
 }
 
 void PrivateStream::show() const {

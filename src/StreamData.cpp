@@ -47,6 +47,9 @@ std::ostream &StreamData::print(ostream &os) const {
        << "    " << (getIsPublic() ? "public" : "private") << " " << getLanguage() << " " << getViewers() << " viewers "
        << getLikes() << " likes " << " " << getDislikes() << " dislikes" << std::endl
        << "    " << getStartDate().toString();
+    if(isOver()){
+        os << " - " << getEndDate().toString() << endl;
+    }
     return os;
 }
 
@@ -59,10 +62,14 @@ unsigned StreamData::getDislikes() const {
 }
 
 ostream& operator<<(ostream& os, const StreamData &d) {
-    return d.print(os) << " - " << d.getEndDate().toString() << endl;
+    return d.print(os);
 }
 
 void StreamData::show() const {
     /* IMPLEMENTAR MAIS TARDE */
     cout << "IMPLEMENTAR MAIS TARDE" << endl;
+}
+
+bool StreamData::isOver() const{
+    return over;
 }

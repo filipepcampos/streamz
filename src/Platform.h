@@ -182,13 +182,13 @@ public:
     bool deleteStream(unsigned int id);
 
     /**
-     * Return weak_ptr to stream at position 'p' (which can be seen using showStreams)
-     * @param p
+     * Return weak_ptr to stream hosted by streamer
+     * @param streamer - nickname of the streamer
      * @param viewer
-     * @throws std::out_of_range
+     * @throws StreamDoesNotExist
      * @return
      */
-    std::weak_ptr<Stream> joinStreamByPos(int p, const Viewer &viewer);
+    std::weak_ptr<Stream> joinStreamByStreamer(const std::string &streamer, const Viewer &viewer);
 
     /**
      * Return weak_ptr to stream with id
@@ -243,6 +243,11 @@ public:
      * Show all streams active in the platform
      */
     void showStreams(const std::string &language_filter = "", unsigned minimum_age = 99999) const;
+
+    /**
+     * Show all streams in archive
+     */
+    void showArchive();
 
     /**
      * Show all streams in a user history

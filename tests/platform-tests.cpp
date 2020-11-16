@@ -108,19 +108,17 @@ TEST(platform, joinStream){
     platform.testMode();
     platform.registerViewer("viewer", "Name", Date("01/01/1984 00:00"));
     Viewer * viewer = dynamic_cast<Viewer *>(platform.getUser("viewer"));
-    EXPECT_THROW(platform.joinStreamByPos(-9, *viewer), std::out_of_range);
-    EXPECT_THROW(platform.joinStreamByPos(0, *viewer), std::out_of_range);
-    EXPECT_THROW(platform.joinStreamByPos(2, *viewer), std::out_of_range);
+    EXPECT_THROW(platform.joinStreamByStreamer("abc", *viewer), StreamerNotStreaming);
     EXPECT_THROW(platform.joinStreamById(9999, *viewer), StreamDoesNotExist);
     EXPECT_THROW(platform.joinStreamById(0, *viewer), StreamDoesNotExist);
     platform.startPublicStream("title", "nickname", "PT", 5);
-    EXPECT_NO_THROW(platform.joinStreamByPos(1,*viewer));
+    EXPECT_NO_THROW(platform.joinStreamByStreamer("nickname",*viewer));
     viewer->leaveStream();
     EXPECT_NO_THROW(platform.joinStreamById(1, *viewer));
     viewer->leaveStream();
     platform.endStream(1);
     EXPECT_THROW(platform.joinStreamById(1, *viewer), StreamNoLongerActive);
-    EXPECT_THROW(platform.joinStreamByPos(1, *viewer), std::out_of_range);
+    EXPECT_THROW(platform.joinStreamByStreamer("nickname", *viewer), StreamerNotStreaming);
 }
 
 TEST(platform, endStream){
@@ -155,7 +153,7 @@ TEST(platform, top10){
 
     Viewer viewer("abc","name",Date("01/01/1984 00:00"), platform);
     for(int i = 0; i < 1500; ++i){
-        platform.joinStreamByPos(rand() % platform.getActiveStreamCount()+1, viewer);
+        platform.joinStreamById(1 + rand() % platform.getActiveStreamCount(), viewer);
     }
     platform.topActiveStreams();
 

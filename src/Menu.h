@@ -14,11 +14,6 @@ class Menu{
 protected:
     Platform &platform;
 
-    template <typename T>
-    bool getInput(T &var) const;
-
-    static std::string getRawInput() ;
-
     static void waitEnter() ;
 
     Menu * invalidOption();

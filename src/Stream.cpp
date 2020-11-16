@@ -46,12 +46,14 @@ ostream& operator<<(ostream& os, const Stream& stream){
 }
 
 ostream& Stream::print(ostream & os) const{
-    StreamData::print(os); os << std::endl << "    minimum_age: " << getMinimumAge() << std::endl;
+    StreamData::print(os);
+    os << std::endl << "    minimum_age: " << getMinimumAge() << std::endl;
     return os;
 }
 
 void Stream::endStream(){
     end_date = Date();
+    over = true;
 }
 
 unsigned Stream::getMinimumAge() const {

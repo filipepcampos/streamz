@@ -4,6 +4,14 @@
 #include <iomanip>
 
 User::User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform) : nickname(nickname), name(name), birth_date(birth_date), platform(platform) {
+    char last = ' ';
+    // Capitalize first letter of the name
+    for(auto &c : this->name){
+        if(last == ' ' && std::islower(c)){
+            c = std::toupper(c);
+        }
+        last = c;
+    }
 }
 
 std::string User::getNickname() const {

@@ -49,6 +49,10 @@ protected:
      * Number of dislikes of the stream
      */
     unsigned dislikes = 0;
+    /**
+     * Keep track if stream is over or not
+     */
+    bool over = true;
 public:
     /**
      * Class constructor
@@ -104,6 +108,11 @@ public:
      * @return Number of dislikes of the stream
      */
     unsigned getDislikes() const;
+    /**
+     * Return true if stream has already ended
+     * @return
+     */
+    bool isOver() const;
     /**
      * Prints data about the stream
      * @param os Output stream where the information will be writen

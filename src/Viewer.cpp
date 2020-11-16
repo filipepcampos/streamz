@@ -12,11 +12,18 @@ std::weak_ptr<Stream> Viewer::getCurrentStream() const {
     return current_stream;
 }
 
-void Viewer::joinStream(const unsigned int id) {
+void Viewer::joinStream(unsigned int id) {
     if (!current_stream.expired())
         leaveStream();
     current_stream = platform.joinStreamById(id, *this);
 }
+void Viewer::joinStream(const string &streamer) {
+    if(!current_stream.expired()){
+        leaveStream();
+    }
+    current_stream = platform.joinStreamByStreamer(streamer, *this);
+}
+
 
 void Viewer::leaveStream() {
     if (!current_stream.expired())

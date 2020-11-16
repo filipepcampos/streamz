@@ -1,31 +1,8 @@
 #include "Menu.h"
+#include "Input.h"
 #include <sstream>
 
 Menu::Menu(Platform &platform) : platform(platform) {}
-
-template <typename T>
-bool Menu::getInput(T &var) const {
-    std::string str;
-    std::cout << "> ";
-    std::getline(std::cin, str);
-    if(str.empty()){
-        return false;
-    }
-    std::cout << std::endl;
-    std::istringstream ss{str};
-    ss >> var;
-    if(ss.fail() || !ss.eof()){
-        return false;
-    }
-    return true;
-}
-std::string Menu::getRawInput() {
-    std::string str;
-    std::cout << "> ";
-    std::getline(std::cin, str);
-    std::cout << std::endl;
-    return str;
-}
 
 void Menu::waitEnter() {
     std::cout << std::endl << "Press enter to continue..." << std::endl;
@@ -65,7 +42,10 @@ void MainMenu::show() {
     cout << "[0] Exit\n";
 }
 Menu * MainMenu::getNextMenu() {
-    int option; getInput<int>(option);
+    int option;
+    if(!input::get(option)){
+        return invalidOption();
+    }
     switch(option){
         case 0: return nullptr;
         case 1: return new LoginUserMenu(platform);
@@ -86,19 +66,19 @@ void RegisterUserMenu::show() {
 Menu * RegisterUserMenu::getNextMenu() {
     std::string username, birth_date, name, type;
     std::cout << "username\n ";
-    if(!getInput<string>(username)){
+    if(!input::get(username) || !input::validateNickname(username)){
         return invalidOption();
     }
-    std::cout << "name\n "; name = getRawInput();
-    if(name.empty()){
+    std::cout << "name\n "; name = input::getRaw();
+    if(!input::validateName(name)){
         return invalidOption();
     }
     std::cout << "birth date\n ";
-    if(!getInput(birth_date)){
+    if(!input::get(birth_date) || !input::validateBirthDate(birth_date)){
         return invalidOption();
     }
     std::cout << "type of user (viewer or streamer)\n ";
-    if(!getInput(type)){
+    if(!input::get(type)){
         return invalidOption();
     }
     if(type == "viewer"){
@@ -134,13 +114,13 @@ LoginUserMenu::LoginUserMenu(Platform &platform) : Menu(platform) {}
 void LoginUserMenu::show() {
     if(!logged_in){
         std::cout << CLR_SCREEN;
-        std::cout << "Username: ";
+        std::cout << "Username: " << std::endl;
     }
 }
 Menu * LoginUserMenu::getNextMenu() {
     if(!logged_in){
         std::string username;
-        if(!getInput(username)){
+        if(!input::get(username)){
             return invalidOption();
         }
         try{
@@ -186,7 +166,7 @@ void ViewerMenu::show() {
     std::cout << "[0] Exit" << std::endl;
 }
 Menu * ViewerMenu::getNextMenu() {
-    int option; getInput(option);
+    int option; input::get(option);
     if(option == 0){
         return nullptr;
     }
@@ -236,7 +216,7 @@ void StreamerMenu::show() {
 }
 
 Menu * StreamerMenu::getNextMenu() {
-    unsigned int option; getInput(option);
+    unsigned int option; input::get(option);
     switch(option){
         case 0: return nullptr;
         case 1: return new InformationMenu(platform);
@@ -270,7 +250,7 @@ void AdministratorMenu::show() {
 }
 
 Menu * AdministratorMenu::getNextMenu() {
-    int option; getInput<int>(option);
+    int option; input::get(option);
     switch(option){
         case 1: std::cout << "Average views per stream: " << admin.averageViews() << std::endl; waitEnter(); return this;
         case 2: return new FilterStreamsMenu(platform, admin);
@@ -280,7 +260,7 @@ Menu * AdministratorMenu::getNextMenu() {
             std::cout << "Streamer with most views: ";
             Streamer * strm = admin.topStreamer();
             if(strm){
-                strm->show();
+                std::cout << strm->getNickname();
             }
             else{
                 std::cout << "No streamer registered";
@@ -298,14 +278,14 @@ void FilterStreamsMenu::show() {
 Menu * FilterStreamsMenu::getNextMenu() {
     std::string type, lower_date, upper_date;
 
-    std::cout << "Stream type\n "; getInput<std::string>(type);
+    std::cout << "Stream type\n "; input::get(type);
     while (type != "public" && type != "private") {
         std::cout << "Invalid type\n";
-        getInput<std::string>(type);
+        input::get(type);
     }
     /* MAIS TARDE VERIFICAR DATAS INVALIDAS */
-    std::cout << "Lower date\n "; getInput<std::string>(lower_date);
-    std::cout << "Upper date\n "; getInput<std::string>(upper_date);
+    std::cout << "Lower date\n "; input::get(lower_date);
+    std::cout << "Upper date\n "; input::get(upper_date);
     /* MAIS TARDE VERIFICAR DATAS INVALIDAS */
     std::cout << "Number of " << type << " streams between " << lower_date << " and " << upper_date << ": ";
     std::cout << admin.streamsCounter(type == "public", Date(lower_date), Date(upper_date)) << std::endl;
@@ -319,20 +299,21 @@ InformationMenu::InformationMenu(Platform &platform) : Menu(platform) {}
 void InformationMenu::show() {
     unsigned int option = 1;
     std::cout << CLR_SCREEN;
-    for(const auto &str : {"Show top active streams", "Show Top archived streams", "Show all active streams", "Show users", "Sort active streams"}){
+    for(const auto &str : {"Show top active streams", "Show Top archived streams", "Show all active streams", "Show all archived streams", "Show users", "Sort active streams"}){
         std::cout << "[" << option++ << "] " << str << std::endl;
     }
     std::cout << std::endl << "[0] Exit" << std::endl;
 }
 Menu * InformationMenu::getNextMenu() {
-    unsigned int option; getInput(option);
+    unsigned int option; input::get(option);
     switch(option){
         case 0: return nullptr;
         case 1: platform.topActiveStreams(); waitEnter(); return this;
         case 2: platform.topArchivedStreams(); waitEnter(); return this;
         case 3: platform.showStreams(); waitEnter(); return this;
-        case 4: platform.showUsers(); waitEnter(); return this;
-        case 5: return new SortMenu(platform);
+        case 4: platform.showArchive(); waitEnter(); return this;
+        case 5: platform.showUsers(); waitEnter(); return this;
+        case 6: return new SortMenu(platform);
     }
     return invalidOption();
 }
@@ -360,7 +341,7 @@ void SortMenu::show() {
 }
 Menu * SortMenu::getNextMenu() {
     static sortingMode mode;
-    int option; getInput(option);
+    int option; input::get(option);
     if(!stage2){
         switch(option){
             case 0: return nullptr;
@@ -390,23 +371,28 @@ void CreateStreamMenu::show() {
 Menu * CreateStreamMenu::getNextMenu() {
     std::cout << "Stream type ('public' or 'private')" << std::endl;
     std::string type;
-    if(!getInput(type)){
+    if(!input::get(type)){
         return invalidOption();
     }
     if(type == "public" || type == "private"){
         std::cout << "Stream title" << std::endl;
-        std::string title = getRawInput();
+        std::string title = input::getRaw();
         if(title.empty()){
             return invalidOption();
         }
         std::cout << "Language" << std::endl;
         std::string language;
-        if(!getInput(language)){
+        if(!input::get(language)){
             return invalidOption();
+        }
+        for(auto &c : language){
+            if(std::isupper(c)){
+                c = std::tolower(c);
+            }
         }
         std::cout << "Minimum age" << std::endl;
         unsigned int minimum_age;
-        if(!getInput(minimum_age)){
+        if(!input::get(minimum_age) || minimum_age > 125){
             return invalidOption();
         }
         if(type == "public"){
@@ -415,7 +401,7 @@ Menu * CreateStreamMenu::getNextMenu() {
         else{
             std::cout << "Maximum capacity" << std::endl;
             unsigned int max_capacity;
-            if(!getInput(max_capacity)){
+            if(!input::get(max_capacity)){
                 return invalidOption();
             }
 
@@ -424,7 +410,7 @@ Menu * CreateStreamMenu::getNextMenu() {
             std::cout << "Allowed users (Write all users you wish to allow into the stream, submit blank username to complete)" << std::endl;
 
             while(true){
-                if(!getInput(user)){
+                if(!input::get(user)){
                     break;
                 }
                 allowed.push_back(user);
@@ -441,24 +427,37 @@ Menu * CreateStreamMenu::getNextMenu() {
 // ------------- Join Stream Menu -----------------
 JoinStreamMenu::JoinStreamMenu(Platform &platform, Viewer *viewer) : Menu(platform), viewer(viewer) {}
 void JoinStreamMenu::show() {
-    std::cout << CLR_SCREEN << "Join stream" << std::endl << "Stream id:" << std::endl;
+    std::cout << CLR_SCREEN << "Join stream" << std::endl << "Stream id or streamer name:" << std::endl;
 }
 Menu * JoinStreamMenu::getNextMenu() {
-    unsigned int id; getInput(id);
-    try{
-        viewer->joinStream(id);
+    std::string str = input::getRaw();
+    if(str.empty()){
         return nullptr;
     }
-    catch(const StreamDoesNotExist &e){
-        std::cout << "Stream with id " << id << " does not exist" << std::endl;
-        waitEnter();
-        return nullptr;
+    unsigned int id;
+    if(input::strToVar(str, id)){ // Interpret string as an id
+        try{
+            viewer->joinStream(id);
+        }
+        catch(const StreamDoesNotExist &e){
+            std::cout << "Stream with id " << id << " does not exist" << std::endl;
+            waitEnter();
+        }
+        catch(const StreamNoLongerActive &e){
+            std::cout << "Stream with id " << id << " already ended" << std::endl;
+            waitEnter();
+        }
     }
-    catch(const StreamNoLongerActive &e){
-        std::cout << "Stream with id " << id << " already ended" << std::endl;
-        waitEnter();
-        return nullptr;
+    else { // Interpret string as an username
+        try {
+            viewer->joinStream(str);
+        }
+        catch (const StreamerNotStreaming &e) {
+            std::cout << "Streamer '" << e.getName() << "' isn't currently streaming" << std::endl;
+            waitEnter();
+        }
     }
+    return nullptr;
 }
 
 // ----------- Submit Comment Menu ------------
@@ -468,7 +467,7 @@ void SubmitCommentMenu::show() {
     std::cout << CLR_SCREEN << "Comment: ";
 }
 Menu * SubmitCommentMenu::getNextMenu() {
-    std::string comment = getRawInput();
+    std::string comment = input::getRaw();
     if(comment.empty()){
         return nullptr;
     }

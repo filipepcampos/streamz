@@ -80,6 +80,7 @@ void Streamer::showStreamInfo() const {
         std::cout << "Dislikes: " << ptr->getDislikes() << std::endl;
         std::shared_ptr<PrivateStream> private_stream = std::dynamic_pointer_cast<std::shared_ptr<PrivateStream>::element_type>(ptr);
         if(private_stream){
+            std::cout << "Comments: " << std::endl;
             for(const auto &comment : private_stream->getComments()){
                 std::cout << "  (" << comment.date.toString() << ")  "
                         << comment.nickname << " \"" << comment.comment << "\"" << std::endl;

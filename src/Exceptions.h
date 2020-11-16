@@ -109,6 +109,13 @@ class StreamDoesNotExist : public std::exception {
     unsigned int getId() const;
 };
 
+class StreamerNotStreaming : public std::exception {
+    std::string streamer;
+public:
+    StreamerNotStreaming(const std::string &nickname);
+    std::string getName() const;
+};
+
 class InvalidAction : public std::exception {
     std::string message;
 public:

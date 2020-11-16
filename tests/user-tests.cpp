@@ -11,11 +11,20 @@ TEST(user, getMethods) {
     platform.testMode();
     Streamer st("streamer","st name", Date("22/06/2001 00:00"), platform);
     EXPECT_EQ("streamer", st.getNickname());
-    EXPECT_EQ("st name", st.getName());
+    EXPECT_EQ("St Name", st.getName());
 
     Viewer vw("viewer","vw name", Date("22/06/2001 00:00"), platform);
     EXPECT_EQ("viewer", vw.getNickname());
-    EXPECT_EQ("vw name", vw.getName());
+    EXPECT_EQ("Vw Name", vw.getName());
+}
+
+TEST(user, capitalizeName){
+    Platform platform;
+    platform.testMode();
+    Viewer vw("abc", "first second third", Date("22/06/2001 00:00"), platform);
+    EXPECT_EQ(vw.getName(), "First Second Third");
+    Streamer st("abc", "First Second Third", Date("22/06/2001 00:00"), platform);
+    EXPECT_EQ(st.getName(), "First Second Third");
 }
 
 TEST(user, userEquality) {
