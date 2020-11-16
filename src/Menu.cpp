@@ -323,13 +323,13 @@ Menu * InformationMenu::getNextMenu() {
         case 1: platform.topActiveStreams(); waitEnter(); return this;
         case 2: platform.topArchivedStreams(); waitEnter(); return this;
         case 3: platform.showStreams(); waitEnter(); return this;
-        case 4: std::cout << "language: ";
+        case 4:{std::cout << "language: ";
             std::string language;
             if(!input::get(language)){
                 return invalidOption();
             }
             std::transform(language.begin(), language.end(), language.begin(), ::toupper);
-            platform.showStreams(language); waitEnter(); return this;
+            platform.showStreams(language); waitEnter(); return this;}
         case 5: std::cout << "minimum_age: ";
             unsigned int minimum_age;
             if(!input::get(minimum_age)){
