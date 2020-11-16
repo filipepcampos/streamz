@@ -39,3 +39,9 @@ StreamerNotStreaming::StreamerNotStreaming(const std::string &nickname) : stream
 std::string StreamerNotStreaming::getName() const {
     return streamer;
 }
+
+InvalidDate::InvalidDate(const std::string &date) : date(date) {}
+std::string InvalidDate::getDate() const {
+    return date;
+}
+
