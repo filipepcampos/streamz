@@ -1,5 +1,6 @@
 #include "Stream.h"
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -37,8 +38,7 @@ void Stream::giveDislike() {
 }
 
 void Stream::show() const {
-    /* IMPLEMENTAR MAIS TARDE */
-    cout << "IMPLEMENTAR MAIS TARDE" << endl;
+    std::cout << std::setw(10) << getStreamer() << std::setw(9) << getIsPublic() << std::setw(7) << getId() << std::setw(20) << getTitle() << std::setw(4) << getLanguage() << std::setw(7) << getViewers() << std::endl;
 }
 
 ostream& operator<<(ostream& os, const Stream& stream){
