@@ -1,5 +1,6 @@
 #include "User.h"
 #include "Stream.h"
+#include "Input.h"
 #include <iostream>
 #include <iomanip>
 
@@ -32,7 +33,7 @@ unsigned User::getAge() const {
 }
 
 void User::show() const {
-    std::cout << std::setw(10) << nickname << std::setw(20) << name << std::endl;
+    std::cout << std::setw(MAX_NICKNAME_LENGHT) << nickname << std::setw(MAX_NAME_LENGHT) << name << std::endl;
 }
 
 std::ostream& User::print(std::ostream & os) const {
