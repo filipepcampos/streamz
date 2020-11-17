@@ -1,6 +1,7 @@
 #ifndef STREAMZ_DATE_H
 #define STREAMZ_DATE_H
 #include <string>
+#include "Exceptions.h"
 
 using namespace std;
 

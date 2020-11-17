@@ -4,6 +4,10 @@
 #include <iostream>
 #include <sstream>
 
+#define MAX_NAME_LENGHT 20
+#define MAX_NICKNAME_LENGHT 10
+#define MAX_TITLE_LENGHT 20
+
 namespace input{
     std::string getRaw();
     void trimString(std::string &str);
@@ -29,6 +33,7 @@ namespace input{
     bool validateNickname(const std::string &nickname);
     bool validateName(const std::string &name);
     bool validateBirthDate(const std::string &date);
+    bool validateTitle(const std::string &title);
 }
 
 

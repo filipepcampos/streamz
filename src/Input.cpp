@@ -37,8 +37,8 @@ namespace input{
             std::cout << "Nickname can't be empty" << std::endl;
             return false;
         }
-        if(nickname.length() > 20){
-            std::cout << "Nickname can't exceed 20 characters " << std::endl;
+        if(nickname.length() > MAX_NICKNAME_LENGHT){
+            std::cout << "Nickname can't exceed " << MAX_NICKNAME_LENGHT << " characters " << std::endl;
             return false;
         }
         bool has_alpha;
@@ -59,6 +59,10 @@ namespace input{
             std::cout << "Name can't be empty" << std::endl;
             return false;
         }
+        if(name.length() > MAX_NAME_LENGHT){
+            std::cout << "Name can't exceed " << MAX_NAME_LENGHT << " characters " << std::endl;
+            return false;
+        }
         for(auto c : name){
             if(!isalpha(c) && c != ' '){
                 std::cout << "Name can only contain alphabetic characters and spaces" << std::endl;
@@ -71,6 +75,24 @@ namespace input{
     bool validateBirthDate(const std::string &date){
         if(!(Date(date) < Date())){ // Users from the future are not allowed
             return false;
+        }
+        return true;
+    }
+
+    bool validateTitle(const std::string &title) {
+        if(title.empty()){
+            std::cout << "Title can't be empty" << std::endl;
+            return false;
+        }
+        if(title.length() > MAX_TITLE_LENGHT){
+            std::cout << "Title can't exceed " << MAX_TITLE_LENGHT << " characters " << std::endl;
+            return false;
+        }
+        for(auto c : title){
+            if(!isalpha(c) && c != ' '){
+                std::cout << "Title can only contain alphabetic characters and spaces" << std::endl;
+                return false;
+            }
         }
         return true;
     }

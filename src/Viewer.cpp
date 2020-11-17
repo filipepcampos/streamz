@@ -32,7 +32,7 @@ void Viewer::leaveStream() {
 }
 
 void Viewer::show() const {
-    std::cout << std::left << std::setw(10) << "Viewer";
+    std::cout << std::setw(10) << "Viewer";
     User::show();
 }
 

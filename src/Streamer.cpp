@@ -66,7 +66,7 @@ void Streamer::removeStream(const unsigned int id) {
 }
 
 void Streamer::show() const {
-    std::cout << std::left << std::setw(10) << "Streamer";
+    std::cout << std::setw(10) << "Streamer";
     User::show();
 }
 
