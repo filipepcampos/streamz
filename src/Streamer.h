@@ -6,10 +6,6 @@
 #include <memory>
 
 class Streamer : public User {
-    /**
-     * Vector containing the id's of the streams created by the user (always sorted by id)
-     */
-    std::vector<unsigned int> streams_history;
 public:
     /**
      * Class constructor used when creating a new streamer
@@ -26,7 +22,7 @@ public:
      * @param birth_date Birth date of the user
      * @throws InvalidAge
      */
-    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<unsigned int> &streams_history);
+    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int,char>> &streams_history);
     /**
      * Class constructor used when loading an existing streamer from a file
      * @param nickname Nickname of the user
@@ -35,13 +31,8 @@ public:
      * @param current_stream weak_ptr to streamer's current stream
      * @throws InvalidAge
      */
-    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<unsigned int> &streams_history, const std::weak_ptr<Stream> &current_stream);
+    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int,char>> &streams_history, const std::weak_ptr<Stream> &current_stream);
 
-    /**
-     * Gets the streamer's previous streams
-     * @return Vector containing the id of the streamer's previous streams
-     */
-    std::vector<unsigned int> getStreamsHistory() const;
     /**
      * Starts a Public Stream and associate it with the streamer
      * @param title Stream title
@@ -49,7 +40,7 @@ public:
      * @param minimum_age Minimum age of the allowed viewers
      * @throws InvalidAction
      */
-    void startPublicStream(const string &title, const string &language, const unsigned minimum_age);
+    void startPublicStream(const string &title, const string &language, unsigned minimum_age);
     /**
      * Starts a Private Stream and associate it with the streamer
      * @param title Stream title
@@ -59,7 +50,7 @@ public:
      * @param allowed_viewers Vector with allowed viewers nicknames
      * @throws InvalidAction
      */
-    void startPrivateStream(const string &title, const string &language, const unsigned minimum_age, const unsigned max_capacity, const vector<string> &allowed_viewers);
+    void startPrivateStream(const string &title, const string &language, unsigned minimum_age, unsigned max_capacity, const vector<string> &allowed_viewers);
     /**
      * Ends the stream the user is currently streaming
      * @throws InvalidAction
@@ -70,7 +61,7 @@ public:
      * @param id Id of the stream
      * @throws StreamDoesNotExist
      */
-    void removeStream(const unsigned int id);
+    void removeStream(unsigned int id);
     /**
      * Displays on the screen the info about the user
      */

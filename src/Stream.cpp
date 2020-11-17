@@ -33,8 +33,16 @@ void Stream::giveLike() {
     likes++;
 }
 
+void Stream::removeLike() {
+    likes--;
+}
+
 void Stream::giveDislike() {
     dislikes++;
+}
+
+void Stream::removeDislike() {
+    dislikes--;
 }
 
 void Stream::show() const {

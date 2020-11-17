@@ -153,9 +153,12 @@ void ViewerMenu::show() {
     std::cout << CLR_SCREEN;
     unsigned int option = 1;
     if(viewer->inStream()){
+        char feedback = viewer->getCurrentFeedback();
         std::cout << "[" << option++ << "] Leave Stream" << std::endl;
-        std::cout << "[" << option++ << "] Like" << std::endl;
-        std::cout << "[" << option++ << "] Dislike" << std::endl;
+        std::string color = feedback == 'L' ? BLUE : RESET;
+        std::cout << "[" << option++ << "] " << color << "Like" << RESET << std::endl;
+        color = feedback == 'D' ? RED : RESET;
+        std::cout << "[" << option++ << "] " << color << "Dislike" << RESET << std::endl;
         if(viewer->inPrivateStream()){
             std::cout << "[" << option++ << "] Comment" << std::endl;
         }
@@ -176,8 +179,8 @@ Menu * ViewerMenu::getNextMenu() {
     if(viewer->inStream()){
         switch(option){
             case 1: viewer->leaveStream(); return this;
-            case 2: std::cout << "Under development...\n"; return this;
-            case 3: std::cout << "Under development...\n"; return this;
+            case 2: viewer->like(); return this;
+            case 3: viewer->dislike(); return this;
         }
         if(viewer->inPrivateStream()){
             switch(option){

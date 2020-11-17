@@ -4,6 +4,7 @@
 #include "Platform.h"
 #include <iostream>
 #include <string>
+#include <utility>
 
 class User {
     /**
@@ -28,6 +29,12 @@ protected:
      * Weak pointer to the stream the viewer is currently watching or streamer is currently hosting
      */
     std::weak_ptr<Stream> current_stream;
+
+    /**
+     * Vector containing the id's of the streams created by the user (always sorted by id)
+     */
+    std::vector<std::pair<unsigned int, char>> streams_history;
+
 public:
     /**
      * Class constructor
@@ -36,6 +43,14 @@ public:
      * @param birth_date Birth date of the user
      */
     User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform);
+    /**
+     * Class constructor
+     * @param nickname Nickname of the user
+     * @param name Name of the user
+     * @param birth_date Birth date of the user
+     * @param history Watched / hosted streams history
+     */
+    User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &history);
     /**
      * Gets the nickname of the user
      * @return String containing the nickname of the user
@@ -56,6 +71,12 @@ public:
      * @return Age of the user
      */
     unsigned getAge() const;
+
+    /**
+     * Gets the streamer's previous streams
+     * @return Vector containing the id of the streamer's previous streams
+     */
+    const std::vector<std::pair<unsigned int,char>> & getStreamsHistory() const;
 
     /**
      * Check if user is in a stream

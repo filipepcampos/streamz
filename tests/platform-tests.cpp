@@ -279,11 +279,11 @@ TEST(platform, showStreams){
 TEST(platform, archiveTop){
     Platform platform;
     platform.testMode();
-    std::vector<unsigned int> ids;
+    std::vector<std::pair<unsigned int,char>> ids;
     const unsigned int N_STREAMS = 50;
     for(int i = 0; i < N_STREAMS; ++i){
         if(rand() % 3 == 0){
-            ids.push_back(i);
+            ids.emplace_back(i,'-');
         }
         platform.startPublicStream("title"+std::to_string(i), "streamer", "PT", 19);
         platform.endStream(i+1);
@@ -291,7 +291,7 @@ TEST(platform, archiveTop){
     std::cout << " --- Verify the following information ---\n";
     std::cout << "Should include following ids:";
     for(auto i : ids){
-        std::cout << i << ",";
+        std::cout << i.first << ",";
     }
     std::cout << std::endl;
     platform.showStreamHistory(ids);

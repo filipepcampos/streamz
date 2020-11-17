@@ -47,13 +47,13 @@ TEST(archive, streamsById){
     const unsigned N_STREAMS = 50;
     srand(time(0));
 
-    std::vector<unsigned int> ids;
+    std::vector<std::pair<unsigned int,char>> ids;
 
     for(int i = 0; i < N_STREAMS; ++i){
         unsigned int viewers = rand() % 5000;
         bool is_public = rand() % 2;
         if(rand() % 3 == 0){
-            ids.push_back(i);
+            ids.emplace_back(i,'-');
         }
         archive.archiveStream(StreamData(i,"title"+std::to_string(i), "streamer", Date(), Date(), "PT", viewers, is_public));
     }
@@ -61,14 +61,14 @@ TEST(archive, streamsById){
     std::vector<const StreamData *> vec = archive.getStreamsById(ids);
     EXPECT_EQ(ids.size(), vec.size());
     for(int i = 0; i < ids.size(); ++i){
-        if(vec[i]->getId() != ids[i]){
+        if(vec[i]->getId() != ids[i].first){
             GTEST_FAIL();
         }
     }
 
-    std::vector<unsigned int> empty_ids;
+    std::vector<std::pair<unsigned int,char>> empty_ids;
     EXPECT_EQ(archive.getStreamsById(empty_ids).size(), 0);
 
-    std::vector<unsigned int> out_of_range_ids = {99921, 7213, 721349};
+    std::vector<std::pair<unsigned int,char>> out_of_range_ids = {{99921,'-'},{7213,'-'}, {721349,'-'}};
     EXPECT_EQ(archive.getStreamsById(out_of_range_ids).size(), 0);
 }
