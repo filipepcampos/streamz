@@ -131,4 +131,19 @@ public:
     std::string getMessage() const;
 };
 
+class InvalidDate : public std::exception {
+    std::string date;
+public:
+    /**
+     * Class constructor
+     * @param date Date that is invalid
+     */
+    InvalidDate(const std::string &date);
+    /**
+     * Gets date
+     * @return Date
+     */
+    std::string getDate() const;
+};
+
 #endif //STREAMZ_EXCEPTIONS_H
