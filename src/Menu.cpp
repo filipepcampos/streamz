@@ -289,11 +289,16 @@ Menu * FilterStreamsMenu::getNextMenu() {
     std::cout << "Stream type\n "; type = input::getRaw();
     if (type != "public" && type != "private")
         return invalidOption();
-    /* MAIS TARDE VERIFICAR DATAS INVALIDAS */
-    input::getRaw();
-    std::cout << "Lower date\n ";lower_date = input::getRaw();
-    std::cout << "Upper date\n ";upper_date = input::getRaw();
-    /* MAIS TARDE VERIFICAR DATAS INVALIDAS */
+    try {
+        std::cout << "Lower date\n ";lower_date = input::getRaw();
+        Date l_date(lower_date);
+        std::cout << "Upper date\n ";upper_date = input::getRaw();
+        Date u_date(upper_date);
+    }
+    catch (const InvalidDate &e) {
+        std::cout << "Date " << e.getDate() << " is invalid!" << std::endl;
+        return nullptr;
+    }
     std::cout << "Number of " << type << " streams between " << lower_date << " and " << upper_date << ": ";
     std::cout << admin.streamsCounter(type == "public", Date(lower_date), Date(upper_date)) << std::endl;
     waitEnter();
