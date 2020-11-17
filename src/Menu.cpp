@@ -300,6 +300,7 @@ Menu * FilterStreamsMenu::getNextMenu() {
     }
     catch (const InvalidDate &e) {
         std::cout << "Date " << e.getDate() << " is invalid!" << std::endl;
+        waitEnter();
         return nullptr;
     }
     std::cout << "Number of " << type << " streams between " << lower_date << " and " << upper_date << ": ";
