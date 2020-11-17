@@ -23,7 +23,7 @@ TEST(private_stream, privateStreamTests){
     Platform platform;
     platform.testMode();
     PrivateStream pst("title", "loltyler1", "english", 10, 16, 300, {"aaaa", "babaab", "adadf"}, 0, 0, Date().toString(), {});
-    Viewer viewer("aaaa", "Vasco", Date("07/06/2000"), platform);
+    Viewer viewer("aaaa", "Vasco", Date("29/02/2004 12:30"), platform);
     EXPECT_EQ(true, pst.canJoin(viewer));
     pst.addComment(viewer, "nao jogas nada");
     EXPECT_EQ("nao jogas nada", pst.getComments().at(0).comment);
