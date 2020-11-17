@@ -15,6 +15,18 @@ User::User(const std::string &nickname, const std::string &name, const Date &bir
     }
 }
 
+User::User(const string &nickname, const string &name, const Date &birth_date, Platform &platform,
+           const vector<std::pair<unsigned int, char>> &history) : nickname(nickname), name(name), birth_date(birth_date), platform(platform), streams_history(history){
+    char last = ' ';
+    // Capitalize first letter of the name
+    for(auto &c : this->name){
+        if(last == ' ' && std::islower(c)){
+            c = std::toupper(c);
+        }
+        last = c;
+    }
+}
+
 std::string User::getNickname() const {
     return nickname;
 }
@@ -39,6 +51,10 @@ void User::show() const {
 std::ostream& User::print(std::ostream & os) const {
     os << getNickname() << " " << getName() << std::endl;
     os << "    " << (current_stream.expired() ? 0 : current_stream.lock()->getId()) << " " << getBirthDate().toString() << std::endl;
+    os << "    history: ";
+    for (const auto &p : streams_history)
+        os << p.first << p.second << " ";
+    os << std::endl;
     return os;
 }
 
@@ -56,4 +72,8 @@ bool User::inStream() const {
 
 bool User::inPrivateStream() const {
     return inStream() && !current_stream.lock()->getIsPublic();
+}
+
+const std::vector<std::pair<unsigned int, char>> &User::getStreamsHistory() const {
+    return streams_history;
 }

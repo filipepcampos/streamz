@@ -79,12 +79,14 @@ void Archive::showStream(unsigned int id) const{
     }
 }
 
-std::vector<const StreamData *> Archive::getStreamsById(const std::vector<unsigned int> &ids) const{
+std::vector<const StreamData *> & Archive::getStreamsById(const std::vector<std::pair<unsigned int, char>> &history, char filter) const{
     std::vector<const StreamData *> vec;
-    for(auto id : ids){
-        int pos = binarySearch(id);
-        if(pos != -1){
-            vec.push_back(&streams[pos]);
+    for(const auto &p : history){
+        if(!filter || p.second == filter){
+            int pos = binarySearch(p.first);
+            if(pos != -1){
+                vec.push_back(&streams[pos]);
+            }
         }
     }
     return vec;

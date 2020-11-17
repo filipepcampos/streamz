@@ -9,6 +9,9 @@
 #include <functional>
 
 #define CLR_SCREEN "\033[2J\033[1;1H"
+#define BLUE "\u001b[36m"
+#define RED "\u001b[31m"
+#define RESET "\u001b[0m"
 
 class Menu{
 protected:

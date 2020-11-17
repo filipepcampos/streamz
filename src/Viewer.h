@@ -5,6 +5,15 @@
 #include <memory>
 
 class Viewer : public User {
+    /*
+     * Add current stream to history if needed and link current_stream_feedback to correct char in history
+     */
+    void syncHistory();
+    /*
+     * Pointer to feedback char of current stream
+     * If it's not nullptr, then it will point to a char (pair.second) of a entry in streams history
+     */
+    char *current_stream_feedback = nullptr;
 public:
     /**
      * Class constructor
@@ -14,6 +23,16 @@ public:
      * @throws InvalidAge
      */
     Viewer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform &platform);
+
+    /**
+     * Class constructor
+     * @param nickname Nickname of the user
+     * @param name Name of the user
+     * @param birth_date Birth date of the user
+     * @param history Watched streams history
+     * @throws InvalidAge
+     */
+    Viewer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform &platform, const std::vector<std::pair<unsigned int, char>> &history);
     /**
      * Gets the weak pointer to the stream the viewer is currently watching
      * @return Weak pointer to the stream the viewer is currently watching
@@ -33,6 +52,19 @@ public:
      * Leaves the stream that is currently being watched
      */
     void leaveStream();
+    /**
+     * Like the stream (if already liked, then the previous like is removed)
+     */
+    void like();
+    /**
+     * Dislike the stream (if already disliked, then the previous dislike is removed)
+     */
+    void dislike();
+    /**
+     * Return char that represents current feedback ('L' like, 'D' dislike, '-' None)
+     * @return char
+     */
+    char getCurrentFeedback() const;
     /**
      * Leave a comment in the current stream (if viewer is not in private stream nothing will happen)
      * @param str - Comment content

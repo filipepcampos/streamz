@@ -91,7 +91,7 @@ bool Platform::readUserFromFile(std::ifstream &file) {
     std::string nickname, name, user_type, birth_date, str;
     unsigned current_stream_id;
     std::vector<std::istringstream> lines;
-    for(int i = 0; i < 2; ++i){
+    for(int i = 0; i < 3; ++i){
         if(!std::getline(file, str)){
             return false;
         }
@@ -102,23 +102,20 @@ bool Platform::readUserFromFile(std::ifstream &file) {
     lines[1] >> current_stream_id;
     std::getline(lines[1], birth_date);
 
+    unsigned int id; char feedback; vector<std::pair<unsigned int, char>> history;
+    lines[2] >> str; // Remove 'history: '
+    while(lines[2] >> id >> feedback){
+        history.emplace_back(id, feedback);
+    }
+
     if(user_type == "(viewer)"){
-        Viewer * viewer = new Viewer(nickname, name, birth_date, *this);
+        Viewer * viewer = new Viewer(nickname, name, birth_date, *this, history);
         if(current_stream_id) {
             viewer->joinStream(current_stream_id);
         }
         users.push_back(viewer);
     }
     else{
-        if(!std::getline(file, str)){
-            return false;
-        }
-        lines.emplace_back(str);
-        unsigned int id; vector<unsigned int> history;
-        lines[2] >> str; // Remove 'history: '
-        while(lines[2] >> id){
-            history.push_back(id);
-        }
         auto it = std::find_if(active_streams.begin(), active_streams.end(), [current_stream_id](const std::shared_ptr<Stream> &ptr){
             return ptr->getId() == current_stream_id;
         });
@@ -241,9 +238,9 @@ void Platform::showUsers() const{
     }
 }
 
-void Platform::showStreamHistory(const std::vector<unsigned int> &ids) const {
-    std::vector<const StreamData *> history = archive.getStreamsById(ids);
-    for(const auto &data : history){
+void Platform::showStreamHistory(const std::vector<std::pair<unsigned int,char>> &history) const {
+    std::vector<const StreamData *> h = archive.getStreamsById(history);
+    for(const auto &data : h){
         data->show();
     }
 }

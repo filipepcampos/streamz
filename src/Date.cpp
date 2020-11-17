@@ -3,6 +3,7 @@
 #include <ctime>
 #include <sstream>
 #include <iomanip>
+#include <vector>
 
 
 using namespace std;
@@ -30,36 +31,26 @@ Date::Date(const string &date){
     istringstream ss{date};
     unsigned dia, mes, ano, horas, minutos;
     char separator;
-    struct tm  timeinfo;
+    vector<unsigned> months {31,28,31,30,31,30,31,31,30,31,30,31};
     if(date.length() > 10){
         ss >> dia >> separator >> mes >> separator >> ano >> horas >> separator >> minutos;
-        timeinfo.tm_year = ano - 1900;
-        timeinfo.tm_mon = mes - 1;
-        timeinfo.tm_mday = dia;
-        timeinfo.tm_hour = horas;
-        timeinfo.tm_min = minutos;
-        timeinfo.tm_isdst = 0;
-        timeinfo.tm_sec = 0;
-        timeinfo.tm_wday = 0;
-        timeinfo.tm_yday = 0;
-        if (mktime(&timeinfo) == -1)
+        if ( ( ano % 4 == 0 && ano % 100 != 0 ) || ano % 400 == 0 )
+            months[1] = 29;
+        if (mes > 12 || dia > months[mes - 1] || horas > 23 || minutos > 59) {
             throw InvalidDate(date);
+        }
     }
-    else{
+    else if (date.length() == 10){
         ss >> dia >> separator >> mes >> separator >> ano;
+        if ( ( ano % 4 == 0 && ano % 100 != 0 ) || ano % 400 == 0 )
+            months[1] = 29;
+        if (mes > 12 || dia > months[mes - 1])
+            throw InvalidDate(date);
         horas = 0;
         minutos = 0;
-        timeinfo.tm_year = ano - 1900;
-        timeinfo.tm_mon = mes - 1;
-        timeinfo.tm_mday = dia;
-        timeinfo.tm_hour = horas;
-        timeinfo.tm_min = minutos;
-        timeinfo.tm_isdst = 0;
-        timeinfo.tm_sec = 0;
-        timeinfo.tm_wday = 0;
-        timeinfo.tm_yday = 0;
-        if (mktime(&timeinfo) == -1)
-            throw InvalidDate(date);
+    }
+    else{
+        throw InvalidDate(date);
     }
     ss.ignore(100, '\n');
     ss.clear();

@@ -10,21 +10,17 @@ Streamer::Streamer(const std::string &nickname, const std::string &name, const D
         throw InvalidAge(getAge());
 }
 
-Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<unsigned int> &streams_history) : User(nickname, name, birth_date, platform) {
+Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history) : User(nickname, name, birth_date, platform) {
     if (getAge() <= MINIMUM_STREAMER_AGE)
         throw InvalidAge(getAge());
     this->streams_history = streams_history;
 }
 
-Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<unsigned int> &streams_history, const std::weak_ptr<Stream> &current_stream) : User(nickname, name, birth_date, platform) {
+Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history, const std::weak_ptr<Stream> &current_stream) : User(nickname, name, birth_date, platform) {
     if (getAge() <= MINIMUM_STREAMER_AGE)
         throw InvalidAge(getAge());
     this->streams_history = streams_history;
     this->current_stream = current_stream;
-}
-
-std::vector<unsigned int> Streamer::getStreamsHistory() const {
-    return streams_history;
 }
 
 void Streamer::startPublicStream(const string &title, const string &language, const unsigned minimum_age) {
@@ -42,10 +38,19 @@ void Streamer::startPrivateStream(const string &title, const string &language, c
 void Streamer::endStream() {
     if (current_stream.expired())
         throw InvalidAction("No stream is occurring");
-    unsigned int id = current_stream.lock()->getId();
+
+    auto ptr = current_stream.lock();
+
+    unsigned int id = ptr->getId();
+    unsigned int likes = ptr->getLikes(), dislikes = ptr->getDislikes();
+    char feedback = '-';
+    if(likes != dislikes){
+        feedback = likes > dislikes ? 'L' : 'D';
+    }
+
     current_stream.lock()->endStream();
     platform.endStream(id);
-    streams_history.push_back(id);
+    streams_history.emplace_back(id, feedback);
     current_stream.reset();
 }
 
@@ -53,9 +58,9 @@ void Streamer::removeStream(const unsigned int id) {
     unsigned int left = 0, right = streams_history.size() - 1, middle;
     while (left <= right) {
         middle = (left + right) / 2;
-        if (streams_history.at(middle) < id)
+        if (streams_history.at(middle).first < id)
             left = middle + 1;
-        else if (id < streams_history.at(middle))
+        else if (id < streams_history.at(middle).first)
             right = middle - 1;
         else {
             streams_history.erase(streams_history.begin() + middle);
@@ -93,10 +98,6 @@ void Streamer::showStreamInfo() const {
 std::ostream& Streamer::print(std::ostream & os) const {
     os << "(streamer) ";
     User::print(os);
-    os << "    history: ";
-    for (unsigned int id : streams_history)
-        os << id << " ";
-    os << std::endl;
     return os;
 }
 

@@ -48,9 +48,17 @@ public:
      */
     void giveLike();
     /**
+     * Remove a like from stream
+     */
+    void removeLike();
+    /**
      * Gives a dislike to the stream
      */
     void giveDislike();
+    /**
+     * Remove a dislike from stream
+     */
+    void removeDislike();
     /**
      * Ends the stream
      */

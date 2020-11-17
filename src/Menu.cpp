@@ -153,9 +153,12 @@ void ViewerMenu::show() {
     std::cout << CLR_SCREEN;
     unsigned int option = 1;
     if(viewer->inStream()){
+        char feedback = viewer->getCurrentFeedback();
         std::cout << "[" << option++ << "] Leave Stream" << std::endl;
-        std::cout << "[" << option++ << "] Like" << std::endl;
-        std::cout << "[" << option++ << "] Dislike" << std::endl;
+        std::string color = feedback == 'L' ? BLUE : RESET;
+        std::cout << "[" << option++ << "] " << color << "Like" << RESET << std::endl;
+        color = feedback == 'D' ? RED : RESET;
+        std::cout << "[" << option++ << "] " << color << "Dislike" << RESET << std::endl;
         if(viewer->inPrivateStream()){
             std::cout << "[" << option++ << "] Comment" << std::endl;
         }
@@ -176,8 +179,8 @@ Menu * ViewerMenu::getNextMenu() {
     if(viewer->inStream()){
         switch(option){
             case 1: viewer->leaveStream(); return this;
-            case 2: std::cout << "Under development...\n"; return this;
-            case 3: std::cout << "Under development...\n"; return this;
+            case 2: viewer->like(); return this;
+            case 3: viewer->dislike(); return this;
         }
         if(viewer->inPrivateStream()){
             switch(option){
@@ -322,21 +325,21 @@ Menu * InformationMenu::getNextMenu() {
     unsigned int option;
     if(!input::get(option))
         return invalidOption();
-    
+
+    std::string language;
+    unsigned int minimum_age;
     switch(option){
         case 0: return nullptr;
         case 1: platform.topActiveStreams(); waitEnter(); return this;
         case 2: platform.topArchivedStreams(); waitEnter(); return this;
         case 3: platform.showStreams(); waitEnter(); return this;
-        case 4:{std::cout << "language: ";
-            std::string language;
+        case 4: std::cout << "language: ";
             if(!input::get(language)){
                 return invalidOption();
             }
             std::transform(language.begin(), language.end(), language.begin(), ::toupper);
-            platform.showStreams(language); waitEnter(); return this;}
+            platform.showStreams(language); waitEnter(); return this;
         case 5: std::cout << "minimum_age: ";
-            unsigned int minimum_age;
             if(!input::get(minimum_age)){
                 return invalidOption();
             }

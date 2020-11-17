@@ -1,6 +1,7 @@
 #include "Stream.h"
 #include <iostream>
 #include <iomanip>
+#include "Input.h"
 
 using namespace std;
 
@@ -33,12 +34,20 @@ void Stream::giveLike() {
     likes++;
 }
 
+void Stream::removeLike() {
+    likes--;
+}
+
 void Stream::giveDislike() {
     dislikes++;
 }
 
+void Stream::removeDislike() {
+    dislikes--;
+}
+
 void Stream::show() const {
-    std::cout << std::setw(10) << getStreamer() << std::setw(9) << getIsPublic() << std::setw(7) << getId() << std::setw(20) << getTitle() << std::setw(4) << getLanguage() << std::setw(7) << getViewers() << std::endl;
+    std::cout << std::setw(MAX_NICKNAME_LENGHT) <<  getStreamer() << " " << std::setw(9) << (getIsPublic() ? "public" : "private") << " " << std::setw(7) << getId() << " " << std::setw(MAX_TITLE_LENGHT) << getTitle() << " " << std::setw(4) << getLanguage() << " " <<  std::setw(7) << getViewers() << std::endl;
 }
 
 ostream& operator<<(ostream& os, const Stream& stream){

@@ -253,7 +253,7 @@ public:
      * Show all streams in a user history
      * @param ids - vector of ids of all streams to be shown
      */
-    void showStreamHistory(const std::vector<unsigned> &ids) const;
+    void showStreamHistory(const std::vector<std::pair<unsigned int, char>> &history) const;
 
     /**
      * Show all users in the platform
