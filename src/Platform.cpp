@@ -9,6 +9,7 @@
 #include <stack>
 #include <fstream>
 #include <sstream>
+#include <iomanip>
 
 Platform::Platform() : archive(files.archived_stream_file) {
     readStreamsFromFile();
@@ -178,7 +179,7 @@ void Platform::sort(sortingMode mode, sortingOrder order) {
             }); break;
         case minimum_age:
             sortActiveStreams([asc](std::shared_ptr<Stream> &ptr1, std::shared_ptr<Stream> &ptr2){
-                return asc ? ptr1->getMinimumAge() < ptr2->getMinimumAge() : ptr1->getMinimumAge() > ptr2->getMinimumAge();
+                return asc ? ptr1->getMinAge() < ptr2->getMinAge() : ptr1->getMinAge() > ptr2->getMinAge();
             }); break;
     }
 }
@@ -222,24 +223,25 @@ unsigned int Platform::getTotalStreamCount() const{
 
 
 void Platform::showStreams(const std::string &language_filter, unsigned minimum_age) const{
-    std::cout << "All active streams:" << std::endl;
-    for(int i = 0; i < active_streams.size(); ++i){
-        if((language_filter.empty() || active_streams[i]->getLanguage() == language_filter) && active_streams[i]->getMinimumAge() <= minimum_age){
-            std::cout << i+1 << ": "; active_streams[i]->show();
+    std::cout << "Active streams:" << std::endl;
+    showStreamsHeader();
+    for(const auto & active_stream : active_streams){
+        if((language_filter.empty() || active_stream->getLanguage() == language_filter) && active_stream->getMinAge() <= minimum_age){
+            active_stream->show();
         }
     }
 }
 
 void Platform::showUsers() const{
     std::cout << "All Users:" << std::endl;
-    for(int i = 0; i < users.size(); ++i){
-        std::cout << i+1 << ": ";
-        users[i]->show();
+    for(auto user : users){
+        user->show();
     }
 }
 
 void Platform::showStreamHistory(const std::vector<std::pair<unsigned int,char>> &history) const {
     std::vector<const StreamData *> h = archive.getStreamsById(history);
+    showStreamsHeader();
     for(const auto &data : h){
         data->show();
     }
@@ -356,18 +358,20 @@ void Platform::topActiveStreams() {
     std::vector<std::weak_ptr<Stream>> views = getTopActiveStreams([](const std::shared_ptr<Stream> &ptr1,const std::shared_ptr<Stream> &ptr2){
         return ptr1->getViewers() < ptr2->getViewers();
     });
-    std::cout << "Top by Views" << std::endl;
+    std::cout << "Top by Views" << std::endl << "    ";
+    showStreamsHeader();
     for(int i = 0; i < views.size(); ++i){
         if(auto ptr = views[i].lock()){
-            std::cout << i+1 << ": ";
+            std::cout << std::right << std::setw(2) << i+1 << ": " << std::left;
             ptr->show();
         }
     }
 
-    std::cout << "\nTop by Likes" << std::endl;
+    std::cout << "\nTop by Likes" << std::endl << "    ";
+    showStreamsHeader();
     for(int i = 0; i < likes.size(); ++i){
         if(auto ptr = likes[i].lock()){
-            std::cout << i+1 << ": ";
+            std::cout << std::right << std::setw(2) << i+1 << ": " << std::left;
             ptr->show();
         }
     }

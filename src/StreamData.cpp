@@ -4,10 +4,11 @@
 #include "Input.h"
 
 StreamData::StreamData(unsigned id, const string &title, const string &streamer,const Date &start_date,
-                       const Date &end_date,  const string &language, unsigned viewers,
-                       bool isPublic, unsigned likes, unsigned dislikes) :
+                       const Date &end_date,  const string &language, unsigned viewers, bool isPublic,
+                       unsigned min_age, unsigned likes, unsigned dislikes) :
                             id(id), title(title), streamer(streamer), start_date(start_date), end_date(end_date),
-                            language(language), viewers(viewers), isPublic(isPublic), likes(likes), dislikes(dislikes) {}
+                            language(language), viewers(viewers), min_age(min_age),
+                            isPublic(isPublic), likes(likes), dislikes(dislikes) {}
 
 unsigned StreamData::getId() const{
     return id;
@@ -50,6 +51,7 @@ std::ostream &StreamData::print(ostream &os) const {
     if(isOver()){
         os << " - " << getEndDate().toString() << endl;
     }
+    os << std::endl << "    minimum_age: " << getMinAge() << std::endl;
     return os;
 }
 
@@ -66,9 +68,31 @@ ostream& operator<<(ostream& os, const StreamData &d) {
 }
 
 void StreamData::show() const {
-    std::cout << std::setw(MAX_NICKNAME_LENGHT) << getStreamer() << " " << std::setw(9) << (getIsPublic() ? "public" : "private") << " " << std::setw(7) << getId() << " " << std::setw(MAX_TITLE_LENGHT) << getTitle() << " " << std::setw(4) << getLanguage() << " " << std::setw(7) << getViewers() << " " << std::setw(7) << getLikes() << " " << std::setw(7) << getDislikes() << " " <<  getStartDate().toString() << " " << getEndDate().toString() << std::endl;
+    std::cout << std::left << std::setw(MAX_NICKNAME_LENGHT+2) << getStreamer()
+        << std::setw(10) << (getIsPublic() ? "public" : "private")
+        << std::setw(8) << getId()       << std::setw(MAX_TITLE_LENGHT+2) << getTitle()
+        << std::setw(5) << getLanguage() << std::setw(8) << getMinAge()
+        << std::setw(8) << getViewers()  << std::setw(8) << getLikes()
+        << std::setw(8) << getDislikes() << " "
+        << getStartDate().toString() << "  " << (over ? getEndDate().toString() : "")
+        << std::endl;
 }
 
+unsigned int StreamData::getMinAge() const {
+    return min_age;
+}
 bool StreamData::isOver() const{
     return over;
+}
+
+void showStreamsHeader(){
+    std::cout << std::left << std::setw(MAX_NICKNAME_LENGHT+2) << "streamer "
+              << std::setw(10) << "type "
+              << std::setw(8) << "id "
+              << std::setw(MAX_TITLE_LENGHT+2) << "title "
+              << std::setw(5) << "lang "
+              << std::setw(8) << "min_age "
+              << std::setw(8) << "views "
+              << std::setw(8) << "likes " << std::setw(8) << "dislikes "
+              << "start             " << "end " << std::endl;
 }

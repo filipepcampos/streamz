@@ -18,7 +18,7 @@ TEST(archive, addStream){
     for(int i = 0; i < N_STREAMS; ++i){
         unsigned int viewers = rand() % 5000;
         bool is_public = rand() % 2;
-        archive.archiveStream(StreamData(i,"title"+std::to_string(i), "streamer", Date(), Date(), "PT", viewers, is_public));
+        archive.archiveStream(StreamData(i,"title"+std::to_string(i), "streamer", Date(), Date(), "PT", viewers, is_public, 10));
     }
     archive.showStream(5);
     EXPECT_EQ(archive.getStreamCount(), N_STREAMS);
@@ -32,7 +32,7 @@ TEST(archive, show){
     for(int i = 0; i < N_STREAMS; ++i){
         unsigned int viewers = rand() % 5000;
         bool is_public = rand() % 2;
-        archive.archiveStream(StreamData(i,"title"+std::to_string(i), "streamer", Date(), Date(), "PT", viewers, is_public));
+        archive.archiveStream(StreamData(i,"title"+std::to_string(i), "streamer", Date(), Date(), "PT", viewers, is_public, 10));
     }
     EXPECT_EQ(archive.getStreamCount(), N_STREAMS);
     std::cout << "  ---  Verify the following information  ---\n";
@@ -55,7 +55,7 @@ TEST(archive, streamsById){
         if(rand() % 3 == 0){
             ids.emplace_back(i,'-');
         }
-        archive.archiveStream(StreamData(i,"title"+std::to_string(i), "streamer", Date(), Date(), "PT", viewers, is_public));
+        archive.archiveStream(StreamData(i,"title"+std::to_string(i), "streamer", Date(), Date(), "PT", viewers, is_public, 10));
     }
 
     std::vector<const StreamData *> vec = archive.getStreamsById(ids);

@@ -10,8 +10,8 @@ PrivateStream::PrivateStream(const string &title, const string &streamer, const 
                              const unsigned int minimum_age, const unsigned int max_capacity, const vector<string> &allowed_viewers,
                              unsigned int likes, unsigned int dislikes,
                              const std::string &start_date, const std::vector<Comment> &comments) :
-                                 Stream(title, streamer, language, id, minimum_age, likes, dislikes, start_date),
-                                 max_capacity(max_capacity), allowed_viewers(allowed_viewers), comments(comments) {
+        Stream(title, streamer, language, id, minimum_age, likes, dislikes, start_date),
+        max_capacity(max_capacity), allowed_viewers(allowed_viewers), comments(comments) {
     isPublic = false;
 }
 
@@ -47,8 +47,3 @@ void PrivateStream::addComment(Viewer &viewer, const string &comment){
     c.comment = comment;
     comments.push_back(c);
 }
-
-void PrivateStream::show() const {
-    Stream::show();
-}
-

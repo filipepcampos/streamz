@@ -80,7 +80,7 @@ void Streamer::showStreamInfo() const {
         std::cout << (ptr->getIsPublic() ? "Public" : "Private") << " stream" << std::endl;
         std::cout << "Title: \"" << ptr->getTitle() << "\"" << std::endl;
         std::cout << "Id: " << ptr->getId() << std::endl;
-        std::cout << "Min age: " << ptr->getMinimumAge() << std::endl;
+        std::cout << "Min age: " << ptr->getMinAge() << std::endl;
         std::cout << "Views: " << ptr->getViewers() << std::endl;
         std::cout << "Likes: " << ptr->getLikes() << std::endl;
         std::cout << "Dislikes: " << ptr->getDislikes() << std::endl;

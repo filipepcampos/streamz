@@ -14,7 +14,7 @@ TEST(stream, streamTests) {
     st.giveLike();
     EXPECT_EQ("loltyler1", st.getStreamer());
     EXPECT_EQ("english", st.getLanguage());
-    EXPECT_EQ(16, st.getMinimumAge());
+    EXPECT_EQ(16, st.getMinAge());
     EXPECT_EQ(1, st.getLikes());
     EXPECT_EQ(1, st.getDislikes());
 }

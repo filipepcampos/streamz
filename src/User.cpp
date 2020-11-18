@@ -46,7 +46,7 @@ unsigned User::getAge() const {
 }
 
 void User::show() const {
-    std::cout << std::setw(MAX_NICKNAME_LENGHT) << nickname << std::setw(MAX_NAME_LENGHT) << name << std::endl;
+    std::cout << std::left << std::setw(MAX_NICKNAME_LENGHT+1) << nickname << " " << name << std::endl;
 }
 
 std::ostream& User::print(std::ostream & os) const {

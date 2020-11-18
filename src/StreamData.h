@@ -4,60 +4,28 @@
 #include "Date.h"
 #include <string>
 
-using namespace std;
-
+void showStreamsHeader();
 
 class StreamData {
 protected:
-    /**
-     * Identification of the stream
-     */
-    unsigned id;
-    /**
-     * Title of the stream
-     */
-    string title;
-    /**
-     * Streamer
-     */
-    string streamer;
-    /**
-     * Start date of the stream
-     */
-    Date start_date;
-    /**
-     * End date of the stream
-     */
-    Date end_date;
-    /**
-     * Language of the stream
-     */
-    string language;
-    /**
-     * Number of viewers
-     */
-    unsigned viewers;
-    /**
-     * Accessibility of the stream
-     */
-    bool isPublic;
-    /**
-     * Number of likes of the stream
-     */
-    unsigned likes = 0;
-    /**
-     * Number of dislikes of the stream
-     */
-    unsigned dislikes = 0;
-    /**
-     * Keep track if stream is over or not
-     */
-    bool over = true;
+    unsigned id; /**> Id of the stream*/
+    string title; /**> Title of the stream*/
+    string streamer; /**> Streamer nickname*/
+    Date start_date; /**> Start date of the stream*/
+    Date end_date; /**> End date of the stream*/
+    string language; /**> Language of the stream*/
+    unsigned min_age; /**>Minimum viewer age*/
+    unsigned viewers = 0; /**>Number of viewers*/
+    bool isPublic = true; /**>Accessibility of the stream*/
+    unsigned likes = 0; /**> Number of likes*/
+    unsigned dislikes = 0; /**> Number of dislikes*/
+    bool over = false; /**>Keep track if stream is over or not*/
 public:
     /**
      * Class constructor
      */
-    StreamData(unsigned id, const string &title, const string &streamer,const Date &start_date, const Date &end_date,  const string &language, unsigned viewers, bool isPublic, unsigned likes=0, unsigned dislikes=0);
+    StreamData(unsigned id, const string &title, const string &streamer,const Date &start_date, const Date &end_date,  const string &language,
+               unsigned viewers, bool isPublic, unsigned min_age, unsigned likes=0, unsigned dislikes=0);
     /**
      * Gets the id of the stream
      * @return id of the stream
@@ -109,6 +77,11 @@ public:
      */
     unsigned getDislikes() const;
     /**
+     * Gets minimum viewer age
+     * @return age
+     */
+     unsigned getMinAge() const;
+    /**
      * Return true if stream has already ended
      * @return
      */
@@ -120,7 +93,11 @@ public:
      * @return Stream where the information will be writen
      */
     friend ostream& operator<<(ostream& os, const StreamData &d);
-
+    /**
+     * Print data about stream into ostream
+     * @param os
+     * @return
+     */
     virtual std::ostream& print(std::ostream & os) const;
     /**
      * Displays on the screen info about the stream

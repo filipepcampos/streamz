@@ -142,7 +142,7 @@ TEST(platform, top10){
     platform.testMode();
     std::cout << "Should be empty:" << std::endl;
     platform.topActiveStreams();
-    platform.registerStreamer("streamer", "StreamerName", Date("01/01/1984 00:00"));
+    platform.registerStreamer("streamer", "Name", Date("01/01/1984 00:00"));
     Streamer * streamer = dynamic_cast<Streamer *>(platform.getUser("streamer"));
 
     for(int i = 0; i < 30; ++i){
@@ -242,19 +242,19 @@ TEST(platform, sorting){
     vec = platform.testGetStreams();
     old_val = 0;
     for(const auto &ptr : vec){
-        if(ptr->getMinimumAge() < old_val){
+        if(ptr->getMinAge() < old_val){
             GTEST_FAIL();
         }
-        old_val = ptr->getMinimumAge();
+        old_val = ptr->getMinAge();
     }
     platform.sort(minimum_age, descending);
     vec = platform.testGetStreams();
     old_val = 999999999;
     for(const auto &ptr : vec){
-        if(ptr->getMinimumAge() > old_val){
+        if(ptr->getMinAge() > old_val){
             GTEST_FAIL();
         }
-        old_val = ptr->getMinimumAge();
+        old_val = ptr->getMinAge();
     }
 }
 
@@ -262,10 +262,10 @@ TEST(platform, showStreams){
     Platform platform;
     platform.testMode();
     for(int i = 0; i < 100; ++i){
-        platform.startPublicStream("title" + std::to_string(i), "streamername" + std::to_string(i), "PT", i);
+        platform.startPublicStream("title" + std::to_string(i), "nick" + std::to_string(i), "PT", i);
     }
-    platform.startPublicStream("title", "streamername", "EN", 95);
-    platform.startPublicStream("title", "streamer_name", "EN", 15);
+    platform.startPublicStream("title", "nick", "EN", 95);
+    platform.startPublicStream("title", "nick", "EN", 15);
     std::cout << " --- Please verify the following information --- " << std::endl;
     platform.showStreams();
     std::cout << " --- Filter: min_age <= 16 ---" << std::endl;
