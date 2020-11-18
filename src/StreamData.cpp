@@ -5,10 +5,10 @@
 
 StreamData::StreamData(unsigned id, const std::string &title, const std::string &streamer,const Date &start_date,
                        const Date &end_date,  const std::string &language, unsigned viewers, bool isPublic,
-                       unsigned min_age, unsigned likes, unsigned dislikes) :
+                       unsigned min_age, unsigned likes, unsigned dislikes, bool over) :
                             id(id), title(title), streamer(streamer), start_date(start_date), end_date(end_date),
                             language(language), viewers(viewers), min_age(min_age),
-                            isPublic(isPublic), likes(likes), dislikes(dislikes) {}
+                            isPublic(isPublic), likes(likes), dislikes(dislikes), over(over) {}
 
 unsigned StreamData::getId() const{
     return id;
@@ -51,7 +51,7 @@ std::ostream &StreamData::print(std::ostream &os) const {
     if(isOver()){
         os << " - " << getEndDate().toString() << std::endl;
     }
-    os << std::endl << "    minimum_age: " << getMinAge() << std::endl;
+    os << "    minimum_age: " << getMinAge() << std::endl;
     return os;
 }
 

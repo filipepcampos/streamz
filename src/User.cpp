@@ -5,7 +5,8 @@
 #include <iomanip>
 #include <algorithm>
 
-User::User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform) : nickname(nickname), name(name), birth_date(birth_date), platform(platform) {
+User::User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform)
+: nickname(nickname), name(name), birth_date(birth_date), platform(platform) {
     char last = ' ';
     // Capitalize first letter of the name
     for(auto &c : this->name){
@@ -17,7 +18,8 @@ User::User(const std::string &nickname, const std::string &name, const Date &bir
 }
 
 User::User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform &platform,
-           const std::vector<std::pair<unsigned int, char>> &history) : nickname(nickname), name(name), birth_date(birth_date), platform(platform), streams_history(history){
+           const std::vector<std::pair<unsigned int, char>> &history)
+           : nickname(nickname), name(name), birth_date(birth_date), platform(platform), streams_history(history){
     char last = ' ';
     // Capitalize first letter of the name
     for(auto &c : this->name){
@@ -79,7 +81,7 @@ const std::vector<std::pair<unsigned int, char>> &User::getStreamsHistory() cons
     return streams_history;
 }
 
-void User::removeStreamFromHistory(const unsigned int id) {
+void User::removeStreamFromHistory(unsigned int id) {
     auto it = std::find_if(streams_history.begin(), streams_history.end(), [id](const std::pair<unsigned int,char> &p){
         return p.first == id;
     });

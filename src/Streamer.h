@@ -59,9 +59,8 @@ public:
     /**
      * Removes a stream from the streams history
      * @param id Id of the stream
-     * @throws StreamDoesNotExist
      */
-    void removeStreamFromHistory(const unsigned int id);
+    void removeStreamFromHistory(unsigned int id);
     /**
      * Displays on the screen the info about the user
      */

@@ -10,13 +10,13 @@ Streamer::Streamer(const std::string &nickname, const std::string &name, const D
         throw InvalidAge(getAge());
 }
 
-Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history) : User(nickname, name, birth_date, platform) {
+Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history) : User(nickname, name, birth_date, platform, streams_history) {
     if (getAge() <= MINIMUM_STREAMER_AGE)
         throw InvalidAge(getAge());
     this->streams_history = streams_history;
 }
 
-Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history, const std::weak_ptr<Stream> &current_stream) : User(nickname, name, birth_date, platform) {
+Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history, const std::weak_ptr<Stream> &current_stream) : User(nickname, name, birth_date, platform, streams_history) {
     if (getAge() <= MINIMUM_STREAMER_AGE)
         throw InvalidAge(getAge());
     this->streams_history = streams_history;
@@ -40,21 +40,18 @@ void Streamer::endStream() {
         throw InvalidAction("No stream is occurring");
 
     auto ptr = current_stream.lock();
-
     unsigned int id = ptr->getId();
     unsigned int likes = ptr->getLikes(), dislikes = ptr->getDislikes();
     char feedback = '-';
     if(likes != dislikes){
         feedback = likes > dislikes ? 'L' : 'D';
     }
-
-    current_stream.lock()->endStream();
     platform.endStream(id);
     streams_history.emplace_back(id, feedback);
     current_stream.reset();
 }
 
-void Streamer::removeStreamFromHistory(const unsigned int id) {
+void Streamer::removeStreamFromHistory(unsigned int id) {
     unsigned int left = 0, right = streams_history.size() - 1, middle;
     while (left <= right) {
         middle = (left + right) / 2;
@@ -67,7 +64,6 @@ void Streamer::removeStreamFromHistory(const unsigned int id) {
             return;
         }
     }
-    throw StreamDoesNotExist(id);
 }
 
 void Streamer::show() const {

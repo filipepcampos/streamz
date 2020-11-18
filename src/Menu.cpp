@@ -167,6 +167,7 @@ void ViewerMenu::show() {
         std::cout << "[" << option++ << "] Join Stream" << std::endl;
         std::cout << "[" << option++ << "] View stream history" << std::endl;
         std::cout << "[" << option++ << "] View liked streams history" << std::endl;
+        std::cout << "[" << option++ << "] Remove stream from history" << std::endl;
     }
     std::cout << "[" << option++ << "] Delete Account" << std::endl << std::endl;
     std::cout << "[0] Exit" << std::endl;
@@ -197,11 +198,13 @@ Menu * ViewerMenu::getNextMenu() {
         }
     }
     else{
+        unsigned int id;
         switch(option){
             case 1: return new JoinStreamMenu(platform, viewer);
             case 2: platform.showStreamHistory(viewer->getStreamsHistory()); waitEnter(); return this;
             case 3: platform.showStreamHistory(viewer->getStreamsHistory(), 'L'); waitEnter(); return this;
-            case 4: platform.deleteUser(viewer->getNickname()); return nullptr;
+            case 4: std::cout << "Stream id: "; if(input::get(id)){viewer->removeStreamFromHistory(id);} return this;
+            case 5: platform.deleteUser(viewer->getNickname()); return nullptr;
         }
     }
     return invalidOption();
@@ -221,6 +224,7 @@ void StreamerMenu::show() {
     else{
         std::cout << "[" << option++ << "] Start stream" << std::endl;
         std::cout << "[" << option++ << "] View stream history" << std::endl;
+        std::cout << "[" << option++ << "] Remove stream from history" << std::endl;
     }
     std::cout << "[" << option++ << "] Delete account" << std::endl << std::endl;
     std::cout << "[0] Exit" << std::endl;
@@ -242,10 +246,12 @@ Menu * StreamerMenu::getNextMenu() {
         }
     }
     else{
+        unsigned int id;
         switch(option){
             case 2: return new CreateStreamMenu(platform, streamer);
             case 3: platform.showStreamHistory(streamer->getStreamsHistory()); waitEnter(); return this;
-            case 4: platform.deleteUser(streamer->getNickname()); return nullptr;
+            case 4: std::cout << "Stream id: "; if(input::get(id)){streamer->removeStreamFromHistory(id);} return this;
+            case 5: platform.deleteUser(streamer->getNickname()); return nullptr;
         }
     }
     return invalidOption();
@@ -257,7 +263,8 @@ AdministratorMenu::AdministratorMenu(Platform &platform) : Menu(platform), admin
 void AdministratorMenu::show() {
     unsigned int option = 1;
     std::cout << CLR_SCREEN;
-    for(const auto &str : {"Show average views", "Filter streams", "Show Top Language", "Show Top Stream Type", "Show Top Streamer"}){
+    for(const auto &str : {"Information", "Show average views", "Filter streams", "Show Top Language",
+                           "Show Top Stream Type", "Show Top Streamer", "Delete user"}){
         std::cout << "[" << option++ << "] " << str << std::endl;
     }
     std::cout << "[0] Exit" << std::endl;
@@ -267,13 +274,17 @@ Menu * AdministratorMenu::getNextMenu() {
     int option;
     if(!input::get(option))
         return invalidOption();
+    std::string str; unsigned int id;
     switch(option){
         case 0: return nullptr;
-        case 1: std::cout << "Average views per stream: " << admin.averageViews() << std::endl; waitEnter(); return this;
-        case 2: return new FilterStreamsMenu(platform, admin);
-        case 3: std::cout << "Most used language in streams: " << admin.topLanguage() << std::endl; waitEnter(); return this;
-        case 4: std::cout << "Most used stream type in streams: " << admin.topTypeStream() << std::endl; waitEnter(); return this;
-        case 5: std::cout << "Streamer with most views: " << admin.topStreamer() << std::endl; waitEnter(); return this;
+        case 1: return new InformationMenu(platform);
+        case 2: std::cout << "Average views per stream: " << admin.averageViews() << std::endl; waitEnter(); return this;
+        case 3: return new FilterStreamsMenu(platform, admin);
+        case 4: std::cout << "Most used language in streams: " << admin.topLanguage() << std::endl; waitEnter(); return this;
+        case 5: std::cout << "Most used stream type in streams: " << admin.topTypeStream() << std::endl; waitEnter(); return this;
+        case 6: std::cout << "Streamer with most views: " << admin.topStreamer() << std::endl; waitEnter(); return this;
+        case 7: std::cout << "Username: "; if(input::get(str)){platform.deleteUser(str);} return this;
+        case 8: std::cout << "Stream id: "; if(input::get(id)){platform.deleteStream(id);} return this;
     }
     return invalidOption();
 }

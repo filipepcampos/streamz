@@ -25,7 +25,7 @@ public:
      * Class constructor
      */
     StreamData(unsigned id, const std::string &title, const std::string &streamer,const Date &start_date, const Date &end_date,  const std::string &language,
-               unsigned viewers, bool isPublic, unsigned min_age, unsigned likes=0, unsigned dislikes=0);
+               unsigned viewers, bool isPublic, unsigned min_age, unsigned likes=0, unsigned dislikes=0, bool over=false);
     /**
      * Gets the id of the stream
      * @return id of the stream

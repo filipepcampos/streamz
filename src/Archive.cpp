@@ -49,12 +49,13 @@ Archive::~Archive(){
         if(file.is_open()){
             file << "top_views: ";
             for(const auto &data : top_views){
-                file << data.getId();
+                file << data.getId() << " ";
             }
-            file << "top_likes: ";
+            file << std::endl << "top_likes: ";
             for(const auto &data : top_likes){
-                file << data.getId();
+                file << data.getId() << " ";
             }
+            file << std::endl;
             for(const auto &data : streams){
                 file << data;
             }
@@ -82,7 +83,7 @@ bool Archive::readStreamFromFile(std::ifstream &file) {
     lines[2] >> stream_type >> language >> views >> str >> likes >> str >> dislikes;
     start_date = lines[3].str().substr(0, 16); end_date = lines[3].str().substr(19, 16);
     lines[4] >> str >>  minimum_age;
-    streams.emplace_back(id, title, streamer, start_date, end_date, language, views, stream_type=="public", minimum_age);
+    streams.emplace_back(id, title, streamer, start_date, end_date, language, views, stream_type=="public", minimum_age, likes, dislikes, true);
     return true;
 }
 

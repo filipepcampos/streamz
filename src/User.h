@@ -83,7 +83,7 @@ public:
      * @param id Id of the stream
      * @throws StreamDoesNotExist
      */
-    virtual void removeStreamFromHistory(const unsigned int id);
+    virtual void removeStreamFromHistory(unsigned int id);
 
     /**
      * Check if user is in a stream
