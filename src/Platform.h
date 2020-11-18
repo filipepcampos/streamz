@@ -194,6 +194,7 @@ public:
      * Return weak_ptr to stream with id
      * @param id - unique stream id
      * @param viewer
+     * @throws StreamDoesNotExist, StreamNoLongerActive
      * @return
      */
     std::weak_ptr<Stream> joinStream(unsigned int id, const Viewer &viewer);
@@ -202,8 +203,8 @@ public:
      * Start a Public Stream and return a weak_ptr to it
      * @param title - Stream title
      * @param streamer - Streamer nickname
-     * @param language
-     * @param minimum_age
+     * @param language - Stream language
+     * @param minimum_age - Minimum viewer age
      * @return
      */
     std::weak_ptr<Stream> startPublicStream(const std::string &title, const std::string &streamer, const std::string &language,

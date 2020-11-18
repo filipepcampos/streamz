@@ -26,6 +26,12 @@ private:
      * Returns true if read successfully
      */
     bool readStreamFromFile(std::ifstream &file);
+
+    /*
+     * Compare data to the streams in top 10, and update it accordingly
+     * @param data
+     */
+    void updateTop(const StreamData &data);
 public:
     explicit Archive(const std::string &filename = "archive.txt");
     ~Archive();
@@ -35,12 +41,6 @@ public:
      * @param data
      */
     void archiveStream(const StreamData &data);
-
-    /*
-     * Compare data to the streams in top 10, and update it accordingly
-     * @param data
-     */
-    void updateTop(const StreamData &data);
 
     /*
      * Get number of streams stored
