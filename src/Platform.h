@@ -188,7 +188,7 @@ public:
      * @throws StreamDoesNotExist
      * @return
      */
-    std::weak_ptr<Stream> joinStreamByStreamer(const std::string &streamer, const Viewer &viewer);
+    std::weak_ptr<Stream> joinStream(const std::string &streamer, const Viewer &viewer);
 
     /**
      * Return weak_ptr to stream with id
@@ -196,7 +196,7 @@ public:
      * @param viewer
      * @return
      */
-    std::weak_ptr<Stream> joinStreamById(unsigned int id, const Viewer &viewer);
+    std::weak_ptr<Stream> joinStream(unsigned int id, const Viewer &viewer);
 
     /**
      * Start a Public Stream and return a weak_ptr to it

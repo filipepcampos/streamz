@@ -257,7 +257,7 @@ User *Platform::getUser(const std::string &nickname) {
     return (*it);
 }
 
-std::weak_ptr<Stream> Platform::joinStreamByStreamer(const std::string &streamer, const Viewer &viewer) {
+std::weak_ptr<Stream> Platform::joinStream(const std::string &streamer, const Viewer &viewer) {
     auto it = find_if(active_streams.begin(), active_streams.end(), [streamer](const std::shared_ptr<Stream> &ptr){
         return ptr->getStreamer() == streamer;
     });
@@ -272,7 +272,7 @@ std::weak_ptr<Stream> Platform::joinStreamByStreamer(const std::string &streamer
     return std::weak_ptr<Stream>();
 }
 
-std::weak_ptr<Stream> Platform::joinStreamById(unsigned int id, const Viewer &viewer) {
+std::weak_ptr<Stream> Platform::joinStream(unsigned int id, const Viewer &viewer) {
     auto it = std::find_if(active_streams.begin(), active_streams.end(), [id](const std::shared_ptr<Stream> &ptr){
         return ptr->getId() == id;
     });
