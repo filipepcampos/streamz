@@ -7,38 +7,7 @@
 Archive::Archive(const std::string &filename) : filename(filename) {
     std::ifstream file(filename);
     if(file.is_open()) {
-        std::string str; unsigned int id;
-        std::vector<unsigned int> topviews_ids, toplikes_ids;
-        // Read top streams ids
-        std::getline(file, str); std::istringstream ss1{str};
-        ss1 >> str;
-        while(ss1 >> id){
-            topviews_ids.push_back(id);
-        }
-        std::getline(file, str); std::istringstream ss2{str};
-        ss2 >> str;
-        while(ss2 >> id){
-            toplikes_ids.push_back(id);
-        }
-
         while(readStreamFromFile(file));
-
-        for(auto id : topviews_ids){
-            auto it = std::find_if(streams.begin(), streams.end(), [id](const StreamData &d){
-                return d.getId() == id;
-            });
-            if(it != streams.end()){
-                top_views.emplace_back((*it));
-            }
-        }
-        for(auto id : toplikes_ids){
-            auto it = std::find_if(streams.begin(), streams.end(), [id](const StreamData &d){
-                return d.getId() == id;
-            });
-            if(it != streams.end()){
-                top_likes.emplace_back((*it));
-            }
-        }
         file.close();
     }
 }
@@ -47,15 +16,6 @@ Archive::~Archive(){
     if(!test){
         std::ofstream file(filename, std::ofstream::trunc);
         if(file.is_open()){
-            file << "top_views: ";
-            for(const auto &data : top_views){
-                file << data.getId() << " ";
-            }
-            file << std::endl << "top_likes: ";
-            for(const auto &data : top_likes){
-                file << data.getId() << " ";
-            }
-            file << std::endl;
             for(const auto &data : streams){
                 file << data;
             }
@@ -84,6 +44,7 @@ bool Archive::readStreamFromFile(std::ifstream &file) {
     start_date = lines[3].str().substr(0, 16); end_date = lines[3].str().substr(19, 16);
     lines[4] >> str >>  minimum_age;
     streams.emplace_back(id, title, streamer, start_date, end_date, language, views, stream_type=="public", minimum_age, likes, dislikes, true);
+    updateTop(*(streams.rbegin()));
     return true;
 }
 
