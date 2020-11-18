@@ -45,7 +45,11 @@ TEST(input, validateNickname){
     EXPECT_EQ(input::validateNickname("examp le"), false);
     EXPECT_EQ(input::validateNickname("NicknameTooLargeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"), false);
 
+<<<<<<< HEAD
     EXPECT_EQ(input::validateNickname("Name123"), true);
+=======
+    EXPECT_EQ(input::validateNickname("ReasonableName123"), false);
+>>>>>>> 700b1a2b94157783809a1e9b5b3642ecd56049cc
     EXPECT_EQ(input::validateNickname("example123"), true);
 }
 

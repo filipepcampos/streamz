@@ -1,5 +1,7 @@
 #include "StreamData.h"
 #include <iostream>
+#include <iomanip>
+#include "Input.h"
 
 StreamData::StreamData(unsigned id, const string &title, const string &streamer,const Date &start_date,
                        const Date &end_date,  const string &language, unsigned viewers,
@@ -64,8 +66,7 @@ ostream& operator<<(ostream& os, const StreamData &d) {
 }
 
 void StreamData::show() const {
-    /* IMPLEMENTAR MAIS TARDE */
-    cout << "IMPLEMENTAR MAIS TARDE" << endl;
+    std::cout << std::setw(MAX_NICKNAME_LENGHT) << getStreamer() << " " << std::setw(9) << (getIsPublic() ? "public" : "private") << " " << std::setw(7) << getId() << " " << std::setw(MAX_TITLE_LENGHT) << getTitle() << " " << std::setw(4) << getLanguage() << " " << std::setw(7) << getViewers() << " " << std::setw(7) << getLikes() << " " << std::setw(7) << getDislikes() << " " <<  getStartDate().toString() << " " << getEndDate().toString() << std::endl;
 }
 
 bool StreamData::isOver() const{
