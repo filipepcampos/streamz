@@ -103,7 +103,7 @@ bool Platform::readUserFromFile(std::ifstream &file) {
     lines[1] >> current_stream_id;
     std::getline(lines[1], birth_date);
 
-    unsigned int id; char feedback; vector<std::pair<unsigned int, char>> history;
+    unsigned int id; char feedback; std::vector<std::pair<unsigned int, char>> history;
     lines[2] >> str; // Remove 'history: '
     while(lines[2] >> id >> feedback){
         history.emplace_back(id, feedback);
@@ -149,7 +149,7 @@ void Platform::save(){
     }
     std::ofstream streams_file(files.active_stream_file, std::ofstream::trunc);
     if(streams_file.is_open()){
-        streams_file << stream_id_count << endl;
+        streams_file << stream_id_count << std::endl;
         for(const auto &stream : active_streams){
             streams_file << *stream;
         }
@@ -239,8 +239,8 @@ void Platform::showUsers() const{
     }
 }
 
-void Platform::showStreamHistory(const std::vector<std::pair<unsigned int,char>> &history) const {
-    std::vector<const StreamData *> h = archive.getStreamsById(history);
+void Platform::showStreamHistory(const std::vector<std::pair<unsigned int,char>> &history, char filter) const {
+    std::vector<const StreamData *> h = archive.getStreamsById(history, filter);
     showStreamsHeader();
     for(const auto &data : h){
         data->show();
@@ -292,7 +292,7 @@ std::weak_ptr<Stream> Platform::joinStreamById(unsigned int id, const Viewer &vi
     return std::weak_ptr<Stream>();
 }
 
-std::weak_ptr<Stream> Platform::startPublicStream(const string &title, const string &streamer, const string &language,
+std::weak_ptr<Stream> Platform::startPublicStream(const std::string &title, const std::string &streamer, const std::string &language,
                                                   const unsigned int minimum_age) {
     std::shared_ptr<Stream> ptr(new Stream(title, streamer, language, stream_id_count++, minimum_age));
     active_streams.emplace_back(ptr);
@@ -300,9 +300,9 @@ std::weak_ptr<Stream> Platform::startPublicStream(const string &title, const str
     return weak_ptr;
 }
 
-std::weak_ptr<Stream> Platform::startPrivateStream(const string &title, const string &streamer, const string &language,
+std::weak_ptr<Stream> Platform::startPrivateStream(const std::string &title, const std::string &streamer, const std::string &language,
                                                    const unsigned minimum_age, const unsigned max_capacity,
-                                                   const vector<string> &allowed_viewers){
+                                                   const std::vector<std::string> &allowed_viewers){
     std::shared_ptr<Stream> ptr(new PrivateStream(title, streamer, language, stream_id_count++, minimum_age, max_capacity, allowed_viewers));
     active_streams.emplace_back(ptr);
     std::weak_ptr<Stream> weak_ptr = ptr;

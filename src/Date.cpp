@@ -24,11 +24,11 @@ Date::Date(const Date &date){
 }
 
 
-Date::Date(const string &date){
-    istringstream ss{date};
+Date::Date(const std::string &date){
+    std::istringstream ss{date};
     unsigned dia, mes, ano, horas, minutos;
     char separator;
-    vector<unsigned> months {31,28,31,30,31,30,31,31,30,31,30,31};
+    std::vector<unsigned> months {31,28,31,30,31,30,31,31,30,31,30,31};
     if(date.length() > 10){
         ss >> dia >> separator >> mes >> separator >> ano >> horas >> separator >> minutos;
         if ( ( ano % 4 == 0 && ano % 100 != 0 ) || ano % 400 == 0 )
@@ -37,7 +37,7 @@ Date::Date(const string &date){
             throw InvalidDate(date);
         }
     }
-    else if (date.length() == 10){
+    else if (date.length() <= 10 && date.length() > 7){
         ss >> dia >> separator >> mes >> separator >> ano;
         if ( ( ano % 4 == 0 && ano % 100 != 0 ) || ano % 400 == 0 )
             months[1] = 29;
@@ -58,14 +58,14 @@ Date::Date(const string &date){
     minutes = minutos;
 }
 
-string Date::toString() const {
-    stringstream ss;
-    string dia = to_string(day);
-    string mes = to_string(month);
-    string ano = to_string(year);
-    string horas = to_string(hours);
-    string minutos = to_string(minutes);
-    ss << setfill('0') << setw(2) << dia << "/" << setw(2) << mes << "/" << setw(4) << ano << " " << setw(2) << horas << ":" << setw(2) << minutos;
+std::string Date::toString() const {
+    std::stringstream ss;
+    std::string dia = std::to_string(day);
+    std::string mes = std::to_string(month);
+    std::string ano = std::to_string(year);
+    std::string horas = std::to_string(hours);
+    std::string minutos = std::to_string(minutes);
+    ss << std::setfill('0') << std::setw(2) << dia << "/" << std::setw(2) << mes << "/" << std::setw(4) << ano << " " << std::setw(2) << horas << ":" << std::setw(2) << minutos;
     return ss.str();
 }
 

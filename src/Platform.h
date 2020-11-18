@@ -206,7 +206,7 @@ public:
      * @param minimum_age
      * @return
      */
-    std::weak_ptr<Stream> startPublicStream(const string &title, const string &streamer, const string &language,
+    std::weak_ptr<Stream> startPublicStream(const std::string &title, const std::string &streamer, const std::string &language,
                                             unsigned minimum_age);
 
     /**
@@ -219,9 +219,9 @@ public:
      * @param allowed_viewers - Vector with allowed viewers nicknames
      * @return
      */
-    std::weak_ptr<Stream> startPrivateStream(const string &title, const string &streamer, const string &language,
+    std::weak_ptr<Stream> startPrivateStream(const std::string &title, const std::string &streamer, const std::string &language,
                                              unsigned minimum_age, unsigned max_capacity,
-                                             const vector<string> &allowed_viewers);
+                                             const std::vector<std::string> &allowed_viewers);
 
     /**
      * End stream with a given id
@@ -253,7 +253,7 @@ public:
      * Show all streams in a user history
      * @param ids - vector of ids of all streams to be shown
      */
-    void showStreamHistory(const std::vector<std::pair<unsigned int, char>> &history) const;
+    void showStreamHistory(const std::vector<std::pair<unsigned int, char>> &history, char filter=0) const;
 
     /**
      * Show all users in the platform

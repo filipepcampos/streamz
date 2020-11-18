@@ -33,7 +33,7 @@ unsigned int Admin::streamsCounter(const bool isPublic, const Date &lower, const
 }
 
 std::string Admin::topLanguage() const {
-    map<string, unsigned int> languages;
+    std::map<std::string, unsigned int> languages;
     for (const std::shared_ptr<Stream>& stream : platform.active_streams) {
         languages[stream->getLanguage()]++;
     }
@@ -42,7 +42,7 @@ std::string Admin::topLanguage() const {
     }
 
     unsigned maxCounter = 0;
-    string maxLanguage = "There are no streams"; // In case no stream is processed
+    std::string maxLanguage = "There are no streams"; // In case no stream is processed
     auto it = languages.begin();
     while (it != languages.end()) {
         if (it->second > maxCounter) {
@@ -67,7 +67,7 @@ std::string Admin::topTypeStream() const {
 }
 
 std::string Admin::topStreamer() const {
-    map<string, unsigned int> streamers;
+    std::map<std::string, unsigned int> streamers;
     for (const std::shared_ptr<Stream>& stream : platform.active_streams) {
         streamers[stream->getStreamer()]++;
     }
@@ -76,7 +76,7 @@ std::string Admin::topStreamer() const {
     }
 
     unsigned maxCounter = 0;
-    string maxStreamer = "There are no streamers"; // In case no streamer is processed
+    std::string maxStreamer = "There are no streamers"; // In case no streamer is processed
     auto it = streamers.begin();
     while (it != streamers.end()) {
         if (it->second > maxCounter) {

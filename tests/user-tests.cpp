@@ -84,8 +84,8 @@ TEST(user, showUser) {
     platform.registerViewer("Viewer1", "Viewer Name", Date("22/06/2001 00:00"));
 
     Streamer * st = dynamic_cast<Streamer*>(platform.getUser("Streamer1"));
-    cout << *st;
+    std::cout << *st;
     Viewer * vw1 = dynamic_cast<Viewer*>(platform.getUser("Viewer1"));
-    cout << *vw1;
-    cout << endl << vw1->getAge() << endl;
+    std::cout << *vw1;
+    std::cout << std::endl << vw1->getAge() << std::endl;
 }

@@ -23,13 +23,13 @@ Streamer::Streamer(const std::string &nickname, const std::string &name, const D
     this->current_stream = current_stream;
 }
 
-void Streamer::startPublicStream(const string &title, const string &language, const unsigned minimum_age) {
+void Streamer::startPublicStream(const std::string &title, const std::string &language, const unsigned minimum_age) {
     if (!current_stream.expired())
         throw InvalidAction("Stream already occurring");
     current_stream = platform.startPublicStream(title, getNickname(), language, minimum_age);
 }
 
-void Streamer::startPrivateStream(const string &title, const string &language, const unsigned minimum_age, const unsigned max_capacity, const vector<string> &allowed_viewers) {
+void Streamer::startPrivateStream(const std::string &title, const std::string &language, const unsigned minimum_age, const unsigned max_capacity, const std::vector<std::string> &allowed_viewers) {
     if (!current_stream.expired())
         throw InvalidAction("Stream already occurring");
     current_stream = platform.startPrivateStream(title, getNickname(), language, minimum_age, max_capacity, allowed_viewers);

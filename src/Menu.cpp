@@ -24,7 +24,7 @@ void MainMenu::show() {
     unsigned int options = 0;
 
     std::cout << CLR_SCREEN;
-    cout << "\n"
+    std::cout << "\n"
             "   _____ _                            ______\n"
             "  / ____| |                          |___  /\n"
             " | (___ | |_ _ __ ___  __ _ _ __ ___    / / \n"
@@ -34,13 +34,13 @@ void MainMenu::show() {
             "\n";
 
     /* MAIS TARDE AJUSTAR ESPACAMENTO COM SETW() */
-    cout << "Main Menu:\n\n";
-    cout << "[" << ++options << "] " << "Login User\n";
-    cout << "[" << ++options << "] " << "Register User\n";
-    cout << "[" << ++options << "] " << "Administrator\n";
-    cout << "[" << ++options << "] " << "Show information\n";
-    cout << "[" << ++options << "] " << "Manual Save\n\n"; // ?
-    cout << "[0] Exit\n";
+    std::cout << "Main Menu:\n\n";
+    std::cout << "[" << ++options << "] " << "Login User\n";
+    std::cout << "[" << ++options << "] " << "Register User\n";
+    std::cout << "[" << ++options << "] " << "Administrator\n";
+    std::cout << "[" << ++options << "] " << "Show information\n";
+    std::cout << "[" << ++options << "] " << "Manual Save\n\n"; // ?
+    std::cout << "[0] Exit\n";
 }
 Menu * MainMenu::getNextMenu() {
     int option;
@@ -138,7 +138,7 @@ Menu * LoginUserMenu::getNextMenu() {
             }
         }
         catch(const UserDoesNotExist &e){
-            std::cout << "User " << e.getNickname() << " does not exist" << endl;
+            std::cout << "User " << e.getNickname() << " does not exist" << std::endl;
             waitEnter();
         }
     }
@@ -165,6 +165,8 @@ void ViewerMenu::show() {
     }
     else{
         std::cout << "[" << option++ << "] Join Stream" << std::endl;
+        std::cout << "[" << option++ << "] View stream history" << std::endl;
+        std::cout << "[" << option++ << "] View liked streams history" << std::endl;
     }
     std::cout << "[" << option++ << "] Delete Account" << std::endl << std::endl;
     std::cout << "[0] Exit" << std::endl;
@@ -197,7 +199,9 @@ Menu * ViewerMenu::getNextMenu() {
     else{
         switch(option){
             case 1: return new JoinStreamMenu(platform, viewer);
-            case 2: platform.deleteUser(viewer->getNickname()); return nullptr;
+            case 2: platform.showStreamHistory(viewer->getStreamsHistory()); waitEnter(); return this;
+            case 3: platform.showStreamHistory(viewer->getStreamsHistory(), 'L'); waitEnter(); return this;
+            case 4: platform.deleteUser(viewer->getNickname()); return nullptr;
         }
     }
     return invalidOption();
@@ -216,6 +220,7 @@ void StreamerMenu::show() {
     }
     else{
         std::cout << "[" << option++ << "] Start stream" << std::endl;
+        std::cout << "[" << option++ << "] View stream history" << std::endl;
     }
     std::cout << "[" << option++ << "] Delete account" << std::endl << std::endl;
     std::cout << "[0] Exit" << std::endl;
@@ -239,7 +244,8 @@ Menu * StreamerMenu::getNextMenu() {
     else{
         switch(option){
             case 2: return new CreateStreamMenu(platform, streamer);
-            case 3: platform.deleteUser(streamer->getNickname()); return nullptr;
+            case 3: platform.showStreamHistory(streamer->getStreamsHistory()); waitEnter(); return this;
+            case 4: platform.deleteUser(streamer->getNickname()); return nullptr;
         }
     }
     return invalidOption();
@@ -428,7 +434,7 @@ Menu * CreateStreamMenu::getNextMenu() {
                 return invalidOption();
             }
 
-            vector<string> allowed;
+            std::vector<std::string> allowed;
             std::string user;
             std::cout << "Allowed users (Write all users you wish to allow into the stream, submit blank username to complete)" << std::endl;
 

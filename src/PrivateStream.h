@@ -5,8 +5,8 @@
 
 struct Comment{
     Date date;
-    string nickname;
-    string comment;
+    std::string nickname;
+    std::string comment;
 };
 
 class PrivateStream : public Stream {
@@ -21,7 +21,7 @@ public:
      * @param max_capacity Maximum capacity of the stream
      * @param allowed_viewers Viewers allowed to watch the stream
      */
-    PrivateStream(const string &title, const string &streamer, const string &language, unsigned int id, unsigned minimum_age, unsigned max_capacity, const vector<string> &allowed_viewers);
+    PrivateStream(const std::string &title, const std::string &streamer, const std::string &language, unsigned int id, unsigned minimum_age, unsigned max_capacity, const std::vector<std::string> &allowed_viewers);
 
     /**
      * Class constructor
@@ -32,10 +32,10 @@ public:
      * @param minimum_age Minimum age to watch the stream
      * @param max_capacity Maximum capacity of the stream
      * @param allowed_viewers Viewers allowed to watch the stream
-     * @param start_date String that represents start date of stream
+     * @param start_date std::string that represents start date of stream
      * @param comments Vector of stream comments
      */
-    PrivateStream(const string &title, const string &streamer, const string &language, unsigned int id, unsigned minimum_age, unsigned max_capacity, const vector<string> &allowed_viewers, unsigned int likes, unsigned int dislikes, const std::string &start_date, const vector<Comment> &comments);
+    PrivateStream(const std::string &title, const std::string &streamer, const std::string &language, unsigned int id, unsigned minimum_age, unsigned max_capacity, const std::vector<std::string> &allowed_viewers, unsigned int likes, unsigned int dislikes, const std::string &start_date, const std::vector<Comment> &comments);
     /**
      * Check if viewer can join the stream
      * @param viewer Viewer who wants to join the stream
@@ -46,19 +46,19 @@ public:
      * Gets the comments of the stream
      * @return Comments of the stream
      */
-    vector<Comment> & getComments();
+    std::vector<Comment> & getComments();
     /**
      * Writes in the indicated ostream the information about the stream
      * @param os Output stream where the information will be writen
      * @return Stream where the information will be writen
      */
-    ostream& print(ostream & os) const;
+    std::ostream& print(std::ostream & os) const;
     /**
      * Adds a comment to the stream
      * @param viewer Viewer leaving the comment
      * @param comment Comment the viewer is leaving
      */
-    void addComment(Viewer &viewer, const string &comment);
+    void addComment(Viewer &viewer, const std::string &comment);
 private:
     /**
      * Maximum capacity of the stream
@@ -67,11 +67,11 @@ private:
     /**
      * Vector with the viewers allowed to watch the stream
      */
-    vector<string> allowed_viewers;
+    std::vector<std::string> allowed_viewers;
     /**
      * Vector with all the comments
      */
-    vector<Comment> comments;
+    std::vector<Comment> comments;
 };
 
 #endif //STREAMZ_PRIVATESTREAM_H

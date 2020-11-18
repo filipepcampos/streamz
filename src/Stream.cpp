@@ -2,11 +2,11 @@
 #include <iostream>
 
 
-Stream::Stream(const string &title, const string &streamer, const string &language, unsigned int id,
+Stream::Stream(const std::string &title, const std::string &streamer, const std::string &language, unsigned int id,
                const unsigned int minimum_age) :
         StreamData(id,title,streamer,Date(),Date(),language,0,true, minimum_age) {}
 
-Stream::Stream(const string &title, const string &streamer, const string &language, unsigned int id,
+Stream::Stream(const std::string &title, const std::string &streamer, const std::string &language, unsigned int id,
                const unsigned int minimum_age, unsigned int likes, unsigned int dislikes,
                const std::string &start_date) :
         StreamData(id,title,streamer,Date(start_date),Date(),language,0,true,

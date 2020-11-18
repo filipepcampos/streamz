@@ -40,7 +40,7 @@ public:
      * @param minimum_age Minimum age of the allowed viewers
      * @throws InvalidAction
      */
-    void startPublicStream(const string &title, const string &language, unsigned minimum_age);
+    void startPublicStream(const std::string &title, const std::string &language, unsigned minimum_age);
     /**
      * Starts a Private Stream and associate it with the streamer
      * @param title Stream title
@@ -50,7 +50,7 @@ public:
      * @param allowed_viewers Vector with allowed viewers nicknames
      * @throws InvalidAction
      */
-    void startPrivateStream(const string &title, const string &language, unsigned minimum_age, unsigned max_capacity, const vector<string> &allowed_viewers);
+    void startPrivateStream(const std::string &title, const std::string &language, unsigned minimum_age, unsigned max_capacity, const std::vector<std::string> &allowed_viewers);
     /**
      * Ends the stream the user is currently streaming
      * @throws InvalidAction

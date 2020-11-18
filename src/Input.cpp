@@ -73,6 +73,13 @@ namespace input{
     }
 
     bool validateBirthDate(const std::string &date){
+        Date d;
+        try{
+            d = Date(date);
+        }
+        catch(const InvalidDate &e){
+            return false;
+        }
         if(!(Date(date) < Date())){ // Users from the future are not allowed
             return false;
         }

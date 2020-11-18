@@ -3,8 +3,8 @@
 #include <iomanip>
 #include "Input.h"
 
-StreamData::StreamData(unsigned id, const string &title, const string &streamer,const Date &start_date,
-                       const Date &end_date,  const string &language, unsigned viewers, bool isPublic,
+StreamData::StreamData(unsigned id, const std::string &title, const std::string &streamer,const Date &start_date,
+                       const Date &end_date,  const std::string &language, unsigned viewers, bool isPublic,
                        unsigned min_age, unsigned likes, unsigned dislikes) :
                             id(id), title(title), streamer(streamer), start_date(start_date), end_date(end_date),
                             language(language), viewers(viewers), min_age(min_age),
@@ -14,11 +14,11 @@ unsigned StreamData::getId() const{
     return id;
 }
 
-string StreamData::getTitle() const{
+std::string StreamData::getTitle() const{
     return title;
 }
 
-string StreamData::getStreamer() const{
+std::string StreamData::getStreamer() const{
     return streamer;
 }
 
@@ -30,7 +30,7 @@ Date StreamData::getEndDate() const{
     return end_date;
 }
 
-string StreamData::getLanguage() const{
+std::string StreamData::getLanguage() const{
     return language;
 }
 
@@ -42,14 +42,14 @@ bool StreamData::getIsPublic() const {
     return isPublic;
 }
 
-std::ostream &StreamData::print(ostream &os) const {
-    os << "(" << getId() << ") " << getTitle() << endl
-       << "    by " << getStreamer() << endl
+std::ostream &StreamData::print(std::ostream &os) const {
+    os << "(" << getId() << ") " << getTitle() << std::endl
+       << "    by " << getStreamer() << std::endl
        << "    " << (getIsPublic() ? "public" : "private") << " " << getLanguage() << " " << getViewers() << " viewers "
        << getLikes() << " likes " << " " << getDislikes() << " dislikes" << std::endl
        << "    " << getStartDate().toString();
     if(isOver()){
-        os << " - " << getEndDate().toString() << endl;
+        os << " - " << getEndDate().toString() << std::endl;
     }
     os << std::endl << "    minimum_age: " << getMinAge() << std::endl;
     return os;
@@ -63,7 +63,7 @@ unsigned StreamData::getDislikes() const {
     return dislikes;
 }
 
-ostream& operator<<(ostream& os, const StreamData &d) {
+std::ostream& operator<<(std::ostream& os, const StreamData &d) {
     return d.print(os);
 }
 

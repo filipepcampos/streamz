@@ -2,12 +2,14 @@
 #include <iostream>
 #include <algorithm>
 
-PrivateStream::PrivateStream(const string &title, const string &streamer, const string &language, const unsigned int id, const unsigned int minimum_age, const unsigned int max_capacity, const vector<string> &allowed_viewers) : Stream(title, streamer, language, id, minimum_age), max_capacity(max_capacity), allowed_viewers(allowed_viewers) {
+PrivateStream::PrivateStream(const std::string &title, const std::string &streamer, const std::string &language,
+                             const unsigned int id, const unsigned int minimum_age, const unsigned int max_capacity,
+                             const std::vector<std::string> &allowed_viewers) : Stream(title, streamer, language, id, minimum_age), max_capacity(max_capacity), allowed_viewers(allowed_viewers) {
     isPublic = false;
 }
 
-PrivateStream::PrivateStream(const string &title, const string &streamer, const string &language, unsigned int id,
-                             const unsigned int minimum_age, const unsigned int max_capacity, const vector<string> &allowed_viewers,
+PrivateStream::PrivateStream(const std::string &title, const std::string &streamer, const std::string &language, unsigned int id,
+                             const unsigned int minimum_age, const unsigned int max_capacity, const std::vector<std::string> &allowed_viewers,
                              unsigned int likes, unsigned int dislikes,
                              const std::string &start_date, const std::vector<Comment> &comments) :
         Stream(title, streamer, language, id, minimum_age, likes, dislikes, start_date),
@@ -16,7 +18,7 @@ PrivateStream::PrivateStream(const string &title, const string &streamer, const 
 }
 
 bool PrivateStream::canJoin(Viewer &viewer){
-    string nickname = viewer.getNickname();
+    std::string nickname = viewer.getNickname();
     if (viewers < max_capacity)
         if (Stream::canJoin(viewer))
             if (find(allowed_viewers.begin(),allowed_viewers.end(),nickname) != allowed_viewers.end())
@@ -24,12 +26,12 @@ bool PrivateStream::canJoin(Viewer &viewer){
     return false;
 }
 
-vector<Comment> & PrivateStream::getComments(){
+std::vector<Comment> & PrivateStream::getComments(){
     return comments;
 }
 
 
-ostream& PrivateStream::print(ostream & os) const{
+std::ostream& PrivateStream::print(std::ostream & os) const{
     Stream::print(os);
     os << "    " << "maximum_capacity: " << max_capacity << " allowed_users: ";
     for (int i = 0; i < allowed_viewers.size(); i++)
@@ -40,7 +42,7 @@ ostream& PrivateStream::print(ostream & os) const{
     return os;
 }
 
-void PrivateStream::addComment(Viewer &viewer, const string &comment){
+void PrivateStream::addComment(Viewer &viewer, const std::string &comment){
     Comment c;
     c.date = Date();
     c.nickname = viewer.getNickname();

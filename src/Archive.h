@@ -27,7 +27,7 @@ private:
      */
     bool readStreamFromFile(std::ifstream &file);
 public:
-    explicit Archive(const string &filename = "archive.txt");
+    explicit Archive(const std::string &filename = "archive.txt");
     ~Archive();
 
     /*

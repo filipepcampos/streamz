@@ -3,8 +3,6 @@
 #include <string>
 #include "Exceptions.h"
 
-using namespace std;
-
 class Date {
     unsigned day;
     unsigned month;
@@ -25,7 +23,7 @@ public:
      * Another constructor
      * @param date Date in the format dd/mm/yyyy hh:mm
      */
-    Date(const string &date);
+    Date(const std::string &date);
     /**
      *
      * @param d1_inicial Initial date for range 1
@@ -64,7 +62,7 @@ public:
      * Turns date into a string
      * @return String in the format dd/mm/yyyy hh:mm
      */
-    string toString() const;
+    std::string toString() const;
     /**
      * Checks if one date comes before the other
      * @param d1 Date 1

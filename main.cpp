@@ -6,7 +6,7 @@
 int main(int argc, char* argv[]) {
     std::cout << std::left;
     Platform platform;
-    stack<Menu *> menus;
+    std::stack<Menu *> menus;
     menus.push(new MainMenu(platform));
 
     while(!menus.empty()){

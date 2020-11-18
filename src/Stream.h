@@ -15,7 +15,7 @@ public:
      * @param id Id of the stream
      * @param minimum_age Minimum age to watch the stream
      */
-    Stream(const string &title, const string &streamer, const string &language, unsigned int id, const unsigned minimum_age);
+    Stream(const std::string &title, const std::string &streamer, const std::string &language, unsigned int id, const unsigned minimum_age);
     /**
      * Class constructor
      * @param title Title of the stream
@@ -25,7 +25,7 @@ public:
      * @param minimum_age Minimum age to watch the stream
      * @param start_date String to start_date
      */
-    Stream(const string &title, const string &streamer, const string &language, unsigned int id,
+    Stream(const std::string &title, const std::string &streamer, const std::string &language, unsigned int id,
            const unsigned int minimum_age, unsigned int likes, unsigned int dislikes,
            const std::string &start_date);
 

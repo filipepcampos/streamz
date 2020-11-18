@@ -9,8 +9,8 @@ Viewer::Viewer(const std::string &nickname, const std::string &name, const Date 
         throw InvalidAge(getAge());
 }
 
-Viewer::Viewer(const string &nickname, const string &name, const Date &birth_date, Platform &platform,
-               const vector<std::pair<unsigned int, char>> &history)
+Viewer::Viewer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform &platform,
+               const std::vector<std::pair<unsigned int, char>> &history)
                         : User(nickname, name, birth_date, platform, history){
     if (getAge() <= MINIMUM_VIEWER_AGE)
         throw InvalidAge(getAge());
@@ -26,7 +26,7 @@ void Viewer::joinStream(unsigned int id) {
     current_stream = platform.joinStreamById(id, *this);
     syncHistory();
 }
-void Viewer::joinStream(const string &streamer) {
+void Viewer::joinStream(const std::string &streamer) {
     if(!current_stream.expired()){
         leaveStream();
     }
@@ -56,7 +56,7 @@ bool Viewer::operator==(const Viewer &other) const {
     return this->getNickname() == other.getNickname();
 }
 
-void Viewer::comment(const string &str) {
+void Viewer::comment(const std::string &str) {
     if(auto ptr = current_stream.lock()){
         std::shared_ptr<PrivateStream> private_stream = std::dynamic_pointer_cast<std::shared_ptr<PrivateStream>::element_type>(ptr);
         if(private_stream){

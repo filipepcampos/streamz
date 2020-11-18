@@ -16,8 +16,8 @@ User::User(const std::string &nickname, const std::string &name, const Date &bir
     }
 }
 
-User::User(const string &nickname, const string &name, const Date &birth_date, Platform &platform,
-           const vector<std::pair<unsigned int, char>> &history) : nickname(nickname), name(name), birth_date(birth_date), platform(platform), streams_history(history){
+User::User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform &platform,
+           const std::vector<std::pair<unsigned int, char>> &history) : nickname(nickname), name(name), birth_date(birth_date), platform(platform), streams_history(history){
     char last = ' ';
     // Capitalize first letter of the name
     for(auto &c : this->name){

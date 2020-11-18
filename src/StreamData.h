@@ -9,11 +9,11 @@ void showStreamsHeader();
 class StreamData {
 protected:
     unsigned id; /**> Id of the stream*/
-    string title; /**> Title of the stream*/
-    string streamer; /**> Streamer nickname*/
+    std::string title; /**> Title of the stream*/
+    std::string streamer; /**> Streamer nickname*/
     Date start_date; /**> Start date of the stream*/
     Date end_date; /**> End date of the stream*/
-    string language; /**> Language of the stream*/
+    std::string language; /**> Language of the stream*/
     unsigned min_age; /**>Minimum viewer age*/
     unsigned viewers = 0; /**>Number of viewers*/
     bool isPublic = true; /**>Accessibility of the stream*/
@@ -24,7 +24,7 @@ public:
     /**
      * Class constructor
      */
-    StreamData(unsigned id, const string &title, const string &streamer,const Date &start_date, const Date &end_date,  const string &language,
+    StreamData(unsigned id, const std::string &title, const std::string &streamer,const Date &start_date, const Date &end_date,  const std::string &language,
                unsigned viewers, bool isPublic, unsigned min_age, unsigned likes=0, unsigned dislikes=0);
     /**
      * Gets the id of the stream
@@ -35,12 +35,12 @@ public:
      * Gets the title of the stream
      * @return title of the stream
      */
-    string getTitle() const;
+    std::string getTitle() const;
     /**
      * Gets the streamer
      * @return streamer
      */
-    string getStreamer() const;
+    std::string getStreamer() const;
     /**
      * Gets the start date of the stream
      * @return start date of the stream
@@ -55,7 +55,7 @@ public:
      * Gets the language of the stream
      * @return language of the stream
      */
-    string getLanguage() const;
+    std::string getLanguage() const;
     /**
      * Gets the number of viewers at the stream
      * @return number of viewers at the stream
@@ -92,7 +92,7 @@ public:
      * @param d StreamData
      * @return Stream where the information will be writen
      */
-    friend ostream& operator<<(ostream& os, const StreamData &d);
+    friend std::ostream& operator<<(std::ostream& os, const StreamData &d);
     /**
      * Print data about stream into ostream
      * @param os
