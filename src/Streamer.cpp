@@ -54,7 +54,7 @@ void Streamer::endStream() {
     current_stream.reset();
 }
 
-void Streamer::removeStream(const unsigned int id) {
+void Streamer::removeStreamFromHistory(const unsigned int id) {
     unsigned int left = 0, right = streams_history.size() - 1, middle;
     while (left <= right) {
         middle = (left + right) / 2;

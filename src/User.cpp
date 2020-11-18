@@ -3,6 +3,7 @@
 #include "Input.h"
 #include <iostream>
 #include <iomanip>
+#include <algorithm>
 
 User::User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform) : nickname(nickname), name(name), birth_date(birth_date), platform(platform) {
     char last = ' ';
@@ -76,4 +77,13 @@ bool User::inPrivateStream() const {
 
 const std::vector<std::pair<unsigned int, char>> &User::getStreamsHistory() const {
     return streams_history;
+}
+
+void User::removeStreamFromHistory(const unsigned int id) {
+    auto it = std::find_if(streams_history.begin(), streams_history.end(), [id](const std::pair<unsigned int,char> &p){
+        return p.first == id;
+    });
+    if(it != streams_history.end()){
+        streams_history.erase(it);
+    }
 }

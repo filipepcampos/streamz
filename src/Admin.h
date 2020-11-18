@@ -42,9 +42,9 @@ public:
     std::string topTypeStream() const;
     /**
      * Searches the streamer with the most total views
-     * @return Pointer to the streamer with the most total views
+     * @return Nickname of the streamer with the most total views
      */
-    Streamer * topStreamer() const;
+    std::string topStreamer() const;
 };
 
 

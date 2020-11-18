@@ -41,9 +41,5 @@ TEST(admin, adminTests) {
     EXPECT_EQ(2, ad.streamsCounter(true, d1, Date()));
     EXPECT_EQ("PT", ad.topLanguage());
     EXPECT_EQ("public", ad.topTypeStream());
-    EXPECT_EQ("st1", ad.topStreamer()->getNickname());
-
-
-
-
+    EXPECT_EQ("st1", ad.topStreamer());
 }

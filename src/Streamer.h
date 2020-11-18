@@ -61,7 +61,7 @@ public:
      * @param id Id of the stream
      * @throws StreamDoesNotExist
      */
-    void removeStream(unsigned int id);
+    void removeStreamFromHistory(const unsigned int id);
     /**
      * Displays on the screen the info about the user
      */

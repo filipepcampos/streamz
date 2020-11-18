@@ -1,8 +1,6 @@
 #include "StreamData.h"
 #include <iostream>
 
-using namespace std;
-
 StreamData::StreamData(unsigned id, const string &title, const string &streamer,const Date &start_date,
                        const Date &end_date,  const string &language, unsigned viewers,
                        bool isPublic, unsigned likes, unsigned dislikes) :

@@ -4,9 +4,6 @@
 #include <sstream>
 #include <iomanip>
 
-
-using namespace std;
-
 Date::Date(){
     time_t now = time(0);
     tm *ltm = localtime(&now);

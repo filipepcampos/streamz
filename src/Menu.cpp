@@ -267,16 +267,7 @@ Menu * AdministratorMenu::getNextMenu() {
         case 2: return new FilterStreamsMenu(platform, admin);
         case 3: std::cout << "Most used language in streams: " << admin.topLanguage() << std::endl; waitEnter(); return this;
         case 4: std::cout << "Most used stream type in streams: " << admin.topTypeStream() << std::endl; waitEnter(); return this;
-        case 5:
-            std::cout << "Streamer with most views: ";
-            Streamer * strm = admin.topStreamer();
-            if(strm){
-                std::cout << strm->getNickname();
-            }
-            else{
-                std::cout << "No streamer registered";
-            }
-            std::cout << std::endl; waitEnter(); return this;
+        case 5: std::cout << "Streamer with most views: " << admin.topStreamer() << std::endl; waitEnter(); return this;
     }
     return invalidOption();
 }

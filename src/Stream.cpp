@@ -2,9 +2,6 @@
 #include <iostream>
 #include <iomanip>
 
-using namespace std;
-
-
 Stream::Stream(const string &title, const string &streamer, const string &language, unsigned int id,
                const unsigned int minimum_age) :
                         StreamData(id,title,streamer,Date(),end_date,language,0,true),

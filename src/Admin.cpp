@@ -66,26 +66,24 @@ std::string Admin::topTypeStream() const {
     return totalPublic > totalPrivate ? "public" : "private";
 }
 
-Streamer * Admin::topStreamer() const {
-    unsigned int maxViews = 0;
-    Streamer * maxStreamer = nullptr;
+std::string Admin::topStreamer() const {
+    map<string, unsigned int> streamers;
+    for (const std::shared_ptr<Stream>& stream : platform.active_streams) {
+        streamers[stream->getStreamer()]++;
+    }
+    for (const StreamData& stream : platform.archive.streams) {
+        streamers[stream.getStreamer()]++;
+    }
 
-    for (User * user : platform.users) {
-        Streamer * streamer;
-        unsigned int views = 0;
-        streamer = dynamic_cast<Streamer*> (user);
-        if (streamer == nullptr) {
-            continue;
+    unsigned maxCounter = 0;
+    string maxStreamer = "There are no streamers"; // In case no streamer is processed
+    auto it = streamers.begin();
+    while (it != streamers.end()) {
+        if (it->second > maxCounter) {
+            maxStreamer = it->first;
+            maxCounter = it->second;
         }
-        vector<const StreamData *> history = platform.archive.getStreamsById(streamer->getStreamsHistory());
-
-        for (const StreamData * stream : history)
-            views += stream->getViewers();
-
-        if (views > maxViews || !maxStreamer) {
-            maxViews = views;
-            maxStreamer = streamer;
-        }
+        it++;
     }
     return maxStreamer;
 }

@@ -79,7 +79,7 @@ void Archive::showStream(unsigned int id) const{
     }
 }
 
-std::vector<const StreamData *> & Archive::getStreamsById(const std::vector<std::pair<unsigned int, char>> &history, char filter) const{
+std::vector<const StreamData *> Archive::getStreamsById(const std::vector<std::pair<unsigned int, char>> &history, char filter) const{
     std::vector<const StreamData *> vec;
     for(const auto &p : history){
         if(!filter || p.second == filter){

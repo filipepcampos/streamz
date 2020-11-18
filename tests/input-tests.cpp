@@ -2,6 +2,7 @@
 #include <gmock/gmock.h>
 #include <string>
 #include "Input.h"
+#include "Date.h"
 using testing::Eq;
 
 TEST(input, trimString) {
@@ -44,7 +45,7 @@ TEST(input, validateNickname){
     EXPECT_EQ(input::validateNickname("examp le"), false);
     EXPECT_EQ(input::validateNickname("NicknameTooLargeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"), false);
 
-    EXPECT_EQ(input::validateNickname("ReasonableName123"), true);
+    EXPECT_EQ(input::validateNickname("Name123"), true);
     EXPECT_EQ(input::validateNickname("example123"), true);
 }
 
@@ -57,5 +58,5 @@ TEST(input, validateName){
 }
 
 TEST(input, validateBirthDate){
-    GTEST_SKIP();
+    EXPECT_EQ(input::validateBirthDate("18/11/3125"), false);
 }

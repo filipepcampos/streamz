@@ -79,6 +79,13 @@ public:
     const std::vector<std::pair<unsigned int,char>> & getStreamsHistory() const;
 
     /**
+     * Removes a stream from the streams history
+     * @param id Id of the stream
+     * @throws StreamDoesNotExist
+     */
+    virtual void removeStreamFromHistory(const unsigned int id);
+
+    /**
      * Check if user is in a stream
      * @return true if in stream
      */

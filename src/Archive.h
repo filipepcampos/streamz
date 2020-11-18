@@ -70,7 +70,7 @@ public:
      * @param filter - char that will be matched with feedback from each stream ('L': like, 'D': dislike, '-': None)
      * @return std::vector<const StreamData *>
      */
-    std::vector<const StreamData *> & getStreamsById(const std::vector<std::pair<unsigned int, char>> &history, char filter = 0) const;
+    std::vector<const StreamData *> getStreamsById(const std::vector<std::pair<unsigned int, char>> &history, char filter = 0) const;
 
     /*
      * Enable test mode in which file read/write operations are disabled, and all current information cleared     *
