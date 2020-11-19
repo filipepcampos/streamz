@@ -53,7 +53,7 @@ void User::show() const {
 
 std::ostream& User::print(std::ostream & os) const {
     os << getNickname() << " " << getName() << std::endl;
-    os << "    " << (current_stream.expired() ? 0 : current_stream.lock()->getId()) << " " << getBirthDate().toString() << std::endl;
+    os << "    " << (current_stream.expired() ? 0 : current_stream.lock()->getId()) << " " << getBirthDate().toString(false) << std::endl;
     os << "    history: ";
     for (const auto &p : streams_history)
         os << p.first << p.second << " ";

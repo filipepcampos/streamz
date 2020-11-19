@@ -58,14 +58,17 @@ Date::Date(const std::string &date){
     minutes = minutos;
 }
 
-std::string Date::toString() const {
+std::string Date::toString(bool includeHours) const {
     std::stringstream ss;
     std::string dia = std::to_string(day);
     std::string mes = std::to_string(month);
     std::string ano = std::to_string(year);
     std::string horas = std::to_string(hours);
     std::string minutos = std::to_string(minutes);
-    ss << std::setfill('0') << std::setw(2) << dia << "/" << std::setw(2) << mes << "/" << std::setw(4) << ano << " " << std::setw(2) << horas << ":" << std::setw(2) << minutos;
+    ss << std::setfill('0') << std::setw(2) << dia << "/" << std::setw(2) << mes << "/" << std::setw(4) << ano;
+    if (includeHours){
+        ss << std::setfill('0') << " " << std::setw(2) << horas << ":" << std::setw(2) << minutos;
+    }
     return ss.str();
 }
 

@@ -60,9 +60,10 @@ public:
     unsigned getMinutes() const;
     /**
      * Turns date into a string
+     * @param includeHours Boolean indicating if hours and minutes should be printed
      * @return String in the format dd/mm/yyyy hh:mm
      */
-    std::string toString() const;
+    std::string toString(bool includeHours = true) const;
     /**
      * Checks if one date comes before the other
      * @param d1 Date 1
