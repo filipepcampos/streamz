@@ -245,6 +245,20 @@ void Platform::showStreamHistory(const std::vector<std::pair<unsigned int,char>>
     for(const auto &data : h){
         data->show();
     }
+    if(history.size() != h.size()) {
+        for (const auto &p : history) {
+            if (!filter || p.second == filter) {
+                unsigned int id = p.first;
+                auto it = std::find_if(active_streams.begin(), active_streams.end(),
+                                       [id](const std::shared_ptr<Stream> &ptr) {
+                                           return ptr->getId() == id;
+                                       });
+                if (it != active_streams.end()) {
+                    (*it)->show();
+                }
+            }
+        }
+    }
 }
 
 User *Platform::getUser(const std::string &nickname) {
