@@ -84,9 +84,11 @@ namespace input{
             d = Date(date);
         }
         catch(const InvalidDate &e){
+            std::cout << "Date wrongly formatted (should be day/month/year)" << std::endl;
             return false;
         }
         if(!(Date(date) < Date())){ // Users from the future are not allowed
+            std::cout << "Date is not valid" << std::endl;
             return false;
         }
         return true;
