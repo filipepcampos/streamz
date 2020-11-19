@@ -5,15 +5,9 @@
 
 Menu::Menu(Platform &platform) : platform(platform) {}
 
-void Menu::waitEnter() {
-    std::cout << std::endl << "Press enter to continue..." << std::endl;
-    std::string str;
-    std::getline(std::cin, str);
-}
-
 Menu * Menu::invalidOption() {
     std::cout << "Invalid option" << std::endl;
-    waitEnter();
+    input::waitEnter();
     return this;
 }
 
@@ -106,7 +100,7 @@ Menu * RegisterUserMenu::getNextMenu() {
             std::cout << "Streamer minimum age must be " << MINIMUM_STREAMER_AGE << std::endl;
         }
     }
-    waitEnter();
+    input::waitEnter();
     return nullptr;
 }
 
@@ -139,7 +133,7 @@ Menu * LoginUserMenu::getNextMenu() {
         }
         catch(const UserDoesNotExist &e){
             std::cout << "User " << e.getNickname() << " does not exist" << std::endl;
-            waitEnter();
+            input::waitEnter();
         }
     }
     return nullptr;
@@ -201,8 +195,8 @@ Menu * ViewerMenu::getNextMenu() {
         unsigned int id;
         switch(option){
             case 1: return new JoinStreamMenu(platform, viewer);
-            case 2: platform.showStreamHistory(viewer->getStreamsHistory()); waitEnter(); return this;
-            case 3: platform.showStreamHistory(viewer->getStreamsHistory(), 'L'); waitEnter(); return this;
+            case 2: platform.showStreamHistory(viewer->getStreamsHistory()); input::waitEnter(); return this;
+            case 3: platform.showStreamHistory(viewer->getStreamsHistory(), 'L'); input::waitEnter(); return this;
             case 4: std::cout << "Stream id: "; if(input::get(id)){viewer->removeStreamFromHistory(id);} return this;
             case 5: platform.deleteUser(viewer->getNickname()); return nullptr;
         }
@@ -241,7 +235,7 @@ Menu * StreamerMenu::getNextMenu() {
     if(streamer->inStream()){
         switch(option){
             case 2: streamer->endStream(); return this;
-            case 3: std::cout << CLR_SCREEN; streamer->showStreamInfo(); waitEnter(); return this;
+            case 3: std::cout << CLR_SCREEN; streamer->showStreamInfo(); input::waitEnter(); return this;
             case 4: platform.deleteUser(streamer->getNickname()); return nullptr;
         }
     }
@@ -249,7 +243,7 @@ Menu * StreamerMenu::getNextMenu() {
         unsigned int id;
         switch(option){
             case 2: return new CreateStreamMenu(platform, streamer);
-            case 3: platform.showStreamHistory(streamer->getStreamsHistory()); waitEnter(); return this;
+            case 3: platform.showStreamHistory(streamer->getStreamsHistory()); input::waitEnter(); return this;
             case 4: std::cout << "Stream id: "; if(input::get(id)){streamer->removeStreamFromHistory(id);} return this;
             case 5: platform.deleteUser(streamer->getNickname()); return nullptr;
         }
@@ -278,11 +272,11 @@ Menu * AdministratorMenu::getNextMenu() {
     switch(option){
         case 0: return nullptr;
         case 1: return new InformationMenu(platform);
-        case 2: std::cout << "Average views per stream: " << admin.averageViews() << std::endl; waitEnter(); return this;
+        case 2: std::cout << "Average views per stream: " << admin.averageViews() << std::endl; input::waitEnter(); return this;
         case 3: return new FilterStreamsMenu(platform, admin);
-        case 4: std::cout << "Most used language in streams: " << admin.topLanguage() << std::endl; waitEnter(); return this;
-        case 5: std::cout << "Most used stream type in streams: " << admin.topTypeStream() << std::endl; waitEnter(); return this;
-        case 6: std::cout << "Streamer with most views: " << admin.topStreamer() << std::endl; waitEnter(); return this;
+        case 4: std::cout << "Most used language in streams: " << admin.topLanguage() << std::endl; input::waitEnter(); return this;
+        case 5: std::cout << "Most used stream type in streams: " << admin.topTypeStream() << std::endl; input::waitEnter(); return this;
+        case 6: std::cout << "Streamer with most views: " << admin.topStreamer() << std::endl; input::waitEnter(); return this;
         case 7: std::cout << "Username: "; if(input::get(str)){platform.deleteUser(str);} return this;
         case 8: std::cout << "Stream id: "; if(input::get(id)){platform.deleteStream(id);} return this;
     }
@@ -308,12 +302,12 @@ Menu * FilterStreamsMenu::getNextMenu() {
     }
     catch (const InvalidDate &e) {
         std::cout << "Date " << e.getDate() << " is invalid!" << std::endl;
-        waitEnter();
+        input::waitEnter();
         return nullptr;
     }
     std::cout << "Number of " << type << " streams between " << lower_date << " and " << upper_date << ": ";
     std::cout << admin.streamsCounter(type == "public", Date(lower_date), Date(upper_date)) << std::endl;
-    waitEnter();
+    input::waitEnter();
     return nullptr;
 }
 
@@ -339,22 +333,22 @@ Menu * InformationMenu::getNextMenu() {
     unsigned int minimum_age;
     switch(option){
         case 0: return nullptr;
-        case 1: platform.topActiveStreams(); waitEnter(); return this;
-        case 2: platform.topArchivedStreams(); waitEnter(); return this;
-        case 3: platform.showStreams(); waitEnter(); return this;
+        case 1: platform.topActiveStreams(); input::waitEnter(); return this;
+        case 2: platform.topArchivedStreams(); input::waitEnter(); return this;
+        case 3: platform.showStreams(); input::waitEnter(); return this;
         case 4: std::cout << "language: ";
             if(!input::get(language)){
                 return invalidOption();
             }
             std::transform(language.begin(), language.end(), language.begin(), ::toupper);
-            platform.showStreams(language); waitEnter(); return this;
+            platform.showStreams(language); input::waitEnter(); return this;
         case 5: std::cout << "minimum_age: ";
             if(!input::get(minimum_age)){
                 return invalidOption();
             }
-            platform.showStreams("", minimum_age); waitEnter(); return this;
-        case 6: platform.showArchive(); waitEnter(); return this;
-        case 7: platform.showUsers(); waitEnter(); return this;
+            platform.showStreams("", minimum_age); input::waitEnter(); return this;
+        case 6: platform.showArchive(); input::waitEnter(); return this;
+        case 7: platform.showUsers(); input::waitEnter(); return this;
         case 8: return new SortMenu(platform);
     }
     return invalidOption();
@@ -421,7 +415,7 @@ Menu * CreateStreamMenu::getNextMenu() {
     if(type == "public" || type == "private"){
         std::cout << "Stream title" << std::endl;
         std::string title = input::getRaw();
-        if(title.empty()){
+        if(!input::validateTitle(title)){
             return invalidOption();
         }
         std::cout << "Language" << std::endl;
@@ -458,7 +452,7 @@ Menu * CreateStreamMenu::getNextMenu() {
             streamer->startPrivateStream(title, language, minimum_age, max_capacity, allowed);
         }
         std::cout << "Stream created with success!" << std::endl;
-        waitEnter();
+        input::waitEnter();
         return nullptr;
     }
     return invalidOption();
@@ -481,11 +475,11 @@ Menu * JoinStreamMenu::getNextMenu() {
         }
         catch(const StreamDoesNotExist &e){
             std::cout << "Stream with id " << id << " does not exist" << std::endl;
-            waitEnter();
+            input::waitEnter();
         }
         catch(const StreamNoLongerActive &e){
             std::cout << "Stream with id " << id << " already ended" << std::endl;
-            waitEnter();
+            input::waitEnter();
         }
     }
     else { // Interpret string as an username
@@ -494,7 +488,7 @@ Menu * JoinStreamMenu::getNextMenu() {
         }
         catch (const StreamerNotStreaming &e) {
             std::cout << "Streamer '" << e.getName() << "' isn't currently streaming" << std::endl;
-            waitEnter();
+            input::waitEnter();
         }
     }
     return nullptr;
@@ -513,6 +507,6 @@ Menu * SubmitCommentMenu::getNextMenu() {
     }
     viewer->comment(comment);
     std::cout << "Comment submitted" << std::endl;
-    waitEnter();
+    input::waitEnter();
     return nullptr;
 }

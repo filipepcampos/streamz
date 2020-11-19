@@ -14,6 +14,12 @@ namespace input{
         return str;
     }
 
+    void waitEnter(){
+        std::cout << std::endl << "Press enter to continue..." << std::endl;
+        std::string str;
+        std::getline(std::cin, str);
+    }
+
     void trimString(std::string &str) {
         // Remove whitespace from start and end of the string
         auto front = std::find_if_not(str.begin(),str.end(),[](int c){

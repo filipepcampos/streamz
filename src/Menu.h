@@ -17,8 +17,6 @@ class Menu{
 protected:
     Platform &platform;
 
-    static void waitEnter() ;
-
     Menu * invalidOption();
 public:
     explicit Menu(Platform &platform);

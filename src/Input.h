@@ -30,6 +30,7 @@ namespace input{
         }
         return strToVar(str, var);
     }
+    void waitEnter();
     bool validateNickname(const std::string &nickname);
     bool validateName(const std::string &name);
     bool validateBirthDate(const std::string &date);
