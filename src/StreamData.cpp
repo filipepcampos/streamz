@@ -49,9 +49,9 @@ std::ostream &StreamData::print(std::ostream &os) const {
        << getLikes() << " likes " << " " << getDislikes() << " dislikes" << std::endl
        << "    " << getStartDate().toString();
     if(isOver()){
-        os << " - " << getEndDate().toString() << std::endl;
+        os << " - " << getEndDate().toString();
     }
-    os << "    minimum_age: " << getMinAge() << std::endl;
+    os << std::endl << "    minimum_age: " << getMinAge() << std::endl;
     return os;
 }
 
