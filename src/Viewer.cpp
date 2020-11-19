@@ -66,8 +66,12 @@ void Viewer::comment(const std::string &str) {
 }
 
 void Viewer::syncHistory() {
-    auto it = std::find_if(streams_history.begin(), streams_history.end(), [](const std::pair<unsigned int, char> &p){
-        return p.first == id;
+    unsigned int current_id;
+    if(auto ptr = current_stream.lock()){
+        current_id = ptr->getId();
+    }
+    auto it = std::find_if(streams_history.begin(), streams_history.end(), [current_id](const std::pair<unsigned int, char> &p){
+        return p.first == current_id;
     });
     if(it == streams_history.end()){
         if(auto ptr = current_stream.lock()){
