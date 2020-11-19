@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['operator_3c_3c_47',['operator&lt;&lt;',['../class_user.html#a8096d4eb432e19f22dd6566e10007454',1,'User']]],
-  ['operator_3d_3d_48',['operator==',['../class_streamer.html#aea6d286028191df087b928a2e658ff9d',1,'Streamer::operator==()'],['../class_user.html#ae6b5bfa0555fde48560fd1f2a37dd4e0',1,'User::operator==()'],['../class_viewer.html#a695eaa8a2feabad465d117d936852cec',1,'Viewer::operator==()']]]
+  ['name_77',['name',['../class_user.html#a085d8d69282b6298964eab8351584536',1,'User']]],
+  ['nickname_78',['nickname',['../class_user_does_not_exist.html#acd8ea7523f86c6063ac6552d81dfa92f',1,'UserDoesNotExist::nickname()'],['../class_user_already_exists.html#ad881e8ff728ae9d5a79393cd435128bd',1,'UserAlreadyExists::nickname()'],['../class_user.html#aebdb6953485740c33307118f91156832',1,'User::nickname()']]]
 ];

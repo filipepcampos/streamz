@@ -3,10 +3,13 @@
 #include "Stream.h"
 #include <vector>
 
+/**
+ * Represents a comment made by a Viewer
+ */
 struct Comment{
-    Date date;
-    std::string nickname;
-    std::string comment;
+    Date date; /*> Comment date */
+    std::string nickname; /*> Viewer nickname */
+    std::string comment; /*> Comment message */
 };
 
 class PrivateStream : public Stream {
@@ -32,6 +35,8 @@ public:
      * @param minimum_age Minimum age to watch the stream
      * @param max_capacity Maximum capacity of the stream
      * @param allowed_viewers Viewers allowed to watch the stream
+     * @param likes Number of likes
+     * @param dislikes Number of dislikes
      * @param start_date std::string that represents start date of stream
      * @param comments Vector of stream comments
      */

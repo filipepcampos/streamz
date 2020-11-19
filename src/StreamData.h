@@ -23,6 +23,18 @@ protected:
 public:
     /**
      * Class constructor
+     * @param id Id of the stream
+     * @param title Title of the stream
+     * @param streamer Nickname of the streamer hosting the stream
+     * @param start_date Start date of the stream
+     * @param end_date End date of the stream
+     * @param viewers Number of viewers
+     * @param isPublic True if public, false if private
+     * @param language Language of the stream
+     * @param min_age Minimum age to watch the stream
+     * @param likes Number of likes
+     * @param dislikes Number of dislikes
+     * @param over True if stream is already over
      */
     StreamData(unsigned id, const std::string &title, const std::string &streamer,const Date &start_date, const Date &end_date,  const std::string &language,
                unsigned viewers, bool isPublic, unsigned min_age, unsigned likes=0, unsigned dislikes=0, bool over=false);

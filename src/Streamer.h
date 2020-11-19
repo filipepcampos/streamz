@@ -12,6 +12,7 @@ public:
      * @param nickname Nickname of the user
      * @param name Name of the user
      * @param birth_date Birth date of the user
+     * @param platform Reference to associated platform
      * @throws InvalidAge
      */
     Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform);
@@ -20,6 +21,8 @@ public:
      * @param nickname Nickname of the user
      * @param name Name of the user
      * @param birth_date Birth date of the user
+     * @param platform Reference to associated platform
+     * @param streams_history Streamer's stream history vector
      * @throws InvalidAge
      */
     Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int,char>> &streams_history);
@@ -28,7 +31,9 @@ public:
      * @param nickname Nickname of the user
      * @param name Name of the user
      * @param birth_date Birth date of the user
-     * @param current_stream weak_ptr to streamer's current stream
+     * @param platform Reference to associated platform
+     * @param streams_history Streamer's stream history vector
+     * @param current_stream Weak_ptr to current stream
      * @throws InvalidAge
      */
     Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int,char>> &streams_history, const std::weak_ptr<Stream> &current_stream);
@@ -62,7 +67,7 @@ public:
      */
     void removeStreamFromHistory(unsigned int id);
     /**
-     * Displays on the screen the info about the user
+     * Displays on the screen the info about the streamer
      */
     void show() const;
 

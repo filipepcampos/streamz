@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['current_5fstream_157',['current_stream',['../class_streamer.html#ae349c50ff6b4191702fce8c562e5096f',1,'Streamer::current_stream()'],['../class_viewer.html#aa7c83c7f330db66957ae9492b43eb239',1,'Viewer::current_stream()']]]
+  ['comments_267',['comments',['../class_private_stream.html#a304d445efc15522ff910f78df1f97199',1,'PrivateStream']]],
+  ['current_5fstream_268',['current_stream',['../class_user.html#ae5938c6eedc65ad026435a6b9daa7419',1,'User']]]
 ];

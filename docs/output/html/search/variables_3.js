@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['end_5fdate_158',['end_date',['../class_stream_data.html#ab3de2ecb675182c53dd6b17e91c4d516',1,'StreamData']]]
+  ['dislikes_269',['dislikes',['../class_stream_data.html#a3012b462df821b658d2fff794df3b85e',1,'StreamData']]]
 ];

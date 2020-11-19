@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['platform_49',['Platform',['../class_platform.html',1,'Platform'],['../class_admin.html#a8c6bc473ba511930e5ec9d6bf6808912',1,'Admin::platform()'],['../class_user.html#a8faed8eb28efc299d37643fd25dad4fe',1,'User::platform()']]],
-  ['print_50',['print',['../class_streamer.html#a0f93ce75a5aed16042eaa5932a61984e',1,'Streamer::print()'],['../class_user.html#a074f405d4a5c913a275de8242da8d7c6',1,'User::print()'],['../class_viewer.html#a4cba5751b59c64b415c8723fa5f840ca',1,'Viewer::print()']]],
-  ['privatestream_51',['PrivateStream',['../class_private_stream.html',1,'PrivateStream'],['../class_private_stream.html#a518bced3fc5b98f933876b1ae01a827b',1,'PrivateStream::PrivateStream()']]]
+  ['operator_3c_79',['operator&lt;',['../class_date.html#a5a3f411cbd59e9ecb90b2f8e6aaea551',1,'Date']]],
+  ['operator_3c_3c_80',['operator&lt;&lt;',['../class_stream_data.html#a50c19119d3b37e39041c62808cb917ab',1,'StreamData::operator&lt;&lt;()'],['../class_user.html#a8096d4eb432e19f22dd6566e10007454',1,'User::operator&lt;&lt;()']]],
+  ['operator_3d_3d_81',['operator==',['../class_streamer.html#aea6d286028191df087b928a2e658ff9d',1,'Streamer::operator==()'],['../class_user.html#ae6b5bfa0555fde48560fd1f2a37dd4e0',1,'User::operator==()'],['../class_viewer.html#a695eaa8a2feabad465d117d936852cec',1,'Viewer::operator==()']]],
+  ['over_82',['over',['../class_stream_data.html#ac1fd6f51eb0c91f7054353ee3661e9b9',1,'StreamData']]]
 ];

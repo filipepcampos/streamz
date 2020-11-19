@@ -23,6 +23,8 @@ public:
      * @param language Language of the stream
      * @param id Id of the stream
      * @param minimum_age Minimum age to watch the stream
+     * @param likes Number of likes
+     * @param dislikes Number of dislikes
      * @param start_date String to start_date
      */
     Stream(const std::string &title, const std::string &streamer, const std::string &language, unsigned int id,

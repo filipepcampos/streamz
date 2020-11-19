@@ -21,7 +21,16 @@ protected:
 public:
     explicit Menu(Platform &platform);
     virtual ~Menu() = default;
+    /**
+     * Show information associated with the menu
+     */
     virtual void show() = 0;
+    /**
+     * Return a pointer to the next menu ('nullptr' and 'this' can also be returned)
+     * nullptr -> Return to previous menu
+     * this -> Don't change the menu
+     * @return Menu * to next menu
+     */
     virtual Menu * getNextMenu() = 0;
 };
 

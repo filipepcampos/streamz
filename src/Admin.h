@@ -8,7 +8,7 @@ class Platform;
 
 class Admin {
     /**
-     * Pointer to the associated platform
+     * Reference to the associated platform
      */
     const Platform & platform;
 public:
@@ -42,7 +42,7 @@ public:
     std::string topTypeStream() const;
     /**
      * Searches the streamer with the most total views
-     * @return Nickname of the streamer with the most total views
+     * @return nickname of the streamer with the most total views
      */
     std::string topStreamer() const;
 };

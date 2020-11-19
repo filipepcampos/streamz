@@ -11,7 +11,7 @@ class Date {
     unsigned minutes;
 public:
     /**
-     * Class constructor
+     * Class constructor, sets date as current date
      */
     Date();
     /**
@@ -20,7 +20,7 @@ public:
      */
     Date(const Date &date);
     /**
-     * Another constructor
+     * Constructor from string
      * @param date Date in the format dd/mm/yyyy hh:mm
      */
     Date(const std::string &date);

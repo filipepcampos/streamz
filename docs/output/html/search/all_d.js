@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['registerstreamer_52',['registerStreamer',['../class_platform.html#a06db58293ec6859885da5de5b7a0792e',1,'Platform']]],
-  ['registerviewer_53',['registerViewer',['../class_platform.html#ac6383c31a56c7d8a4c4156db1535c5e5',1,'Platform']]],
-  ['removestream_54',['removeStream',['../class_streamer.html#a73241e3fef6c2cdf3d29891f69b0961b',1,'Streamer']]]
+  ['platform_83',['Platform',['../class_platform.html',1,'Platform'],['../class_admin.html#afeeacc9d6bc13977a6cf4913333503aa',1,'Admin::platform()'],['../class_user.html#a1c26f8c4d295d81c3b5c3105373667ba',1,'User::platform()']]],
+  ['print_84',['print',['../class_private_stream.html#a9ff4b39b328f784056c23a6103512ece',1,'PrivateStream::print()'],['../class_stream_data.html#a78a2a7e73e1aad5c01aa05d209b34ee1',1,'StreamData::print()'],['../class_streamer.html#a0f93ce75a5aed16042eaa5932a61984e',1,'Streamer::print()'],['../class_user.html#a074f405d4a5c913a275de8242da8d7c6',1,'User::print()'],['../class_viewer.html#a4cba5751b59c64b415c8723fa5f840ca',1,'Viewer::print()']]],
+  ['privatestream_85',['PrivateStream',['../class_private_stream.html',1,'PrivateStream'],['../class_private_stream.html#a39d82dc919d8d2289b7c13fca574fe8a',1,'PrivateStream::PrivateStream(const std::string &amp;title, const std::string &amp;streamer, const std::string &amp;language, unsigned int id, unsigned minimum_age, unsigned max_capacity, const std::vector&lt; std::string &gt; &amp;allowed_viewers)'],['../class_private_stream.html#a10434fdab8b7b56129cc3a0a683d087d',1,'PrivateStream::PrivateStream(const std::string &amp;title, const std::string &amp;streamer, const std::string &amp;language, unsigned int id, unsigned minimum_age, unsigned max_capacity, const std::vector&lt; std::string &gt; &amp;allowed_viewers, unsigned int likes, unsigned int dislikes, const std::string &amp;start_date, const std::vector&lt; Comment &gt; &amp;comments)']]]
 ];

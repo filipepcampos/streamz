@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operator_3c_3c_172',['operator&lt;&lt;',['../class_user.html#a8096d4eb432e19f22dd6566e10007454',1,'User']]]
+  ['checkdateintersection_290',['checkDateIntersection',['../class_date.html#aa8139e65941ec8ac1158612f370b1337',1,'Date']]]
 ];

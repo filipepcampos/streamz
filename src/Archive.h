@@ -28,7 +28,7 @@ private:
     bool readStreamFromFile(std::ifstream &file);
 
     /*
-     * Compare data to the streams in top 10, and update it accordingly
+     * Compare data to the streams in top 10, and update the top lists if needed
      * @param data
      */
     void updateTop(const StreamData &data);
@@ -54,7 +54,7 @@ public:
     void show() const;
 
     /*
-     * Show the top 10
+     * Show the top 10 streams by number of views and number of likes
      */
     void showTop() const;
 
@@ -68,7 +68,7 @@ public:
      * Return a vector of pointers to all streams specified in ids
      * @param history - streamHistory from a User
      * @param filter - char that will be matched with feedback from each stream ('L': like, 'D': dislike, '-': None)
-     * @return std::vector<const StreamData *>
+     * @return std::vector<const StreamData *> with pointers to all streams
      */
     std::vector<const StreamData *> getStreamsById(const std::vector<std::pair<unsigned int, char>> &history, char filter = 0) const;
 

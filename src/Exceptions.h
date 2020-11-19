@@ -110,9 +110,20 @@ class StreamDoesNotExist : public std::exception {
 };
 
 class StreamerNotStreaming : public std::exception {
+    /**
+     * Nickname of the streamer
+     */
     std::string streamer;
 public:
+    /**
+     * Constructor
+     * @param nickname - nickname of the streamer
+     */
     StreamerNotStreaming(const std::string &nickname);
+    /**
+     * Get streamer nickname
+     * @return streamer nickname
+     */
     std::string getName() const;
 };
 
@@ -126,7 +137,7 @@ public:
     InvalidAction(const std::string &message);
     /**
      * Gets exception message
-     * @return id
+     * @return message
      */
     std::string getMessage() const;
 };

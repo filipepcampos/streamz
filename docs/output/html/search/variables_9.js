@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['start_5fdate_167',['start_date',['../class_stream_data.html#a65f2ba0b3d5d5793b8300587e5064ab2',1,'StreamData']]],
-  ['streamer_168',['streamer',['../class_stream_data.html#a5130e20fe33aa3c314ef7b0fde302477',1,'StreamData']]],
-  ['streams_5fhistory_169',['streams_history',['../class_streamer.html#aa98be95221b4602bf8e7671a103478c8',1,'Streamer']]]
+  ['name_277',['name',['../class_user.html#a085d8d69282b6298964eab8351584536',1,'User']]],
+  ['nickname_278',['nickname',['../class_user_does_not_exist.html#acd8ea7523f86c6063ac6552d81dfa92f',1,'UserDoesNotExist::nickname()'],['../class_user_already_exists.html#ad881e8ff728ae9d5a79393cd435128bd',1,'UserAlreadyExists::nickname()'],['../class_user.html#aebdb6953485740c33307118f91156832',1,'User::nickname()']]]
 ];

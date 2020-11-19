@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['date_81',['Date',['../class_date.html',1,'']]]
+  ['comment_140',['Comment',['../struct_comment.html',1,'']]],
+  ['createstreammenu_141',['CreateStreamMenu',['../class_create_stream_menu.html',1,'']]]
 ];

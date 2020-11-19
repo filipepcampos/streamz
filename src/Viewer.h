@@ -20,6 +20,7 @@ public:
      * @param nickname Nickname of the user
      * @param name Name of the user
      * @param birth_date Birth date of the user
+     * @param platform Reference to associated platform
      * @throws InvalidAge
      */
     Viewer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform &platform);
@@ -30,6 +31,8 @@ public:
      * @param name Name of the user
      * @param birth_date Birth date of the user
      * @param history Watched streams history
+     * @param platform Reference to associated platform
+     * @param history Viewer's stream history
      * @throws InvalidAge
      */
     Viewer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform &platform, const std::vector<std::pair<unsigned int, char>> &history);

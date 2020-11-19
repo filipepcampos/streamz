@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['max_5fcapacity_162',['max_capacity',['../class_private_stream.html#a93fbebeb5882e41fdb65a09b918f0acb',1,'PrivateStream']]],
-  ['minimum_5fage_163',['minimum_age',['../class_stream.html#aa11d597fd55f57b5eb8d3f8d57c6c1fc',1,'Stream']]]
+  ['ispublic_272',['isPublic',['../class_stream_data.html#a5b6a895fcf37195dae3f29c79ce4adc8',1,'StreamData']]]
 ];

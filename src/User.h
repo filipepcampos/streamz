@@ -31,7 +31,9 @@ protected:
     std::weak_ptr<Stream> current_stream;
 
     /**
-     * Vector containing the id's of the streams created by the user (always sorted by id)
+     * Vector containing the user's history of streams
+     * Is composed by pairs of <stream id, feedback char> where feedback char
+     * can be 'L' like, 'D' dislike or '-' neutral.
      */
     std::vector<std::pair<unsigned int, char>> streams_history;
 
@@ -41,6 +43,7 @@ public:
      * @param nickname Nickname of the user
      * @param name Name of the user
      * @param birth_date Birth date of the user
+     * @param platform Reference to associated platform
      */
     User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform);
     /**
@@ -49,6 +52,7 @@ public:
      * @param name Name of the user
      * @param birth_date Birth date of the user
      * @param history Watched / hosted streams history
+     * @param platform Reference to associated platform
      */
     User(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &history);
     /**
@@ -73,8 +77,8 @@ public:
     unsigned getAge() const;
 
     /**
-     * Gets the streamer's previous streams
-     * @return Vector containing the id of the streamer's previous streams
+     * Gets the user's stream history
+     * @return Vector containing pairs of <stream_id, feedback('L' like, 'D' dislike, '-')> that represent the history
      */
     const std::vector<std::pair<unsigned int,char>> & getStreamsHistory() const;
 
@@ -92,8 +96,8 @@ public:
     bool inStream() const;
 
     /**
-     * Check if user is in a public stream
-     * @return true if in public stream
+     * Check if user is in a private stream
+     * @return true if in private stream
      */
     bool inPrivateStream() const;
 
