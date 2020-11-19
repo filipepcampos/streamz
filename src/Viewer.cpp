@@ -5,14 +5,14 @@
 #include <algorithm>
 
 Viewer::Viewer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform &platform) : User(nickname, name, birth_date, platform) {
-    if (getAge() <= MINIMUM_VIEWER_AGE)
+    if (getAge() < MINIMUM_VIEWER_AGE)
         throw InvalidAge(getAge());
 }
 
 Viewer::Viewer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform &platform,
                const std::vector<std::pair<unsigned int, char>> &history)
                         : User(nickname, name, birth_date, platform, history){
-    if (getAge() <= MINIMUM_VIEWER_AGE)
+    if (getAge() < MINIMUM_VIEWER_AGE)
         throw InvalidAge(getAge());
 }
 

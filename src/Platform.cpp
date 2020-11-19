@@ -100,7 +100,7 @@ bool Platform::readUserFromFile(std::ifstream &file) {
     }
     lines[0] >> user_type >> nickname;
     std::getline(lines[0] >> std::ws, name);
-    lines[1] >> current_stream_id;
+    lines[1] >> current_stream_id >> std::ws;
     std::getline(lines[1], birth_date);
 
     unsigned int id; char feedback; std::vector<std::pair<unsigned int, char>> history;
