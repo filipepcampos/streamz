@@ -317,7 +317,7 @@ InformationMenu::InformationMenu(Platform &platform) : Menu(platform) {}
 void InformationMenu::show() {
     unsigned int option = 1;
     std::cout << CLR_SCREEN;
-    for(const auto &str : {"Show top active streams", "Show Top archived streams", "Show all active streams",
+    for(const auto &str : {"Show top active streams", "Show top archived streams", "Show all active streams",
                            "Search active streams by language", "Search active streams by minimum age",
                            "Show all archived streams", "Show users", "Sort active streams"}){
         std::cout << "[" << option++ << "] " << str << std::endl;

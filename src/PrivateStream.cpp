@@ -38,7 +38,7 @@ std::ostream& PrivateStream::print(std::ostream & os) const{
         os << allowed_viewers.at(i) << " ";
     os << std::endl;
     for (int n = 0; n < comments.size(); n++)
-        os << "      " << comments.at(n).date.toString() << " " << comments.at(n).nickname << " \"" << comments.at(n).comment << "\"" << std::endl;
+        os << "      " << comments.at(n).date.toString(true) << " " << comments.at(n).nickname << " \"" << comments.at(n).comment << "\"" << std::endl;
     return os;
 }
 
