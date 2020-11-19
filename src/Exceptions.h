@@ -5,10 +5,7 @@
 
 
 class UserDoesNotExist : public std::exception{
-    /**
-     * Nickname of the user
-     */
-    std::string nickname;
+    std::string nickname; /**< Nickname of the user */
 public:
     /**
      * Class constructor
@@ -22,12 +19,8 @@ public:
     std::string getNickname() const;
 };
 
-
 class UserAlreadyExists : public std::exception{
-    /**
-     * Nickname of the user
-     */
-    std::string nickname;
+    std::string nickname; /**< Nickname of the user */
 public:
     /**
      * Class constructor
@@ -41,12 +34,8 @@ public:
     std::string getNickname() const;
 };
 
-
 class InvalidAge : public std::exception{
-    /**
-     * Age of the user
-     */
-    unsigned int age;
+    unsigned int age; /**< Age of the user */
 public:
     /**
      * Class constructor
@@ -60,12 +49,8 @@ public:
     unsigned int getAge() const;
 };
 
-
 class InsufficientAge : public std::exception{
-    /**
-     * Age of the user
-     */
-    unsigned int age;
+    unsigned int age; /**< Age of the user */
 public:
     /**
      * Class constructor
@@ -80,7 +65,7 @@ public:
 };
 
 class StreamNoLongerActive : public std::exception {
-    unsigned int id;
+    unsigned int id; /**< Id of the stream */
 public:
     /**
      * Class constructor
@@ -95,8 +80,8 @@ public:
 };
 
 class StreamDoesNotExist : public std::exception {
-    unsigned int id;
-    public:
+    unsigned int id; /**< Id of the stream */
+public:
     /**
      * Class constructor
      * @param id stream id
@@ -110,10 +95,7 @@ class StreamDoesNotExist : public std::exception {
 };
 
 class StreamerNotStreaming : public std::exception {
-    /**
-     * Nickname of the streamer
-     */
-    std::string streamer;
+    std::string streamer; /**< Nickname of the streamer */
 public:
     /**
      * Constructor
@@ -128,7 +110,7 @@ public:
 };
 
 class InvalidAction : public std::exception {
-    std::string message;
+    std::string message; /**< Message to be displayed */
 public:
     /**
      * Class constructor
@@ -143,7 +125,7 @@ public:
 };
 
 class InvalidDate : public std::exception {
-    std::string date;
+    std::string date; /**< Date which is invalid */
 public:
     /**
      * Class constructor

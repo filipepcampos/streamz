@@ -153,7 +153,7 @@ public:
      */
     unsigned int getActiveStreamCount() const;
 
-    /*
+    /**
      * Get number of archived streams
      * @return unsigned int
      */
@@ -236,12 +236,12 @@ public:
      */
     void endStream(unsigned int id);
 
-    /*+
+    /**
      * Get top 10 active streams by views and by likes
      */
     void topActiveStreams();
 
-    /*
+    /**
      * Get top 10 archived streams by views and by likes
      */
     void topArchivedStreams() const;

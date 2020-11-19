@@ -14,12 +14,12 @@ protected:
     Date start_date; /**> Start date of the stream*/
     Date end_date; /**> End date of the stream*/
     std::string language; /**> Language of the stream*/
-    unsigned min_age; /**>Minimum viewer age*/
-    unsigned viewers = 0; /**>Number of viewers*/
-    bool isPublic = true; /**>Accessibility of the stream*/
+    unsigned min_age; /**> Minimum viewer age*/
+    unsigned viewers = 0; /**> Number of viewers*/
+    bool isPublic = true; /**> Accessibility of the stream*/
     unsigned likes = 0; /**> Number of likes*/
     unsigned dislikes = 0; /**> Number of dislikes*/
-    bool over = false; /**>Keep track if stream is over or not*/
+    bool over = false; /**> Keep track if stream is over or not*/
 public:
     /**
      * Class constructor
@@ -94,8 +94,8 @@ public:
      */
      unsigned getMinAge() const;
     /**
-     * Return true if stream has already ended
-     * @return
+     * Checks if stream has already ended
+     * @return true if stream has already ended
      */
     bool isOver() const;
     /**
@@ -107,8 +107,8 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const StreamData &d);
     /**
      * Print data about stream into ostream
-     * @param os
-     * @return
+     * @param os Stream where the information will be writen
+     * @return Stream where the information will be writen
      */
     virtual std::ostream& print(std::ostream & os) const;
     /**

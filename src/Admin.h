@@ -7,10 +7,7 @@
 class Platform;
 
 class Admin {
-    /**
-     * Reference to the associated platform
-     */
-    const Platform & platform;
+    const Platform & platform; /**< Reference to the associated platform */
 public:
     /**
      * Class constructor

@@ -5,11 +5,11 @@
 #include <memory>
 
 class Viewer : public User {
-    /*
+    /**
      * Add current stream to history if needed and link current_stream_feedback to correct char in history
      */
     void syncHistory();
-    /*
+    /**
      * Pointer to feedback char of current stream
      * If it's not nullptr, then it will point to a char (pair.second) of a entry in streams history
      */

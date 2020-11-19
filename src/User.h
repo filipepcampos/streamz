@@ -7,35 +7,19 @@
 #include <utility>
 
 class User {
-    /**
-     * Nickname of the user
-     */
-    std::string nickname;
-    /**
-     * Name of the user
-     */
-    std::string name;
-    /**
-     * Birth date of the user
-     */
-    Date birth_date;
+    std::string nickname; /**< Nickname of the user */
+    std::string name; /**< Name of the user */
+    Date birth_date; /**< Birth date of the user */
 protected:
-    /**
-     * Pointer to the associated platform
-     */
-    Platform & platform;
-
-    /**
-     * Weak pointer to the stream the viewer is currently watching or streamer is currently hosting
-     */
-    std::weak_ptr<Stream> current_stream;
+    Platform & platform; /**< Pointer to the associated platform */
+    std::weak_ptr<Stream> current_stream; /**< Weak pointer to the stream the viewer is currently watching or streamer is currently hosting */
 
     /**
      * Vector containing the user's history of streams
      * Is composed by pairs of <stream id, feedback char> where feedback char
      * can be 'L' like, 'D' dislike or '-' neutral.
      */
-    std::vector<std::pair<unsigned int, char>> streams_history;
+    std::vector<std::pair<unsigned int, char>> streams_history; /**< Birth date of the user */
 
 public:
     /**
