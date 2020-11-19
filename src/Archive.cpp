@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <iomanip>
 
 Archive::Archive(const std::string &filename) : filename(filename) {
     std::ifstream file(filename);
@@ -66,13 +67,13 @@ void Archive::showTop() const{
     showStreamsHeader();
     int i = 1;
     for(auto it = top_views.rbegin(); it != top_views.rend(); ++it){
-        std::cout << std::right << i++ << ": " << std::left; (*it).show();
+        std::cout << std::right << std::setw(2) << i++ << ": " << std::left; (*it).show();
     }
     std::cout << "\nTop by Likes:" << std::endl << "    ";
     showStreamsHeader();
     i = 1;
     for(auto it = top_likes.rbegin(); it != top_likes.rend(); ++it){
-        std::cout << std::right << i++ << ": " << std::left; (*it).show();
+        std::cout << std::right << std::setw(2) << i++ << ": " << std::left; (*it).show();
     }
 }
 
