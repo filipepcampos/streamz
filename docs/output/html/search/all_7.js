@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['id_63',['id',['../class_stream_no_longer_active.html#a5b6b63e8febd8451359ff34edf505bc4',1,'StreamNoLongerActive::id()'],['../class_stream_does_not_exist.html#a33ed8739a2cbdaa801e31b4627f2a622',1,'StreamDoesNotExist::id()']]],
+  ['id_63',['id',['../class_stream_no_longer_active.html#a5b6b63e8febd8451359ff34edf505bc4',1,'StreamNoLongerActive::id()'],['../class_stream_does_not_exist.html#a33ed8739a2cbdaa801e31b4627f2a622',1,'StreamDoesNotExist::id()'],['../class_stream_data.html#a34667b131ae79030d7dd1511ea9c6109',1,'StreamData::id()']]],
   ['informationmenu_64',['InformationMenu',['../class_information_menu.html',1,'']]],
   ['inprivatestream_65',['inPrivateStream',['../class_user.html#a7ba2056df471f6e289621f52e9d22bd4',1,'User']]],
   ['instream_66',['inStream',['../class_user.html#a60c190906fc4e2d68d4f6c8818663f5f',1,'User']]],

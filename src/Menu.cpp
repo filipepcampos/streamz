@@ -3,6 +3,27 @@
 #include <sstream>
 #include <algorithm>
 
+
+namespace screen{
+    void showScreenLine(const std::string &code){
+        for(int i = 0; i < WIDTH; ++i){
+            std::cout << code;
+        }
+    }
+
+    void showScreen(){
+        std::cout << "┌"; showScreenLine("─"); std::cout << "┐" << std::endl;
+        for(int i = 0; i < HEIGHT; ++i){
+            std::cout << "│";
+            for(int j = 0; j < WIDTH; ++j){
+                std::cout << image[i][j] << "▉" << RESET;
+            }
+            std::cout << "│" << std::endl;
+        }
+        std::cout << "└"; showScreenLine("─"); std::cout << "┘" << std::endl;
+    }
+}
+
 Menu::Menu(Platform &platform) : platform(platform) {}
 
 Menu * Menu::invalidOption() {
@@ -148,6 +169,7 @@ void ViewerMenu::show() {
     unsigned int option = 1;
     if(viewer->inStream()){
         char feedback = viewer->getCurrentFeedback();
+        screen::showScreen(); std::cout << std::endl;
         std::cout << "[" << option++ << "] Leave Stream" << std::endl;
         std::string color = feedback == 'L' ? BLUE : RESET;
         std::cout << "[" << option++ << "] " << color << "Like" << RESET << std::endl;
@@ -212,6 +234,7 @@ void StreamerMenu::show() {
     std::cout << CLR_SCREEN;
     std::cout << "[" << option++ << "] Information" << std::endl;
     if(streamer->inStream()){
+        screen::showScreen(); std::cout << std::endl;
         std::cout << "[" << option++ << "] End Stream" << std::endl;
         std::cout << "[" << option++ << "] View stream info" << std::endl;
     }

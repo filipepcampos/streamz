@@ -4,7 +4,6 @@ project(StreamZ)
 set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCE_FILES
-        main.cpp
         src/Admin.h
         src/Date.h
         src/StreamData.h
@@ -30,7 +29,8 @@ set(SOURCE_FILES
         src/Archive.cpp
         src/Platform.cpp
         src/Menu.cpp
-        src/Input.cpp)
+        src/Input.cpp
+        main.cpp)
 
 include_directories(src)
 add_subdirectory(tests)
