@@ -7,9 +7,9 @@
  * Represents a comment made by a Viewer
  */
 struct Comment{
-    Date date; /**> Comment date */
-    std::string nickname; /**> Viewer nickname */
-    std::string comment; /**> Comment message */
+    Date date; /**< Comment date */
+    std::string nickname; /**< Viewer nickname */
+    std::string comment; /**< Comment message */
 };
 
 class PrivateStream : public Stream {

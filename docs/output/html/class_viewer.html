@@ -136,14 +136,12 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a36dcd6b9d90c8c06e9f6ee5bc9e7f0ed"><td class="memItemLeft" align="right" valign="top"><a id="a36dcd6b9d90c8c06e9f6ee5bc9e7f0ed"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>syncHistory</b> ()</td></tr>
+<tr class="memitem:a36dcd6b9d90c8c06e9f6ee5bc9e7f0ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_viewer.html#a36dcd6b9d90c8c06e9f6ee5bc9e7f0ed">syncHistory</a> ()</td></tr>
 <tr class="separator:a36dcd6b9d90c8c06e9f6ee5bc9e7f0ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a11fc4801bbcaaca0a4e62401fa14189a"><td class="memItemLeft" align="right" valign="top"><a id="a11fc4801bbcaaca0a4e62401fa14189a"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>current_stream_feedback</b> = nullptr</td></tr>
+<tr class="memitem:a11fc4801bbcaaca0a4e62401fa14189a"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_viewer.html#a11fc4801bbcaaca0a4e62401fa14189a">current_stream_feedback</a> = nullptr</td></tr>
 <tr class="separator:a11fc4801bbcaaca0a4e62401fa14189a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -199,6 +197,7 @@ Additional Inherited Members</h2></td></tr>
     <tr><td class="paramname">nickname</td><td>Nickname of the user </td></tr>
     <tr><td class="paramname">name</td><td>Name of the user </td></tr>
     <tr><td class="paramname">birth_date</td><td>Birth date of the user </td></tr>
+    <tr><td class="paramname">platform</td><td>Reference to associated platform </td></tr>
   </table>
   </dd>
 </dl>
@@ -260,6 +259,8 @@ Additional Inherited Members</h2></td></tr>
     <tr><td class="paramname">name</td><td>Name of the user </td></tr>
     <tr><td class="paramname">birth_date</td><td>Birth date of the user </td></tr>
     <tr><td class="paramname">history</td><td>Watched streams history </td></tr>
+    <tr><td class="paramname">platform</td><td>Reference to associated platform </td></tr>
+    <tr><td class="paramname">history</td><td><a class="el" href="class_viewer.html">Viewer</a>'s stream history </td></tr>
   </table>
   </dd>
 </dl>
@@ -520,6 +521,56 @@ Additional Inherited Members</h2></td></tr>
 <p>Displays on the screen the info about the user </p>
 
 <p>Reimplemented from <a class="el" href="class_user.html#ae39ad06f6b431952b3e372676adaba6e">User</a>.</p>
+
+</div>
+</div>
+<a id="a36dcd6b9d90c8c06e9f6ee5bc9e7f0ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36dcd6b9d90c8c06e9f6ee5bc9e7f0ed">&#9670;&nbsp;</a></span>syncHistory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Viewer::syncHistory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Add current stream to history if needed and link current_stream_feedback to correct char in history </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a11fc4801bbcaaca0a4e62401fa14189a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11fc4801bbcaaca0a4e62401fa14189a">&#9670;&nbsp;</a></span>current_stream_feedback</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* Viewer::current_stream_feedback = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Pointer to feedback char of current stream If it's not nullptr, then it will point to a char (pair.second) of a entry in streams history </p>
 
 </div>
 </div>

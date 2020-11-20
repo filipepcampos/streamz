@@ -179,6 +179,7 @@ Friends</h2></td></tr>
     <tr><td class="paramname">nickname</td><td>Nickname of the user </td></tr>
     <tr><td class="paramname">name</td><td>Name of the user </td></tr>
     <tr><td class="paramname">birth_date</td><td>Birth date of the user </td></tr>
+    <tr><td class="paramname">platform</td><td>Reference to associated platform </td></tr>
   </table>
   </dd>
 </dl>
@@ -234,6 +235,7 @@ Friends</h2></td></tr>
     <tr><td class="paramname">name</td><td>Name of the user </td></tr>
     <tr><td class="paramname">birth_date</td><td>Birth date of the user </td></tr>
     <tr><td class="paramname">history</td><td>Watched / hosted streams history </td></tr>
+    <tr><td class="paramname">platform</td><td>Reference to associated platform </td></tr>
   </table>
   </dd>
 </dl>
@@ -327,7 +329,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the streamer's previous streams </p><dl class="section return"><dt>Returns</dt><dd>Vector containing the id of the streamer's previous streams </dd></dl>
+<p>Gets the user's stream history </p><dl class="section return"><dt>Returns</dt><dd>Vector containing pairs of &lt;stream_id, feedback('L' like, 'D' dislike, '-')&gt; that represent the history </dd></dl>
 
 </div>
 </div>
@@ -345,7 +347,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Check if user is in a public stream </p><dl class="section return"><dt>Returns</dt><dd>true if in public stream </dd></dl>
+<p>Check if user is in a private stream </p><dl class="section return"><dt>Returns</dt><dd>true if in private stream </dd></dl>
 
 </div>
 </div>
@@ -675,7 +677,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Vector containing the id's of the streams created by the user (always sorted by id) </p>
+<p>Vector containing the user's history of streams Is composed by pairs of &lt;stream id, feedback char&gt; where feedback char can be 'L' like, 'D' dislike or '-' neutral. Birth date of the user </p>
 
 </div>
 </div>

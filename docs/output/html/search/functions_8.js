@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['operator_3d_3d_224',['operator==',['../class_streamer.html#aea6d286028191df087b928a2e658ff9d',1,'Streamer::operator==()'],['../class_user.html#ae6b5bfa0555fde48560fd1f2a37dd4e0',1,'User::operator==()'],['../class_viewer.html#a695eaa8a2feabad465d117d936852cec',1,'Viewer::operator==()']]]
+  ['leavestream_244',['leaveStream',['../class_stream.html#a679920da7b7c1ad1fd9e7228f6fcd907',1,'Stream::leaveStream()'],['../class_viewer.html#a1bcb6d912b95fe17dca5d6c0b811ffe7',1,'Viewer::leaveStream()']]],
+  ['like_245',['like',['../class_viewer.html#a4dc413f16d7ddda30a66a61bd05a995c',1,'Viewer']]]
 ];

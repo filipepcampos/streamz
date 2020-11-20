@@ -86,81 +86,51 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_archive.html#a0cd1d90e3c5bb56dfb0b2da7a64a16ef">   13</a></span>&#160;    std::vector&lt;StreamData&gt; <a class="code" href="class_archive.html#a0cd1d90e3c5bb56dfb0b2da7a64a16ef">streams</a>; </div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_archive.html#a5600319be63089d59bcd5483f5193b15">   14</a></span>&#160;    std::list&lt;StreamData&gt; <a class="code" href="class_archive.html#a5600319be63089d59bcd5483f5193b15">top_views</a>; </div>
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_archive.html#a2dd1afdff49406b58d19c0162d1d00f8">   15</a></span>&#160;    std::list&lt;StreamData&gt; <a class="code" href="class_archive.html#a2dd1afdff49406b58d19c0162d1d00f8">top_likes</a>; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">     * Search vector streams for StreamData with the given id</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">     * @param id - Id of stream</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">     * @returns position of stream in the vector or -1 is the stream does not exist</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">int</span> binarySearch(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_archive.html#aec86ea37e381a571b50cd4c2263e800f">binarySearch</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">     * Read a single StreamData from a file</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">     * Returns true if read successfully</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">bool</span> readStreamFromFile(std::ifstream &amp;file);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_archive.html#a67b798ab74ad4722f9396f1cadc70112">readStreamFromFile</a>(std::ifstream &amp;file);</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * Compare data to the streams in top 10, and update it accordingly</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     * @param data</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> updateTop(<span class="keyword">const</span> <a class="code" href="class_stream_data.html">StreamData</a> &amp;data);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_archive.html#a2bf0ca999f89d68e764f0a936ab6c778">updateTop</a>(<span class="keyword">const</span> <a class="code" href="class_stream_data.html">StreamData</a> &amp;data);</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_archive.html">Archive</a>(<span class="keyword">const</span> std::string &amp;<a class="code" href="class_archive.html#a6db63ed099d34e11acaa8fde396bc5c5">filename</a> = <span class="stringliteral">&quot;archive.txt&quot;</span>);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    ~<a class="code" href="class_archive.html">Archive</a>();</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     * Store a stream</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     * @param data</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> archiveStream(<span class="keyword">const</span> <a class="code" href="class_stream_data.html">StreamData</a> &amp;data);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_archive.html#a84f2f5766779753a38e1c69dd3653a18">archiveStream</a>(<span class="keyword">const</span> <a class="code" href="class_stream_data.html">StreamData</a> &amp;data);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">     * Get number of streams stored</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">     * @return stream count</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getStreamCount() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_archive.html#a7fc025516bb8551e303f1f01da2f5f85">getStreamCount</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">     * Show the information of every stream stored</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> show() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_archive.html#aa4fedde581ef67acb28b5d188b0ddb8d">show</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">     * Show the top 10</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> showTop() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_archive.html#a65d5313f7902f503a1c855a185f92790">showTop</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">     * Show a specific stream</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">     * @param id - id of the stream</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> showStream(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_archive.html#a079463d8ed3eba4bb2c979fbb4887d1f">showStream</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">     * Return a vector of pointers to all streams specified in ids</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">     * @param history - streamHistory from a User</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">     * @param filter - char that will be matched with feedback from each stream (&#39;L&#39;: like, &#39;D&#39;: dislike, &#39;-&#39;: None)</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">     * @return std::vector&lt;const StreamData *&gt;</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    std::vector&lt;const StreamData *&gt; getStreamsById(<span class="keyword">const</span> std::vector&lt;std::pair&lt;unsigned int, char&gt;&gt; &amp;history, <span class="keywordtype">char</span> filter = 0) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    std::vector&lt;const StreamData *&gt; <a class="code" href="class_archive.html#a0dc645e00233cb2c6b57b5c013db68e2">getStreamsById</a>(<span class="keyword">const</span> std::vector&lt;std::pair&lt;unsigned int, char&gt;&gt; &amp;history, <span class="keywordtype">char</span> filter = 0) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">     * Enable test mode in which file read/write operations are disabled, and all current information cleared     *</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> testMode();</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_archive.html#a8b37416f0e015495bb11be1e869071b4">testMode</a>();</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif //STREAMZ_ARCHIVE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclass_archive_html_a65d5313f7902f503a1c855a185f92790"><div class="ttname"><a href="class_archive.html#a65d5313f7902f503a1c855a185f92790">Archive::showTop</a></div><div class="ttdeci">void showTop() const</div><div class="ttdef"><b>Definition:</b> Archive.cpp:64</div></div>
 <div class="ttc" id="aclass_archive_html_a5600319be63089d59bcd5483f5193b15"><div class="ttname"><a href="class_archive.html#a5600319be63089d59bcd5483f5193b15">Archive::top_views</a></div><div class="ttdeci">std::list&lt; StreamData &gt; top_views</div><div class="ttdef"><b>Definition:</b> Archive.h:14</div></div>
 <div class="ttc" id="aclass_archive_html"><div class="ttname"><a href="class_archive.html">Archive</a></div><div class="ttdef"><b>Definition:</b> Archive.h:8</div></div>
+<div class="ttc" id="aclass_archive_html_a7fc025516bb8551e303f1f01da2f5f85"><div class="ttname"><a href="class_archive.html#a7fc025516bb8551e303f1f01da2f5f85">Archive::getStreamCount</a></div><div class="ttdeci">unsigned int getStreamCount() const</div><div class="ttdef"><b>Definition:</b> Archive.cpp:52</div></div>
+<div class="ttc" id="aclass_archive_html_a84f2f5766779753a38e1c69dd3653a18"><div class="ttname"><a href="class_archive.html#a84f2f5766779753a38e1c69dd3653a18">Archive::archiveStream</a></div><div class="ttdeci">void archiveStream(const StreamData &amp;data)</div><div class="ttdef"><b>Definition:</b> Archive.cpp:116</div></div>
 <div class="ttc" id="aclass_admin_html"><div class="ttname"><a href="class_admin.html">Admin</a></div><div class="ttdef"><b>Definition:</b> Admin.h:9</div></div>
+<div class="ttc" id="aclass_archive_html_a67b798ab74ad4722f9396f1cadc70112"><div class="ttname"><a href="class_archive.html#a67b798ab74ad4722f9396f1cadc70112">Archive::readStreamFromFile</a></div><div class="ttdeci">bool readStreamFromFile(std::ifstream &amp;file)</div><div class="ttdef"><b>Definition:</b> Archive.cpp:28</div></div>
+<div class="ttc" id="aclass_archive_html_aa4fedde581ef67acb28b5d188b0ddb8d"><div class="ttname"><a href="class_archive.html#aa4fedde581ef67acb28b5d188b0ddb8d">Archive::show</a></div><div class="ttdeci">void show() const</div><div class="ttdef"><b>Definition:</b> Archive.cpp:56</div></div>
 <div class="ttc" id="aclass_archive_html_a6db63ed099d34e11acaa8fde396bc5c5"><div class="ttname"><a href="class_archive.html#a6db63ed099d34e11acaa8fde396bc5c5">Archive::filename</a></div><div class="ttdeci">std::string filename</div><div class="ttdef"><b>Definition:</b> Archive.h:12</div></div>
 <div class="ttc" id="aclass_stream_data_html"><div class="ttname"><a href="class_stream_data.html">StreamData</a></div><div class="ttdef"><b>Definition:</b> StreamData.h:9</div></div>
 <div class="ttc" id="aclass_archive_html_a6a412abda41d62a2ff856637a70a0b6d"><div class="ttname"><a href="class_archive.html#a6a412abda41d62a2ff856637a70a0b6d">Archive::test</a></div><div class="ttdeci">bool test</div><div class="ttdef"><b>Definition:</b> Archive.h:11</div></div>
+<div class="ttc" id="aclass_archive_html_a2bf0ca999f89d68e764f0a936ab6c778"><div class="ttname"><a href="class_archive.html#a2bf0ca999f89d68e764f0a936ab6c778">Archive::updateTop</a></div><div class="ttdeci">void updateTop(const StreamData &amp;data)</div><div class="ttdef"><b>Definition:</b> Archive.cpp:125</div></div>
 <div class="ttc" id="aclass_archive_html_a0cd1d90e3c5bb56dfb0b2da7a64a16ef"><div class="ttname"><a href="class_archive.html#a0cd1d90e3c5bb56dfb0b2da7a64a16ef">Archive::streams</a></div><div class="ttdeci">std::vector&lt; StreamData &gt; streams</div><div class="ttdef"><b>Definition:</b> Archive.h:13</div></div>
+<div class="ttc" id="aclass_archive_html_aec86ea37e381a571b50cd4c2263e800f"><div class="ttname"><a href="class_archive.html#aec86ea37e381a571b50cd4c2263e800f">Archive::binarySearch</a></div><div class="ttdeci">int binarySearch(unsigned int id) const</div><div class="ttdef"><b>Definition:</b> Archive.cpp:101</div></div>
+<div class="ttc" id="aclass_archive_html_a0dc645e00233cb2c6b57b5c013db68e2"><div class="ttname"><a href="class_archive.html#a0dc645e00233cb2c6b57b5c013db68e2">Archive::getStreamsById</a></div><div class="ttdeci">std::vector&lt; const StreamData * &gt; getStreamsById(const std::vector&lt; std::pair&lt; unsigned int, char &gt;&gt; &amp;history, char filter=0) const</div><div class="ttdef"><b>Definition:</b> Archive.cpp:88</div></div>
 <div class="ttc" id="aclass_archive_html_a2dd1afdff49406b58d19c0162d1d00f8"><div class="ttname"><a href="class_archive.html#a2dd1afdff49406b58d19c0162d1d00f8">Archive::top_likes</a></div><div class="ttdeci">std::list&lt; StreamData &gt; top_likes</div><div class="ttdef"><b>Definition:</b> Archive.h:15</div></div>
+<div class="ttc" id="aclass_archive_html_a079463d8ed3eba4bb2c979fbb4887d1f"><div class="ttname"><a href="class_archive.html#a079463d8ed3eba4bb2c979fbb4887d1f">Archive::showStream</a></div><div class="ttdeci">void showStream(unsigned int id) const</div><div class="ttdef"><b>Definition:</b> Archive.cpp:80</div></div>
+<div class="ttc" id="aclass_archive_html_a8b37416f0e015495bb11be1e869071b4"><div class="ttname"><a href="class_archive.html#a8b37416f0e015495bb11be1e869071b4">Archive::testMode</a></div><div class="ttdeci">void testMode()</div><div class="ttdef"><b>Definition:</b> Archive.cpp:144</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

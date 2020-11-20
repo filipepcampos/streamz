@@ -8,18 +8,18 @@ void showStreamsHeader();
 
 class StreamData {
 protected:
-    unsigned id; /**> Id of the stream*/
-    std::string title; /**> Title of the stream*/
-    std::string streamer; /**> Streamer nickname*/
-    Date start_date; /**> Start date of the stream*/
-    Date end_date; /**> End date of the stream*/
-    std::string language; /**> Language of the stream*/
-    unsigned min_age; /**> Minimum viewer age*/
-    unsigned viewers = 0; /**> Number of viewers*/
-    bool isPublic = true; /**> Accessibility of the stream*/
-    unsigned likes = 0; /**> Number of likes*/
-    unsigned dislikes = 0; /**> Number of dislikes*/
-    bool over = false; /**> Keep track if stream is over or not*/
+    unsigned id; /**< Id of the stream*/
+    std::string title; /**< Title of the stream*/
+    std::string streamer; /**< Streamer nickname*/
+    Date start_date; /**< Start date of the stream*/
+    Date end_date; /**< End date of the stream*/
+    std::string language; /**< Language of the stream*/
+    unsigned min_age; /**< Minimum viewer age*/
+    unsigned viewers = 0; /**< Number of viewers*/
+    bool isPublic = true; /**< Accessibility of the stream*/
+    unsigned likes = 0; /**< Number of likes*/
+    unsigned dislikes = 0; /**< Number of dislikes*/
+    bool over = false; /**< Keep track if stream is over or not*/
 public:
     /**
      * Class constructor
