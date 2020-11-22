@@ -10,6 +10,8 @@ Compilação:
 
 O programa deverá ser executado através do executável 'StreamZ_run', para carregar dados previamente criados é necessário mover os ficheiros active_streams.txt, archive.txt, user.txt para o folder onde se encontra o executável.
 
+Nota: os dados fornecidos apresentam números de likes / dislikes / views por stream não consistentes com o número de viewers existentes, pois foram escolhidos aleatoriamente de modo a demonstrar as funcionalidades de ordenação / pesquisa de streams
+
 
 A interface gráfica utiliza códigos ANSI, incluindo o código de CLEAR_SCREEN.
 
@@ -50,3 +52,9 @@ CMakeLists.txt
 * stream-tests.cpp
 * user-tests.cpp
 * CMakeLists.txt
+
+
+/data-set
+* archive.txt
+* active_streams.txt
+* user.txt
