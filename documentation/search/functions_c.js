@@ -1,24 +1,11 @@
 var searchData=
 [
-  ['save_259',['save',['../class_platform.html#a96a4b3e2d40b6b905c745e8da073c13f',1,'Platform']]],
-  ['show_260',['show',['../class_archive.html#aa4fedde581ef67acb28b5d188b0ddb8d',1,'Archive::show()'],['../class_menu.html#a6a39f0279393d72625776c4b717cad8a',1,'Menu::show()'],['../class_main_menu.html#a7a17724b8ef7f8b033d029db81a84431',1,'MainMenu::show()'],['../class_register_user_menu.html#a61971a2b19829cf2653feb99e7861bd8',1,'RegisterUserMenu::show()'],['../class_login_user_menu.html#ab69dbb7faec561bc09e5511c1ff6f795',1,'LoginUserMenu::show()'],['../class_viewer_menu.html#a82cd831dd93ea9993f28e2a1ff576db4',1,'ViewerMenu::show()'],['../class_streamer_menu.html#a857a1eec80c3eef45d1daea1b5c04e08',1,'StreamerMenu::show()'],['../class_administrator_menu.html#afb03f91529e7ad3ba8974aae1e6017d4',1,'AdministratorMenu::show()'],['../class_filter_streams_menu.html#a34eb26df2062fd2d8e64aaaeb73c6e8b',1,'FilterStreamsMenu::show()'],['../class_information_menu.html#abf92ddc365c2cb1932bdcafa621a4727',1,'InformationMenu::show()'],['../class_sort_menu.html#a5b9c2d640fa120169e4d269994f7de1f',1,'SortMenu::show()'],['../class_create_stream_menu.html#a7f6ba85445851a2dd74a0fead05fc363',1,'CreateStreamMenu::show()'],['../class_join_stream_menu.html#a2cc2db83acb2b131da3d715fde6b9510',1,'JoinStreamMenu::show()'],['../class_submit_comment_menu.html#a684c511821b4aff28556c824b070a607',1,'SubmitCommentMenu::show()'],['../class_stream_data.html#af9e4600ab6969a6ec41301f3c35e93b8',1,'StreamData::show()'],['../class_streamer.html#ab3fb7d9a0b37e58417be6522996fbf6b',1,'Streamer::show()'],['../class_user.html#ae39ad06f6b431952b3e372676adaba6e',1,'User::show()'],['../class_viewer.html#a49e2ff0fd192d62edee4a37bc13736bd',1,'Viewer::show()']]],
-  ['showarchive_261',['showArchive',['../class_platform.html#a9296e25023e8ceff980016435b42cb11',1,'Platform']]],
-  ['showstream_262',['showStream',['../class_archive.html#a079463d8ed3eba4bb2c979fbb4887d1f',1,'Archive']]],
-  ['showstreamhistory_263',['showStreamHistory',['../class_platform.html#a8426e37099ddd9c296592188e2cb5e31',1,'Platform']]],
-  ['showstreaminfo_264',['showStreamInfo',['../class_streamer.html#ad390f42c1a0eafb5a369e496b9ade19c',1,'Streamer']]],
-  ['showstreams_265',['showStreams',['../class_platform.html#ad4f2d4177e67b6bb82500c4f94aa2d6c',1,'Platform']]],
-  ['showtop_266',['showTop',['../class_archive.html#a65d5313f7902f503a1c855a185f92790',1,'Archive']]],
-  ['showusers_267',['showUsers',['../class_platform.html#ac11f4f028c521f32d64e6d771a14ac16',1,'Platform']]],
-  ['sort_268',['sort',['../class_platform.html#a62c400635d515029f99b2a30556343ba',1,'Platform']]],
-  ['sortactivestreams_269',['sortActiveStreams',['../class_platform.html#a841163798c2405e6ead8e2eff654defb',1,'Platform']]],
-  ['startprivatestream_270',['startPrivateStream',['../class_platform.html#a1e505b8c74b174ffebf94afdaa57899a',1,'Platform::startPrivateStream()'],['../class_streamer.html#a79ea7c6585e5a16e6bb12ec4847d377c',1,'Streamer::startPrivateStream()']]],
-  ['startpublicstream_271',['startPublicStream',['../class_platform.html#a250ef3e0a3bd76bceb32f28b2d204233',1,'Platform::startPublicStream()'],['../class_streamer.html#acc186073890f9d2307afd28329f3ff8d',1,'Streamer::startPublicStream()']]],
-  ['stream_272',['Stream',['../class_stream.html#a968addd8b22b3a6d673569699ff831df',1,'Stream::Stream(const std::string &amp;title, const std::string &amp;streamer, const std::string &amp;language, unsigned int id, const unsigned minimum_age)'],['../class_stream.html#a1c7c059ad1f1eb075537b825cb9dfe35',1,'Stream::Stream(const std::string &amp;title, const std::string &amp;streamer, const std::string &amp;language, unsigned int id, const unsigned int minimum_age, unsigned int likes, unsigned int dislikes, const std::string &amp;start_date)']]],
-  ['streamdata_273',['StreamData',['../class_stream_data.html#a15263edb04b3c5427fdc7588c660f7ba',1,'StreamData']]],
-  ['streamdoesnotexist_274',['StreamDoesNotExist',['../class_stream_does_not_exist.html#a4fc8bbc1fd89b22000d62bbf69c638f4',1,'StreamDoesNotExist']]],
-  ['streamer_275',['Streamer',['../class_streamer.html#ac6ccaba01222ab3c7031e31b51aaa3a3',1,'Streamer::Streamer(const std::string &amp;nickname, const std::string &amp;name, const Date &amp;birth_date, Platform &amp;platform)'],['../class_streamer.html#a5699df0b5993399e4322798a53b072df',1,'Streamer::Streamer(const std::string &amp;nickname, const std::string &amp;name, const Date &amp;birth_date, Platform &amp;platform, const std::vector&lt; std::pair&lt; unsigned int, char &gt;&gt; &amp;streams_history)'],['../class_streamer.html#af032b26dc23daa74535049cf054c44fb',1,'Streamer::Streamer(const std::string &amp;nickname, const std::string &amp;name, const Date &amp;birth_date, Platform &amp;platform, const std::vector&lt; std::pair&lt; unsigned int, char &gt;&gt; &amp;streams_history, const std::weak_ptr&lt; Stream &gt; &amp;current_stream)']]],
-  ['streamernotstreaming_276',['StreamerNotStreaming',['../class_streamer_not_streaming.html#aa43145221672e6c5b5337161995a8cbd',1,'StreamerNotStreaming']]],
-  ['streamnolongeractive_277',['StreamNoLongerActive',['../class_stream_no_longer_active.html#a5c6e4f56f1141e1f8db15c27c743c16a',1,'StreamNoLongerActive']]],
-  ['streamscounter_278',['streamsCounter',['../class_admin.html#a0a18e7187918e379689a3966d83ed2cd',1,'Admin']]],
-  ['synchistory_279',['syncHistory',['../class_viewer.html#a36dcd6b9d90c8c06e9f6ee5bc9e7f0ed',1,'Viewer']]]
+  ['testgetstreams_247',['testGetStreams',['../classPlatform.html#ae0a9c593f866e4fa61c9f82793d37ea1',1,'Platform']]],
+  ['testmode_248',['testMode',['../classArchive.html#a8b37416f0e015495bb11be1e869071b4',1,'Archive::testMode()'],['../classPlatform.html#a69a793b5ab52f6ac4de0b1537917de2b',1,'Platform::testMode()']]],
+  ['topactivestreams_249',['topActiveStreams',['../classPlatform.html#a176f6b46546301bcbd5768b7a626809f',1,'Platform']]],
+  ['toparchivedstreams_250',['topArchivedStreams',['../classPlatform.html#ab1896bbc00c5138c717a45a490cdba60',1,'Platform']]],
+  ['toplanguage_251',['topLanguage',['../classAdmin.html#abad5b844a83eed9ee230631e156aeca5',1,'Admin']]],
+  ['topstreamer_252',['topStreamer',['../classAdmin.html#a3ad56be67df9ead097b970c191302ce0',1,'Admin']]],
+  ['toptypestream_253',['topTypeStream',['../classAdmin.html#ac7fd0cdcd88fee80c184c9b237271bcd',1,'Admin']]],
+  ['tostring_254',['toString',['../classDate.html#a5f0876ad13b502bc34ca58ff610c4e17',1,'Date']]]
 ];

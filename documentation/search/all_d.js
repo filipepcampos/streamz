@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['platform_92',['Platform',['../class_platform.html',1,'Platform'],['../class_admin.html#afeeacc9d6bc13977a6cf4913333503aa',1,'Admin::platform()'],['../class_user.html#a1c26f8c4d295d81c3b5c3105373667ba',1,'User::platform()'],['../class_platform.html#a52028ea2984cbfdf8e9f42ee87f66cfe',1,'Platform::Platform()']]],
-  ['print_93',['print',['../class_private_stream.html#a9ff4b39b328f784056c23a6103512ece',1,'PrivateStream::print()'],['../class_stream_data.html#a78a2a7e73e1aad5c01aa05d209b34ee1',1,'StreamData::print()'],['../class_streamer.html#a0f93ce75a5aed16042eaa5932a61984e',1,'Streamer::print()'],['../class_user.html#a074f405d4a5c913a275de8242da8d7c6',1,'User::print()'],['../class_viewer.html#a4cba5751b59c64b415c8723fa5f840ca',1,'Viewer::print()']]],
-  ['privatestream_94',['PrivateStream',['../class_private_stream.html',1,'PrivateStream'],['../class_private_stream.html#a39d82dc919d8d2289b7c13fca574fe8a',1,'PrivateStream::PrivateStream(const std::string &amp;title, const std::string &amp;streamer, const std::string &amp;language, unsigned int id, unsigned minimum_age, unsigned max_capacity, const std::vector&lt; std::string &gt; &amp;allowed_viewers)'],['../class_private_stream.html#a10434fdab8b7b56129cc3a0a683d087d',1,'PrivateStream::PrivateStream(const std::string &amp;title, const std::string &amp;streamer, const std::string &amp;language, unsigned int id, unsigned minimum_age, unsigned max_capacity, const std::vector&lt; std::string &gt; &amp;allowed_viewers, unsigned int likes, unsigned int dislikes, const std::string &amp;start_date, const std::vector&lt; Comment &gt; &amp;comments)']]]
+  ['registerstreamer_83',['registerStreamer',['../classPlatform.html#a06db58293ec6859885da5de5b7a0792e',1,'Platform']]],
+  ['registerusermenu_84',['RegisterUserMenu',['../classRegisterUserMenu.html',1,'']]],
+  ['registerviewer_85',['registerViewer',['../classPlatform.html#ac6383c31a56c7d8a4c4156db1535c5e5',1,'Platform']]],
+  ['removedislike_86',['removeDislike',['../classStream.html#a8808dbbb71903b95038f7082eb99eb44',1,'Stream']]],
+  ['removelike_87',['removeLike',['../classStream.html#ab0e1450ee8b526f041c3dd53d38440d0',1,'Stream']]],
+  ['removestreamfromhistory_88',['removeStreamFromHistory',['../classStreamer.html#ac994dc496fb23b30e6742a2dc8e4082c',1,'Streamer::removeStreamFromHistory()'],['../classUser.html#acadbff015edbd22b2f60909450c66d8c',1,'User::removeStreamFromHistory()']]]
 ];

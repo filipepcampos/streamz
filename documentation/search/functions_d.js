@@ -1,11 +1,6 @@
 var searchData=
 [
-  ['testgetstreams_280',['testGetStreams',['../class_platform.html#ae0a9c593f866e4fa61c9f82793d37ea1',1,'Platform']]],
-  ['testmode_281',['testMode',['../class_archive.html#a8b37416f0e015495bb11be1e869071b4',1,'Archive::testMode()'],['../class_platform.html#a69a793b5ab52f6ac4de0b1537917de2b',1,'Platform::testMode()']]],
-  ['topactivestreams_282',['topActiveStreams',['../class_platform.html#a176f6b46546301bcbd5768b7a626809f',1,'Platform']]],
-  ['toparchivedstreams_283',['topArchivedStreams',['../class_platform.html#ab1896bbc00c5138c717a45a490cdba60',1,'Platform']]],
-  ['toplanguage_284',['topLanguage',['../class_admin.html#abad5b844a83eed9ee230631e156aeca5',1,'Admin']]],
-  ['topstreamer_285',['topStreamer',['../class_admin.html#a3ad56be67df9ead097b970c191302ce0',1,'Admin']]],
-  ['toptypestream_286',['topTypeStream',['../class_admin.html#ac7fd0cdcd88fee80c184c9b237271bcd',1,'Admin']]],
-  ['tostring_287',['toString',['../class_date.html#a5f0876ad13b502bc34ca58ff610c4e17',1,'Date']]]
+  ['user_255',['User',['../classUser.html#a93f12c03d805f904b5da78f7bfdd78b3',1,'User::User(const std::string &amp;nickname, const std::string &amp;name, const Date &amp;birth_date, Platform &amp;platform)'],['../classUser.html#a04cd1e62b28d4f2ae2acb6c91b3f9e76',1,'User::User(const std::string &amp;nickname, const std::string &amp;name, const Date &amp;birth_date, Platform &amp;platform, const std::vector&lt; std::pair&lt; unsigned int, char &gt;&gt; &amp;history)']]],
+  ['useralreadyexists_256',['UserAlreadyExists',['../classUserAlreadyExists.html#a9a9d47eb9a2c49a4208e214fb7d6dff9',1,'UserAlreadyExists']]],
+  ['userdoesnotexist_257',['UserDoesNotExist',['../classUserDoesNotExist.html#a8414b565867fca38f84b209fb0d3b124',1,'UserDoesNotExist']]]
 ];

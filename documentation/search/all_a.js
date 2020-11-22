@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['mainmenu_81',['MainMenu',['../class_main_menu.html',1,'']]],
-  ['max_5fcapacity_82',['max_capacity',['../class_private_stream.html#a93fbebeb5882e41fdb65a09b918f0acb',1,'PrivateStream']]],
-  ['menu_83',['Menu',['../class_menu.html',1,'']]],
-  ['message_84',['message',['../class_invalid_action.html#a8e5f2cc04dea0c35f9997cc7ff3dd1c8',1,'InvalidAction']]],
-  ['min_5fage_85',['min_age',['../class_stream_data.html#a6a45ecce501db3cea56ae39f0d9d749e',1,'StreamData']]]
+  ['nickname_75',['nickname',['../structComment.html#a5d75b2ed6436de34b92ea7a7a41ad81a',1,'Comment']]]
 ];

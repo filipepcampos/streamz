@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['joinstream_74',['joinStream',['../class_platform.html#ad7aaaa055a2891273c124786e74ae915',1,'Platform::joinStream(const std::string &amp;streamer, const Viewer &amp;viewer)'],['../class_platform.html#a2eb28ae7a2b59ed80fd9415dfa8ec2f5',1,'Platform::joinStream(unsigned int id, const Viewer &amp;viewer)'],['../class_stream.html#ade0783a11771dffbb83f905fe768e346',1,'Stream::joinStream()'],['../class_viewer.html#acd6aaf57dda113425930213b7ef7cbb6',1,'Viewer::joinStream(unsigned int id)'],['../class_viewer.html#a04004bd84ed8add74588875592aaf9be',1,'Viewer::joinStream(const std::string &amp;streamer)']]],
-  ['joinstreammenu_75',['JoinStreamMenu',['../class_join_stream_menu.html',1,'']]]
+  ['language_67',['language',['../classStreamData.html#af7d644afe2a5550da15738df1830fb76',1,'StreamData']]],
+  ['leavestream_68',['leaveStream',['../classStream.html#a679920da7b7c1ad1fd9e7228f6fcd907',1,'Stream::leaveStream()'],['../classViewer.html#a1bcb6d912b95fe17dca5d6c0b811ffe7',1,'Viewer::leaveStream()']]],
+  ['like_69',['like',['../classViewer.html#a4dc413f16d7ddda30a66a61bd05a995c',1,'Viewer']]],
+  ['likes_70',['likes',['../classStreamData.html#adfbe3ed5d521cebba89e0caa6ad8d266',1,'StreamData']]],
+  ['loginusermenu_71',['LoginUserMenu',['../classLoginUserMenu.html',1,'']]]
 ];

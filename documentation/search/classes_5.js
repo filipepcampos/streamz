@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['joinstreammenu_166',['JoinStreamMenu',['../class_join_stream_menu.html',1,'']]]
+  ['joinstreammenu_141',['JoinStreamMenu',['../classJoinStreamMenu.html',1,'']]]
 ];

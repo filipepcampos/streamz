@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['canjoin_10',['canJoin',['../class_private_stream.html#a4111af1dd52e3bf87035ee3534eea54a',1,'PrivateStream::canJoin()'],['../class_stream.html#a50c856f8add12a7470207b9009ac811e',1,'Stream::canJoin()']]],
-  ['checkdateintersection_11',['checkDateIntersection',['../class_date.html#aa8139e65941ec8ac1158612f370b1337',1,'Date']]],
-  ['comment_12',['Comment',['../struct_comment.html',1,'Comment'],['../struct_comment.html#a6cd2529744f0548414972a1140955616',1,'Comment::comment()'],['../class_viewer.html#a444d083d33c021d48695857412ef59b9',1,'Viewer::comment()']]],
-  ['comments_13',['comments',['../class_private_stream.html#a304d445efc15522ff910f78df1f97199',1,'PrivateStream']]],
-  ['createstreammenu_14',['CreateStreamMenu',['../class_create_stream_menu.html',1,'']]],
-  ['current_5fstream_15',['current_stream',['../class_user.html#ae5938c6eedc65ad026435a6b9daa7419',1,'User']]],
-  ['current_5fstream_5ffeedback_16',['current_stream_feedback',['../class_viewer.html#a11fc4801bbcaaca0a4e62401fa14189a',1,'Viewer']]]
+  ['date_11',['Date',['../classDate.html',1,'Date'],['../classDate.html#a4e59ed4ba66eec61c27460c5d09fa1bd',1,'Date::Date()'],['../classDate.html#ad60a06bab3db402303ea74ebc409ce29',1,'Date::Date(const Date &amp;date)'],['../classDate.html#ad1b070aee91d2b29b0972992414f65a5',1,'Date::Date(const std::string &amp;date)'],['../structComment.html#a7981daedaaf3cde5e9263dd3b82c22d0',1,'Comment::date()']]],
+  ['deletestream_12',['deleteStream',['../classPlatform.html#a05fdcab9fc63cee8c17814f790ac9480',1,'Platform']]],
+  ['deleteuser_13',['deleteUser',['../classPlatform.html#aedaf507d2e8bde5158fbf5fc3002eb02',1,'Platform']]],
+  ['dislike_14',['dislike',['../classViewer.html#a35335b01b9f24fe3abb6c3ac55cb982e',1,'Viewer']]],
+  ['dislikes_15',['dislikes',['../classStreamData.html#a3012b462df821b658d2fff794df3b85e',1,'StreamData']]]
 ];
