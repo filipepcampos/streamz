@@ -129,7 +129,7 @@ void Archive::updateTop(const StreamData &data){
     if(views_it != top_views.begin() || top_views.size() < 10){
         top_views.insert(views_it, data);
         if(top_views.size() > 10)
-            top_views.pop_back();
+            top_views.pop_front();
     }
     auto likes_it = std::lower_bound(top_likes.begin(), top_likes.end(), data.getLikes(), [](const StreamData &d, unsigned int likes){
         return d.getLikes() < likes;
@@ -137,7 +137,7 @@ void Archive::updateTop(const StreamData &data){
     if(likes_it != top_likes.begin() || top_likes.size() < 10) {
         top_likes.insert(likes_it, data);
         if(top_likes.size() > 10)
-            top_likes.pop_back();
+            top_likes.pop_front();
     }
 }
 
