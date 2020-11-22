@@ -42,7 +42,7 @@ std::ostream& PrivateStream::print(std::ostream & os) const{
     return os;
 }
 
-void PrivateStream::addComment(Viewer &viewer, const std::string &comment){
+void PrivateStream::addComment(const Viewer &viewer, const std::string &comment){
     Comment c;
     c.date = Date();
     c.nickname = viewer.getNickname();

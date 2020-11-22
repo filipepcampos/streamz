@@ -63,7 +63,7 @@ public:
      * @param viewer Viewer leaving the comment
      * @param comment Comment the viewer is leaving
      */
-    void addComment(Viewer &viewer, const std::string &comment);
+    void addComment(const Viewer &viewer, const std::string &comment);
 private:
     /**
      * Maximum capacity of the stream
