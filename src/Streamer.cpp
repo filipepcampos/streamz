@@ -30,13 +30,23 @@ bool Streamer::getBonus() const {
 void Streamer::startPublicStream(const std::string &title, const std::string &language, const unsigned minimum_age) {
     if (!current_stream.expired())
         throw InvalidAction("Stream already occurring");
-    current_stream = platform.startPublicStream(title, getNickname(), language, minimum_age);
+    unsigned int bonus_likes = 0;
+    if (bonus) {
+        bonus_likes = BONUS_LIKES;
+        bonus = false;
+    }
+    current_stream = platform.startPublicStream(title, getNickname(), language, minimum_age, bonus_likes);
 }
 
 void Streamer::startPrivateStream(const std::string &title, const std::string &language, const unsigned minimum_age, const unsigned max_capacity, const std::vector<std::string> &allowed_viewers) {
     if (!current_stream.expired())
         throw InvalidAction("Stream already occurring");
-    current_stream = platform.startPrivateStream(title, getNickname(), language, minimum_age, max_capacity, allowed_viewers);
+    unsigned int bonus_likes = 0;
+    if (bonus) {
+        bonus_likes = BONUS_LIKES;
+        bonus = false;
+    }
+    current_stream = platform.startPrivateStream(title, getNickname(), language, minimum_age, max_capacity, allowed_viewers, bonus_likes);
 }
 
 void Streamer::endStream() {

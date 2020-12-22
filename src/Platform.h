@@ -234,10 +234,11 @@ public:
      * @param streamer - Streamer nickname
      * @param language - Stream language
      * @param minimum_age - Minimum viewer age
+     * @param bonus_likes - Initial likes that will be given to the stream
      * @return weak_ptr to stream
      */
     std::weak_ptr<Stream> startPublicStream(const std::string &title, const std::string &streamer, const std::string &language,
-                                            unsigned minimum_age);
+                                            unsigned minimum_age, unsigned bonus_likes = 0);
 
     /**
      * Start a Private Stream and return a weak_ptr to it
@@ -247,11 +248,12 @@ public:
      * @param minimum_age - Minimum viewer age
      * @param max_capacity - Maximum number of viewers
      * @param allowed_viewers - Vector with allowed viewers nicknames
+     * @param bonus_likes - Initial likes that will be given to the stream
      * @return weak_ptr to stream
      */
     std::weak_ptr<Stream> startPrivateStream(const std::string &title, const std::string &streamer, const std::string &language,
                                              unsigned minimum_age, unsigned max_capacity,
-                                             const std::vector<std::string> &allowed_viewers);
+                                             const std::vector<std::string> &allowed_viewers, unsigned bonus_likes = 0);
 
     /**
      * End stream with a given id

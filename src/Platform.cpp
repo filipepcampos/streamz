@@ -308,8 +308,8 @@ std::weak_ptr<Stream> Platform::joinStream(unsigned int id, const Viewer &viewer
 }
 
 std::weak_ptr<Stream> Platform::startPublicStream(const std::string &title, const std::string &streamer, const std::string &language,
-                                                  const unsigned int minimum_age) {
-    std::shared_ptr<Stream> ptr(new Stream(title, streamer, language, stream_id_count++, minimum_age));
+                                                  const unsigned int minimum_age, unsigned bonus_likes) {
+    std::shared_ptr<Stream> ptr(new Stream(title, streamer, language, stream_id_count++, minimum_age, bonus_likes, 0, Date().toString()));
     active_streams.emplace_back(ptr);
     std::weak_ptr<Stream> weak_ptr = ptr;
     return weak_ptr;
@@ -317,8 +317,8 @@ std::weak_ptr<Stream> Platform::startPublicStream(const std::string &title, cons
 
 std::weak_ptr<Stream> Platform::startPrivateStream(const std::string &title, const std::string &streamer, const std::string &language,
                                                    const unsigned minimum_age, const unsigned max_capacity,
-                                                   const std::vector<std::string> &allowed_viewers){
-    std::shared_ptr<Stream> ptr(new PrivateStream(title, streamer, language, stream_id_count++, minimum_age, max_capacity, allowed_viewers));
+                                                   const std::vector<std::string> &allowed_viewers, unsigned bonus_likes){
+    std::shared_ptr<Stream> ptr(new PrivateStream(title, streamer, language, stream_id_count++, minimum_age, max_capacity, allowed_viewers, bonus_likes, 0, Date().toString(), {}));
     active_streams.emplace_back(ptr);
     std::weak_ptr<Stream> weak_ptr = ptr;
     return weak_ptr;
