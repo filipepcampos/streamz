@@ -6,6 +6,7 @@
 #include <memory>
 
 class Streamer : public User {
+    bool bonus; /**< Indicates if the streamer has bonus likes in is next stream */
 public:
     /**
      * Class constructor used when creating a new streamer
@@ -13,9 +14,10 @@ public:
      * @param name Name of the user
      * @param birth_date Birth date of the user
      * @param platform Reference to associated platform
+     * @param bonus Indicates if the streamer has bonus likes in is next stream
      * @throws InvalidAge
      */
-    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform);
+    Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, bool bonus = false);
     /**
      * Class constructor used when loading an existing streamer from a file
      * @param nickname Nickname of the user
@@ -37,7 +39,11 @@ public:
      * @throws InvalidAge
      */
     Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int,char>> &streams_history, const std::weak_ptr<Stream> &current_stream);
-
+    /**
+     * Indicates if the streamer has bonus likes in is next stream
+     * @return boolean indicating if the streamer has bonus likes in is next stream
+     */
+    bool getBonus() const;
     /**
      * Starts a Public Stream and associate it with the streamer
      * @param title Stream title

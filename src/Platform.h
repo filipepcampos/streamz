@@ -11,6 +11,7 @@
 
 #define MINIMUM_VIEWER_AGE 12
 #define MINIMUM_STREAMER_AGE 15
+#define BONUS_LIKES 50
 
 class User;
 class Viewer;
