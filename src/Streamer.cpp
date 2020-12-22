@@ -5,18 +5,18 @@
 #include <iomanip>
 #include <algorithm>
 
-Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform) : User(nickname, name, birth_date, platform) {
+Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform) : User(nickname, name, birth_date, platform), store(nickname) {
     if (getAge() < MINIMUM_STREAMER_AGE)
         throw InvalidAge(getAge());
 }
 
-Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history) : User(nickname, name, birth_date, platform, streams_history) {
+Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history) : User(nickname, name, birth_date, platform, streams_history),  store(nickname) {
     if (getAge() < MINIMUM_STREAMER_AGE)
         throw InvalidAge(getAge());
     this->streams_history = streams_history;
 }
 
-Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history, const std::weak_ptr<Stream> &current_stream) : User(nickname, name, birth_date, platform, streams_history) {
+Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history, const std::weak_ptr<Stream> &current_stream) : User(nickname, name, birth_date, platform, streams_history), store(nickname){
     if (getAge() < MINIMUM_STREAMER_AGE)
         throw InvalidAge(getAge());
     this->streams_history = streams_history;
@@ -99,4 +99,8 @@ std::ostream& Streamer::print(std::ostream & os) const {
 
 bool Streamer::operator==(const Streamer &other) const {
     return this->getNickname() == other.getNickname();
+}
+
+Store *Streamer::getStore() {
+    return &store;
 }
