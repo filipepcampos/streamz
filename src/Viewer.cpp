@@ -1,5 +1,6 @@
 #include "Viewer.h"
 #include "PrivateStream.h"
+#include "Order.h"
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
@@ -112,5 +113,16 @@ void Viewer::dislike() {
                 case 'D': ptr->removeDislike(); *current_stream_feedback = '-'; break;
             }
         }
+    }
+}
+
+void Viewer::completeOrder(const Order &o) {
+    auto it = std::find_if(pending_orders.begin(), pending_orders.end(), [o](Order *o2){
+        return (*o2) == o;
+    });
+    if(it != pending_orders.end()){
+        Order *ptr = (*it);
+        completed_orders.emplace_back(*ptr);
+        pending_orders.erase(it);
     }
 }

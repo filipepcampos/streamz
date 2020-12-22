@@ -31,6 +31,12 @@ set(SOURCE_FILES
         src/Platform.cpp
         src/Menu.cpp
         src/Input.cpp
+        src/Product.cpp
+        src/Product.h
+        src/Order.cpp
+        src/Order.h
+        src/Store.cpp
+        src/Store.h
         src/StreamerRecord.cpp
         main.cpp)
 

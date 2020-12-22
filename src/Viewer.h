@@ -3,6 +3,9 @@
 #include "User.h"
 #include "Stream.h"
 #include <memory>
+#include <vector>
+
+class Order;
 
 class Viewer : public User {
     /**
@@ -14,6 +17,9 @@ class Viewer : public User {
      * If it's not nullptr, then it will point to a char (pair.second) of a entry in streams history
      */
     char *current_stream_feedback = nullptr;
+
+    std::vector<Order *> pending_orders;
+    std::vector<Order> completed_orders;
 public:
     /**
      * Class constructor
@@ -89,6 +95,9 @@ public:
      * @return Boolean indicating if the viewers are the same
      */
     bool operator==(const Viewer &other) const;
+
+    void completeOrder(const Order &o);
+    void addPendingOrder(Order *o);
 };
 
 #endif //STREAMZ_VIEWER_H

@@ -2,11 +2,13 @@
 #define STREAMZ_STREAMER_H
 #include "User.h"
 #include "Stream.h"
+#include "Store.h"
 #include <vector>
 #include <memory>
 
 class Streamer : public User {
     bool bonus; /**< Indicates if the streamer has bonus likes in is next stream */
+    Store store;
 public:
     /**
      * Class constructor used when creating a new streamer
@@ -94,6 +96,8 @@ public:
      * @return Boolean indicating if the streamers are the same
      */
     bool operator==(const Streamer &other) const;
+
+    Store *getStore();
 };
 
 #endif //STREAMZ_STREAMER_H
