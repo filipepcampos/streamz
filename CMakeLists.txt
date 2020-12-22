@@ -17,6 +17,7 @@ set(SOURCE_FILES
         src/Platform.h
         src/Input.h
         src/Menu.h
+        src/StreamerRecord.h
         src/Admin.cpp
         src/Date.cpp
         src/StreamData.cpp
@@ -30,6 +31,7 @@ set(SOURCE_FILES
         src/Platform.cpp
         src/Menu.cpp
         src/Input.cpp
+        src/StreamerRecord.cpp
         main.cpp)
 
 include_directories(src)
