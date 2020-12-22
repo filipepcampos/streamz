@@ -16,6 +16,8 @@ public:
     double getTotalPrice() const;
     int getSize() const;
     int getDisp() const;
+    std::string getCustomerNickname() const;
+    bool operator==(const Order &o) const;
     bool operator<(const Order &o) const;
     friend std::ostream& operator <<(std::ostream& os, const Order &o);
 };

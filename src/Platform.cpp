@@ -4,6 +4,7 @@
 #include "StreamData.h"
 #include "Stream.h"
 #include "PrivateStream.h"
+#include "Store.h"
 #include <iostream>
 #include <algorithm>
 #include <stack>
@@ -439,4 +440,13 @@ std::vector<std::shared_ptr<Stream>> Platform::testGetStreams() {
 
 void Platform::showArchive() {
     archive.show();
+}
+
+Store *Platform::getStore(const std::string &streamer_name) {
+    User * u = getUser(streamer_name);
+    Streamer * s = dynamic_cast<Streamer *>(u);
+    if(s != nullptr){
+        return s->getStore();
+    }
+    return nullptr;
 }

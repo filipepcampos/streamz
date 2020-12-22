@@ -42,3 +42,20 @@ std::ostream &operator<<(std::ostream &os, const Order &o) {
     }
     return os;
 }
+
+std::string Order::getCustomerNickname() const {
+    return customer->getNickname();
+}
+
+bool Order::operator==(const Order &o) const {
+    if(getCustomerNickname()==o.getCustomerNickname() && streamer==o.streamer && disp==o.disp && products.size()==o.products.size()){
+        std::vector<Product>::const_iterator it1, it2;
+        for(it1 = products.cbegin(), it2 = o.products.cbegin(); it1 != products.cend() && it2 != o.products.cend(); ++it1, ++it2){
+            if((*it1).getName() != (*it2).getName()){
+                return false;
+            }
+        }
+        return true;
+    }
+    return false;
+}

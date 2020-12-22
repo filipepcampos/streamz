@@ -4,7 +4,8 @@
 #include "Stream.h"
 #include <memory>
 #include <vector>
-#include "Order.h"
+
+class Order;
 
 class Viewer : public User {
     /**

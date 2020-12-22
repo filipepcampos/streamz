@@ -1,7 +1,7 @@
 #include "Store.h"
 #include <algorithm>
 
-Store::Store(const std::string &streamer) : streamer(streamer) {
+Store::Store(const std::string &streamer, Platform &platform) : streamer(streamer), platform(platform) {
 }
 
 bool Store::addMerchandise(const Product &p) {
@@ -44,5 +44,18 @@ void Store::showOrders() const {
     while(!tmp_queue.empty()){
         Order o = tmp_queue.top(); tmp_queue.pop();
         std::cout << o << std::endl;
+    }
+}
+
+std::string Store::getStreamer() const {
+    return streamer;
+}
+
+void Store::processOrder() {
+    Order o = orders.top(); orders.pop();
+    User * u = platform.getUser(o.getCustomerNickname());
+    Viewer *v = dynamic_cast<Viewer *> (u);
+    if(v != nullptr){
+        v->completeOrder(o);
     }
 }

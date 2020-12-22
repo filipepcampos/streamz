@@ -15,6 +15,7 @@ class Viewer;
 class Streamer;
 class StreamData;
 class Stream;
+class Store;
 
 /*
  * Sorting parameter
@@ -270,6 +271,8 @@ public:
      * Show all users in the platform
      */
     void showUsers() const;
+
+    Store *getStore(const std::string &streamer_name);
 
     /**
      * Clear all vectors in memory
