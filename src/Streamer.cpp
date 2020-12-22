@@ -5,34 +5,48 @@
 #include <iomanip>
 #include <algorithm>
 
-Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform) : User(nickname, name, birth_date, platform), store(nickname, platform) {
+Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, bool bonus) : User(nickname, name, birth_date, platform), store(nickname, platform), bonus(bonus) {
     if (getAge() < MINIMUM_STREAMER_AGE)
         throw InvalidAge(getAge());
 }
 
-Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history) : User(nickname, name, birth_date, platform, streams_history),  store(nickname, platform) {
+Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history) : User(nickname, name, birth_date, platform, streams_history), store(nickname, platform), bonus(false) {
     if (getAge() < MINIMUM_STREAMER_AGE)
         throw InvalidAge(getAge());
     this->streams_history = streams_history;
 }
 
-Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history, const std::weak_ptr<Stream> &current_stream) : User(nickname, name, birth_date, platform, streams_history), store(nickname, platform){
+Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history, const std::weak_ptr<Stream> &current_stream) : User(nickname, name, birth_date, platform, streams_history), store(nickname, platform), bonus(false) {
     if (getAge() < MINIMUM_STREAMER_AGE)
         throw InvalidAge(getAge());
     this->streams_history = streams_history;
     this->current_stream = current_stream;
 }
 
+bool Streamer::getBonus() const {
+    return bonus;
+}
+
 void Streamer::startPublicStream(const std::string &title, const std::string &language, const unsigned minimum_age) {
     if (!current_stream.expired())
         throw InvalidAction("Stream already occurring");
-    current_stream = platform.startPublicStream(title, getNickname(), language, minimum_age);
+    unsigned int bonus_likes = 0;
+    if (bonus) {
+        bonus_likes = BONUS_LIKES;
+        bonus = false;
+    }
+    current_stream = platform.startPublicStream(title, getNickname(), language, minimum_age, bonus_likes);
 }
 
 void Streamer::startPrivateStream(const std::string &title, const std::string &language, const unsigned minimum_age, const unsigned max_capacity, const std::vector<std::string> &allowed_viewers) {
     if (!current_stream.expired())
         throw InvalidAction("Stream already occurring");
-    current_stream = platform.startPrivateStream(title, getNickname(), language, minimum_age, max_capacity, allowed_viewers);
+    unsigned int bonus_likes = 0;
+    if (bonus) {
+        bonus_likes = BONUS_LIKES;
+        bonus = false;
+    }
+    current_stream = platform.startPrivateStream(title, getNickname(), language, minimum_age, max_capacity, allowed_viewers, bonus_likes);
 }
 
 void Streamer::endStream() {

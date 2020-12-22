@@ -5,14 +5,13 @@
 class Streamer;
 
 class StreamerRecord {
-    union {
-        Streamer * streamer;
-        std::string nickname;
-    };
+    Streamer * streamer;
+    std::string nickname;
     bool active;
 public:
     explicit StreamerRecord(Streamer * st);
-    explicit StreamerRecord(std::string &nick);
+    explicit StreamerRecord(const std::string &nick);
+    StreamerRecord(const StreamerRecord &sr);
     ~StreamerRecord();
     const Streamer * getStreamer() const;
     std::string getNickname() const;
