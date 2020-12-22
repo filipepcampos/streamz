@@ -2,10 +2,12 @@
 #define STREAMZ_PLATFORM_H
 #include "Exceptions.h"
 #include "Archive.h"
+#include "StreamerRecord.h"
 #include <vector>
 #include <string>
 #include <memory>
 #include <list>
+#include <unordered_set>
 
 #define MINIMUM_VIEWER_AGE 12
 #define MINIMUM_STREAMER_AGE 15
@@ -32,6 +34,24 @@ enum sortingOrder{
     ascending,
     descending
 };
+/*
+ * Struct needed to hashtable
+ */
+struct StreamerRecordHash {
+    int operator()(const StreamerRecord &sr) const {
+        int v = 0;
+        for (const char &c : sr.getNickname()) {
+            v = 37 * v + c;
+        }
+        return v;
+    }
+
+    bool operator()(const StreamerRecord& sr1, const StreamerRecord& sr2) const {
+        return sr1.getNickname() == sr2.getNickname();
+    }
+};
+
+typedef std::unordered_set<StreamerRecord, StreamerRecordHash, StreamerRecordHash> HashTableStreamerRecord;
 
 class Platform {
 private:
@@ -40,6 +60,7 @@ private:
 
     std::vector<User *> users; /*< Users*/
     std::vector<std::shared_ptr<Stream>> active_streams; /*< Active streams */
+    HashTableStreamerRecord streamerRecords;
 
     unsigned int stream_id_count = 1; /*< Track stream ids to be assigned to new streams*/
 
