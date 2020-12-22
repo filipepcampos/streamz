@@ -1,4 +1,5 @@
 #include "StreamerRecord.h"
+#include "Streamer.h"
 
 
 StreamerRecord::StreamerRecord(Streamer * st) : active(true) {
@@ -8,13 +9,18 @@ StreamerRecord::StreamerRecord(Streamer * st) : active(true) {
 StreamerRecord::StreamerRecord(std::string &nick) : active(false) {
     nickname = nick;
 }
+// TODO: Confirmar se este destrutor está correto
+StreamerRecord::~StreamerRecord() {
+    if (active) streamer = nullptr;
+    else nickname.clear();
+}
 
 const Streamer * StreamerRecord::getStreamer() const {
     if (active) return streamer;
     return nullptr;
 }
 
-const std::string & StreamerRecord::getNickname() const {
+std::string StreamerRecord::getNickname() const {
     if (active) return streamer->getNickname();
     return nickname;
 }
