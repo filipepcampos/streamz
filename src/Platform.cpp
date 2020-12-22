@@ -196,7 +196,20 @@ bool Platform::registerStreamer(const std::string &nickname, const std::string &
     if(userExists(nickname)){
         throw UserAlreadyExists(nickname);
     }
-    users.push_back(new Streamer(nickname, name, birth_date, *this));
+
+    Streamer * st = nullptr;
+    StreamerRecord aux(nickname);
+
+    HashTableStreamerRecord::iterator it = streamerRecords.find(aux);
+    if (it != streamerRecords.end()) {
+        streamerRecords.erase(it);
+        st = new Streamer(nickname, name, birth_date, *this, true);
+    }
+    else {
+        st = new Streamer(nickname, name, birth_date, *this);
+    }
+    users.push_back(st);
+    streamerRecords.insert(StreamerRecord(st));
     return true;
 }
 
@@ -404,8 +417,11 @@ bool Platform::deleteUser(const std::string &nickname) {
         return false;
     }
     Streamer * streamer = dynamic_cast<Streamer*> ((*it));
-    if(streamer && streamer->inStream()){
-        streamer->endStream();
+    if(streamer){
+        if (streamer->inStream()) streamer->endStream();
+        StreamerRecord aux(nickname);
+        streamerRecords.erase(aux);
+        streamerRecords.insert(aux);
     }
     delete (*it);
     users.erase(it);
