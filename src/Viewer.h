@@ -18,7 +18,7 @@ class Viewer : public User {
      */
     char *current_stream_feedback = nullptr;
 
-    std::vector<Order *> pending_orders;
+    std::vector<Order> pending_orders;
     std::vector<Order> completed_orders;
 public:
     /**
@@ -97,7 +97,8 @@ public:
     bool operator==(const Viewer &other) const;
 
     void completeOrder(const Order &o);
-    void addPendingOrder(Order *o);
+    void addPendingOrder(const Order &o);
+    void showOrders();
 };
 
 #endif //STREAMZ_VIEWER_H

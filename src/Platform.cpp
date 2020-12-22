@@ -443,10 +443,15 @@ void Platform::showArchive() {
 }
 
 Store *Platform::getStore(const std::string &streamer_name) {
-    User * u = getUser(streamer_name);
-    Streamer * s = dynamic_cast<Streamer *>(u);
-    if(s != nullptr){
-        return s->getStore();
+    try{
+        User * u = getUser(streamer_name);
+        Streamer * s = dynamic_cast<Streamer *>(u);
+        if(s != nullptr){
+            return s->getStore();
+        }
+    }
+    catch(const UserDoesNotExist &e){
+        return nullptr;
     }
     return nullptr;
 }

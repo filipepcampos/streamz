@@ -184,6 +184,8 @@ void ViewerMenu::show() {
         std::cout << "[" << option++ << "] View stream history" << std::endl;
         std::cout << "[" << option++ << "] View liked streams history" << std::endl;
         std::cout << "[" << option++ << "] Remove stream from history" << std::endl;
+        std::cout << "[" << option++ << "] View orders" << std::endl;
+        std::cout << "[" << option++ << "] Access Store" << std::endl;
     }
     std::cout << "[" << option++ << "] Delete Account" << std::endl << std::endl;
     std::cout << "[0] Exit" << std::endl;
@@ -215,12 +217,26 @@ Menu * ViewerMenu::getNextMenu() {
     }
     else{
         unsigned int id;
+        std::string streamer;
+        Store *store;
         switch(option){
             case 1: return new JoinStreamMenu(platform, viewer);
             case 2: platform.showStreamHistory(viewer->getStreamsHistory()); input::waitEnter(); return this;
             case 3: platform.showStreamHistory(viewer->getStreamsHistory(), 'L'); input::waitEnter(); return this;
             case 4: std::cout << "Stream id: "; if(input::get(id)){viewer->removeStreamFromHistory(id);} return this;
-            case 5: platform.deleteUser(viewer->getNickname()); return nullptr;
+            case 5:
+                viewer->showOrders();
+                input::waitEnter();
+                return this;
+            case 6:
+                std::cout << "Streamer name:" << std::endl;
+                streamer = input::getRaw();
+                store = platform.getStore(streamer);
+                if(store != nullptr){
+                    return new ViewerStoreMenu(platform, viewer, store);
+                }
+                return this;
+            case 7: platform.deleteUser(viewer->getNickname()); return nullptr;
         }
     }
     return invalidOption();
@@ -242,6 +258,7 @@ void StreamerMenu::show() {
         std::cout << "[" << option++ << "] Start stream" << std::endl;
         std::cout << "[" << option++ << "] View stream history" << std::endl;
         std::cout << "[" << option++ << "] Remove stream from history" << std::endl;
+        std::cout << "[" << option++ << "] Store" << std::endl;
     }
     std::cout << "[" << option++ << "] Delete account" << std::endl << std::endl;
     std::cout << "[0] Exit" << std::endl;
@@ -268,7 +285,8 @@ Menu * StreamerMenu::getNextMenu() {
             case 2: return new CreateStreamMenu(platform, streamer);
             case 3: platform.showStreamHistory(streamer->getStreamsHistory()); input::waitEnter(); return this;
             case 4: std::cout << "Stream id: "; if(input::get(id)){streamer->removeStreamFromHistory(id);} return this;
-            case 5: platform.deleteUser(streamer->getNickname()); return nullptr;
+            case 5: return new StreamerStoreMenu(platform, streamer->getStore());
+            case 6: platform.deleteUser(streamer->getNickname()); return nullptr;
         }
     }
     return invalidOption();
@@ -531,5 +549,94 @@ Menu * SubmitCommentMenu::getNextMenu() {
     viewer->comment(comment);
     std::cout << "Comment submitted" << std::endl;
     input::waitEnter();
+    return nullptr;
+}
+
+// ------------- Viewer Store Menu ----------
+ViewerStoreMenu::ViewerStoreMenu(Platform &platform, Viewer *viewer, Store *store) : Menu(platform), viewer(viewer), store(store), order(viewer, 1, store->getStreamer()){}
+void ViewerStoreMenu::show() {
+    unsigned int options = 1;
+    std::cout << CLR_SCREEN;
+    std::cout << "[" << options++ << "] Add Product to Order" << std::endl;
+    std::cout << "[" << options++ << "] Remove Product from Order" << std::endl;
+    std::cout << "[" << options++ << "] Submit Order" << std::endl;
+    std::cout << "[0] Exit" << std::endl << std::endl;
+    std::cout << "Available products:" << std::endl;
+    store->showMerchandise();
+    std::cout << "Current Order:" << std::endl << order << std::endl;
+}
+Menu * ViewerStoreMenu::getNextMenu() {
+    unsigned int option;
+    if(!input::get(option))
+        return invalidOption();
+
+    unsigned int pos;
+    switch(option){
+        case 1:
+            if(!input::get(pos)){
+                return invalidOption();
+            }
+            order.addProduct(store->getProductByPos(pos-1));
+            return this;
+        case 2:
+            if(!input::get(pos)){
+                return invalidOption();
+            }
+            order.removeProduct(store->getProductByPos(pos-1));
+            return this;
+        case 3:
+            viewer->addPendingOrder(order);
+            store->placeOrder(order);
+            return nullptr;
+    }
+    return nullptr;
+}
+
+// ------------- Streamer Store Menu ----------
+StreamerStoreMenu::StreamerStoreMenu(Platform &platform, Store *store) : Menu(platform), store(store){}
+void StreamerStoreMenu::show() {
+    unsigned int options = 1;
+    std::cout << CLR_SCREEN;
+    std::cout << "[" << options++ << "] Show Orders" << std::endl;
+    std::cout << "[" << options++ << "] Process First Order" << std::endl;
+    std::cout << "[" << options++ << "] Add Product" << std::endl;
+    std::cout << "[" << options++ << "] Remove Product" << std::endl;
+    std::cout << "[0] Exit" << std::endl << std::endl;
+    std::cout << "Available products:" << std::endl;
+    store->showMerchandise();
+}
+Menu * StreamerStoreMenu::getNextMenu() {
+    unsigned int option;
+    if(!input::get(option))
+        return invalidOption();
+
+    std::string name;
+    double price;
+    switch(option){
+        case 1:
+            store->showOrders();
+            input::waitEnter();
+            return this;
+        case 2:
+            store->processOrder();
+            return this;
+        case 3:
+            std::cout << "Product name:" << std::endl;
+            name = input::getRaw();
+            if(name.empty()){return nullptr;}
+            std::cout << "Price: " << std::endl;
+            if(!input::get(price)){
+                return nullptr;
+            }
+            store->addMerchandise(name, price);
+            return this;
+        case 4:
+            std::cout << "Product name:" << std::endl;
+            name = input::getRaw();
+            if(name.empty()){return nullptr;}
+            store->removeMerchandise(name);
+            return this;
+    }
+
     return nullptr;
 }

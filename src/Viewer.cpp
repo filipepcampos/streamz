@@ -117,12 +117,27 @@ void Viewer::dislike() {
 }
 
 void Viewer::completeOrder(const Order &o) {
-    auto it = std::find_if(pending_orders.begin(), pending_orders.end(), [o](Order *o2){
-        return (*o2) == o;
+    auto it = std::find_if(pending_orders.begin(), pending_orders.end(), [o](const Order &o2){
+        return o == o2;
     });
     if(it != pending_orders.end()){
-        Order *ptr = (*it);
-        completed_orders.emplace_back(*ptr);
+        completed_orders.emplace_back((*it));
         pending_orders.erase(it);
     }
 }
+
+void Viewer::showOrders() {
+    std::cout << "Pending orders" << std::endl;
+    for(int i = 0; i < pending_orders.size(); ++i){
+        std::cout << i+1 << ": " << std::endl << pending_orders[i];
+    }
+    std::cout << std::endl << "Completed orders" << std::endl;
+    for(int i = 0; i < completed_orders.size(); ++i){
+        std::cout << i+1 << ": " << std::endl << completed_orders[i];
+    }
+}
+
+void Viewer::addPendingOrder(const Order &o) {
+    pending_orders.push_back(o);
+}
+

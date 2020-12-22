@@ -145,4 +145,23 @@ public:
     Menu * getNextMenu() override;
 };
 
+
+class ViewerStoreMenu : public Menu{
+    Viewer * viewer;
+    Store * store;
+    Order order;
+public:
+    ViewerStoreMenu(Platform &platform, Viewer * viewer, Store * store);
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
+class StreamerStoreMenu : public Menu{
+    Store * store;
+public:
+    StreamerStoreMenu(Platform &platform, Store * store);
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
 #endif //STREAMZ_MENU_H

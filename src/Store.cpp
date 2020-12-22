@@ -26,8 +26,9 @@ bool Store::removeMerchandise(const std::string &product_name){
 }
 
 void Store::showMerchandise() const{
+    int i = 1;
     for(const auto &product : available_merchandise){
-        std::cout << product.getName() << ": " << product.getPrice() << "€\n";
+        std::cout << i++ << ".  \"" << product.getName() << "\" - " << product.getPrice() << "€\n";
     }
 }
 
@@ -52,10 +53,19 @@ std::string Store::getStreamer() const {
 }
 
 void Store::processOrder() {
-    Order o = orders.top(); orders.pop();
-    User * u = platform.getUser(o.getCustomerNickname());
-    Viewer *v = dynamic_cast<Viewer *> (u);
-    if(v != nullptr){
-        v->completeOrder(o);
+    if(!orders.empty()){
+        Order o = orders.top(); orders.pop();
+        User * u = platform.getUser(o.getCustomerNickname());
+        Viewer *v = dynamic_cast<Viewer *> (u);
+        if(v != nullptr){
+            v->completeOrder(o);
+        }
     }
+}
+
+Product Store::getProductByPos(int pos) const {
+    if(pos >= 0 && pos < available_merchandise.size()){
+        return available_merchandise[pos];
+    }
+    return Product("",0.0); // TODO: Throw exception
 }

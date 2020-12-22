@@ -1,15 +1,13 @@
-//
-// Created by filipe on 20/12/20.
-//
-
 #include "Order.h"
+#include <algorithm>
 
 // TODO: Check if i if between 1 and 5
 Order::Order(Viewer *customer, int disp, const std::string &streamer) : customer(customer), disp(disp), streamer(streamer){
 }
 
 void Order::addProduct(const Product &product) {
-    products.push_back(product);
+    if(!product.getName().empty())
+        products.push_back(product);
 }
 
 double Order::getTotalPrice() const {
@@ -36,10 +34,14 @@ bool Order::operator<(const Order &o) const {
 }
 
 std::ostream &operator<<(std::ostream &os, const Order &o) {
+    os << "-------------------------------------" << std::endl;
     os << o.customer->getNickname() << " " << o.getDisp() << std::endl;
+    os << "- - - - - - - - - - - - - - - - - - -" << std::endl;
     for(const auto &prod : o.products){
-        os << prod << std::endl;
+        os << prod;
     }
+    os << "Total price: " << o.getTotalPrice() << "€" << std::endl;
+    os << "-------------------------------------" << std::endl;
     return os;
 }
 
@@ -58,4 +60,11 @@ bool Order::operator==(const Order &o) const {
         return true;
     }
     return false;
+}
+
+void Order::removeProduct(const Product &product) {
+    auto it = std::find(products.begin(), products.end(), product);
+    if(it != products.end()){
+        products.erase(it);
+    }
 }

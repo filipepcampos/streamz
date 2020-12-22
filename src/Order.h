@@ -13,6 +13,7 @@ class Order {
 public:
     Order(Viewer *customer, int disp, const std::string &streamer);
     void addProduct(const Product &product);
+    void removeProduct(const Product &product);
     double getTotalPrice() const;
     int getSize() const;
     int getDisp() const;
