@@ -8,6 +8,9 @@
 #include <memory>
 #include <list>
 #include <unordered_set>
+#include "bst.h"
+#include "Donation.h"
+
 
 #define MINIMUM_VIEWER_AGE 12
 #define MINIMUM_STREAMER_AGE 15
@@ -63,6 +66,7 @@ private:
     std::vector<User *> users; /*< Users*/
     std::vector<std::shared_ptr<Stream>> active_streams; /*< Active streams */
     HashTableStreamerRecord streamerRecords;
+    BST<Donation> donations; /*< Donations */
 
     unsigned int stream_id_count = 1; /*< Track stream ids to be assigned to new streams*/
 

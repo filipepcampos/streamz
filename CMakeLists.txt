@@ -5,7 +5,10 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCE_FILES
         src/Admin.h
+        src/bst.h
         src/Date.h
+        src/Donation.h
+        src/Donation.cpp
         src/StreamData.h
         src/Stream.h
         src/PrivateStream.h

@@ -11,8 +11,10 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include "Donation.h"
+#include <string>
 
-Platform::Platform() : archive(files.archived_stream_file) {
+Platform::Platform() : archive(files.archived_stream_file), donations(Donation("",0,0)) {
     readStreamsFromFile();
     readUsersFromFile();
 }
