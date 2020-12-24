@@ -5,18 +5,53 @@
 class Streamer;
 
 class StreamerRecord {
-    Streamer * streamer;
-    std::string nickname;
-    bool active;
+    Streamer * streamer; /**< Pointer to the streamer, if active */
+    std::string nickname; /**< Nickname of the streamer */
+    bool active; /**< Indicates if the streamer is active */
 public:
+    /**
+     * Class constructor
+     * @param st Pointer to the streamer
+     */
     explicit StreamerRecord(Streamer * st);
+    /**
+     * Class constructor
+     * @param nick Nickname of the streamer
+     */
     explicit StreamerRecord(const std::string &nick);
+    /**
+     * Copy constructor
+     * @param sr StreamerRecord that will be copied
+     */
     StreamerRecord(const StreamerRecord &sr);
+    /**
+     * Class destructor
+     */
     ~StreamerRecord();
+    /**
+     * Gets the streamer pointer, if active
+     * @return streamer pointer
+     */
     const Streamer * getStreamer() const;
+    /**
+     * Gets the nickname of the streamer
+     * @return String containing the nickname of the streamer
+     */
     std::string getNickname() const;
+    /**
+     * Indicates if the streamer is active
+     * @return boolean indicating if the streamer is active
+     */
     bool isActive() const;
+    /**
+     * Sets the given streamer to active
+     * @param st streamer to be set active
+     */
     void setActive(Streamer * st);
+    /**
+     * Sets the given streamer to inactive
+     * @param nick nickname of the streamer to be set inactive
+     */
     void setInactive(std::string &nick);
 };
 
