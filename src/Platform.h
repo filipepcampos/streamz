@@ -105,12 +105,17 @@ private:
     bool userExists(const std::string &nickname) const;
 
     /**
-     * Read all users from a file and place them in users vector
+     * Read all inactive streamers from a file and place them in streamers hashtable
+     */
+    void readInactiveStreamersFromFile();
+
+    /**
+     * Read all users from a file and place them in users vector and streamers hashtable
      */
     void readUsersFromFile();
 
     /**
-     * Read a single user from a file and place him in the users vector
+     * Read a single user from a file and place him in the users vector and streamers hashtable
      * @param file - fstream to file
      * @return true if successful
      */

@@ -17,6 +17,7 @@
 Platform::Platform() : archive(files.archived_stream_file), donations(Donation("",0,0)) {
     readStreamsFromFile();
     readUsersFromFile();
+    readInactiveStreamersFromFile();
 }
 
 void Platform::readStreamsFromFile() {
@@ -82,6 +83,17 @@ bool Platform::readStreamFromFile(std::ifstream &file){
     return true;
 }
 
+void Platform::readInactiveStreamersFromFile() {
+    std::ifstream file(files.inactive_streamers_file);
+    std::string nickname;
+    if(file.is_open()){
+        while(getline(file, nickname)) {
+            streamerRecords.insert(StreamerRecord(nickname));
+        }
+        file.close();
+    }
+}
+
 void Platform::readUsersFromFile(){
     std::ifstream file(files.user_file);
     std::string line;
@@ -123,11 +135,14 @@ bool Platform::readUserFromFile(std::ifstream &file) {
         auto it = std::find_if(active_streams.begin(), active_streams.end(), [current_stream_id](const std::shared_ptr<Stream> &ptr){
             return ptr->getId() == current_stream_id;
         });
+        Streamer * st = nullptr;
         if(it != active_streams.end()) {
-            users.emplace_back(new Streamer(nickname, name, birth_date, *this, history, (*it), hasBonus));
+            st = new Streamer(nickname, name, birth_date, *this, history, (*it), hasBonus);
         } else{
-            users.emplace_back(new Streamer(nickname, name, birth_date, *this, history, hasBonus));
+            st = new Streamer(nickname, name, birth_date, *this, history, hasBonus);
         }
+        users.emplace_back(st);
+        streamerRecords.insert(StreamerRecord(st));
     }
     return true;
 }
@@ -149,6 +164,16 @@ void Platform::save(){
             users_file << *user;
         }
         users_file.close();
+    }
+    std::ofstream inactive_streamers_file(files.inactive_streamers_file, std::ofstream::trunc);
+    if(inactive_streamers_file.is_open()){
+        HashTableStreamerRecord::iterator it = streamerRecords.begin();
+        while (it != streamerRecords.end()) {
+            if (!it->isActive())
+                inactive_streamers_file << it->getNickname() << std::endl;
+            ++it;
+        }
+        inactive_streamers_file.close();
     }
     std::ofstream streams_file(files.active_stream_file, std::ofstream::trunc);
     if(streams_file.is_open()){

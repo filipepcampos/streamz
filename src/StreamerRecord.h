@@ -15,6 +15,7 @@ public:
     ~StreamerRecord();
     const Streamer * getStreamer() const;
     std::string getNickname() const;
+    bool isActive() const;
     void setActive(Streamer * st);
     void setInactive(std::string &nick);
 };
