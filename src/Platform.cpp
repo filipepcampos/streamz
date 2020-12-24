@@ -92,7 +92,8 @@ void Platform::readUsersFromFile(){
 }
 
 bool Platform::readUserFromFile(std::ifstream &file) {
-    std::string nickname, name, user_type, birth_date, str;
+    std::string nickname, name, user_type, birth_date, bonus, str;
+    bool hasBonus = false;
     unsigned current_stream_id;
     std::vector<std::istringstream> lines;
     for(int i = 0; i < 3; ++i){
@@ -103,9 +104,8 @@ bool Platform::readUserFromFile(std::ifstream &file) {
     }
     lines[0] >> user_type >> nickname;
     std::getline(lines[0] >> std::ws, name);
-    lines[1] >> current_stream_id >> std::ws;
-    std::getline(lines[1], birth_date);
-
+    lines[1] >> current_stream_id >> birth_date;
+    if (lines[1] >> bonus) hasBonus = true;
     unsigned int id; char feedback; std::vector<std::pair<unsigned int, char>> history;
     lines[2] >> str; // Remove 'history: '
     while(lines[2] >> id >> feedback){
@@ -124,9 +124,9 @@ bool Platform::readUserFromFile(std::ifstream &file) {
             return ptr->getId() == current_stream_id;
         });
         if(it != active_streams.end()) {
-            users.emplace_back(new Streamer(nickname, name, birth_date, *this, history, (*it)));
+            users.emplace_back(new Streamer(nickname, name, birth_date, *this, history, (*it), hasBonus));
         } else{
-            users.emplace_back(new Streamer(nickname, name, birth_date, *this, history));
+            users.emplace_back(new Streamer(nickname, name, birth_date, *this, history, hasBonus));
         }
     }
     return true;

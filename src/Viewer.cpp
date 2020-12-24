@@ -49,7 +49,10 @@ void Viewer::show() const {
 }
 
 std::ostream& Viewer::print(std::ostream & os) const {
-    os << "(viewer) "; User::print(os);
+    os << "(viewer) ";
+    os << getNickname() << " " << getName() << std::endl;
+    os << "    " << (current_stream.expired() ? 0 : current_stream.lock()->getId()) << " " << getBirthDate().toString(false) << std::endl;
+    User::print(os);
     return os;
 }
 

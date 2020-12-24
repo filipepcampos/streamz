@@ -72,6 +72,7 @@ private:
 
     struct IOFiles{
         const std::string user_file = "user.txt";
+        const std::string inactive_streamers_file = "inactive_streamers.txt";
         const std::string active_stream_file = "active_streams.txt";
         const std::string archived_stream_file = "archive.txt";
     };
