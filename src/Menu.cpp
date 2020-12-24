@@ -352,6 +352,22 @@ Menu * FilterStreamsMenu::getNextMenu() {
     return nullptr;
 }
 
+// --------------- Filter Streamers Menu ---------------
+FilterStreamersMenu::FilterStreamersMenu(Platform &platform) : Menu(platform) {}
+void FilterStreamersMenu::show() {
+    std::cout << "Information required: streamer type (active, inactive or leave it empty for no filter)\n";
+}
+Menu * FilterStreamersMenu::getNextMenu() {
+    std::string type;
+
+    std::cout << "Streamer type\n "; type = input::getRaw();
+    if (type != "active" && type != "inactive" && !type.empty())
+        return invalidOption();
+    platform.showStreamers(type);
+    input::waitEnter();
+    return nullptr;
+}
+
 // --------------- Information Menu ---------------
 
 InformationMenu::InformationMenu(Platform &platform) : Menu(platform) {}
@@ -360,7 +376,7 @@ void InformationMenu::show() {
     std::cout << CLR_SCREEN;
     for(const auto &str : {"Show top active streams", "Show top archived streams", "Show all active streams",
                            "Search active streams by language", "Search active streams by minimum age",
-                           "Show all archived streams", "Show users", "Sort active streams"}){
+                           "Show all archived streams", "Show users", "Show streamers", "Sort active streams"}){
         std::cout << "[" << option++ << "] " << str << std::endl;
     }
     std::cout << std::endl << "[0] Exit" << std::endl;
@@ -390,7 +406,8 @@ Menu * InformationMenu::getNextMenu() {
             platform.showStreams("", minimum_age); input::waitEnter(); return this;
         case 6: platform.showArchive(); input::waitEnter(); return this;
         case 7: platform.showUsers(); input::waitEnter(); return this;
-        case 8: return new SortMenu(platform);
+        case 8: return new FilterStreamersMenu(platform);
+        case 9: return new SortMenu(platform);
     }
     return invalidOption();
 }

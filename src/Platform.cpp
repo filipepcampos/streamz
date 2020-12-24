@@ -485,6 +485,22 @@ void Platform::showArchive() {
     archive.show();
 }
 
+void Platform::showStreamers(std::string active_filter) const {
+    if (active_filter != "") {
+        active_filter[0] = toupper(active_filter[0]);
+        std::cout << active_filter << " ";
+    }
+    std::cout << "Streamers:" << std::endl;
+    HashTableStreamerRecord::const_iterator it = streamerRecords.begin();
+    while (it != streamerRecords.end()) {
+        if (active_filter.empty() || (it->isActive() ? "Active" : "Inactive")  == active_filter) {
+            if (active_filter.empty())std::cout << std::setw(9) << (it->isActive() ? "Active" : "Inactive");
+            std::cout << it->getNickname() << std::endl;
+        }
+        ++it;
+    }
+}
+
 Store *Platform::getStore(const std::string &streamer_name) {
     try{
         User * u = getUser(streamer_name);

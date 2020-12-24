@@ -306,6 +306,12 @@ public:
      */
     void showUsers() const;
 
+    /**
+     * Show all streamers in the platform that match the filters
+     * @param active_filter - State of the streamers to be shown
+     */
+    void showStreamers(std::string active_filter = "") const;
+
     Store *getStore(const std::string &streamer_name);
 
     /**
