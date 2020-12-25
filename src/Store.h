@@ -19,6 +19,7 @@ public:
     void showMerchandise() const;
     std::string getStreamer() const;
     Product getProductByPos(int pos) const;
+    const std::vector<Product> & getProducts() const;
     bool placeOrder(const Order &o);
     void showOrders() const;
     void processOrder();

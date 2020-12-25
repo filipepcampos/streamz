@@ -69,3 +69,7 @@ Product Store::getProductByPos(int pos) const {
     }
     return Product("",0.0); // TODO: Throw exception
 }
+
+const std::vector<Product> &Store::getProducts() const {
+    return available_merchandise;
+}

@@ -10,6 +10,7 @@ class Order {
     Viewer *customer;
     std::string streamer;
     int disp;
+    bool completed = false;
 public:
     Order(Viewer *customer, int disp, const std::string &streamer);
     void addProduct(const Product &product);
@@ -17,7 +18,9 @@ public:
     double getTotalPrice() const;
     int getSize() const;
     int getDisp() const;
+    void completeOrder();
     std::string getCustomerNickname() const;
+    std::string getStreamer() const;
     bool operator==(const Order &o) const;
     bool operator<(const Order &o) const;
     friend std::ostream& operator <<(std::ostream& os, const Order &o);

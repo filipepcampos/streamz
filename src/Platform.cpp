@@ -17,6 +17,8 @@
 Platform::Platform() : archive(files.archived_stream_file), donations(Donation("",0,0)) {
     readStreamsFromFile();
     readUsersFromFile();
+    readStoresFromFile();
+    readOrdersFromFile();
 }
 
 void Platform::readStreamsFromFile() {
@@ -158,6 +160,8 @@ void Platform::save(){
         }
         streams_file.close();
     }
+    writeOrdersToFile();
+    writeStoresToFile();
 }
 
 template <typename F>
@@ -472,4 +476,99 @@ Store *Platform::getStore(const std::string &streamer_name) {
         return nullptr;
     }
     return nullptr;
+}
+
+void Platform::writeOrdersToFile() {
+    std::ofstream file(files.orders_file);
+    if(file.is_open()){
+        for(const auto &user : users){
+            Viewer *v = dynamic_cast<Viewer *>(user);
+            if(v != nullptr){
+                for(const auto &order : v->getCompletedOrders()){
+                    file << order;
+                }
+                for(const auto &order : v->getPendingOrders()){
+                    file << order;
+                }
+            }
+        }
+        file.close();
+    }
+}
+
+void Platform::readOrdersFromFile() {
+    std::ifstream file(files.orders_file);
+    std::string line_buffer;
+    if(file.is_open()){
+        while(std::getline(file, line_buffer)){
+            std::string customer_name, streamer_name;
+            int disp; char completed;
+            std::istringstream ss(line_buffer);
+            ss >> customer_name >> streamer_name >> disp >> completed;
+            User *u = getUser(customer_name);
+            Viewer *v = dynamic_cast<Viewer *>(u);
+            u = getUser(streamer_name);
+            Streamer *s = dynamic_cast<Streamer *>(u);
+            Order o(v, disp, streamer_name);
+
+            if(s == nullptr || v == nullptr){
+                continue;
+            }
+
+            while(file.peek() == ' ' && std::getline(file, line_buffer)){
+                std::string product_name; double price;
+                std::istringstream ss2(line_buffer);
+                ss2 >> product_name >> price;
+                o.addProduct(Product(product_name, price));
+            }
+
+            if(completed == 'c'){
+                o.completeOrder();
+                v->addCompletedOrder(o);
+            }
+            else{
+                s->getStore()->placeOrder(o);
+                v->addPendingOrder(o);
+            }
+        }
+    }
+}
+
+void Platform::writeStoresToFile() {
+    std::ofstream file(files.stores_file);
+    std::string line_buffer;
+    for(const auto &user : users){
+        Streamer *s = dynamic_cast<Streamer *>(user);
+        if(s != nullptr){
+            Store * store = s->getStore();
+            file << store->getStreamer() << std::endl;
+            for(const auto &product : store->getProducts()){
+                file << "    " << product.getName() << " " << product.getPrice() << std::endl;
+            }
+        }
+    }
+    file.close();
+}
+
+void Platform::readStoresFromFile() {
+    std::ifstream file(files.stores_file);
+    std::string line_buffer;
+    if(file.is_open()){
+        while(std::getline(file, line_buffer)){
+            std::string streamer_name;
+            std::istringstream ss(line_buffer);
+            ss >> streamer_name;
+            User *u = getUser(streamer_name);
+            Streamer *s = dynamic_cast<Streamer *>(u);
+            if(s != nullptr){
+                Store *store = s->getStore();
+                while(file.peek() == ' ' && std::getline(file, line_buffer)){
+                    std:istringstream ss2(line_buffer);
+                    std::string product_name; double price;
+                    ss2 >> product_name >> price;
+                    store->addMerchandise(Product(product_name, price));
+                }
+            }
+        }
+    }
 }

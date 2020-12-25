@@ -34,14 +34,10 @@ bool Order::operator<(const Order &o) const {
 }
 
 std::ostream &operator<<(std::ostream &os, const Order &o) {
-    os << "-------------------------------------" << std::endl;
-    os << o.customer->getNickname() << " " << o.getDisp() << std::endl;
-    os << "- - - - - - - - - - - - - - - - - - -" << std::endl;
+    os << o.customer->getNickname() << " " << o.getStreamer() << " " << o.getDisp() << " " << (o.completed ? 'c' : 'p') << std::endl;
     for(const auto &prod : o.products){
-        os << prod;
+        os << "     " << prod;
     }
-    os << "Total price: " << o.getTotalPrice() << "€" << std::endl;
-    os << "-------------------------------------" << std::endl;
     return os;
 }
 
@@ -67,4 +63,12 @@ void Order::removeProduct(const Product &product) {
     if(it != products.end()){
         products.erase(it);
     }
+}
+
+void Order::completeOrder() {
+    completed = true;
+}
+
+std::string Order::getStreamer() const {
+    return streamer;
 }

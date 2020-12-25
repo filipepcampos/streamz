@@ -74,6 +74,8 @@ private:
         const std::string user_file = "user.txt";
         const std::string active_stream_file = "active_streams.txt";
         const std::string archived_stream_file = "archive.txt";
+        const std::string orders_file = "orders.txt";
+        const std::string stores_file = "stores.txt";
     };
     IOFiles files; /*< Holds file information to save data across sessions */
 
@@ -126,6 +128,11 @@ private:
      * @return true if successful
      */
     bool readStreamFromFile(std::ifstream &file);
+
+    void writeStoresToFile();
+    void readStoresFromFile();
+    void writeOrdersToFile();
+    void readOrdersFromFile();
 
 public:
     /**

@@ -121,7 +121,9 @@ void Viewer::completeOrder(const Order &o) {
         return o == o2;
     });
     if(it != pending_orders.end()){
-        completed_orders.emplace_back((*it));
+        Order o2 = (*it);
+        o2.completeOrder();
+        completed_orders.emplace_back(o2);
         pending_orders.erase(it);
     }
 }
@@ -139,5 +141,17 @@ void Viewer::showOrders() {
 
 void Viewer::addPendingOrder(const Order &o) {
     pending_orders.push_back(o);
+}
+
+std::vector<Order> &Viewer::getPendingOrders() {
+    return pending_orders;
+}
+
+std::vector<Order> &Viewer::getCompletedOrders() {
+    return completed_orders;
+}
+
+void Viewer::addCompletedOrder(const Order &o) {
+    completed_orders.push_back(o);
 }
 
