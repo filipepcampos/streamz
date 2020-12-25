@@ -10,13 +10,13 @@ Streamer::Streamer(const std::string &nickname, const std::string &name, const D
         throw InvalidAge(getAge());
 }
 
-Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history) : User(nickname, name, birth_date, platform, streams_history), store(nickname, platform), bonus(false) {
+Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history, bool bonus) : User(nickname, name, birth_date, platform, streams_history), store(nickname, platform), bonus(bonus) {
     if (getAge() < MINIMUM_STREAMER_AGE)
         throw InvalidAge(getAge());
     this->streams_history = streams_history;
 }
 
-Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history, const std::weak_ptr<Stream> &current_stream) : User(nickname, name, birth_date, platform, streams_history), store(nickname, platform), bonus(false) {
+Streamer::Streamer(const std::string &nickname, const std::string &name, const Date &birth_date, Platform & platform, const std::vector<std::pair<unsigned int, char>> &streams_history, const std::weak_ptr<Stream> &current_stream, bool bonus) : User(nickname, name, birth_date, platform, streams_history), store(nickname, platform), bonus(bonus) {
     if (getAge() < MINIMUM_STREAMER_AGE)
         throw InvalidAge(getAge());
     this->streams_history = streams_history;
@@ -107,6 +107,10 @@ void Streamer::showStreamInfo() const {
 
 std::ostream& Streamer::print(std::ostream & os) const {
     os << "(streamer) ";
+    os << getNickname() << " " << getName() << std::endl;
+    os << "    " << (current_stream.expired() ? 0 : current_stream.lock()->getId()) << " " << getBirthDate().toString(false);
+    if (bonus) os << " B";
+    os << std::endl;
     User::print(os);
     return os;
 }

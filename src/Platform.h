@@ -72,6 +72,7 @@ private:
 
     struct IOFiles{
         const std::string user_file = "user.txt";
+        const std::string inactive_streamers_file = "inactive_streamers.txt";
         const std::string active_stream_file = "active_streams.txt";
         const std::string archived_stream_file = "archive.txt";
         const std::string orders_file = "orders.txt";
@@ -106,12 +107,17 @@ private:
     bool userExists(const std::string &nickname) const;
 
     /**
-     * Read all users from a file and place them in users vector
+     * Read all inactive streamers from a file and place them in streamers hashtable
+     */
+    void readInactiveStreamersFromFile();
+
+    /**
+     * Read all users from a file and place them in users vector and streamers hashtable
      */
     void readUsersFromFile();
 
     /**
-     * Read a single user from a file and place him in the users vector
+     * Read a single user from a file and place him in the users vector and streamers hashtable
      * @param file - fstream to file
      * @return true if successful
      */
@@ -306,6 +312,12 @@ public:
      * Show all users in the platform
      */
     void showUsers() const;
+
+    /**
+     * Show all streamers in the platform that match the filters
+     * @param active_filter - State of the streamers to be shown
+     */
+    void showStreamers(std::string active_filter = "") const;
 
     Store *getStore(const std::string &streamer_name);
 

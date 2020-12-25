@@ -106,6 +106,13 @@ public:
     Menu * getNextMenu() override;
 };
 
+class FilterStreamersMenu : public Menu{
+public:
+    FilterStreamersMenu(Platform &platform);
+    void show() override;
+    Menu * getNextMenu() override;
+};
+
 class InformationMenu : public Menu{
 public:
     InformationMenu(Platform &platform);

@@ -19,6 +19,7 @@ Platform::Platform() : archive(files.archived_stream_file), donations(Donation("
     readUsersFromFile();
     readStoresFromFile();
     readOrdersFromFile();
+    readInactiveStreamersFromFile();
 }
 
 void Platform::readStreamsFromFile() {
@@ -84,6 +85,17 @@ bool Platform::readStreamFromFile(std::ifstream &file){
     return true;
 }
 
+void Platform::readInactiveStreamersFromFile() {
+    std::ifstream file(files.inactive_streamers_file);
+    std::string nickname;
+    if(file.is_open()){
+        while(getline(file, nickname)) {
+            streamerRecords.insert(StreamerRecord(nickname));
+        }
+        file.close();
+    }
+}
+
 void Platform::readUsersFromFile(){
     std::ifstream file(files.user_file);
     std::string line;
@@ -94,7 +106,8 @@ void Platform::readUsersFromFile(){
 }
 
 bool Platform::readUserFromFile(std::ifstream &file) {
-    std::string nickname, name, user_type, birth_date, str;
+    std::string nickname, name, user_type, birth_date, bonus, str;
+    bool hasBonus = false;
     unsigned current_stream_id;
     std::vector<std::istringstream> lines;
     for(int i = 0; i < 3; ++i){
@@ -105,9 +118,8 @@ bool Platform::readUserFromFile(std::ifstream &file) {
     }
     lines[0] >> user_type >> nickname;
     std::getline(lines[0] >> std::ws, name);
-    lines[1] >> current_stream_id >> std::ws;
-    std::getline(lines[1], birth_date);
-
+    lines[1] >> current_stream_id >> birth_date;
+    if (lines[1] >> bonus) hasBonus = true;
     unsigned int id; char feedback; std::vector<std::pair<unsigned int, char>> history;
     lines[2] >> str; // Remove 'history: '
     while(lines[2] >> id >> feedback){
@@ -125,11 +137,14 @@ bool Platform::readUserFromFile(std::ifstream &file) {
         auto it = std::find_if(active_streams.begin(), active_streams.end(), [current_stream_id](const std::shared_ptr<Stream> &ptr){
             return ptr->getId() == current_stream_id;
         });
+        Streamer * st = nullptr;
         if(it != active_streams.end()) {
-            users.emplace_back(new Streamer(nickname, name, birth_date, *this, history, (*it)));
+            st = new Streamer(nickname, name, birth_date, *this, history, (*it), hasBonus);
         } else{
-            users.emplace_back(new Streamer(nickname, name, birth_date, *this, history));
+            st = new Streamer(nickname, name, birth_date, *this, history, hasBonus);
         }
+        users.emplace_back(st);
+        streamerRecords.insert(StreamerRecord(st));
     }
     return true;
 }
@@ -151,6 +166,16 @@ void Platform::save(){
             users_file << *user;
         }
         users_file.close();
+    }
+    std::ofstream inactive_streamers_file(files.inactive_streamers_file, std::ofstream::trunc);
+    if(inactive_streamers_file.is_open()){
+        HashTableStreamerRecord::iterator it = streamerRecords.begin();
+        while (it != streamerRecords.end()) {
+            if (!it->isActive())
+                inactive_streamers_file << it->getNickname() << std::endl;
+            ++it;
+        }
+        inactive_streamers_file.close();
     }
     std::ofstream streams_file(files.active_stream_file, std::ofstream::trunc);
     if(streams_file.is_open()){
@@ -462,6 +487,22 @@ std::vector<std::shared_ptr<Stream>> Platform::testGetStreams() {
 
 void Platform::showArchive() {
     archive.show();
+}
+
+void Platform::showStreamers(std::string active_filter) const {
+    if (active_filter != "") {
+        active_filter[0] = toupper(active_filter[0]);
+        std::cout << active_filter << " ";
+    }
+    std::cout << "Streamers:" << std::endl;
+    HashTableStreamerRecord::const_iterator it = streamerRecords.begin();
+    while (it != streamerRecords.end()) {
+        if (active_filter.empty() || (it->isActive() ? "Active" : "Inactive")  == active_filter) {
+            if (active_filter.empty())std::cout << std::setw(9) << (it->isActive() ? "Active" : "Inactive");
+            std::cout << it->getNickname() << std::endl;
+        }
+        ++it;
+    }
 }
 
 Store *Platform::getStore(const std::string &streamer_name) {

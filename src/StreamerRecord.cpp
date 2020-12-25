@@ -27,6 +27,10 @@ std::string StreamerRecord::getNickname() const {
     return nickname;
 }
 
+bool StreamerRecord::isActive() const {
+    return active;
+}
+
 void StreamerRecord::setActive(Streamer * st) {
     // TODO: CRIAR EXCEÇÃO POR JÁ ESTAR ATIVO
     active = true;
