@@ -185,6 +185,7 @@ void ViewerMenu::show() {
         std::cout << "[" << option++ << "] View liked streams history" << std::endl;
         std::cout << "[" << option++ << "] Remove stream from history" << std::endl;
         std::cout << "[" << option++ << "] View orders" << std::endl;
+        std::cout << "[" << option++ << "] Remove order" << std::endl;
         std::cout << "[" << option++ << "] Access Store" << std::endl;
     }
     std::cout << "[" << option++ << "] Delete Account" << std::endl << std::endl;
@@ -229,14 +230,22 @@ Menu * ViewerMenu::getNextMenu() {
                 input::waitEnter();
                 return this;
             case 6:
+                return this;
+            case 7:
                 std::cout << "Streamer name:" << std::endl;
                 streamer = input::getRaw();
                 store = platform.getStore(streamer);
                 if(store != nullptr){
-                    return new ViewerStoreMenu(platform, viewer, store);
+                    if(!store->full())
+                        return new ViewerStoreMenu(platform, viewer, store);
+                    else{
+                        std::cout << "This store can't take any more orders for now" << std::endl;
+                        input::waitEnter();
+                        return this;
+                    }
                 }
                 return this;
-            case 7: platform.deleteUser(viewer->getNickname()); return nullptr;
+            case 8: platform.deleteUser(viewer->getNickname()); return nullptr;
         }
     }
     return invalidOption();
@@ -299,7 +308,7 @@ void AdministratorMenu::show() {
     unsigned int option = 1;
     std::cout << CLR_SCREEN;
     for(const auto &str : {"Information", "Show average views", "Filter streams", "Show Top Language",
-                           "Show Top Stream Type", "Show Top Streamer", "Delete user"}){
+                           "Show Top Stream Type", "Show Top Streamer", "Delete user", "Delete stream", "Change Max Order Limit"}){
         std::cout << "[" << option++ << "] " << str << std::endl;
     }
     std::cout << "[0] Exit" << std::endl;
@@ -309,7 +318,7 @@ Menu * AdministratorMenu::getNextMenu() {
     int option;
     if(!input::get(option))
         return invalidOption();
-    std::string str; unsigned int id;
+    std::string str; unsigned int id, max_orders;
     switch(option){
         case 0: return nullptr;
         case 1: return new InformationMenu(platform);
@@ -320,6 +329,7 @@ Menu * AdministratorMenu::getNextMenu() {
         case 6: std::cout << "Streamer with most views: " << admin.topStreamer() << std::endl; input::waitEnter(); return this;
         case 7: std::cout << "Username: "; if(input::get(str)){platform.deleteUser(str);} return this;
         case 8: std::cout << "Stream id: "; if(input::get(id)){platform.deleteStream(id);} return this;
+        case 9: std::cout << "New limit: "; if(input::get(max_orders)){platform.changeMaxOrdersPerStore(max_orders);} return this;
     }
     return invalidOption();
 }
@@ -576,11 +586,14 @@ void ViewerStoreMenu::show() {
     std::cout << CLR_SCREEN;
     std::cout << "[" << options++ << "] Add Product to Order" << std::endl;
     std::cout << "[" << options++ << "] Remove Product from Order" << std::endl;
+    std::cout << "[" << options++ << "] Change Availability" << std::endl;
     std::cout << "[" << options++ << "] Submit Order" << std::endl;
     std::cout << "[0] Exit" << std::endl << std::endl;
     std::cout << "Available products:" << std::endl;
     store->showMerchandise();
-    std::cout << "Current Order:" << std::endl << order << std::endl;
+    std::cout << std::endl << "Current Order:\n-----------------------" << std::endl << order << std::endl;
+    std::cout << "Total price: " << order.getTotalPrice() << "€" << std::endl;
+    std::cout << "-----------------------" << std::endl;
 }
 Menu * ViewerStoreMenu::getNextMenu() {
     unsigned int option;
@@ -602,6 +615,12 @@ Menu * ViewerStoreMenu::getNextMenu() {
             order.removeProduct(store->getProductByPos(pos-1));
             return this;
         case 3:
+            if(!input::get(pos)){
+                return invalidOption();
+            }
+            order.setDisp(pos);
+            return this;
+        case 4:
             viewer->addPendingOrder(order);
             store->placeOrder(order);
             return nullptr;

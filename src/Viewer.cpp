@@ -1,6 +1,7 @@
 #include "Viewer.h"
 #include "PrivateStream.h"
 #include "Order.h"
+#include "Store.h"
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
@@ -156,5 +157,15 @@ std::vector<Order> &Viewer::getCompletedOrders() {
 
 void Viewer::addCompletedOrder(const Order &o) {
     completed_orders.push_back(o);
+}
+void Viewer::removeOrderAtPos(int pos) {
+    if(pos >= 0 && pos < pending_orders.size()){
+        Order o = pending_orders[pos];
+        pending_orders.erase(pending_orders.begin() + pos);
+        Store * store = platform.getStore(o.getStreamer());
+        if(store){
+            store->removeOrder(o);
+        }
+    }
 }
 

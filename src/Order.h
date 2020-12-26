@@ -9,15 +9,16 @@ class Order {
     std::vector<Product> products;
     Viewer *customer;
     std::string streamer;
-    int disp;
+    unsigned disp = 0;
     bool completed = false;
 public:
-    Order(Viewer *customer, int disp, const std::string &streamer);
+    Order(Viewer *customer, unsigned disp, const std::string &streamer);
     void addProduct(const Product &product);
     void removeProduct(const Product &product);
     double getTotalPrice() const;
     int getSize() const;
     int getDisp() const;
+    void setDisp(unsigned disp);
     void completeOrder();
     std::string getCustomerNickname() const;
     std::string getStreamer() const;

@@ -70,6 +70,8 @@ private:
 
     unsigned int stream_id_count = 1; /*< Track stream ids to be assigned to new streams*/
 
+    unsigned int max_orders_per_store = 5;
+
     struct IOFiles{
         const std::string user_file = "user.txt";
         const std::string inactive_streamers_file = "inactive_streamers.txt";
@@ -320,6 +322,8 @@ public:
     void showStreamers(std::string active_filter = "") const;
 
     Store *getStore(const std::string &streamer_name);
+
+    void changeMaxOrdersPerStore(unsigned max_orders);
 
     /**
      * Clear all vectors in memory

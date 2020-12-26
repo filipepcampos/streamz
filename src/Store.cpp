@@ -4,6 +4,9 @@
 Store::Store(const std::string &streamer, Platform &platform) : streamer(streamer), platform(platform) {
 }
 
+Store::Store(const std::string &streamer, Platform &platform, unsigned max_orders) : streamer(streamer), platform(platform), max_orders(max_orders) {
+}
+
 bool Store::addMerchandise(const Product &p) {
     auto it = std::find(available_merchandise.begin(), available_merchandise.end(), p);
     if(it == available_merchandise.end()){
@@ -72,4 +75,32 @@ Product Store::getProductByPos(int pos) const {
 
 const std::vector<Product> &Store::getProducts() const {
     return available_merchandise;
+}
+
+bool Store::full() const {
+    return orders.size() >= max_orders;
+}
+
+bool Store::removeOrder(const Order &o) {
+    std::priority_queue<Order> tmp_queue;
+    bool found = false;
+    while(!orders.empty()){
+        Order o2 = orders.top(); orders.pop();
+        if(!found && o == o2){
+            found = true;
+            continue;
+        }
+        tmp_queue.push(o);
+    }
+    orders = tmp_queue;
+    return found;
+}
+
+void Store::resize(unsigned int new_size) {
+    if(new_size < max_orders){
+        while(orders.size() > new_size){
+            processOrder();
+        }
+    }
+    max_orders = new_size;
 }

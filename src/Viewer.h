@@ -99,6 +99,7 @@ public:
     void completeOrder(const Order &o);
     void addPendingOrder(const Order &o);
     void addCompletedOrder(const Order &o);
+    void removeOrderAtPos(int pos);
     void showOrders();
     std::vector<Order> & getPendingOrders();
     std::vector<Order> & getCompletedOrders();

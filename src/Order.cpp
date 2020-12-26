@@ -1,8 +1,8 @@
 #include "Order.h"
 #include <algorithm>
 
-// TODO: Check if i if between 1 and 5
-Order::Order(Viewer *customer, int disp, const std::string &streamer) : customer(customer), disp(disp), streamer(streamer){
+Order::Order(Viewer *customer, unsigned disp, const std::string &streamer) : customer(customer), streamer(streamer){
+    setDisp(disp);
 }
 
 void Order::addProduct(const Product &product) {
@@ -71,4 +71,9 @@ void Order::completeOrder() {
 
 std::string Order::getStreamer() const {
     return streamer;
+}
+
+void Order::setDisp(unsigned disp) {
+    if(disp >= 1 && disp <= 5)
+        this->disp = disp;
 }

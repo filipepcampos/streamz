@@ -577,7 +577,7 @@ void Platform::readOrdersFromFile() {
 
 void Platform::writeStoresToFile() {
     std::ofstream file(files.stores_file);
-    std::string line_buffer;
+    file << max_orders_per_store << std::endl;
     for(const auto &user : users){
         Streamer *s = dynamic_cast<Streamer *>(user);
         if(s != nullptr){
@@ -595,6 +595,11 @@ void Platform::readStoresFromFile() {
     std::ifstream file(files.stores_file);
     std::string line_buffer;
     if(file.is_open()){
+        unsigned max_orders = 0;
+        if(std::getline(file, line_buffer)){
+            std::istringstream ss(line_buffer);
+            ss >> max_orders;
+        }
         while(std::getline(file, line_buffer)){
             std::string streamer_name;
             std::istringstream ss(line_buffer);
@@ -603,13 +608,24 @@ void Platform::readStoresFromFile() {
             Streamer *s = dynamic_cast<Streamer *>(u);
             if(s != nullptr){
                 Store *store = s->getStore();
+                store->resize(max_orders);
                 while(file.peek() == ' ' && std::getline(file, line_buffer)){
-                    std:istringstream ss2(line_buffer);
+                    std::istringstream ss2(line_buffer);
                     std::string product_name; double price;
                     ss2 >> product_name >> price;
                     store->addMerchandise(Product(product_name, price));
                 }
             }
+        }
+    }
+}
+
+void Platform::changeMaxOrdersPerStore(unsigned int max_orders) {
+    this->max_orders_per_store = max_orders;
+    for(const auto &user : users){
+        Store * store = getStore(user->getNickname());
+        if(store != nullptr){
+            store->resize(max_orders);
         }
     }
 }
