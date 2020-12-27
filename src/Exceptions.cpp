@@ -45,3 +45,5 @@ std::string InvalidDate::getDate() const {
     return date;
 }
 
+ProductDoesntExist::ProductDoesntExist(){
+}

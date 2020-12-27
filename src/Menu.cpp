@@ -217,7 +217,7 @@ Menu * ViewerMenu::getNextMenu() {
         }
     }
     else{
-        unsigned int id;
+        unsigned int id, pos;
         std::string streamer;
         Store *store;
         switch(option){
@@ -230,19 +230,16 @@ Menu * ViewerMenu::getNextMenu() {
                 input::waitEnter();
                 return this;
             case 6:
+                if(input::get(pos)){
+                    viewer->removeOrderAtPos(pos-1);
+                }
                 return this;
             case 7:
                 std::cout << "Streamer name:" << std::endl;
                 streamer = input::getRaw();
                 store = platform.getStore(streamer);
                 if(store != nullptr){
-                    if(!store->full())
-                        return new ViewerStoreMenu(platform, viewer, store);
-                    else{
-                        std::cout << "This store can't take any more orders for now" << std::endl;
-                        input::waitEnter();
-                        return this;
-                    }
+                    return new ViewerStoreMenu(platform, viewer, store);
                 }
                 return this;
             case 8: platform.deleteUser(viewer->getNickname()); return nullptr;
@@ -308,7 +305,7 @@ void AdministratorMenu::show() {
     unsigned int option = 1;
     std::cout << CLR_SCREEN;
     for(const auto &str : {"Information", "Show average views", "Filter streams", "Show Top Language",
-                           "Show Top Stream Type", "Show Top Streamer", "Delete user", "Delete stream", "Change Max Order Limit"}){
+                           "Show Top Stream Type", "Show Top Streamer", "Delete user", "Delete stream", "Change Max Product Limit", "Reset Products Sold for all Stores"}){
         std::cout << "[" << option++ << "] " << str << std::endl;
     }
     std::cout << "[0] Exit" << std::endl;
@@ -329,7 +326,8 @@ Menu * AdministratorMenu::getNextMenu() {
         case 6: std::cout << "Streamer with most views: " << admin.topStreamer() << std::endl; input::waitEnter(); return this;
         case 7: std::cout << "Username: "; if(input::get(str)){platform.deleteUser(str);} return this;
         case 8: std::cout << "Stream id: "; if(input::get(id)){platform.deleteStream(id);} return this;
-        case 9: std::cout << "New limit: "; if(input::get(max_orders)){platform.changeMaxOrdersPerStore(max_orders);} return this;
+        case 9: std::cout << "New limit: "; if(input::get(max_orders)){platform.changeMaxProductsSoldPerStore(max_orders);} return this;
+        case 10: platform.resetProductsSold(); return this;
     }
     return invalidOption();
 }
@@ -606,13 +604,23 @@ Menu * ViewerStoreMenu::getNextMenu() {
             if(!input::get(pos)){
                 return invalidOption();
             }
-            order.addProduct(store->getProductByPos(pos-1));
+            try{
+                order.addProduct(store->getProductByPos(pos-1));
+            }
+            catch(const ProductDoesntExist &e){
+                return invalidOption();
+            }
             return this;
         case 2:
             if(!input::get(pos)){
                 return invalidOption();
             }
-            order.removeProduct(store->getProductByPos(pos-1));
+            try{
+                order.removeProduct(store->getProductByPos(pos-1));
+            }
+            catch(const ProductDoesntExist &e){
+                return invalidOption();
+            }
             return this;
         case 3:
             if(!input::get(pos)){
@@ -634,10 +642,11 @@ void StreamerStoreMenu::show() {
     unsigned int options = 1;
     std::cout << CLR_SCREEN;
     std::cout << "[" << options++ << "] Show Orders" << std::endl;
-    std::cout << "[" << options++ << "] Process First Order" << std::endl;
+    std::cout << "[" << options++ << "] Process Orders" << std::endl;
     std::cout << "[" << options++ << "] Add Product" << std::endl;
     std::cout << "[" << options++ << "] Remove Product" << std::endl;
     std::cout << "[0] Exit" << std::endl << std::endl;
+    std::cout << "Products sold: " << store->getProductsSold() << "/" << store->getMaxProductsSold() << std::endl;
     std::cout << "Available products:" << std::endl;
     store->showMerchandise();
 }
@@ -654,7 +663,7 @@ Menu * StreamerStoreMenu::getNextMenu() {
             input::waitEnter();
             return this;
         case 2:
-            store->processOrder();
+            store->processOrders();
             return this;
         case 3:
             std::cout << "Product name:" << std::endl;

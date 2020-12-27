@@ -577,12 +577,12 @@ void Platform::readOrdersFromFile() {
 
 void Platform::writeStoresToFile() {
     std::ofstream file(files.stores_file);
-    file << max_orders_per_store << std::endl;
+    file << max_products_sold_per_store << std::endl;
     for(const auto &user : users){
         Streamer *s = dynamic_cast<Streamer *>(user);
         if(s != nullptr){
             Store * store = s->getStore();
-            file << store->getStreamer() << std::endl;
+            file << store->getStreamer() << " "  << store->getProductsSold() << std::endl;
             for(const auto &product : store->getProducts()){
                 file << "    " << product.getName() << " " << product.getPrice() << std::endl;
             }
@@ -595,20 +595,22 @@ void Platform::readStoresFromFile() {
     std::ifstream file(files.stores_file);
     std::string line_buffer;
     if(file.is_open()){
-        unsigned max_orders = 0;
+        unsigned max_products_sold = 0;
         if(std::getline(file, line_buffer)){
             std::istringstream ss(line_buffer);
-            ss >> max_orders;
+            ss >> max_products_sold;
         }
         while(std::getline(file, line_buffer)){
             std::string streamer_name;
+            unsigned products_sold;
             std::istringstream ss(line_buffer);
-            ss >> streamer_name;
+            ss >> streamer_name >> products_sold;
             User *u = getUser(streamer_name);
             Streamer *s = dynamic_cast<Streamer *>(u);
             if(s != nullptr){
                 Store *store = s->getStore();
-                store->resize(max_orders);
+                store->changeMaxProductsSold(max_products_sold);
+                store->setProductsSold(products_sold);
                 while(file.peek() == ' ' && std::getline(file, line_buffer)){
                     std::istringstream ss2(line_buffer);
                     std::string product_name; double price;
@@ -620,12 +622,21 @@ void Platform::readStoresFromFile() {
     }
 }
 
-void Platform::changeMaxOrdersPerStore(unsigned int max_orders) {
-    this->max_orders_per_store = max_orders;
+void Platform::changeMaxProductsSoldPerStore(unsigned int max_products_sold){
+    this->max_products_sold_per_store = max_products_sold;
     for(const auto &user : users){
         Store * store = getStore(user->getNickname());
         if(store != nullptr){
-            store->resize(max_orders);
+            store->changeMaxProductsSold(max_products_sold);
+        }
+    }
+}
+
+void Platform::resetProductsSold() {
+    for(const auto &user : users){
+        Store * store = getStore(user->getNickname());
+        if(store != nullptr){
+            store->resetProductsSold();
         }
     }
 }

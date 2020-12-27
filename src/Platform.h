@@ -70,7 +70,7 @@ private:
 
     unsigned int stream_id_count = 1; /*< Track stream ids to be assigned to new streams*/
 
-    unsigned int max_orders_per_store = 5;
+    unsigned int max_products_sold_per_store = 5;
 
     struct IOFiles{
         const std::string user_file = "user.txt";
@@ -323,7 +323,9 @@ public:
 
     Store *getStore(const std::string &streamer_name);
 
-    void changeMaxOrdersPerStore(unsigned max_orders);
+    void changeMaxProductsSoldPerStore(unsigned max_products_sold);
+
+    void resetProductsSold();
 
     /**
      * Clear all vectors in memory

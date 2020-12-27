@@ -4,9 +4,6 @@
 Store::Store(const std::string &streamer, Platform &platform) : streamer(streamer), platform(platform) {
 }
 
-Store::Store(const std::string &streamer, Platform &platform, unsigned max_orders) : streamer(streamer), platform(platform), max_orders(max_orders) {
-}
-
 bool Store::addMerchandise(const Product &p) {
     auto it = std::find(available_merchandise.begin(), available_merchandise.end(), p);
     if(it == available_merchandise.end()){
@@ -36,11 +33,8 @@ void Store::showMerchandise() const{
 }
 
 bool Store::placeOrder(const Order &o) {
-    if(orders.size() < max_orders){
-        orders.push(o);
-        return true;
-    }
-    return false;
+    orders.push(o);
+    return true;
 }
 
 void Store::showOrders() const {
@@ -55,13 +49,20 @@ std::string Store::getStreamer() const {
     return streamer;
 }
 
-void Store::processOrder() {
-    if(!orders.empty()){
-        Order o = orders.top(); orders.pop();
-        User * u = platform.getUser(o.getCustomerNickname());
-        Viewer *v = dynamic_cast<Viewer *> (u);
-        if(v != nullptr){
-            v->completeOrder(o);
+void Store::processOrders() {
+    while(!orders.empty()){
+        Order o = orders.top();
+        if(products_sold+o.getSize() <= max_products_sold) {
+            orders.pop();
+            User * u = platform.getUser(o.getCustomerNickname());
+            Viewer *v = dynamic_cast<Viewer *> (u);
+            if(v != nullptr){
+                v->completeOrder(o);
+            }
+            products_sold += o.getSize();
+        }
+        else{
+            break;
         }
     }
 }
@@ -70,7 +71,7 @@ Product Store::getProductByPos(int pos) const {
     if(pos >= 0 && pos < available_merchandise.size()){
         return available_merchandise[pos];
     }
-    return Product("",0.0); // TODO: Throw exception
+    throw ProductDoesntExist();
 }
 
 const std::vector<Product> &Store::getProducts() const {
@@ -78,7 +79,7 @@ const std::vector<Product> &Store::getProducts() const {
 }
 
 bool Store::full() const {
-    return orders.size() >= max_orders;
+    return products_sold >= max_products_sold;
 }
 
 bool Store::removeOrder(const Order &o) {
@@ -96,11 +97,22 @@ bool Store::removeOrder(const Order &o) {
     return found;
 }
 
-void Store::resize(unsigned int new_size) {
-    if(new_size < max_orders){
-        while(orders.size() > new_size){
-            processOrder();
-        }
-    }
-    max_orders = new_size;
+void Store::changeMaxProductsSold(unsigned int new_max) {
+    max_products_sold = new_max;
+}
+
+void Store::resetProductsSold() {
+    products_sold = 0;
+}
+
+unsigned Store::getProductsSold() const {
+    return products_sold;
+}
+
+unsigned Store::getMaxProductsSold() const {
+    return max_products_sold;
+}
+
+void Store::setProductsSold(unsigned int new_value) {
+    products_sold = new_value;
 }

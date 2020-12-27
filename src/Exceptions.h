@@ -139,4 +139,12 @@ public:
     std::string getDate() const;
 };
 
+class ProductDoesntExist : public std::exception {
+public:
+    /**
+     * Class constructor
+     */
+     ProductDoesntExist();
+};
+
 #endif //STREAMZ_EXCEPTIONS_H
