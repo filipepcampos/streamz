@@ -9,6 +9,7 @@ StreamerRecord::StreamerRecord(const std::string &nick) : active(false), streame
 }
 
 StreamerRecord::StreamerRecord(const StreamerRecord &sr) {
+    nickname.clear();
     active = sr.active;
     streamer = sr.streamer;
     nickname = sr.nickname;
@@ -29,17 +30,4 @@ std::string StreamerRecord::getNickname() const {
 
 bool StreamerRecord::isActive() const {
     return active;
-}
-
-void StreamerRecord::setActive(Streamer * st) {
-    // TODO: CRIAR EXCEÇÃO POR JÁ ESTAR ATIVO
-    active = true;
-    streamer = st;
-}
-
-void StreamerRecord::setInactive(std::string &nick) {
-    // TODO: CRIAR EXCEÇÃO POR JÁ ESTAR INATIVO
-    active = false;
-    streamer = nullptr;
-    nickname = nick;
 }

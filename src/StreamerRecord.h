@@ -43,16 +43,6 @@ public:
      * @return boolean indicating if the streamer is active
      */
     bool isActive() const;
-    /**
-     * Sets the given streamer to active
-     * @param st streamer to be set active
-     */
-    void setActive(Streamer * st);
-    /**
-     * Sets the given streamer to inactive
-     * @param nick nickname of the streamer to be set inactive
-     */
-    void setInactive(std::string &nick);
 };
 
 #endif //STREAMZ_STREAMERRECORD_H
