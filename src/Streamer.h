@@ -8,7 +8,7 @@
 
 class Streamer : public User {
     bool bonus; /**< Indicates if the streamer has bonus likes in is next stream */
-    Store store;
+    Store store; /**< Streamer's merchandise store */
 public:
     /**
      * Class constructor used when creating a new streamer
@@ -99,6 +99,10 @@ public:
      */
     bool operator==(const Streamer &other) const;
 
+    /**
+     * Get pointer to streamer's merchandise store
+     * @return Pointer to store
+     */
     Store *getStore();
 };
 

@@ -8,6 +8,7 @@ bool Store::addMerchandise(const Product &p) {
     auto it = std::find(available_merchandise.begin(), available_merchandise.end(), p);
     if(it == available_merchandise.end()){
         available_merchandise.push_back(p);
+        return true;
     }
     return false;
 }
@@ -32,9 +33,10 @@ void Store::showMerchandise() const{
     }
 }
 
-bool Store::placeOrder(const Order &o) {
+void Store::placeOrder(const Order &o) {
     orders.push(o);
-    return true;
+    Viewer *v = o.getCustomer();
+    v->addPendingOrder(o);
 }
 
 void Store::showOrders() const {
@@ -54,11 +56,8 @@ void Store::processOrders() {
         Order o = orders.top();
         if(products_sold+o.getSize() <= max_products_sold) {
             orders.pop();
-            User * u = platform.getUser(o.getCustomerNickname());
-            Viewer *v = dynamic_cast<Viewer *> (u);
-            if(v != nullptr){
-                v->completeOrder(o);
-            }
+            Viewer *v = o.getCustomer();
+            v->completeOrder(o);
             products_sold += o.getSize();
         }
         else{
@@ -76,10 +75,6 @@ Product Store::getProductByPos(int pos) const {
 
 const std::vector<Product> &Store::getProducts() const {
     return available_merchandise;
-}
-
-bool Store::full() const {
-    return products_sold >= max_products_sold;
 }
 
 bool Store::removeOrder(const Order &o) {

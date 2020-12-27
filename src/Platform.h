@@ -70,7 +70,7 @@ private:
 
     unsigned int stream_id_count = 1; /*< Track stream ids to be assigned to new streams*/
 
-    unsigned int max_products_sold_per_store = 5;
+    unsigned int max_products_sold_per_store = 5; /*< Limit of products that each store can sell*/
 
     struct IOFiles{
         const std::string user_file = "user.txt";
@@ -321,10 +321,22 @@ public:
      */
     void showStreamers(std::string active_filter = "") const;
 
+    /**
+     * Get pointer to a given streamer's store
+     * @param streamer_name Streamer nickname
+     * @return pointer to store if successful, nullptr otherwise
+     */
     Store *getStore(const std::string &streamer_name);
 
+    /**
+     * Change maximum products that can be sold per store limit
+     * @param max_products_sold New limit value
+     */
     void changeMaxProductsSoldPerStore(unsigned max_products_sold);
 
+    /**
+     * Reset all store's product sold counters to zero
+     */
     void resetProductsSold();
 
     /**

@@ -77,3 +77,7 @@ void Order::setDisp(unsigned disp) {
     if(disp >= 1 && disp <= 5)
         this->disp = disp;
 }
+
+Viewer *Order::getCustomer() const {
+    return customer;
+}

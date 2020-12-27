@@ -629,7 +629,6 @@ Menu * ViewerStoreMenu::getNextMenu() {
             order.setDisp(pos);
             return this;
         case 4:
-            viewer->addPendingOrder(order);
             store->placeOrder(order);
             return nullptr;
     }

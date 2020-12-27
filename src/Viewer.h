@@ -89,6 +89,7 @@ public:
      * @return Stream where the information will be writen
      */
     std::ostream& print(std::ostream & os) const;
+
     /**
      * Checks if the users have the same nickname
      * @param other Viewer to be compared with
@@ -96,12 +97,45 @@ public:
      */
     bool operator==(const Viewer &other) const;
 
+    /*
+     * Move Order 'o' from pending_orders to complete_orders
+     * @param o Order to be moved
+     */
     void completeOrder(const Order &o);
+
+    /*
+     * Add order to pending_orders
+     * @param o Order to be added
+     */
     void addPendingOrder(const Order &o);
+
+    /*
+     * Add order straight to completed_orders
+     * @param o Order to be added
+     */
     void addCompletedOrder(const Order &o);
+
+    /*
+     * Remove pending order at position 'pos' of the vector
+     * @param pos Index of orders
+     */
     void removeOrderAtPos(int pos);
+
+    /*
+     * Show all viewer's orders
+     */
     void showOrders();
+
+    /*
+     * Get pending_orders vector
+     * @return vector with orders
+     */
     std::vector<Order> & getPendingOrders();
+
+    /*
+     * Get complete_orders vector
+     * @return vector with orders
+     */
     std::vector<Order> & getCompletedOrders();
 };
 
