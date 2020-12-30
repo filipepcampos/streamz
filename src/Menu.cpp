@@ -629,7 +629,9 @@ Menu * ViewerStoreMenu::getNextMenu() {
             order.setDisp(pos);
             return this;
         case 4:
-            store->placeOrder(order);
+            if(order.getSize() > 0) {
+                store->placeOrder(order);
+            }
             return nullptr;
     }
     return nullptr;
@@ -669,15 +671,15 @@ Menu * StreamerStoreMenu::getNextMenu() {
             name = input::getRaw();
             if(name.empty()){return nullptr;}
             std::cout << "Price: " << std::endl;
-            if(!input::get(price)){
-                return nullptr;
+            if(!input::get(price) || price <= 0){
+                return this;
             }
             store->addMerchandise(name, price);
             return this;
         case 4:
             std::cout << "Product name:" << std::endl;
             name = input::getRaw();
-            if(name.empty()){return nullptr;}
+            if(name.empty()){return this;}
             store->removeMerchandise(name);
             return this;
     }
