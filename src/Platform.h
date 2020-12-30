@@ -350,6 +350,11 @@ public:
      * @return active_streams
      */
     std::vector<std::shared_ptr<Stream>> testGetStreams();
+    /**
+     * Adds a donation to the BST
+     * @param d Donation to be added
+     */
+    void addDonation(Donation &d);
 };
 
 

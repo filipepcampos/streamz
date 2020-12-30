@@ -640,3 +640,17 @@ void Platform::resetProductsSold() {
         }
     }
 }
+
+void Platform::addDonation(Donation &d) {
+    Donation itemNotFound("", 0, 0);
+    Donation d1 = donations.find(d);
+    if(d1 == itemNotFound) {
+        donations.insert(d);
+    }
+    else {
+        unsigned c = d1.getCounter();
+        donations.remove(d1);
+        d.setCounter(c + 1);
+        donations.insert(d);
+    }
+}
