@@ -140,9 +140,21 @@ private:
      */
     bool readStreamFromFile(std::ifstream &file);
 
+    /**
+     * Write all streamer stores to file
+     */
     void writeStoresToFile();
+    /**
+     * Read all streamer stores from file
+     */
     void readStoresFromFile();
+    /**
+     * Write all orders to file
+     */
     void writeOrdersToFile();
+    /**
+     * Read all orders from file
+     */
     void readOrdersFromFile();
 
 public:
@@ -336,6 +348,12 @@ public:
      * @param max_products_sold New limit value
      */
     void changeMaxProductsSoldPerStore(unsigned max_products_sold);
+
+    /**
+     * Return value of maximum products that can be sold per store limit
+     * @return maximum products that can be sold per store
+     */
+    unsigned getMaxProductsSold();
 
     /**
      * Reset all store's product sold counters to zero

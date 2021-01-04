@@ -695,3 +695,7 @@ void Platform::showDonations() {
     }
 }
 
+unsigned Platform::getMaxProductsSold() {
+    return max_products_sold_per_store;
+}
+

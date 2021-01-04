@@ -2,6 +2,7 @@
 #include <algorithm>
 
 Store::Store(const std::string &streamer, Platform &platform) : streamer(streamer), platform(platform) {
+    max_products_sold = platform.getMaxProductsSold();
 }
 
 bool Store::addMerchandise(const Product &p) {
