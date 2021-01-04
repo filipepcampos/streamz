@@ -20,6 +20,7 @@ Platform::Platform() : archive(files.archived_stream_file), donations(Donation("
     readStoresFromFile();
     readOrdersFromFile();
     readInactiveStreamersFromFile();
+    readDonationsFromFile();
 }
 
 void Platform::readStreamsFromFile() {
@@ -187,6 +188,7 @@ void Platform::save(){
     }
     writeOrdersToFile();
     writeStoresToFile();
+    writeDonationsToFile();
 }
 
 template <typename F>
@@ -654,3 +656,67 @@ void Platform::addDonation(Donation &d) {
         donations.insert(d);
     }
 }
+
+vector<Donation> Platform::getDonationsEval(unsigned int a1, unsigned int a2) {
+    vector<Donation> temp;
+    BSTItrIn<Donation> it(donations);
+    while (!it.isAtEnd()){
+        if (it.retrieve().getEvaluation() >= a1 && it.retrieve().getEvaluation() <= a2){
+            temp.push_back(it.retrieve());
+        }
+        it.advance();
+    }
+    return temp;
+}
+
+vector<Donation> Platform::getDonationsStreamer(string st) {
+    vector<Donation> temp;
+    BSTItrIn<Donation> it(donations);
+    while (!it.isAtEnd()){
+        if (it.retrieve().getStreamer() == st){
+            temp.push_back(it.retrieve());
+        }
+        it.advance();
+    }
+    return temp;
+}
+
+vector<Donation> Platform::getDonationsValue(unsigned v) {
+    vector<Donation> temp;
+    BSTItrIn<Donation> it(donations);
+    while (!it.isAtEnd()){
+        if (it.retrieve().getValue() == v){
+            temp.push_back(it.retrieve());
+        }
+        it.advance();
+    }
+    return temp;
+}
+
+void Platform::writeDonationsToFile(){
+    std::ofstream file(files.donations_file);
+    if(file.is_open()){
+        BSTItrIn<Donation> it(donations);
+        while (!it.isAtEnd()){
+            file << it.retrieve();
+            it.advance();
+        }
+        file.close();
+    }
+}
+
+void Platform::readDonationsFromFile() {
+    std::ifstream file(files.donations_file);
+    std::string line_buffer;
+    if(file.is_open()){
+        while(std::getline(file, line_buffer)){
+            std::string st;
+            unsigned val, eval;
+            std::istringstream ss(line_buffer);
+            ss >> st >> val >> eval;
+            Donation d(st, val, eval);
+            donations.insert(d);
+        }
+    }
+}
+

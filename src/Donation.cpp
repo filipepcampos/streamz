@@ -26,8 +26,8 @@ void Donation::setCounter(unsigned int c) {
 
 bool Donation::operator<(const Donation &d) const {
     if (this->getValue() == d.getValue())
-        return (this->getEvaluation() < d.getEvaluation());
-    return this->getValue() < d.getValue();
+        return (this->getEvaluation() > d.getEvaluation());
+    return this->getValue() > d.getValue();
 }
 
 bool Donation::operator==(const Donation &d) const {
@@ -35,6 +35,6 @@ bool Donation::operator==(const Donation &d) const {
 }
 
 std::ostream& operator <<(std::ostream& os, const Donation &d){
-    os << d.getStreamer() << " " << d.getValue() << " " << d.getEvaluation() << "  x" << d.getCounter() << std::endl;
+    os << d.getStreamer() << "  " << d.getValue() << "  " << d.getEvaluation() << "  " << d.getCounter() << std::endl;
     return os;
 }

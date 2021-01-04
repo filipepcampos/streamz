@@ -15,6 +15,8 @@
 #define MINIMUM_VIEWER_AGE 12
 #define MINIMUM_STREAMER_AGE 15
 #define BONUS_LIKES 50
+#define MIN_EVAL 1
+#define MAX_EVAL 5
 
 class User;
 class Viewer;
@@ -79,6 +81,7 @@ private:
         const std::string archived_stream_file = "archive.txt";
         const std::string orders_file = "orders.txt";
         const std::string stores_file = "stores.txt";
+        const std::string donations_file = "donations.txt";
     };
     IOFiles files; /*< Holds file information to save data across sessions */
 
@@ -355,6 +358,33 @@ public:
      * @param d Donation to be added
      */
     void addDonation(Donation &d);
+    /**
+     * Gets donations whose evaluation is in the interval [a1, a2]
+     * @param a1 Lower limit of the interval
+     * @param a2 Upper limit of the interval
+     * @return Vector with donations that match the criteria
+     */
+    vector<Donation> getDonationsEval(unsigned a1, unsigned a2);
+    /**
+     * Gets donations from a streamer
+     * @param st Streamer
+     * @return Vector with donations that match the criteria
+     */
+    vector<Donation> getDonationsStreamer(string st);
+    /**
+     * Gets donations higher than a value
+     * @param v Value
+     * @return Vector with donations that match the criteria
+     */
+    vector<Donation> getDonationsValue(unsigned v);
+    /**
+     * Writes donations to file
+     */
+    void writeDonationsToFile();
+    /**
+     * Reads donations from file
+     */
+    void readDonationsFromFile();
 };
 
 

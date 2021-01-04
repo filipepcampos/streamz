@@ -89,39 +89,5 @@ std::string Admin::topStreamer() const {
     return maxStreamer;
 }
 
-vector<Donation> Admin::getDonationsEval(unsigned int a1, unsigned int a2) {
-    vector<Donation> temp;
-    BSTItrIn<Donation> it(platform.donations);
-    while (!it.isAtEnd()){
-        if (it.retrieve().getEvaluation() >= a1 && it.retrieve().getEvaluation() <= a2){
-            temp.push_back(it.retrieve());
-        }
-        it.advance();
-    }
-    return temp;
-}
 
-vector<Donation> Admin::getDonationsStreamer(Streamer st) {
-    vector<Donation> temp;
-    BSTItrIn<Donation> it(platform.donations);
-    while (!it.isAtEnd()){
-        if (it.retrieve().getStreamer() == st.getNickname()){
-            temp.push_back(it.retrieve());
-        }
-        it.advance();
-    }
-    return temp;
-}
-
-vector<Donation> Admin::getDonationsHigher(unsigned v) {
-    vector<Donation> temp;
-    BSTItrIn<Donation> it(platform.donations);
-    while (!it.isAtEnd()){
-        if (it.retrieve().getValue() > v){
-            temp.push_back(it.retrieve());
-        }
-        it.advance();
-    }
-    return temp;
-}
 
