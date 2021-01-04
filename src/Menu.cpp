@@ -322,10 +322,10 @@ void AdministratorMenu::show() {
     unsigned int option = 1;
     std::cout << CLR_SCREEN;
     for(const auto &str : {"Information", "Show average views", "Filter streams", "Show Top Language",
-                           "Show Top Stream Type", "Show Top Streamer", "Delete user", "Delete stream", "Change Max Product Limit", "Reset Products Sold for all Stores"}){
+                           "Show Top Stream Type", "Show Top Streamer", "Delete user", "Delete stream", "Change Max Product Limit", "Reset Products Sold for all Stores", "Search donations between evaluation", "Search donations by streamer", "Search donations by value"}){
         std::cout << "[" << option++ << "] " << str << std::endl;
     }
-    std::cout << "[0] Exit" << std::endl;
+    std::cout << std::endl << "[0] Exit" << std::endl;
 }
 
 Menu * AdministratorMenu::getNextMenu() {
@@ -333,6 +333,9 @@ Menu * AdministratorMenu::getNextMenu() {
     if(!input::get(option))
         return invalidOption();
     std::string str; unsigned int id, max_orders;
+    std::string streamer;
+    unsigned int eval_lower, eval_higher, val;
+    vector<Donation> temp;
     switch(option){
         case 0: return nullptr;
         case 1: return new InformationMenu(platform);
@@ -345,6 +348,75 @@ Menu * AdministratorMenu::getNextMenu() {
         case 8: std::cout << "Stream id: "; if(input::get(id)){platform.deleteStream(id);} return this;
         case 9: std::cout << "New limit: "; if(input::get(max_orders)){platform.changeMaxProductsSoldPerStore(max_orders);} return this;
         case 10: platform.resetProductsSold(); return this;
+        case 11:
+            temp.clear();
+            std::cout << "lower evaluation: \n";
+            if (!input::get(eval_lower) || eval_lower < MIN_EVAL || eval_lower > MAX_EVAL){
+                return invalidOption();
+            }
+            std::cout << "higher evaluation: \n";
+            if (!input::get(eval_higher) || eval_higher < MIN_EVAL || eval_higher > MAX_EVAL){
+                return invalidOption();
+            }
+            temp = admin.getDonationsEval(eval_lower,eval_higher);
+            if (temp.empty()){
+                std::cout << "No donations match your criteria!" << std::endl;
+            }
+            else{
+                for (int i = 0; i < temp.size(); i++){
+                    std::cout << temp[i];
+                }
+            }
+            input::waitEnter();
+            return this;
+        case 12:
+            temp.clear();
+            std::cout << "streamer: \n";
+            if (!input::get(streamer)){
+                return invalidOption();
+            }
+            User* us;
+            try{
+                us = platform.getUser(streamer);
+            }
+            catch (UserDoesNotExist) {
+                std::cout << "Streamer does not exist!" << std::endl;
+                input::waitEnter();
+                return this;
+            }
+            if (!dynamic_cast<Streamer*> (us)){
+                std::cout << "Streamer does not exist!" << std::endl;
+                input::waitEnter();
+                return this;
+            }
+            temp = admin.getDonationsStreamer(streamer);
+            if (temp.empty()){
+                std::cout << "No donations match your criteria!" << std::endl;
+            }
+            else{
+                for (int i = 0; i < temp.size(); i++){
+                    std::cout << temp[i];
+                }
+            }
+            input::waitEnter();
+            return this;
+        case 13:
+            temp.clear();
+            std::cout << "value: \n";
+            if (!input::get(val)){
+                return invalidOption();
+            }
+            temp = admin.getDonationsValue(val);
+            if (temp.empty()){
+                std::cout << "No donations match your criteria!" << std::endl;
+            }
+            else{
+                for (int i = 0; i < temp.size(); i++){
+                    std::cout << temp[i];
+                }
+            }
+            input::waitEnter();
+            return this;
     }
     return invalidOption();
 }
@@ -401,7 +473,7 @@ void InformationMenu::show() {
     std::cout << CLR_SCREEN;
     for(const auto &str : {"Show top active streams", "Show top archived streams", "Show all active streams",
                            "Search active streams by language", "Search active streams by minimum age",
-                           "Show all archived streams", "Show users", "Show streamers", "Sort active streams", "Search donations between evaluation", "Search donations by streamer", "Search donations by value"}){
+                           "Show all archived streams", "Show users", "Show streamers", "Sort active streams"}){
         std::cout << "[" << option++ << "] " << str << std::endl;
     }
     std::cout << std::endl << "[0] Exit" << std::endl;
@@ -435,75 +507,6 @@ Menu * InformationMenu::getNextMenu() {
         case 7: platform.showUsers(); input::waitEnter(); return this;
         case 8: return new FilterStreamersMenu(platform);
         case 9: return new SortMenu(platform);
-        case 10:
-            temp.clear();
-            std::cout << "lower evaluation: \n";
-            if (!input::get(eval_lower) || eval_lower < MIN_EVAL || eval_lower > MAX_EVAL){
-                return invalidOption();
-            }
-            std::cout << "higher evaluation: \n";
-            if (!input::get(eval_higher) || eval_higher < MIN_EVAL || eval_higher > MAX_EVAL){
-                return invalidOption();
-            }
-            temp = platform.getDonationsEval(eval_lower,eval_higher);
-            if (temp.empty()){
-                std::cout << "No donations match your criteria!" << std::endl;
-            }
-            else{
-                for (int i = 0; i < temp.size(); i++){
-                    std::cout << temp[i];
-                }
-            }
-            input::waitEnter();
-            return this;
-        case 11:
-            temp.clear();
-            std::cout << "streamer: \n";
-            if (!input::get(streamer)){
-                return invalidOption();
-            }
-            User* us;
-            try{
-                us = platform.getUser(streamer);
-            }
-            catch (UserDoesNotExist) {
-                std::cout << "Streamer does not exist!" << std::endl;
-                input::waitEnter();
-                return this;
-            }
-            if (!dynamic_cast<Streamer*> (us)){
-                std::cout << "Streamer does not exist!" << std::endl;
-                input::waitEnter();
-                return this;
-            }
-            temp = platform.getDonationsStreamer(streamer);
-            if (temp.empty()){
-                std::cout << "No donations match your criteria!" << std::endl;
-            }
-            else{
-                for (int i = 0; i < temp.size(); i++){
-                    std::cout << temp[i];
-                }
-            }
-            input::waitEnter();
-            return this;
-        case 12:
-            temp.clear();
-            std::cout << "value: \n";
-            if (!input::get(val)){
-                return invalidOption();
-            }
-            temp = platform.getDonationsValue(val);
-            if (temp.empty()){
-                std::cout << "No donations match your criteria!" << std::endl;
-            }
-            else{
-                for (int i = 0; i < temp.size(); i++){
-                    std::cout << temp[i];
-                }
-            }
-            input::waitEnter();
-            return this;
     }
     return invalidOption();
 }

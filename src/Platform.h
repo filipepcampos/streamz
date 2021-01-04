@@ -359,25 +359,6 @@ public:
      */
     void addDonation(Donation &d);
     /**
-     * Gets donations whose evaluation is in the interval [a1, a2]
-     * @param a1 Lower limit of the interval
-     * @param a2 Upper limit of the interval
-     * @return Vector with donations that match the criteria
-     */
-    vector<Donation> getDonationsEval(unsigned a1, unsigned a2);
-    /**
-     * Gets donations from a streamer
-     * @param st Streamer
-     * @return Vector with donations that match the criteria
-     */
-    vector<Donation> getDonationsStreamer(string st);
-    /**
-     * Gets donations higher than a value
-     * @param v Value
-     * @return Vector with donations that match the criteria
-     */
-    vector<Donation> getDonationsValue(unsigned v);
-    /**
      * Writes donations to file
      */
     void writeDonationsToFile();

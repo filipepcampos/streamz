@@ -657,42 +657,6 @@ void Platform::addDonation(Donation &d) {
     }
 }
 
-vector<Donation> Platform::getDonationsEval(unsigned int a1, unsigned int a2) {
-    vector<Donation> temp;
-    BSTItrIn<Donation> it(donations);
-    while (!it.isAtEnd()){
-        if (it.retrieve().getEvaluation() >= a1 && it.retrieve().getEvaluation() <= a2){
-            temp.push_back(it.retrieve());
-        }
-        it.advance();
-    }
-    return temp;
-}
-
-vector<Donation> Platform::getDonationsStreamer(string st) {
-    vector<Donation> temp;
-    BSTItrIn<Donation> it(donations);
-    while (!it.isAtEnd()){
-        if (it.retrieve().getStreamer() == st){
-            temp.push_back(it.retrieve());
-        }
-        it.advance();
-    }
-    return temp;
-}
-
-vector<Donation> Platform::getDonationsValue(unsigned v) {
-    vector<Donation> temp;
-    BSTItrIn<Donation> it(donations);
-    while (!it.isAtEnd()){
-        if (it.retrieve().getValue() == v){
-            temp.push_back(it.retrieve());
-        }
-        it.advance();
-    }
-    return temp;
-}
-
 void Platform::writeDonationsToFile(){
     std::ofstream file(files.donations_file);
     if(file.is_open()){
