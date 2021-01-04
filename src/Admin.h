@@ -43,12 +43,13 @@ public:
      */
     std::string topStreamer() const;
     /**
-     * Gets donations whose evaluation is in the interval [a1, a2]
+     * Gets donations whose evaluation is in the interval [a1, a2] greater than a minimum value
      * @param a1 Lower limit of the interval
      * @param a2 Upper limit of the interval
+     * @param min_value Minimum value of the donation
      * @return Vector with donations that match the criteria
      */
-    vector<Donation> getDonationsEval(unsigned a1, unsigned a2);
+    vector<Donation> getDonationsEval(unsigned a1, unsigned a2, unsigned min_value = 0);
     /**
      * Gets donations from a streamer
      * @param st Streamer

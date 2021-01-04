@@ -354,6 +354,10 @@ public:
      */
     std::vector<std::shared_ptr<Stream>> testGetStreams();
     /**
+     * Show all donations
+     */
+    void showDonations();
+    /**
      * Adds a donation to the BST
      * @param d Donation to be added
      */

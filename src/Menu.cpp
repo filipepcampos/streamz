@@ -322,7 +322,12 @@ void AdministratorMenu::show() {
     unsigned int option = 1;
     std::cout << CLR_SCREEN;
     for(const auto &str : {"Information", "Show average views", "Filter streams", "Show Top Language",
-                           "Show Top Stream Type", "Show Top Streamer", "Delete user", "Delete stream", "Change Max Product Limit", "Reset Products Sold for all Stores", "Search donations between evaluation", "Search donations by streamer", "Search donations by value"}){
+                           "Show Top Stream Type", "Show Top Streamer", "Delete user", "Delete stream", "Change Max Product Limit",
+                           "Reset Products Sold for all Stores",
+                           "Show all donations",
+                           "Search donations between evaluation",
+                           "Search donations between evaluation and a minimum value",
+                           "Search donations by streamer", "Search donations by value"}){
         std::cout << "[" << option++ << "] " << str << std::endl;
     }
     std::cout << std::endl << "[0] Exit" << std::endl;
@@ -348,7 +353,8 @@ Menu * AdministratorMenu::getNextMenu() {
         case 8: std::cout << "Stream id: "; if(input::get(id)){platform.deleteStream(id);} return this;
         case 9: std::cout << "New limit: "; if(input::get(max_orders)){platform.changeMaxProductsSoldPerStore(max_orders);} return this;
         case 10: platform.resetProductsSold(); return this;
-        case 11:
+        case 11: platform.showDonations();  input::waitEnter(); return this;
+        case 12:
             temp.clear();
             std::cout << "lower evaluation: \n";
             if (!input::get(eval_lower) || eval_lower < MIN_EVAL || eval_lower > MAX_EVAL){
@@ -369,7 +375,32 @@ Menu * AdministratorMenu::getNextMenu() {
             }
             input::waitEnter();
             return this;
-        case 12:
+        case 13:
+            temp.clear();
+            std::cout << "lower evaluation: \n";
+            if (!input::get(eval_lower) || eval_lower < MIN_EVAL || eval_lower > MAX_EVAL){
+                return invalidOption();
+            }
+            std::cout << "higher evaluation: \n";
+            if (!input::get(eval_higher) || eval_higher < MIN_EVAL || eval_higher > MAX_EVAL){
+                return invalidOption();
+            }
+            std::cout << "minimum value: \n";
+            if (!input::get(val) || val <= 0){
+                return invalidOption();
+            }
+            temp = admin.getDonationsEval(eval_lower,eval_higher, val);
+            if (temp.empty()){
+                std::cout << "No donations match your criteria!" << std::endl;
+            }
+            else{
+                for (int i = 0; i < temp.size(); i++){
+                    std::cout << temp[i];
+                }
+            }
+            input::waitEnter();
+            return this;
+        case 14:
             temp.clear();
             std::cout << "streamer: \n";
             if (!input::get(streamer)){
@@ -400,7 +431,7 @@ Menu * AdministratorMenu::getNextMenu() {
             }
             input::waitEnter();
             return this;
-        case 13:
+        case 15:
             temp.clear();
             std::cout << "value: \n";
             if (!input::get(val)){

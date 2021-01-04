@@ -89,10 +89,13 @@ std::string Admin::topStreamer() const {
     return maxStreamer;
 }
 
-vector<Donation> Admin::getDonationsEval(unsigned int a1, unsigned int a2) {
+vector<Donation> Admin::getDonationsEval(unsigned int a1, unsigned int a2, unsigned min_value) {
     vector<Donation> temp;
     BSTItrIn<Donation> it(platform.donations);
     while (!it.isAtEnd()){
+        if(it.retrieve().getValue() < min_value){
+            break;
+        }
         if (it.retrieve().getEvaluation() >= a1 && it.retrieve().getEvaluation() <= a2){
             temp.push_back(it.retrieve());
         }
@@ -119,6 +122,9 @@ vector<Donation> Admin::getDonationsValue(unsigned v) {
     while (!it.isAtEnd()){
         if (it.retrieve().getValue() == v){
             temp.push_back(it.retrieve());
+        }
+        if(it.retrieve().getValue() < v){
+            break;
         }
         it.advance();
     }

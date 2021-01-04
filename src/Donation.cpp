@@ -35,6 +35,6 @@ bool Donation::operator==(const Donation &d) const {
 }
 
 std::ostream& operator <<(std::ostream& os, const Donation &d){
-    os << d.getStreamer() << "  " << d.getValue() << "  " << d.getEvaluation() << "  " << d.getCounter() << std::endl;
+    os << d.getStreamer() << "  " << d.getValue() << "€  " << d.getEvaluation() << "  " << d.getCounter() << std::endl;
     return os;
 }

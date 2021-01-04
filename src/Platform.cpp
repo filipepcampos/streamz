@@ -674,13 +674,24 @@ void Platform::readDonationsFromFile() {
     std::string line_buffer;
     if(file.is_open()){
         while(std::getline(file, line_buffer)){
-            std::string st;
-            unsigned val, eval;
+            std::string st, eur_symbol;
+            unsigned val, eval, count;
             std::istringstream ss(line_buffer);
-            ss >> st >> val >> eval;
+            ss >> st >> val >> eur_symbol >> eval >> count;
             Donation d(st, val, eval);
-            donations.insert(d);
+            for(int i = 0; i < count; ++i){
+                addDonation(d);
+            }
         }
+    }
+}
+
+void Platform::showDonations() {
+    BSTItrIn<Donation> it(donations);
+    std::cout << "All donations:" << std::endl;
+    while (!it.isAtEnd()){
+        std::cout << it.retrieve();
+        it.advance();
     }
 }
 
